@@ -4,7 +4,6 @@ body {
     font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* background-color: black; */
   }
-
   
   @media only screen and (min-width: 992px) {
     .header {
@@ -146,7 +145,6 @@ body {
     }
   
     img.img-home {
-      height: 80%;  
       width: 100%;
       border-radius: 20px;
   }
@@ -160,24 +158,4 @@ body {
     .banner .container span {
       font-weight: 800;
     }
-
-    .banner .container .div-img2-home {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .banner .container .div-text2-home {
-      width: 50%;
-      height: 100%;
-    }
-
-    .banner .container .div-img2-home .title2 p {
-      font-size: 24px;
-      color: black;
-    }
   }
-
