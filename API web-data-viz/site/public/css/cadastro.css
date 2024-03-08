@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container-register {
+    display: flex;
+    background-color: #091227;
+    height: 100vh;
+    width: 100%;
+}
+
+.container-register .left-content {
+    background: url(https://images.pexels.com/photos/5554249/pexels-photo-5554249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    width: 40%;
+    height: 100%;
+    background-color: #091227;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-register .left-content .logo-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-content .navbar {
+    position: absolute;
+    top: 40px;
+}
+
+.left-content .navbar ul {
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.left-content .navbar li {
+    list-style: none;
+    
+}
+
+.left-content .navbar a {
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Jura', sans-serif;
+    color: white;
+}
+
+.right-content {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-content .box-register {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-content .box-register h1 {
+    text-align: center;
+    font-family: 'JURA', sans-serif;
+    margin-bottom: 44px;
+    color: #091227;
+}
+
+.right-content .box-register .titles-inputs {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 16px;
+    font-weight: bold;
+
+}
+
+.right-content .box-register .inputs-name {
+    height: 24px;
+    width: 97%;
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background-color: #091227;
+    color: white;
+}
+
+.right-content .box-register .inputs {
+    height: 24px;
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: black;
+    width: 97%;
+}
+
+::placeholder {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.right-content .box-register .box-name {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.right-content .box-register .box-name .name{
+    width: 50%;
+}
+
+.right-content .box-register .box-name .last-name{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.right-content .box-register .box-name .last-name .title-last-name{
+    width: 86%;
+}
+
+.right-content .box-register .box-name .inputs-name{
+    width: 80%;
+}
+
+.btn-register {
+    background-color: #D5B642;
+    padding: 12px 52px;
+    margin-top: 32px;
+    border-radius: 16px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    border: 2px solid #7c6b2b;
+}
+
+.card_erro {
+    text-align: center;
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+}
+
+.msg-login p {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: white;
+}
+
+.msg-login a {
+    color:#D5B642;
+    text-decoration: none;
+}
+
+.msg-erro {
+    font-family: 'Poppins', sans-serif;
+    color: red;
+    font-size: 16px;
+    width: fit-content;
+    margin-top: 4px;
+}
