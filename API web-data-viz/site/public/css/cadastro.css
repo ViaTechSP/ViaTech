@@ -11,7 +11,7 @@
 }
 
 .container-register .left-content {
-    background: url(https://images.pexels.com/photos/5554249/pexels-photo-5554249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background: url(../assets/imgs/img-cadastro.jpg);
     width: 40%;
     height: 100%;
     background-color: #091227;
@@ -64,11 +64,12 @@
     justify-content: center;
 }
 
-.right-content .box-register h1 {
+.right-content .box-register h3 {
     text-align: center;
     font-family: 'JURA', sans-serif;
-    margin-bottom: 44px;
-    color: #091227;
+    margin-bottom: 20px;
+    margin-top: 2   0px;
+    color: white;
 }
 
 .right-content .box-register .titles-inputs {
@@ -99,6 +100,22 @@
     background-color: white;
     color: black;
     width: 97%;
+}
+
+.box-password {
+    width: 108%;
+}
+
+.box-informativo {
+    display: flex;
+    flex-direction: row;
+}
+
+.informativo {
+    width: 35px;
+    height: 35px;
+    margin-top: 4px;
+    margin-left: 10px;
 }
 
 ::placeholder {

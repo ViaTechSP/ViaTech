@@ -37,7 +37,7 @@
         <div class="right-content">
           
             <div class="box-register">
-                <h1>Cadastre-se</h1>
+                <h3>Primeiro acesso</h3>
                     <div class="name">
                         <p class="titles-inputs">Nome fantasia</p>
                         <input type="text" onkeyup="validarNome()" class="inputs id="input_name" placeholder="Digite seu Nome">
@@ -68,9 +68,13 @@
                     
                     <div class="box-password">
                         <p class="titles-inputs">Senha</p>
-                        <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password" placeholder="Digite sua senha"> <br>
-                        <div class="msg-erro" id="error_password"></div>
-                      </div>
+                        <div class="box-informativo">
+                          
+                          <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password" placeholder="Digite sua senha"> <br>
+                          <div class="msg-erro" id="error_password"></div>
+                          <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" alt="">
+                        </div>
+                        </div>
 
                     
                 <button class="btn-register" onclick="cadastrar()">Registrar</button>
