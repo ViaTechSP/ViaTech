@@ -61,6 +61,7 @@ input#input_email {
     color: white;
     cursor: pointer;
     font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-login:hover{
@@ -85,6 +86,25 @@ input#input_email {
     color: #7c6b2b;
     transition: ease 0.1s;    
 }
+
+
+.msg-esqueceu {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.msg-esqueceu a {
+    color:#D5B642;
+    text-decoration: none;
+
+}
+
+.msg-esqueceu a:hover{
+    color: #7c6b2b;
+    transition: ease 0.1s;    
+}
+
 
 .right-content {
     width: 40%;

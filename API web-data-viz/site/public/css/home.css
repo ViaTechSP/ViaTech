@@ -45,8 +45,7 @@ body {
   
     .btn-login:hover{
       padding: 16px;
-      background-color: #171796;
-      color: white;
+      background-color: #c6c6c6;
     }
   
     .btn-register:hover{
@@ -68,7 +67,7 @@ body {
       width: 18%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       list-style: none;
       color: black;
     }
@@ -162,7 +161,7 @@ body {
     }
 
     .banner .container .div-img2-home {
-      width: 50%;
+      width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
@@ -178,6 +177,20 @@ body {
     .banner .container .div-img2-home .title2 p {
       font-size: 24px;
       color: black;
+    }
+    .propagandas{
+      background-color: #171796;
+      width: 50%;
+
+    }
+
+    .computador{
+      background-color: aqua;
+      width: 45%;
+    }
+
+    .img-menor{
+      width: 250px;
     }
   }
 

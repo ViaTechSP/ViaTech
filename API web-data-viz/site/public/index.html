@@ -31,7 +31,7 @@
             </li>
           </ul>
           <ul class="login-register">
-            <button class="btn-login" href="login.html">Login</button>
+            <button onclick="paginaLogin()" class="btn-login" href="login.html">Login</button>
             <button class="btn-register" href="cadastro.html">Cadastrar</button>
           </ul>
         </div>
@@ -54,9 +54,17 @@
         <div class="container">
           <div class="div-img2-home">
             <div class="title2">
-              <p>Monitore a automatização de seus trens. <br> ViaTech é tudo o que você precisa!</p>
+              <p>Garanta a qualidade de serviço dos seus trens. <br> ViaTech é tudo o que você precisa!</p>
             </div>
             <img src="./assets/imgs/img2-home.svg" alt="">
+
+          </div>
+          <div class="propagandas">
+
+            <div class="computador">
+              <img src="https://gartic.com.br/imgs/mural/du/duduards/notebook.png" class="img-menor">
+              
+            </div>
           </div>
           <div class="div-text2-home">
           
@@ -66,3 +74,9 @@
       </div>
 </body>
 </html>
+
+<script>
+  function paginaLogin(){
+    window.location.replace("login.html")
+  }
+</script>
