@@ -1,0 +1,435 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'Courier New', Courier, monospace;
+
+}
+
+.container-login {
+    display: flex;
+    height: 100vh;
+
+    
+}
+
+.left-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    background-color: #091227;
+}
+
+.left-content .box-login {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    
+}
+
+.left-content .box-login h3{
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    padding-bottom: 48px;
+}
+
+.left-content .box-login p {
+    color: white;
+    margin-bottom: 8px;
+}
+
+input#input_email {
+    margin-bottom: 16px;
+}
+
+.input {
+    height: 24px;
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    outline: none;
+}
+
+.btn-login {
+    background-color:  #D5B642;
+    border: 2px solid #7c6b2b;
+    padding: 12px 52px;
+    margin-top: 16px;
+    border-radius: 16px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-login:hover{
+    color: #D5B642;
+    background-color: #181818;  
+    transition: ease 0.5s;
+}
+
+.msg-register {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.msg-register a {
+    color:#D5B642;
+    text-decoration: none;
+
+}
+
+.msg-register a:hover{
+    color: #7c6b2b;
+    transition: ease 0.1s;    
+}
+
+.right-content {
+    width: 40%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-image: url("https://images.unsplash.com/photo-1529179307417-ca83d48bd790?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    
+}
+
+
+.right-content .navbar {
+    position: absolute;
+    top: 40px;
+}
+
+.right-content .navbar ul {
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.right-content .navbar li {
+    list-style: none;
+    
+}
+
+.navbar li:hover {
+    transform: scale(1.1);
+    transition: ease 0.5s;
+}
+
+.right-content .navbar a {
+    text-decoration: none;
+    list-style: none;
+    color: aliceblue;
+    font-size: 23px;
+}
+
+.card_erro {
+    text-align: center;
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.msg-erro {
+    color: red;
+    font-size: 16px;
+    width: fit-content;
+    margin-top: 4px;
+}
+
+span#mensagem_erro {
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+}
+    
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .container-login {
+        display: flex;  
+        flex-direction: column;
+        width: 100%;      
+    }
+    
+    .left-content {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-image: url("https://images.unsplash.com/photo-1529179307417-ca83d48bd790?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-size: cover;
+        
+    }
+    
+    .box-login{ 
+        
+         padding: 20px;       
+         border-radius: 16px;
+         box-shadow: 0 4px 30px #0000001a;
+         border: 1px solid #ffffff5c;   
+    }
+
+    .left-content .box-login {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;   
+    }
+    
+
+    .left-content .box-login h3{
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        padding-bottom: 48px;
+    }
+    
+    .left-content .box-login p {
+        color: white;
+        margin-bottom: 8px;
+    }
+    
+    input#input_email {
+        margin-bottom: 16px;
+    }
+    
+    .input {
+        height: 14px;
+        border-radius: 12px;
+        padding: 8px;
+        border: none;
+        outline: none;
+    }
+    
+    .btn-login {
+        background-color:  #D5B642;
+        border: 2px solid #7c6b2b;
+        padding: 6px 52px;
+        margin-top: 16px;
+        border-radius: 16px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        font-weight: 500px;
+    }
+
+    .right-content{
+        display: none;
+    }
+    
+    .btn-login:hover{
+        color: #D5B642;
+        background-color: #181818;  
+        transition: ease 0.5s;
+    }
+    
+    .msg-register {
+        text-align: center;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+    
+    .msg-register a {
+        color:#D5B642;
+        text-decoration: none;
+    
+    }
+    
+    .msg-register a:hover{
+        color: #7c6b2b;
+        transition: ease 0.1s;    
+    }
+
+    .card_erro {
+        text-align: center;
+        margin-top: 20px;
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 900;
+    }
+    
+    .msg-erro {
+        color: red;
+        font-size: 16px;
+        width: fit-content;
+        margin-top: 4px;
+    }
+    
+    span#mensagem_erro {
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+    }
+       
+}
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 601px) and (max-width: 768px){
+
+    .container-login {
+        display: flex;
+        height: 100vh;
+        
+    }
+    
+    .left-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        background-color: #091227;
+    }
+    
+    .left-content .box-login {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        
+    }
+    
+    .left-content .box-login h3{
+        font-size: 30px;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        padding-bottom: 48px;
+    }
+    
+    .left-content .box-login p {
+        color: white;
+        margin-bottom: 8px;
+    }
+
+    
+
+    input#input_email {
+        margin-bottom: 16px;
+    }
+    
+    .input {
+        height: 24px;
+        border-radius: 12px;
+        padding: 8px;
+        border: none;
+        outline: none;
+    }
+    
+    .btn-login {
+        background-color:  #D5B642;
+        border: 2px solid #7c6b2b;
+        padding: 12px 52px;
+        margin-top: 16px;
+        border-radius: 16px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    
+    .btn-login:hover{
+        color: #D5B642;
+        background-color: #181818;  
+        transition: ease 0.5s;
+    }
+    
+    .msg-register {
+        text-align: center;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+    
+    .msg-register a {
+        color:#D5B642;
+        text-decoration: none;
+    
+    }
+    
+    .msg-register a:hover{
+        color: #7c6b2b;
+        transition: ease 0.1s;    
+    }
+    
+    .right-content {
+        width: 50%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-image: url("https://images.unsplash.com/photo-1529179307417-ca83d48bd790?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        
+    }
+    
+    
+    .right-content .navbar {
+        position: absolute;
+        top: 40px;
+    }
+    
+    .right-content .navbar ul {
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .right-content .navbar li {
+        list-style: none;
+        
+    }
+    
+    .navbar li:hover {
+        transform: scale(1.1);
+        transition: ease 0.5s;
+    }
+    
+    .right-content .navbar a {
+        text-decoration: none;
+        list-style: none;
+        color: aliceblue;
+        font-size: 23px;
+    }
+    
+    .card_erro {
+        text-align: center;
+        margin-top: 20px;
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: 900;
+    }
+    
+    .msg-erro {
+        color: red;
+        font-size: 16px;
+        width: fit-content;
+        margin-top: 4px;
+    }
+    
+    span#mensagem_erro {
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+    }
+           
+
+}
