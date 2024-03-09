@@ -37,10 +37,9 @@
         <div class="right-content">
           
             <div class="box-register">
-                <h3>Primeiro acesso</h3>
                     <div class="name">
                         <p class="titles-inputs">Nome fantasia</p>
-                        <input type="text" onkeyup="validarNome()" class="inputs id="input_name" placeholder="Digite seu Nome">
+                        <input type="text" onkeyup="validarNome()" class="inputs" id= input_name>
                         <div class="msg-erro" id="error_name">
                           <span></span>
                         </div>
@@ -48,19 +47,19 @@
                       
                       <div class="box-username">
                           <p class="titles-inputs">CNPJ</p>
-                          <input maxlength="20" class="input-cnpj" id="input_cnpj" placeholder="Digite seu cnpj">
+                          <input maxlength="20" class="input-cnpj" id="input_cnpj">
                           <div class="msg-erro" id="error_username"></div>
                         </div>
 
                     <div class="box-email">
                         <p class="titles-inputs">Telefone</p>
-                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email" placeholder="Digite seu telefone">
+                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email">
                         <div class="msg-erro" id="error_email"></div>
                       </div>
                     
                     <div class="box-email">
                         <p class="titles-inputs">Email</p>
-                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email" placeholder="Digite seu email">
+                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email">
                         <div class="msg-erro" id="error_email"></div>
                       </div>
                                         
@@ -69,7 +68,7 @@
                         <p class="titles-inputs">Senha</p>
                         <div class="box-informativo">
                           
-                          <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password" placeholder="Digite sua senha"> <br>
+                          <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password"> <br>
                           <div class="msg-erro" id="error_password"></div>
                           <!-- <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" id="informativo"> -->
                         </div>
@@ -86,7 +85,7 @@
                 <button class="btn-register" onclick="cadastrar()">Registrar</button>
                     
                 <div class="msg-login">
-                    <p>Já possui uma conta? <a href="login.html">Entre</a></p>
+                    <p>Já possui uma conta? <a href="login.html"> Entre</a></p>
                 </div>
 
                 <div class="login">
@@ -150,34 +149,9 @@ var validacaoEspecial =
   senha.indexOf("@") >= 0 ||
   senha.indexOf("#") >= 0 ||
   senha.indexOf("$") >= 0 ||
-  senha.indexOf("%") >= 0 ||
-  senha.indexOf("¨") >= 0 ||
   senha.indexOf("&") >= 0 ||
-  senha.indexOf("*") >= 0 ||
-  senha.indexOf("(") >= 0 ||
-  senha.indexOf(")") >= 0 ||
-  senha.indexOf("-") >= 0 ||
   senha.indexOf("_") >= 0 ||
-  senha.indexOf("+") >= 0 ||
-  senha.indexOf("=") >= 0 ||
-  senha.indexOf("§") >= 0 ||
-  senha.indexOf('"') >= 0 ||
-  senha.indexOf("'") >= 0 ||
-  senha.indexOf(",") >= 0 ||
-  senha.indexOf("<") >= 0 ||
-  senha.indexOf(".") >= 0 ||
-  senha.indexOf(">") >= 0 ||
-  senha.indexOf(":") >= 0 ||
-  senha.indexOf(":") >= 0 ||
-  senha.indexOf("/") >= 0 ||
   senha.indexOf("?") >= 0 ||
-  senha.indexOf("°") >= 0 ||
-  senha.indexOf("º") >= 0 ||
-  senha.indexOf("]") >= 0 ||
-  senha.indexOf("}") >= 0 ||
-  senha.indexOf("ª") >= 0 ||
-  senha.indexOf("[") >= 0 ||
-  senha.indexOf("{") >= 0 ||
   senha.indexOf("%") >= 0;
 
 var validacaoNumero =

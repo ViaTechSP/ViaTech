@@ -11,7 +11,9 @@
 }
 
 .container-register .left-content {
-    background: url(../assets/imgs/img-cadastro.jpg);
+    background-image: url(../assets/imgs/img-cadastro.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 40%;
     height: 100%;
     background-color: #091227;
@@ -102,6 +104,8 @@
     width: 97%;
 }
 
+
+
 .input-cnpj {
     height: 24px;
     border-radius: 12px;
@@ -114,7 +118,10 @@
 }
 
 
-/* .box-informativo {
+/* CSS DA INTEROGAÇÃO DA SENHA
+
+
+    .box-informativo {
     display: flex;
     flex-direction: row;
 }
@@ -147,12 +154,9 @@
 
 .image-container:hover .popup-informativo {
     display: block;
-} */ */
+} */ 
 
-::placeholder {
-    color: black;
-    font-family: 'Poppins', sans-serif;
-}
+
 
 
 
@@ -191,6 +195,17 @@
     cursor: pointer;
     font-weight: 500;
     border: 2px solid #7c6b2b;
+}
+
+.btn-register:hover{
+    color: #D5B642;
+    background-color: #181818;  
+    transition: ease 0.5s;
+}
+
+.msg-login a:hover{
+    color: #7c6b2b;
+    transition: ease 0.1s;    
 }
 
 .card_erro {
