@@ -221,6 +221,7 @@ body {
   }
 
 
+  
   footer {
     width: 100%;
     /* color: #282222bf; */
@@ -231,9 +232,10 @@ body {
     text-decoration: none;
   }
   
-
+  
+  
   #footer_content {
-    background-image: url('https://images.unsplash.com/photo-1516488603192-3424e7ecd3bb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+    background-image: url('https://cdn.pixabay.com/photo/2017/08/20/20/21/train-2663056_1280.jpg'); 
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center;
@@ -244,18 +246,21 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     /* filter: blur(1px);  */
-    opacity: 0.6;
+    opacity: 0.92;
   }
+  
   
   #footer_contacts {
     text-align: center;
     margin-right: 40px;
+    
     
   }
   
   #footer_contacts h1 {
     text-align: center;
     margin-bottom: 10px;
+    
   }
   
   
@@ -265,6 +270,7 @@ body {
   }
   
   .footer-list {
+    
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -273,7 +279,8 @@ body {
   }
   
   .slogan {
-    color: #EAEAEA;
+    color: #000000;
+    
   }
   
   .footer-list h3 {
@@ -284,6 +291,7 @@ body {
   .footer-list .mapa-br {
     width: 122px;
     height: 124px;
+    
   }
   
   .footer-list .footer-link {
@@ -303,6 +311,7 @@ body {
     text-align: center;
     font-size: 24px;
     color: white;
+    
     /* padding: 10px 0; */
   }
   
