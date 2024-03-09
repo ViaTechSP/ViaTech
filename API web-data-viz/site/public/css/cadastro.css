@@ -220,6 +220,13 @@
         width: 100%;
     }
 
+    .box-register{
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid #ffffff4d;
+        box-shadow: 0 4px 30px #0000001a;
+        background: #ffffff33;
+    }
     .left-content .navbar {
         display: none;
     }
