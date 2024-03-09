@@ -25,7 +25,7 @@
                 <div class="navbar">
                     <ul>
                         <li><a href="index.html">Início</a></li>
-                        <li><a href="">Sobre nós</a></li>
+                        <li><a href="index.html">Sobre nós</a></li>
                     </ul>
                 </div>
 
@@ -39,22 +39,19 @@
             <div class="box-register">
                     <div class="name">
                         <p class="titles-inputs">Nome fantasia</p>
-                        <input type="text" onkeyup="validarNome()" class="inputs" id= input_name>
-                        <div class="msg-erro" id="error_name">
-                          <span></span>
-                        </div>
+                        <input type="text" class="inputs" id="input_name">
                       </div>
                       
-                      <div class="box-username">
+                      <div class="box-cnpj">
                           <p class="titles-inputs">CNPJ</p>
                           <input maxlength="20" class="input-cnpj" id="input_cnpj">
-                          <div class="msg-erro" id="error_username"></div>
+                          <div class="msg-erro" id="error_cnpj"></div>
                         </div>
 
                     <div class="box-email">
                         <p class="titles-inputs">Telefone</p>
-                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email">
-                        <div class="msg-erro" id="error_email"></div>
+                        <input type="text" class="inputs" id="input_telefone">
+                        <div class="msg-erro" id="error_telefone"></div>
                       </div>
                     
                     <div class="box-email">
@@ -66,12 +63,11 @@
                     
                     <div class="box-password">
                         <p class="titles-inputs">Senha</p>
-                        <div class="box-informativo">
-                          
+                        <!-- <div class="box-informativo"> -->
                           <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password"> <br>
                           <div class="msg-erro" id="error_password"></div>
                           <!-- <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" id="informativo"> -->
-                        </div>
+                        <!-- </div> -->
                         </div>
 
                     <!-- <div class="popup-informativo">
@@ -88,13 +84,6 @@
                     <p>Já possui uma conta? <a href="login.html"> Entre</a></p>
                 </div>
 
-                <div class="login">
-                  <div class="alerta_erro">
-                    <div class="card_erro" id="cardErro">
-                      <span id="mensagem_erro"></span>
-                    </div>
-                  </div>
-                </div>
             </div>
         </div>   
     </div>
@@ -104,31 +93,6 @@
 </html>
 
 <script>
-    function validarNome() {
-      var nomeVar = input_name.value;
-      
-      if (nomeVar == '' || nomeVar.length < 2) {
-        input_name.style.border = 'solid 2px red'
-        error_name.innerHTML = 'Nome inválido'
-      } else {
-        input_name.style.border = 'solid 2px green'
-        error_name.innerHTML = ''
-    }
-    }
-
-    function validarSobrenome(){
-      var lastNameVar = input_last_name.value;
-
-      if (lastNameVar == '' || lastNameVar.length < 2) {
-        error_lastname.innerHTML = `Sobrenome inválido`
-        input_last_name.style.border = 'solid 2px red'
-      
-      } else {
-      input_last_name.style.border = 'solid 2px green'
-      error_lastname.innerHTML = ''
-        }
-    }
-
     function validarEmail() {
       var emailVar = input_email.value;
       
@@ -141,7 +105,7 @@
         }
     }
 
-    function validarSenha() {
+function validarSenha() {
 var senha = input_password.value;
 
 var validacaoEspecial =
@@ -197,26 +161,13 @@ if (senha.length >= 8) {
 }  
 
     function cadastrar() {
-    // aguardar();
     validarSenha();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = input_name.value;
     var lastNameVar = input_last_name.value;
     var emailVar = input_email.value;
-    var usernameVar = input_username.value;
+    var cnpjVar = input_cnpj.value;
     var senhaVar = input_password.value;
-    var possui_especial =
-      senhaVar.indexOf('#') >= 0 ||
-      senhaVar.indexOf('@') >= 0 ||
-      senhaVar.indexOf('!') >= 0 ||
-      senhaVar.indexOf('%') >= 0 ||
-      senhaVar.indexOf('?') >= 0 ||
-      senhaVar.indexOf('-') >= 0 ||
-      senhaVar.indexOf('+') >= 0 ||
-      senhaVar.indexOf('_') >= 0;
-    
     if (
       nomeVar == "" ||
       lastNameVar == "" ||
@@ -225,46 +176,30 @@ if (senha.length >= 8) {
       senhaVar.length <= 6 || 
       nomeVar.length <= 1 ||
       emailVar.indexOf('@') < 0 ||
-      emailVar.indexOf('.') < 0 ||
-      possui_especial == false
+      emailVar.indexOf('.') < 0
     ) {
-      cardErro.style.display = "block";
       error_name.innerHTML = 'Nome inválido'
       error_lastname.innerHTML = `Sobrenome inválido`
       error_email.innerHTML = `Email inválido`
-      error_password.innerHTML = `Senha deve conter: <br>
-        8 dígitos<br>
-        Pelo menos uma letra maiúscula<br>
-        Pelo menos uma letra minúscula<br>
-        Pelo menos um caractere especial`
-
-      mensagem_erro.innerHTML =
-        "Verifique os campos!";
-
-      // finalizarAguardar();
       return false;
     } else {
       mensagem_erro.innerHTML =
-            // "Cadastro realizado com sucesso! <br> Redirecionando para tela de Login...";
       setInterval(sumirMensagem, 5000);
     }
     
       
   
 
-    // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         lastNameServer: lastNameVar,
         emailServer: emailVar,
-        usernameServer: usernameVar,
+        cnpjServer: cnpjVar,
         senhaServer: senhaVar,
       }),
     })
@@ -272,34 +207,22 @@ if (senha.length >= 8) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
-          cardErro.style.border = 'solid 1px #091227';
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! <br> Redirecionando para tela de Login...";
 
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
-          // limparFormulario();
-          // finalizarAguardar();
         } else {
-          error_username.innerHTML = `Nome de usuário já utilizado`;
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        // finalizarAguardar();
       });
 
     return false;
   }
-
   
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
 
   function mascara() {
     const inputCnpj = document.querySelector('.input-cnpj');
@@ -316,14 +239,7 @@ if (senha.length >= 8) {
       }
     });
 
-    // const input_contato = document.querySelector('.telefone-top');
-
-    // input_contato.addEventListener('keypress', () => {
-    //   let telLength = input_contato.value.length;
-
-    //   if (telLength == 5) input_contato.value += '-'
-    // })
   }
 
-  mascara();
+mascara();
 </script>

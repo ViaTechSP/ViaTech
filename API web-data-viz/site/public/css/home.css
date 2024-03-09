@@ -42,6 +42,10 @@ body {
       border: none;
       cursor: pointer;
     }
+
+    .btn-login a, .btn-register a{
+      color: black;
+    }
   
     .btn-login:hover{
       padding: 16px;

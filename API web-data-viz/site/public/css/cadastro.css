@@ -117,49 +117,6 @@
     width: 97%;
 }
 
-
-/* CSS DA INTEROGAÇÃO DA SENHA
-
-
-    .box-informativo {
-    display: flex;
-    flex-direction: row;
-}
-
-.informativo {
-    width: 35px;
-    height: 35px;
-    margin-top: 4px;
-    margin-left: 10px;
-}
-
-/* #informativo {
-    transition: opacity 0.3s ease-in-out;
-}
-
-.popup-informativo {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.image-container:hover #informativo {
-    opacity: 0.7;
-}
-
-.image-container:hover .popup-informativo {
-    display: block;
-} */ 
-
-
-
-
-
 .right-content .box-register .box-name {
     width: 100%;
     display: flex;
@@ -236,4 +193,42 @@
     color: red;
     font-size: 14px;
     width: fit-content;
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .container-register {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        background-image: url(../assets/imgs/img-cadastro-blur.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .container-register .left-content {
+        width: 0%;
+    } 
+
+    .right-content {
+        width: 100%;
+    }
+
+    .left-content .navbar {
+        display: none;
+    }
+
+    .right-content .box-register .titles-inputs {
+        color: black;
+    }
+
+    .right-content .box-register .inputs, .right-content .box-register .input-cnpj {
+        border: solid 2px black;
+    }
 }

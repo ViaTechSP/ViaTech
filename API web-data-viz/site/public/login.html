@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover Sheets | Login</title>
+    <title>ViaTech | Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -73,8 +73,6 @@
         var senhaVar = input_password.value;
 
         if (emailVar == "" || senhaVar == "") {
-            // cardErro.style.display = "block"
-            // cardErro.style.border = 'solid 1px white';
             mensagem_erro.innerHTML = "Preencha os campos";
             return false;
         }
@@ -114,11 +112,6 @@
             } else {
                 mensagem_erro.innerHTML = "Usuário ou senha incorretos"
                 console.log("Houve um erro ao tentar realizar o login!");
-
-                // resposta.text().then(texto => {
-                //     console.error(texto);
-                //     finalizarAguardar(texto);
-                // });
             }
 
         }).catch(function (erro) {
@@ -127,8 +120,4 @@
 
         return false;
     }
-
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
 </script>
