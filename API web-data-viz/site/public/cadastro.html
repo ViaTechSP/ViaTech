@@ -48,7 +48,7 @@
                       
                       <div class="box-username">
                           <p class="titles-inputs">CNPJ</p>
-                          <input type="text"  class="inputs" id="input_cnpj" placeholder="Digite seu cnpj">
+                          <input maxlength="20" class="input-cnpj" id="input_cnpj" placeholder="Digite seu cnpj">
                           <div class="msg-erro" id="error_username"></div>
                         </div>
 
@@ -63,8 +63,7 @@
                         <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email" placeholder="Digite seu email">
                         <div class="msg-erro" id="error_email"></div>
                       </div>
-                    
-                    
+                                        
                     
                     <div class="box-password">
                         <p class="titles-inputs">Senha</p>
@@ -72,9 +71,16 @@
                           
                           <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password" placeholder="Digite sua senha"> <br>
                           <div class="msg-erro" id="error_password"></div>
-                          <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" alt="">
+                          <!-- <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" id="informativo"> -->
                         </div>
                         </div>
+
+                    <!-- <div class="popup-informativo">
+                      A senha deve conter:
+                      6 dígitos
+                      Letra maiúscula e minúscula
+                      Um caractere especial
+                    </div> -->
 
                     
                 <button class="btn-register" onclick="cadastrar()">Registrar</button>
@@ -136,40 +142,86 @@
         }
     }
 
-    function validarSenha(){
-      var senhaVar = input_password.value;
-      var emailVar = input_email.value;
-      
-      var possui_especial =
-      senhaVar.indexOf('#') >= 0 ||
-      senhaVar.indexOf('@') >= 0 ||
-      senhaVar.indexOf('!') >= 0 ||
-      senhaVar.indexOf('%') >= 0 ||
-      senhaVar.indexOf('?') >= 0 ||
-      senhaVar.indexOf('-') >= 0 ||
-      senhaVar.indexOf('+') >= 0 ||
-      senhaVar.indexOf('_') >= 0;
+    function validarSenha() {
+var senha = input_password.value;
 
-      var terminacaoEmail = emailVar.endsWith('.com') || emailVar.endsWith('.br') || emailVar.endsWith('.school')
+var validacaoEspecial =
+  senha.indexOf("!") >= 0 ||
+  senha.indexOf("@") >= 0 ||
+  senha.indexOf("#") >= 0 ||
+  senha.indexOf("$") >= 0 ||
+  senha.indexOf("%") >= 0 ||
+  senha.indexOf("¨") >= 0 ||
+  senha.indexOf("&") >= 0 ||
+  senha.indexOf("*") >= 0 ||
+  senha.indexOf("(") >= 0 ||
+  senha.indexOf(")") >= 0 ||
+  senha.indexOf("-") >= 0 ||
+  senha.indexOf("_") >= 0 ||
+  senha.indexOf("+") >= 0 ||
+  senha.indexOf("=") >= 0 ||
+  senha.indexOf("§") >= 0 ||
+  senha.indexOf('"') >= 0 ||
+  senha.indexOf("'") >= 0 ||
+  senha.indexOf(",") >= 0 ||
+  senha.indexOf("<") >= 0 ||
+  senha.indexOf(".") >= 0 ||
+  senha.indexOf(">") >= 0 ||
+  senha.indexOf(":") >= 0 ||
+  senha.indexOf(":") >= 0 ||
+  senha.indexOf("/") >= 0 ||
+  senha.indexOf("?") >= 0 ||
+  senha.indexOf("°") >= 0 ||
+  senha.indexOf("º") >= 0 ||
+  senha.indexOf("]") >= 0 ||
+  senha.indexOf("}") >= 0 ||
+  senha.indexOf("ª") >= 0 ||
+  senha.indexOf("[") >= 0 ||
+  senha.indexOf("{") >= 0 ||
+  senha.indexOf("%") >= 0;
 
-      if (senhaVar.length >= 8 && possui_especial && terminacaoEmail && (senhaVar != senhaVar.toUpperCase() && senhaVar != senhaVar.toLowerCase())) {
+var validacaoNumero =
+  senha.indexOf(0) >= 0 ||
+  senha.indexOf(1) >= 0 ||
+  senha.indexOf(2) >= 0 ||
+  senha.indexOf(3) >= 0 ||
+  senha.indexOf(4) >= 0 ||
+  senha.indexOf(5) >= 0 ||
+  senha.indexOf(6) >= 0 ||
+  senha.indexOf(7) >= 0 ||
+  senha.indexOf(8) >= 0 ||
+  senha.indexOf(9) >= 0;
+
+var validacaoMaiusculaMinuscula = senha != senha.toLowerCase() && senha != senha.toUpperCase();
+
+if (senha.length >= 8) {
+  if (validacaoMaiusculaMinuscula) {
+    if (validacaoEspecial) {
+      if (validacaoNumero) {
+        
         input_password.style.border = 'solid 2px green'
         error_password.innerHTML = ``
+
+          } else {
+            error_password.innerHTML = "A senha deve conter pelo menos um numero";
+            input_password.style.border = 'solid 2px red'
+          }
+        } else { 
+          error_password.innerHTML = "A senha deve conter ao menos um caractere especial";
+          input_password.style.border = 'solid 2px red'
+        } 
       } else {
+        error_password.innerHTML = "A senha deve conter ao menos uma letra maiuscula e uma minuscula";
         input_password.style.border = 'solid 2px red'
-        error_password.innerHTML = `Senha deve conter: <br>
-        8 dígitos<br>
-        Pelo menos uma letra maiúscula<br>
-        Pelo menos uma letra minúscula<br>
-        Pelo menos um caractere especial`
       }
+    } else {
+    error_password.innerHTML = "A senha deve ter pelo menos 8 caracteres";
+    input_password.style.border = 'solid 2px red'
     }
 
-  
-    
-    
-    
-    
+
+}  
+
     function cadastrar() {
     // aguardar();
     validarSenha();
@@ -276,17 +328,17 @@
   }
 
   function mascara() {
-    const input_cnpj = document.querySelector('.input_cnpj');
+    const inputCnpj = document.querySelector('.input-cnpj');
 
-    input_cnpj.addEventListener('keypress', () => {
-      let cnpjLength = input_cnpj.value.length;
+    inputCnpj.addEventListener('keypress', () => {
+      let cnpjLength = inputCnpj.value.length;
 
       if (cnpjLength == 2 || cnpjLength == 6) {
-        input_cnpj.value += ".";
+        inputCnpj.value += ".";
       } else if (cnpjLength == 10) {
-        input_cnpj.value += "/";
+        inputCnpj.value += "/";
       } else if (cnpjLength == 15) {
-        input_cnpj.value += "-";
+        inputCnpj.value += "-";
       }
     });
 

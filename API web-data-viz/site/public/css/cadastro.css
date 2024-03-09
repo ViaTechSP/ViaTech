@@ -102,11 +102,19 @@
     width: 97%;
 }
 
-.box-password {
-    width: 108%;
+.input-cnpj {
+    height: 24px;
+    border-radius: 12px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: black;
+    width: 97%;
 }
 
-.box-informativo {
+
+/* .box-informativo {
     display: flex;
     flex-direction: row;
 }
@@ -117,6 +125,29 @@
     margin-top: 4px;
     margin-left: 10px;
 }
+
+/* #informativo {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.popup-informativo {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.image-container:hover #informativo {
+    opacity: 0.7;
+}
+
+.image-container:hover .popup-informativo {
+    display: block;
+} */ */
 
 ::placeholder {
     color: black;
@@ -188,7 +219,6 @@
 .msg-erro {
     font-family: 'Poppins', sans-serif;
     color: red;
-    font-size: 16px;
+    font-size: 14px;
     width: fit-content;
-    margin-top: 4px;
 }
