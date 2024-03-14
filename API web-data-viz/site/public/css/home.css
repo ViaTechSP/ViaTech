@@ -191,7 +191,6 @@ body {
     }
 
     .container-sobre-nos{
-      margin-top: 50px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -199,14 +198,25 @@ body {
       align-items: center;
     }
 
-    .titulo-sobre-nos h2{
-      color: #091227;
+    .sobre-nos-superior {
+      display: flex;
+      width: 85%;
+
     }
 
+    .titulo-sobre-nos h2{
+      color: #091227;
+      font-size: 36px;
+      text-decoration: underline 1px;
+      text-underline-position: from-font;
+    }
+
+    .titulo-texto-sobre-nos {
+      width: 50%;
+  }
+
     .texto-sobre-nos{
-      text-align: center;
       font-size: 15px;
-      width: 55%;
     }
 
     .box-valores{
@@ -249,10 +259,9 @@ body {
 
     .header-servicos{
       font-size: 15px;
-      text-align: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
+     
     }
 
     .header-servicos p{
@@ -260,10 +269,13 @@ body {
     }
 
     .titulo-serviços{
-      width: 100%;
-      display: flex;
-      justify-content: center;
       color: #091227;
+    }
+
+    .titulo-serviços h2 {
+      font-size: 36px;
+      text-decoration: underline 1px;
+      text-underline-position: from-font;
     }
 
     .banner .container .div-img2-home {
