@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
 
 }
 
@@ -15,10 +15,9 @@
 .buttonHome {
     color: #F8F5EC;
     background-color: #091227;
-    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 15px;
-    width: 150px;
+    width: 100px;
     height: 35px;
     margin-top: 10px;
     border-radius: 5px;
@@ -29,7 +28,6 @@
   .buttonCadastro {
     color: #F8F5EC;
     background-color: #091227;
-    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 15px;
     width: 200px;
@@ -90,7 +88,6 @@ input#input_email {
     color: white;
     cursor: pointer;
     font-weight: 500;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-login:hover{
@@ -360,7 +357,6 @@ span#mensagem_erro {
     
     .left-content .box-login h3{
         font-size: 30px;
-        font-family: 'Roboto', sans-serif;
         color: white;
         padding-bottom: 48px;
     }
