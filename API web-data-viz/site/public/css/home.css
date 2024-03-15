@@ -201,14 +201,23 @@ body {
       align-items: center;
     }
 
+    .titulo-texto-sobre-nos {
+      width: 85%;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
     .titulo-sobre-nos h2{
       color: #091227;
+      font-size: 36px;
+      text-decoration: underline 1px;
+      text-underline-position: from-font;
     }
 
     .texto-sobre-nos{
       text-align: center;
-      font-size: 15px;
-      width: 55%;
+      font-size: 16px;
     }
 
     .box-valores{
@@ -252,24 +261,41 @@ body {
 
     /* TÓPICO PROBLEMAS */
     .container-problema{
-      background-color: #658add;
-      margin-top: 50px;
-      width: 100%;
+      width: 90%;
       display: flex;
       justify-content: center;
-      flex-direction: column;
+      flex-direction: row-reverse;
       align-items: center;
+      margin: auto;
+      height: 100vh;
+    }
+
+    .titulo-problema{
+      text-align: center;
     }
 
     
     .titulo-problema h2{
       color: #091227;
+      font-size: 36px;
+      text-decoration: underline 1px;
+      text-underline-position: from-font;
     }
 
     .texto-problema{
-      text-align: center;
-      font-size: 15px;
-      width: 55%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      height: 60%;
+      margin-left: 28px;
+    
+    }
+
+    .titulo-texto-problema {
+      width: 50%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
     }
 
     .texto-problema span{
@@ -280,16 +306,13 @@ body {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      width: 90%;
-      height: 30%;
-
+      width: 50%;
     }
 
     .problema{
       margin: 20px;
       padding: 20px;
       border-radius: 15px;
-      width: 30%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -313,7 +336,9 @@ body {
     }
 
     .header-servicos p{
-      width: 40%;
+      width: 90%;
+      margin-bottom: 40px;
+      font-size: 20px;
     }
 
     .titulo-serviços{
@@ -321,6 +346,12 @@ body {
       display: flex;
       justify-content: center;
       color: #091227;
+    }
+
+    .titulo-serviços h2 {
+      font-size: 36px;
+    text-decoration: underline 1px;
+    text-underline-position: from-font;
     }
 
     .banner .container .div-img2-home {
@@ -354,9 +385,6 @@ body {
     }
     
     .checklist {
-      background-color: #a9c1ee;
-      border: 2px solid #091227;
-      /* height: 25%; */
       border-radius: 12px;
       display: flex;
       padding: 6px;
@@ -367,6 +395,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #091227;
+    border-radius: 12px;
+    margin-right: 12px;
   }
 
   img.icons-checklist {
@@ -382,6 +413,8 @@ body {
 
   .text-checklist p{
   font-weight: bold;
+  text-decoration: underline 1px;
+    text-underline-position: from-font;
   }
 
     .img-menor{
