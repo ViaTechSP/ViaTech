@@ -30,13 +30,12 @@
     background-color: #091227;
     font-weight: bold;
     font-size: 15px;
-    width: 200px;
     height: 35px;
     margin-top: 10px;
-    margin-left: 50px;
     border-radius: 5px;
     border: 4px solid #091227;
     box-shadow: 0px 0px 0px 2px rgb(180, 166, 166), 0px 0px 0px 5px #091227;
+    padding: 0px 16px;
   }
 
 .left-content {
@@ -56,14 +55,16 @@
 
 .left-content .box-login h3{
     font-size: 40px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Barlow', sans-serif;
     color: white;
     padding-bottom: 48px;
 }
 
 .left-content .box-login p {
     color: white;
-    margin-bottom: 8px;
+    font-family: 'Barlow', sans-serif;
+    margin-top: 16px;
+    font-weight: bold;
 }
 
 input#input_email {
@@ -79,15 +80,16 @@ input#input_email {
 }
 
 .btn-login {
-    background-color:  #D5B642;
-    border: 2px solid #7c6b2b;
+    background-color: #D5B642;
     padding: 12px 52px;
-    margin-top: 16px;
+    margin-top: 32px;
     border-radius: 16px;
     font-size: 16px;
     color: white;
     cursor: pointer;
     font-weight: 500;
+    border: 2px solid #7c6b2b;
+    font-family: 'Barlow', sans-serif;
 }
 
 .btn-login:hover{
@@ -105,6 +107,7 @@ input#input_email {
 .msg-register a {
     color:#D5B642;
     text-decoration: none;
+    font-family: 'Barlow', sans-serif;
 
 }
 
@@ -123,6 +126,7 @@ input#input_email {
 .msg-esqueceu a {
     color:#D5B642;
     text-decoration: none;
+    font-family: 'Barlow', sans-serif;
 
 }
 
@@ -169,7 +173,7 @@ input#input_email {
     text-decoration: none;
     list-style: none;
     color: aliceblue;
-    font-size: 23px;
+    font-size: 15px;
 }
 
 .card_erro {
@@ -238,7 +242,7 @@ span#mensagem_erro {
 
     .left-content .box-login h3{
         font-size: 20px;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Barlow', sans-serif;
         color: white;
         padding-bottom: 48px;
     }
@@ -270,6 +274,7 @@ span#mensagem_erro {
         color: white;
         cursor: pointer;
         font-weight: 500px;
+        font-family: 'Barlow', sans-serif;
     }
 
     .right-content{
@@ -291,6 +296,7 @@ span#mensagem_erro {
     .msg-register a {
         color:#D5B642;
         text-decoration: none;
+        font-family: 'Barlow', sans-serif;
     
     }
     
@@ -359,6 +365,7 @@ span#mensagem_erro {
         font-size: 30px;
         color: white;
         padding-bottom: 48px;
+        font-family: 'Barlow', sans-serif;
     }
     
     .left-content .box-login p {
@@ -390,6 +397,7 @@ span#mensagem_erro {
         color: white;
         cursor: pointer;
         font-weight: 500;
+        font-family: 'Barlow', sans-serif;
     }
     
     .btn-login:hover{
@@ -407,6 +415,7 @@ span#mensagem_erro {
     .msg-register a {
         color:#D5B642;
         text-decoration: none;
+        font-family: 'Barlow', sans-serif;
     
     }
     
