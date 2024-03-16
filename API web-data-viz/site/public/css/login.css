@@ -197,7 +197,22 @@ span#mensagem_erro {
     border-radius: 8px;
 }
     
-
+/* Rolagem de fundo */
+::-webkit-scrollbar {
+    width: 10px; 
+    background-color: #091227;
+  }
+  
+  /* A cor da barrinha */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #658add; 
+  }
+  
+  /* Quando passa por cima */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a9c1ee; 
+  }
 
 
 
@@ -484,6 +499,22 @@ span#mensagem_erro {
         padding: 8px;
         border-radius: 8px;
     }
-           
+
+    /* Rolagem de fundo */
+    ::-webkit-scrollbar {
+        width: 10px; 
+        background-color: #091227;
+      }
+
+      /* A cor da barrinha */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #658add; 
+      }
+
+      /* Quando passa por cima */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: #a9c1ee; 
+      }
 
 }
