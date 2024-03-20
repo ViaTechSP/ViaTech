@@ -8,7 +8,11 @@
     scroll-behavior: smooth; /*quando clicar no li do header a rolagem da tela será mais suave*/
 }
 
-   
+
+   .btn-register-home a{
+    text-decoration: none;
+    color: white;
+   }
     .header {
       height: 80px;
       background-color: #091227;

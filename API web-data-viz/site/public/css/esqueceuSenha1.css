@@ -52,6 +52,10 @@
     width: fit-content;
     
 }
+#btn-login-id a{
+    text-decoration: none;
+    color: white;
+}
 
 .left-content .box-login h3{
     font-size: 40px;

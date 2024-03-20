@@ -12,6 +12,10 @@
     
 }
 
+.btn-login a {
+    text-decoration: none;
+    color: white;
+}
 .buttonHome {
     color: #F8F5EC;
     background-color: #091227;
