@@ -1,0 +1,215 @@
+* {
+    font-family: "Roboto Thin", Arial, sans-serif;
+    font-size: 20px;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    text-decoration: none;
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+
+/* TELA PRINCIPAL */
+
+.home {
+    width: 100%;
+    height: 100%;   
+    z-index: 1;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+}
+
+.imagemHome{
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    
+}
+/* FRASE EM CIMA DA IMAGEM */
+
+.frase{
+    position: absolute;
+    display: flex;
+    z-index: 2;
+    width: 40%;
+    font-size: 80px;
+    top: 50%;
+}
+
+/* HEADER */
+
+.header{
+    z-index: 3;
+    position: fixed; 
+    display: flex;
+    width: 100%;
+    height: 120px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background: #01164070;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #F27A5E;
+}
+
+.navbar{
+    width: 95%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerLogo{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;    
+}
+
+.logo{
+    width: 50%;
+    height: 80%;
+}
+
+.containerNavegacao{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerNavegacao ul{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.containerBotaoHeader{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.btn-login {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #091227;
+    border: none;
+    cursor: pointer;
+    box-shadow: #3667d88a 0 0 10px 1px;
+}
+
+.btn-login:hover{
+    background-color: #142855;
+    transition: ease 0.2s;
+}
+
+.btn-cadastrar {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #091227;
+    border: none;
+    cursor: pointer;
+    box-shadow: #3667d88a 0 0 10px 1px;
+}
+
+.btn-cadastrar:hover{
+    background-color: #142855;
+    transition: ease 0.2s;
+}
+
+
+/* SOBRE NÓS */
+.sobreNos{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sobreNos h1{
+    font-size: 40px;
+    color: #091227;
+}
+
+.containerValores{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.imagemBarra{
+    margin-top: 50px;
+    width: 50vw;
+    height: 80px;
+}
+
+.valores{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconValor{
+    width: 100px;
+}
+
+.confianca{
+    display: flex;
+    width: 32%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.qualidade{
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.etica{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.texto-valor{
+
+    text-align: center;
+    display: flex;
+    width: 60%;
+    font-size: 20px;
+    justify-content: center;
+    align-items: start;
+    color: black;
+}
+
+.valores p{
+    margin-top: 20px;
+    color: black;
+}
