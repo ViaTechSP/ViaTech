@@ -6,300 +6,682 @@
     padding: 0;
 }
 
-li{
-    text-decoration: none;
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
+@media only screen and (min-width: 744px) and (max-width: 2000px) {
+    li{
+        text-decoration: none;
+        list-style: none;
+    }
     
-}
-
-
-/* TELA PRINCIPAL */
-
-.home {
-    width: 100%;
-    height: 100%;   
-    z-index: 1;
-    display: flex;
-    align-items: end;
-    flex-direction: column;
-}
-
-.imagemHome{
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
+    a{
+        text-decoration: none;
+        
+    }
     
-}
-/* FRASE EM CIMA DA IMAGEM */
-
-.frase{
-    position: absolute;
-    display: flex;
-    z-index: 2;
-    width: 40%;
-    font-size: 80px;
-    top: 50%;
-}
-
-/* HEADER */
-
-.header{
-    z-index: 3;
-    position: fixed; 
-    display: flex;
-    width: 100%;
-    height: 120px;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    background: #01164070;
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid #F27A5E;
-}
-
-.navbar{
-    width: 95%;
-    height: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.containerLogo{
-    width: 15%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;    
-}
-
-.logo{
-    width: 50%;
-    height: 80%;
-}
-
-.containerNavegacao{
-    width: 65%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.containerNavegacao ul{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.containerBotaoHeader{
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    justify-content: space-around;
-}
-
-.btn-login {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #091227;
-    border: none;
-    cursor: pointer;
-    box-shadow: #3667d88a 0 0 10px 1px;
-}
-
-.btn-login:hover{
-    background-color: #142855;
-    transition: ease 0.2s;
-}
-
-.btn-cadastrar {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #091227;
-    border: none;
-    cursor: pointer;
-    box-shadow: #3667d88a 0 0 10px 1px;
-}
-
-.btn-cadastrar:hover{
-    background-color: #142855;
-    transition: ease 0.2s;
-}
-
-
-/* SOBRE NÓS */
-.sobreNos{
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.sobreNos h1{
-    font-size: 40px;
-    color: #091227;
-}
-
-.containerValores{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-}
-
-.imagemBarra{
-    margin-top: 30px;
-    width: 50vw;
-    height: 80px;
-}
-
-.valores{
-    display: flex;
-    width: 80%;
-    align-items: center;
-    justify-content: center;
-}
-
-.iconValor{
-    width: 100px;
-}
-
-.confianca{
-    display: flex;
-    width: 32%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     
+    /* TELA PRINCIPAL */
+    
+    .home {
+        width: 100%;
+        height: 100%;   
+        z-index: 1;
+        display: flex;
+        align-items: end;
+        flex-direction: column;
+    }
+
+    i.material-icons {
+        position: absolute;
+        top: 122px;
+        display: block;
+        background-color: black;
+        width: 100%;
+        text-align: center;
+        padding: 8px 0 10px;
+        cursor: pointer;
+        display: none;
+    
+    }
+
+    .menu {
+        position: absolute;
+        z-index: 2;
+        font-size: 60px;
+        top: 164px;
+        width: 100%;
+        display: none;
+    }
+
+    .menu ul {
+        width: 100%;
+    }
+
+    .navbarMenu{
+        padding: 8px 0px;
+        background-color: black;
+        border-bottom: solid 1px;
+    }
+
+    .navbarMenu:hover {
+        background-color: #091227;
+        color: black;
+        cursor: pointer;
+    }
+
+    
+    .imagemHome{
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+        
+    }
+    /* FRASE EM CIMA DA IMAGEM */
+    
+    .frase{
+        position: absolute;
+        display: flex;
+        z-index: 2;
+        width: 30%;
+        font-size: 60px;
+        top: 350px;
+        margin-right: 12%;
+    }
+    
+    /* HEADER */
+    
+    .header{
+        z-index: 3;
+        position: fixed; 
+        display: flex;
+        width: 100%;
+        height: 120px;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        background: #01164070;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #F27A5E;
+    }
+    
+    .navbar{
+        width: 90%;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .containerLogo{
+        width: 15%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;    
+    }
+    
+    .logo{
+        width: 50%;
+        height: 80%;
+    }
+    
+    .containerNavegacao{
+        width: 65%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .containerNavegacao ul{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    
+    .containerBotaoHeader{
+        width: 15%;
+        display: flex;
+        justify-content: center;
+        justify-content: space-around;
+    }
+    
+    .btn-login {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #091227;
+        border: none;
+        cursor: pointer;
+        box-shadow: #3667d88a 0 0 10px 1px;
+    }
+    
+    .btn-login:hover{
+        background-color: #142855;
+        transition: ease 0.2s;
+    }
+    
+    .btn-cadastrar {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #091227;
+        border: none;
+        cursor: pointer;
+        box-shadow: #3667d88a 0 0 10px 1px;
+    }
+    
+    .btn-cadastrar:hover{
+        background-color: #142855;
+        transition: ease 0.2s;
+    }
+    
+    
+    /* SOBRE NÓS */
+    .sobreNos{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .sobreNos h1{
+        font-size: 40px;
+        color: #091227;
+    }
+    
+    .containerValores{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    
+    }
+    
+    .imagemBarra{
+        margin-top: 30px;
+        width: 50vw;
+        height: 80px;
+    }
+    
+    .valores{
+        display: flex;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .iconValor{
+        width: 100px;
+    }
+    
+    .confianca{
+        display: flex;
+        width: 32%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .qualidade{
+        display: flex;
+        width: 30%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .etica{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+    }
+    
+    .texto-valor{
+    
+        text-align: center;
+        display: flex;
+        width: 85%;
+        font-size: 20px;
+        justify-content: center;
+        align-items: start;
+        color: black;
+    }
+    
+    .valores p{
+        margin-top: 20px;
+        color: black;
+    }
+    
+    
+    /* PARTE DA NOSSA FOTO */
+    .quemSomos{
+        margin-top: 40px;
+        display: flex;
+        width: 80%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .nossaFoto{
+        display: flex;
+        width: 30%;
+        box-shadow: #f2795e79 0 0 10px 1px;
+    
+    }
+    
+    .texto-quem-somos{
+        box-shadow: #f2795e79 0 0 10px 1px;
+        padding: 50px;
+        text-align: center;
+        display: flex;
+        width: 40%;
+        font-size: 20px;
+        justify-content: center;
+        color: black;
+    }
+    
+    
+    
+    /* PARTE SAIBA MAIS */
+    .saibaMais{
+        background-color: #6075a5;
+        margin-top: 60px;
+        padding: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .saibaMais h1{
+        font-size: 40px;
+        color: #091227;
+    }
+    
+    .imagemSistema{
+        display: flex;
+        height: 45vh;
+        width: 30vw;
+    }
+    
+    .titulo{
+        display: flex;
+        color: #091227;
+    }
+    
+    .texto-saiba-mais{
+        padding: 50px;
+        text-align: center;
+        display: flex;
+        width: 50%;
+        font-size: 20px;
+        justify-content: center;
+        color: black;
+    }
+    
+    
+    /* PARTE DE SERVIÇOS */
+    .servico{
+        display: flex; 
+        background-image: url("hardware.jpg");
+        background-size: cover;
+        margin-top: 50px;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 99vw;   
+        justify-content: center;
+    }
+    
+    h1{
+        padding-top: 30px;
+        background-color: #a5606010;
+        height: 50px;
+        backdrop-filter: bluer(12px);
+        font-size: 40px;
+        color: #ffffff;
+        align-items: center;
+    }
 }
 
-.qualidade{
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.etica{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
-}
-
-.texto-valor{
-
-    text-align: center;
-    display: flex;
-    width: 85%;
-    font-size: 20px;
-    justify-content: center;
-    align-items: start;
-    color: black;
-}
-
-.valores p{
-    margin-top: 20px;
-    color: black;
-}
 
 
-/* PARTE DA NOSSA FOTO */
-.quemSomos{
-    margin-top: 40px;
-    display: flex;
-    width: 80%;
-    justify-content: space-around;
-    align-items: center;
-}
+@media only screen and (min-width: 301px) and (max-width: 743px) {
+    li{
+        text-decoration: none;
+        list-style: none;
+    }
+    
+    a{
+        text-decoration: none;
+        
+    }
+    
+    
+    /* TELA PRINCIPAL */
+    
+    .home {
+        width: 100%;
+        height: 100%;   
+        z-index: 1;
+        display: flex;
+        align-items: end;
+        flex-direction: column;
+    }
 
-.nossaFoto{
-    display: flex;
-    width: 30%;
-    box-shadow: #f2795e79 0 0 10px 1px;
+    i.material-icons {
+        position: absolute;
+        top: 122px;
+        display: block;
+        background-color: black;
+        width: 100%;
+        text-align: center;
+        padding: 8px 0 10px;
+        cursor: pointer;
+    
+    }
 
-}
+    .menu {
+        position: absolute;
+        z-index: 2;
+        font-size: 60px;
+        top: 164px;
+        width: 100%;
+        display: none;
+    }
 
-.texto-quem-somos{
-    box-shadow: #f2795e79 0 0 10px 1px;
-    padding: 50px;
-    text-align: center;
-    display: flex;
-    width: 40%;
-    font-size: 20px;
-    justify-content: center;
-    color: black;
-}
+    .menu ul {
+        width: 100%;
+    }
 
+    .navbarMenu{
+        padding: 8px 0px;
+        background-color: black;
+        border-bottom: solid 1px;
+    }
 
-
-/* PARTE SAIBA MAIS */
-.saibaMais{
-    background-color: #6075a5;
-    margin-top: 60px;
-    padding: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.saibaMais h1{
-    font-size: 40px;
-    color: #091227;
-}
-
-.imagemSistema{
-    display: flex;
-    height: 45vh;
-    width: 30vw;
-}
-
-.titulo{
-    display: flex;
-    color: #091227;
-}
-
-.texto-saiba-mais{
-    padding: 50px;
-    text-align: center;
-    display: flex;
-    width: 50%;
-    font-size: 20px;
-    justify-content: center;
-    color: black;
-}
-
-
-/* PARTE DE SERVIÇOS */
-.servico{
-    display: flex; 
-    background-image: url("hardware.jpg");
-    background-size: cover;
-    margin-top: 50px;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 99vw;   
-    justify-content: center;
-}
-
-h1{
-    padding-top: 30px;
-    background-color: #a5606010;
-    height: 50px;
-    backdrop-filter: bluer(12px);
-    font-size: 40px;
-    color: #ffffff;
-    align-items: center;
+    .navbarMenu:hover {
+        background-color: #091227;
+        color: black;
+        cursor: pointer;
+    }
+    
+    .imagemHome{
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+        
+    }
+    /* FRASE EM CIMA DA IMAGEM */
+    
+    .frase{
+        position: absolute;
+        display: flex;
+        z-index: 2;
+        width: 30%;
+        font-size: 60px;
+        top: 350px;
+        margin-right: 12%;
+    }
+    
+    /* HEADER */
+    
+    .header{
+        z-index: 3;
+        position: fixed; 
+        display: flex;
+        width: 100%;
+        height: 120px;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        background: #01164070;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #F27A5E;
+    }
+    
+    .navbar{
+        width: 90%;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .containerLogo{
+        width: 15%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;    
+    }
+    
+    .logo{
+        width: 50%;
+        height: 80%;
+    }
+    
+    .containerNavegacao{
+        width: 65%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .containerNavegacao ul{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    
+    .containerBotaoHeader{
+        width: 15%;
+        display: flex;
+        justify-content: center;
+        justify-content: space-around;
+    }
+    
+    .btn-login {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #091227;
+        border: none;
+        cursor: pointer;
+        box-shadow: #3667d88a 0 0 10px 1px;
+    }
+    
+    .btn-login:hover{
+        background-color: #142855;
+        transition: ease 0.2s;
+    }
+    
+    .btn-cadastrar {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #091227;
+        border: none;
+        cursor: pointer;
+        box-shadow: #3667d88a 0 0 10px 1px;
+    }
+    
+    .btn-cadastrar:hover{
+        background-color: #142855;
+        transition: ease 0.2s;
+    }
+    
+    
+    /* SOBRE NÓS */
+    .sobreNos{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .sobreNos h1{
+        font-size: 40px;
+        color: #091227;
+    }
+    
+    .containerValores{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    
+    }
+    
+    .imagemBarra{
+        margin-top: 30px;
+        width: 50vw;
+        height: 80px;
+    }
+    
+    .valores{
+        display: flex;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .iconValor{
+        width: 100px;
+    }
+    
+    .confianca{
+        display: flex;
+        width: 32%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .qualidade{
+        display: flex;
+        width: 30%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .etica{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+    }
+    
+    .texto-valor{
+    
+        text-align: center;
+        display: flex;
+        width: 85%;
+        font-size: 20px;
+        justify-content: center;
+        align-items: start;
+        color: black;
+    }
+    
+    .valores p{
+        margin-top: 20px;
+        color: black;
+    }
+    
+    
+    /* PARTE DA NOSSA FOTO */
+    .quemSomos{
+        margin-top: 40px;
+        display: flex;
+        width: 80%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .nossaFoto{
+        display: flex;
+        width: 30%;
+        box-shadow: #f2795e79 0 0 10px 1px;
+    
+    }
+    
+    .texto-quem-somos{
+        box-shadow: #f2795e79 0 0 10px 1px;
+        padding: 50px;
+        text-align: center;
+        display: flex;
+        width: 40%;
+        font-size: 20px;
+        justify-content: center;
+        color: black;
+    }
+    
+    
+    
+    /* PARTE SAIBA MAIS */
+    .saibaMais{
+        background-color: #6075a5;
+        margin-top: 60px;
+        padding: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .saibaMais h1{
+        font-size: 40px;
+        color: #091227;
+    }
+    
+    .imagemSistema{
+        display: flex;
+        height: 45vh;
+        width: 30vw;
+    }
+    
+    .titulo{
+        display: flex;
+        color: #091227;
+    }
+    
+    .texto-saiba-mais{
+        padding: 50px;
+        text-align: center;
+        display: flex;
+        width: 50%;
+        font-size: 20px;
+        justify-content: center;
+        color: black;
+    }
+    
+    
+    /* PARTE DE SERVIÇOS */
+    .servico{
+        display: flex; 
+        background-image: url("hardware.jpg");
+        background-size: cover;
+        margin-top: 50px;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 99vw;   
+        justify-content: center;
+    }
+    
+    h1{
+        padding-top: 30px;
+        background-color: #a5606010;
+        height: 50px;
+        backdrop-filter: bluer(12px);
+        font-size: 40px;
+        color: #ffffff;
+        align-items: center;
+    }
 }

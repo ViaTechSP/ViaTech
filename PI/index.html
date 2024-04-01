@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViaTech</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -12,7 +13,17 @@
         <img src="imagemHome.jpg" alt="metro em movimento" class="imagemHome">
 
         <div class="frase">Nós não apenas monitoramos um computador, garantimos sua segurança.</div>
-
+        <i class="material-icons" onclick="clicarMenu()">menu</i>
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="">Início</a></li>
+                <li class="navbarMenu"><a href="">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="">Serviços</a></li>
+                <li class="navbarMenu"><a href="">Login</a></li>
+                <li class="navbarMenu"><a href="">Cadastrar</a></li>
+            </ul>
+        </menu>
         
         <div class="header">
            <div class="navbar">
@@ -109,3 +120,13 @@
     
 </body>
 </html>
+
+<script>
+    function clicarMenu() {
+        if(itens.style.display == 'block'){
+            itens.style.display = 'none'
+        } else{
+            itens.style.display = 'block'
+        }
+    }
+</script>
