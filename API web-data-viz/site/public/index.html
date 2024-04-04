@@ -3,230 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViaTech | Home</title>
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="icon" href="./assets/icon/icon.svg ">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>ViaTech</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <div id="div_inicio" class="header">
-        <div class="container">
-          <div class="titulo-icon">
-            <h1 class="titulo">ViaTech</h1>
-            <div class="div-icon">
-              <img class="icone" src="./assets/icon/icon.svg " alt="">
-            </div>
-          </div>
-          <ul class="navbar">
-            <li class="agora">
-              <div id="div_navbar_inicio"><a href="#div_inicio">Início</a></div>
-            </li>
-            <li>
-              <a href="#div_sobre_nos">Sobre nós</a>
-            </li>
-            <li>
-              <a href="#div_problema">Problemas</a>
-            </li>
-            <li>
-              <a href="#div_servicos">Serviços</a>
-            </li>
-          </ul>
-          <ul class="login-register">
-            <button class="buttonHome"><a href="login.html">Login</a></button>
-            <button class="buttonHome"><a href="cadastro.html">Cadastrar</a></button>
-          </ul>
-        </div>
-      </div>
     
-      <div  class="banner">
+    <div id="div_home" class="home">
+        <img src="./assets/imgs/imagemHome.jpg" alt="metro em movimento" class="imagemHome">
+
+        <div class="frase">Nós não apenas monitoramos um computador, garantimos sua segurança.</div>
+        <i class="material-icons" onclick="clicarMenu()">menu</i>
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="">Início</a></li>
+                <li class="navbarMenu"><a href="">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="">Serviços</a></li>
+                <li class="navbarMenu"><a href="">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="">Login</a></li>
+                <li class="navbarMenu"><a href="">Cadastrar</a></li>
+            </ul>
+        </menu>
         
-        <div id="div_inicio" class="container">
-          <div class="first-phrase">
-            <p>Nós não apenas <span>monitoramos</span> um computador, garantimos sua <span>segurança</span>.</p>
-            <p class="second-phrase">Otimize a automatização de seus trens e evite acidentes.</p>
-            <button class="btn-register-home"><a href="cadastro.html">Cadastrar</a></button>
-          </div>
-          <div class="div-img-home">
-            <img class="img-home" src="./assets/imgs/fotohome.jpg" style="height: 80%;  width: 100%;">
-          </div>
-        </div>
-      </div> 
+        <div class="header">
+           <div class="navbar">
 
-      <div class="container-sobre-nos">
-        <div class="titulo-texto-sobre-nos">
-          <div id="div_sobre_nos" class="titulo-sobre-nos">
-            <h2>Sobre Nós</h2>
-          </div>
-
-
-          <div class="texto-sobre-nos">
-            <p>
-              Como uma startup recém-estabelecida em Fevereiro de 2024, estamos comprometidos não apenas em fornecer serviços excepcionais, mas também em defender três princípios fundamentais nos quais acreditamos firmemente
-            </p>
-          </div>
-  
-        </div>
-        <div class="box-valores">
-          <div class="valor">
-            <img src="https://cdn-icons-png.flaticon.com/512/5527/5527004.png" class="icons-valores">
-            <p>Confiança</p>
-            <p class="texto-valor">Acreditamos que a confiança é a base de qualquer relacionamento sólido com nossos clientes.</p>
-          </div>
-          <div class="valor">
-            <img src="https://cdn-icons-png.flaticon.com/512/6403/6403626.png" class="icons-valores">
-            <p>Qualidade</p>
-            <p class="texto-valor">Buscamos a excelência em nossos serviços e soluções, garantindo que nosso trabalho atenda aos mais altos padrões de qualidade.</p>
-          </div>
-          <div class="valor">
-            <img src="https://cdn-icons-png.flaticon.com/512/4052/4052177.png" class="icons-valores">
-            <p>Ética</p>
-            <p class="texto-valor">Acreditamos que é nossa responsabilidade conduzir nossos negócios com integridade, transparência e respeito as interações com nossos clientes.</p>
-          </div>
-        </div>
-      </div> <!-- Final dos Sobre nós-->
-
-
-      <div class="container-problema">
-        <div class="titulo-texto-problema">
-          <div id="div_problema" class="titulo-problema">
-            <h2>Problemas</h2>
-          </div>
-
-          <div class="texto-problema">
-            <p>É comum a presença de falhas de serviços em diversas áreas, graças a <span>falta de monitoramento dos hardware</span>. A falta dessa monitoria na área metroferroviária, tem um impacto ainda maior por se tratar de um serviço público, ultilizado por muitas pessoas.</p>
-          </div>  
-        </div>
-
-        <div class="box-problema">
-          <div class="problema">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRpBbDh3PW-OYKu3lEc-4cs_UFgwjjCTpEqP4Wbb9spfq-AiRtZzNeVZMJ3N5aUylV-ORsC1v9nQmGljNkZXIzkwkfikhRNv4OMz3rhXViUFELl-x4rxTNKU2QPifZj1jP9m20HQnhysw/s1600/Gifs+animados+Coroa+2.giff" style="width: 100px;">
-            <img id="img-sistema" src="./assets/imgs/error.png">
-            
-            <p>Falha Técnica</p>
-            <!-- <p class="texto-valor">Acreditamos que a confiança é a base de qualquer relacionamento sólido com nossos clientes.</p> -->
-            <div class="justificacao-problema">
-              As falhas técnicas (sistema) ocupam <span>54%</span> dos incidentes, alguns exemplos são: sinaizações, motores, portas, freios, interrupções de serviços.
+            <div class="containerLogo">
+                <img src="./assets/imgs/icon.svg" class="logo">ViaTech
             </div>
-          </div>
+
+            <div class="containerNavegacao">
+                <ul>
+                    <li>
+                        <a href="#div_home">Início</a>
+                    </li>
+                    <li>
+                        <a href="#div_sobre_nos">Sobre Nós</a>
+                    </li>
+                    <li>
+                        <a href="#div_servico">Serviços</a>
+                    </li>
+                    <li>
+                        <a href="#div_saiba_mais">Saiba Mais</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="containerBotaoHeader">
+                <button onclick="Login()" class="btn-login">Login</button>
+                <button onclick="Cadastrar" class="btn-cadastrar">Cadastrar</button>
+            </div>
+           </div>
+        </div> 
+    </div> <!-- FINAL DA TELA PRINCIPAL -->
+    
+    
+    <div id="div_sobre_nos" class="sobreNos">
+        <h1>Sobre nós</h1>
+
+        <div class="containerValores">
+            <img src="./assets/imgs/barraSobreNos.png" class="imagemBarra">
+
+            <div class="valores">
+                
+                <div class="confianca">
+                    
+                    <img src="https://cdn-icons-png.flaticon.com/512/5527/5527004.png" alt="" class="iconValor">
+
+                    <p>Confiança</p>
+                    <p class="texto-valor">Confiança  é fundamental em relacionamentos duradouros, nos orienta em nossos compromissos.</p>
+
+                </div>
+                
+                <div class="qualidade">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/6403/6403626.png" alt="" class="iconValor">
+                    
+                    <p>Qualidade</p>
+                    <p class="texto-valor">Buscamos excelência em serviços e soluções, garantindo qualidade nos mais altos padrões.</p>
+                </div>
+
+                <div class="etica">
+                    
+                    <img src="https://cdn-icons-png.flaticon.com/512/4052/4052177.png" alt="" class="iconValor">
+                    
+                    <p>Ética</p>
+                    <p class="texto-valor">Conduzimos nossos negócios com integridade, transparência e respeito aos clientes.</p>
+                </div>
+
+            </div> 
+         </div><!-- FINAL DOS VALORES-->
+
+         <div class="quemSomos">
+            <img src="https://static.vecteezy.com/ti/fotos-gratis/t2/22992683-equipe-do-jovem-e-diversidade-voluntario-trabalhador-grupo-apreciar-caridoso-social-trabalhos-ao-ar-livre-juntos-dentro-salvando-meio-ambiente-projeto-vestindo-azul-camiseta-enquanto-juntando-mao-dentro-poder-montar-unidade-conceito-foto.jpg" class="nossaFoto">
+
+            <p class="texto-quem-somos"> Nossa startup foi fundada em fevereiro de 2024 com o propósito de oferecer serviços de monitoramento de hardware na indústria metroferroviária. Temos como foco principal a excelência na qualidade dos nossos serviços, baseada em três princípios fundamentais nos quais acreditamos firmemente</p>
+         </div>
+    </div> <!-- FINAL DA TELA SOBRE NÓS -->
+    
+    <div id="div_servico" class="servico">
+            <h1>Serviços</h1>
         
-        </div>
-      </div> 
 
+        <div class="componentesServico">
+            <div class="cpuMemoriaRam">
 
+                <div class="containerCpuRam">
+                    <fieldset class="textoHardware">
+                        <legend> CPU </legend>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2286/2286796.png" alt="CPU" class="imagemHardware">
+                        <p>Causa inconsistência e falhas no processamento, resultando em baixo desempenho do sistema e travamentos frequentes.</p>  
+                    </fieldset>
 
-
-
-
-
-      <div class="header-servicos">
-      <div class="titulo-serviços">
-        <h2 id="div_servicos">Nossos serviços</h2>
-      </div>
-      <p>Garantimos a disponibilidade, o desempenho e segurança dos sistemas de hardware dos computadores, otimizando o retorno financeiro reduzindo o tempo de inatividade não planejado do serviço.</p>
-      </div>
-
-      <div id="div_servico" class="banner">
-        <div class="container">
-          <div class="div-img2-home">
-          </div>     
-          <div class="div-text2-home">
-            <div class="checklist">
-              <div class="img-checklist">
-                <img src="./assets/imgs/cpu.png" alt="" class="icons-checklist">
-              </div>
-              <div class="text-checklist">
-                <p>CPU</p>
-                Causa inconsistência e falhas no processamento, resultando em baixo desempenho do sistema e travamentos frequentes.
-              </div>
+                    <fieldset class="textoHardware">
+                        <legend> Memória Ram </legend>
+                        <img src="https://cdn-icons-png.flaticon.com/512/969/969425.png" alt="CPU" class="imagemHardware">
+                        <p>Podem resultar em instabilidade do sistema, falhas de programas e travamentos devido a problemas na leitura ou escrita de dados.</p>  
+                    </fieldset>
+                    
+                </div>
             </div>
-            <div class="checklist">
-              <div class="img-checklist">
-                <img src="./assets/imgs/hard-disk.png" alt="" class="icons-checklist">
-              </div>
-              <div class="text-checklist">
-                <p>Disco</p>
-                Pode causar falhas na leitura e gravação de dados, levando à perda de arquivos e problemas no sistema operacional.
-              </div>
+
+                <div class="textoCentral">Garantimos a disponibilidade, o desempenho e segurança dos sistemas de hardware dos computadores, otimizando o retorno financeiro reduzindo o tempo de inatividade não planejado do serviço.</div>
+
+                <div class="cpuMemoriaRam">
+                    <div class="containerCpuRam">
+                        <fieldset class="textoHardware">
+                            <legend> Dísco </legend>
+                            <img src="https://prints.ultracoloringpages.com/90897c4adb0482d85701dee2a9bbb421.png"alt="CPU" class="imagemHardware">
+                            <p>Pode causar falhas na leitura e gravação de dados, levando à perda de arquivos e problemas no sistema operacional.</p>  
+                        </fieldset>
+
+
+                        <fieldset class="textoHardware">
+                            <legend> USB </legend>
+                            <img src="https://cdn-icons-png.flaticon.com/512/22/22790.png" alt="CPU" class="imagemHardware">
+                            <p>A ausência de monitoramento de dispositivos USB pode resultar na introdução de malware e vazamento de dados confidenciais.</p>  
+                        </fieldset>
+
+                    </div>
+                </div>
             </div>
-            <div class="checklist">
-              <div class="img-checklist">
-                <img src="./assets/imgs/ram.png" alt="" class="icons-checklist">
-              </div>
-              <div class="text-checklist">
-                <p>Memória RAM</p>
-                Podem resultar em instabilidade do sistema, falhas de programas e travamentos devido a problemas na leitura ou escrita de dados.
-              </div>
-            </div>
-            <div class="checklist">
-              <div class="img-checklist">
-                <img src="./assets/imgs/usb.png" alt="" class="icons-checklist">
-              </div>
-              <div class="text-checklist">
-                <p>Dispositivos USB</p>
-                A ausência de monitoramento de dispositivos USB pode resultar na introdução de malware e vazamento de dados confidenciais.
-              </div>
-            </div>
+        </div>       
+    </div>  <!-- FINAL DE SERVIÇOS -->
+
+    <div class="saibaMais">
+        <h1 id="div_saiba_mais">Saiba Mais</h1>
+
+        <img src="./assets/imgs/error.png" class="imagemSistema">
+        <p class="titulo">Falhas Técnicas</p>
+        <p class="texto-saiba-mais">É comum a presença de falhas de serviços em diversas áreas, graças a falta de monitoramento dos hardware. A falta dessa monitoria na área metroferroviária, tem um impacto ainda maior por se tratar de um serviço público, ultilizado por muitas pessoas.
+
+        As falhas técnicas (sistema) ocupam 54% dos incidentes, elas geralmente estão relacionadas as sinaizações, motores, portas, freios, e interrupções de serviços.</p>
+    </div> <!-- FNAL DE SAIBA MAIS-->
+
+    <div class="footer">
+        <div>
+            <a href="https://github.com/ViaTechSP/ViaTech">
+                <img src="./assets/imgs/imageGit.png" class="imagemFooter">
+            </a>
+            <img src="./assets/imgs/imageFooter.png" class="imagemFooter">
             
-          </div>
         </div>
-      </div> 
-      </div> 
+        
+        <div class="informacaoFooter">
+            <p>Politica de Privacidade - Termos de Uso</p>
+            <p>Fale conosco - suporte@viatech.com</p>
 
+            <p class="fraseFooter">A equipe ViaTech agradece sua preferencia!</p>
+        </div>
 
-      <!-- FOOTER  -->
-
-      <div id="footer_content">
-        <div id="div-footer-list">
-          <!-- 
-            <ul class="footer-list">
-              <li>
-                  <h3> Informaçoes adicionais </h3>
-              </li> 
-              <li>
-                  <img src="" alt="" class="">
-              </li> 
-              <li class="footer_li">
-                  <a href="" class="footer-link">Informação A</a>
-                  <a href="" class="footer-link">Informação B</a>
-                  <a href="" class="footer-link">Informação C</a>
-                  <a href="" class="footer-link">Informação D</a>
-              </li>
-          </ul> 
-        -->
-      </div>
-
-          <div id="footer_contacts" >
-            <img src="assets/icon/icon.svg" alt="logo" class="logo2">
-              <!-- <div id="texto-slogan">
-                <p>Monitorando o coração da cidade</p>
-            </div> -->
-                <!-- <div id="texto-slogan2">
-                  <p>Segurança em cada estação, confiança em cada linha. Nós monitoramos, você viaja tranquilo.</p>
-              </div> -->
-              </p>
-          </div>
-         
-
-          <!-- <ul class="footer-list">
-              <li>
-                  <h3>Navegação ViaTech</h3>
-              </li>
-              <li>
-                  <a href="#"class="footer-link">Contato</a>
-              </li>
-              <li>
-                  <a href="#" class="footer-link">Serviços</a>
-              </li>
-              <li>
-                  <a href="#" class="footer-link">Equipe</a>
-              </li>
-              <li>
-                <a href="#" class="footer-link">FAQ</a>
-            </li>
-
-          </ul> -->
-      </div>
-  </footer> 
+    </div>
     
 </body>
 </html>
+
+<script>
+    function clicarMenu() {
+        if(itens.style.display == 'block'){
+            itens.style.display = 'none'
+        } else{
+            itens.style.display = 'block'
+        }
+    }
+
+    function Login(){
+        window.location = "login.html"
+    }
+</script>
