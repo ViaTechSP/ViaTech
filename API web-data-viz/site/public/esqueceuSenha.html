@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="esqueceuSenha.css">
 </head>
 <body>
     <!-- MOBILE -->
@@ -47,7 +47,7 @@
          </div>
 
          <div class="containerBotaoHeader">
-             <button onclick="Login()" class="btn-login">Login</button>
+             <button onclick="Login" class="btn-login">Login</button>
              <button onclick="Cadastrar" class="btn-cadastrar">Cadastrar</button>
          </div>
         </div>
@@ -57,27 +57,34 @@
         <img src="./imagens/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
         
             <div id="div_email" class="container">
+                <a href="login.html">
+                    <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="voltar" class="imagemVoltar">
+                </a>
                                    
-                    <h1>Login</h1>
+                    <h1>Recuperar Senha</h1>
                     <p>Email</p>
                     <input id="input_login" type="text">
-                    <p>Senha</p>
-                   <input id="input_senha" type="password">
-
                     <p id="frase_validacao" style="display: none;">Email inválido!</p>
-                    <p id="frase_senha" style="display: none;">Senhas divergentes!</p>
-                    <button onclick="avancar()" class="botaoAvancar">Login</button>
-
-                    <p id="frase-senha">Esquceu a senha? <u>
-
-                        <a href="esqueceuSenha.html">Clique aqui</a></p>
-                    </u>
-                        
-
               
     
+                <button onclick="avancar()" class="botaoAvancar">Avançar</button>
             </div>
             
+            <div id="div_redefinir" class="container" style="display: none;">
+                <a href="">
+                    <img onclick="voltar()" src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="voltar" class="imagemVoltar">
+                </a>
+                <h1>Recuperar Senha</h1>
+                <p>Nova senha</p>
+                <input id="input_nova_senha" type="password">
+                <p>Confirmar senha</p>
+                <input id="input_senha" type="password">
+    
+                <button onclick="confirmar()" class="botaoAvancar">Redefinir</button>
+                <p id="frase_senha" style="display: none;">Senhas divergentes!</p>
+
+            </div>
+
         <i class="material-icons" onclick="clicarMenu()">menu</i>
 
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
@@ -102,7 +109,7 @@
         divRedefinir.style.display = "flex";
         
         
-    } else{0
+    } else{
             exibir_frase.style.display = "block";
             exibir_frase.style.color = "#ff5353";
             exibir_frase.style.fontWeight = "bold";
