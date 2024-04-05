@@ -47,8 +47,8 @@
          </div>
 
          <div class="containerBotaoHeader">
-             <button onclick="Login" class="btn-login">Login</button>
-             <button onclick="Cadastrar" class="btn-cadastrar">Cadastrar</button>
+             <button onclick="Login()" class="btn-login">Login</button>
+             <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
          </div>
         </div>
      </div> <!-- FINAL DO HEADER -->
@@ -137,5 +137,12 @@
             exibir_frase_senha.style.color = "#ff5353";
             exibir_frase_senha.style.fontWeight = "bold";
         }
+    }
+
+    function Login(){
+        window.location = "login.html"
+    }
+    function Cadastrar(){
+        window.location ="cadastro.html"
     }
 </script>

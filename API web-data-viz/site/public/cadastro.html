@@ -1,243 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViaTech | Cadastro</title>
-
-    <script src="sessao.js"></script>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/cadastro.css">
-    <link rel="icon" href="img/short-logo.svg">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
-
 <body>
-    <div class="container-register">
-        <div class="left-content">
-            <div class="logo-text">
-                <div class="navbar">
-                    <ul>
-                        <li><button class="buttonHome"><a href="index.html">Início</a></button></li>
-                        <li><button class="buttonHome"><a href="login.html">Login</a></button></li>
-                    </ul>
-                </div>
+    <!-- MOBILE -->
+    <menu id="itens" class="menu">
+        <ul>
+            <li class="navbarMenu"><a href="">Início</a></li>
+            <li class="navbarMenu"><a href="">Sobre nós</a></li>
+            <li class="navbarMenu"><a href="">Saiba Mais</a></li>
+            <li class="navbarMenu"><a href="">Serviços</a></li>
+            <li class="navbarMenu"><a href="">Login</a></li>
+            <li class="navbarMenu"><a href="">Cadastrar</a></li>
+        </ul>
+    </menu>
 
-                <div class="logo-register">
-                    <img src="img/register-logo.svg" alt="">
-                </div>
+    <div class="header">
+        <div class="navbar">
+
+        <a href="index.html#div_home">
+
+         <div class="containerLogo">
+                <img src="./assets/imgs/icon.svg" class="logo">ViaTech
             </div>
+        </a>
+
+         <div class="containerNavegacao">
+             <ul>
+                 <li>
+                     <a href="index.html#div_home">Início</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_sobre_nos">Sobre Nós</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_saiba_mais">Saiba Mais</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_servico">Serviços</a>
+                 </li>
+             </ul>
+         </div>
+
+         <div class="containerBotaoHeader">
+             <button onclick="Login()" class="btn-login">Login</button>
+             <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
+         </div>
         </div>
-        <div class="right-content">
-          
-            <div class="box-register">
-                    <div class="name">
-                        <p class="titles-inputs">Nome fantasia</p>
-                        <input type="text" class="inputs" id="input_name">
-                      </div>
-                      
-                      <div class="box-cnpj">
-                          <p class="titles-inputs">CNPJ</p>
-                          <input maxlength="20" class="input-cnpj" id="input_cnpj">
-                          <div class="msg-erro" id="error_cnpj"></div>
-                        </div>
+     </div> <!-- FINAL DO HEADER -->
 
-                    <div class="box-email">
-                        <p class="titles-inputs">Telefone</p>
-                        <input type="text" class="inputs" id="input_telefone">
-                        <div class="msg-erro" id="error_telefone"></div>
-                      </div>
-                    
-                    <div class="box-email">
-                        <p class="titles-inputs">Email</p>
-                        <input type="text" onkeyup="validarEmail()" class="inputs" id="input_email">
-                        <div class="msg-erro" id="error_email"></div>
-                      </div>
-                                        
-                    
-                    <div class="box-password">
-                        <p class="titles-inputs">Senha</p>
-                        <!-- <div class="box-informativo"> -->
-                          <input type="password" onkeyup="validarSenha()" class="inputs" id="input_password"> <br>
-                          <div class="msg-erro" id="error_password"></div>
-                          <!-- <img class="informativo" src="assets/imgs/interrogacao-cadastro.svg" id="informativo"> -->
-                        <!-- </div> -->
-                        </div>
-
-                    <!-- <div class="popup-informativo">
-                      A senha deve conter:
-                      6 dígitos
-                      Letra maiúscula e minúscula
-                      Um caractere especial
-                    </div> -->
-
-                    
-                <button class="btn-register" onclick="cadastrar()">Registrar</button>
-                    
-                <div class="msg-login">
-                    <p>Já possui uma conta? <a href="login.html"> Entre</a></p>
-                </div>
-
-            </div>
-        </div>   
-    </div>
-
-</body>
-
-</html>
-
-<script>
-    function validarEmail() {
-      var emailVar = input_email.value;
-      
-      if (emailVar.indexOf('@') < 0 || emailVar.indexOf('.') < 0 || emailVar.length < 15) {
-        input_email.style.border = 'solid 2px red'
-        error_email.innerHTML = `Email inválido`
-      } else {
-        input_email.style.border = 'solid 2px green'
-        error_email.innerHTML = ``
-        }
-    }
-
-function validarSenha() {
-var senha = input_password.value;
-
-var validacaoEspecial =
-  senha.indexOf("!") >= 0 ||
-  senha.indexOf("@") >= 0 ||
-  senha.indexOf("#") >= 0 ||
-  senha.indexOf("$") >= 0 ||
-  senha.indexOf("&") >= 0 ||
-  senha.indexOf("_") >= 0 ||
-  senha.indexOf("?") >= 0 ||
-  senha.indexOf("%") >= 0;
-
-var validacaoNumero =
-  senha.indexOf(0) >= 0 ||
-  senha.indexOf(1) >= 0 ||
-  senha.indexOf(2) >= 0 ||
-  senha.indexOf(3) >= 0 ||
-  senha.indexOf(4) >= 0 ||
-  senha.indexOf(5) >= 0 ||
-  senha.indexOf(6) >= 0 ||
-  senha.indexOf(7) >= 0 ||
-  senha.indexOf(8) >= 0 ||
-  senha.indexOf(9) >= 0;
-
-var validacaoMaiusculaMinuscula = senha != senha.toLowerCase() && senha != senha.toUpperCase();
-
-if (senha.length >= 8) {
-  if (validacaoMaiusculaMinuscula) {
-    if (validacaoEspecial) {
-      if (validacaoNumero) {
-        
-        input_password.style.border = 'solid 2px green'
-        error_password.innerHTML = ``
-
-          } else {
-            error_password.innerHTML = "A senha deve conter pelo menos um numero";
-            input_password.style.border = 'solid 2px red'
-          }
-        } else { 
-          error_password.innerHTML = "A senha deve conter ao menos um caractere especial";
-          input_password.style.border = 'solid 2px red'
-        } 
-      } else {
-        error_password.innerHTML = "A senha deve conter ao menos uma letra maiuscula e uma minuscula";
-        input_password.style.border = 'solid 2px red'
-      }
-    } else {
-    error_password.innerHTML = "A senha deve ter pelo menos 8 caracteres";
-    input_password.style.border = 'solid 2px red'
-    }
-
-
-}  
-
-    function cadastrar() {
-    validarSenha();
-
-    var nomeVar = input_name.value;
-    var lastNameVar = input_last_name.value;
-    var emailVar = input_email.value;
-    var cnpjVar = input_cnpj.value;
-    var senhaVar = input_password.value;
-    if (
-      nomeVar == "" ||
-      lastNameVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      senhaVar.length <= 6 || 
-      nomeVar.length <= 1 ||
-      emailVar.indexOf('@') < 0 ||
-      emailVar.indexOf('.') < 0
-    ) {
-      error_name.innerHTML = 'Nome inválido'
-      error_lastname.innerHTML = `Sobrenome inválido`
-      error_email.innerHTML = `Email inválido`
-      return false;
-    } else {
-      mensagem_erro.innerHTML =
-      setInterval(sumirMensagem, 5000);
-    }
+     <div id="div_home" class="home">
+        <img src="./assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
+        <div id="div_email" class="container">                                   
+            <h1>Cadastre-se</h1>
+            <p>Nome fantasia</p>
+            <input id="input_nomeFantasia" type="text" placeholder="ViaTech">
+            <p>CNPJ</p>
+            <input type="text" id="input_cnpj" pattern="\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}" placeholder="00.000.000/0000-00" required>
+            <p>Telefone</p>
+            <input type="tel" id="input_telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}" placeholder="(00)1234-5678" required>
+            <p>Email</p>
+            <input id="input_email" type="email" placeholder="viatech@hotmail.com">
+            <p>Senha</p>
+            <input id="input_senha" type="password" placeholder="**********">
+            <button onclick="validarFormulario()" class="botaoAvancar">Cadastrar</button>
+        </div>
+        <i class="material-icons" onclick="clicarMenu()">menu</i>
+    </div> <!-- FINAL DA IMAGEM DE FUNDO-->
     
-      
-  
+    <script>
 
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nomeServer: nomeVar,
-        lastNameServer: lastNameVar,
-        emailServer: emailVar,
-        cnpjServer: cnpjVar,
-        senhaServer: senhaVar,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+        $(document).ready(function(){
+            $('#input_cnpj').mask('00.000.000/0000-00', {reverse: true});
+            $('#input_telefone').mask('(00)00000-0000');
+        });
 
-        if (resposta.ok) {
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+        function validarFormulario() {
+            var nomeFantasia = document.getElementById("input_nomeFantasia").value;
+            var cnpj = document.getElementById("input_cnpj").value;
+            var telefone = document.getElementById("input_telefone").value;
+            var email = document.getElementById("input_email").value;
+            var senha = document.getElementById("input_senha").value;
+    
+            if (nomeFantasia.trim() === "") {
+                alert("Por favor, insira o nome fantasia.");
+                return false;
+            }
+    
+            if (cnpj.trim() === "") {
+            alert("Por favor, insira um CNPJ válido.");
+            return false;
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+    
+            if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+            alert("Por favor, insira um número de telefone válido.");
+            return false;
+        }
+    
+            if (email.trim() === "" || email.indexOf("@") === -1) {
+            alert("Por favor, insira um email válido.");
+            return false;
+        }
+            if (senha.trim() === "") {
+                alert("Por favor, insira a senha.");
+                return false;
+            }
+        }
 
-    return false;
-  }
-  
+        function Login(){
+        window.location = "login.html"
+    }
+        function Cadastrar(){
+            window.location ="cadastro.html"
+    }
+    // function avancar(){
+        
+        
+    //     var exibir_frase = frase_validacao;
+    //     var validar_email = input_login.value;
+    //     var divEmail = div_email;
 
-  function mascara() {
-    const inputCnpj = document.querySelector('.input-cnpj');
+    //     if(validar_email.indexOf("@") >= 1 && validar_email.indexOf(".") >= 1){
+    //     var divRedefinir = document.getElementById("div_redefinir");
 
-    inputCnpj.addEventListener('keypress', () => {
-      let cnpjLength = inputCnpj.value.length;
+    //     divEmail.style.display = "none";
+    //     divRedefinir.style.display = "block";
+    //     divRedefinir.style.display = "flex";
+        
+        
+    // } else{0
+    //         exibir_frase.style.display = "block";
+    //         exibir_frase.style.color = "#ff5353";
+    //         exibir_frase.style.fontWeight = "bold";
+    //     }
+    // }
 
-      if (cnpjLength == 2 || cnpjLength == 6) {
-        inputCnpj.value += ".";
-      } else if (cnpjLength == 10) {
-        inputCnpj.value += "/";
-      } else if (cnpjLength == 15) {
-        inputCnpj.value += "-";
-      }
-    });
+    // function voltar(){
+    //     var divEmail = document.getElementById("div_email");
+    //     divEmail.style.display = "block";
+        
+    //     var divRedefinir = document.getElementById("div_redefinir");
+    //     divRedefinir.style.display = "none";
+    // }
 
-  }
+    // function confirmar(){
+    //     var nova_senha = input_nova_senha.value;
+    //     var confirmar_senha = input_senha.value;
+    //     var exibir_frase_senha = frase_senha;
 
-mascara();
+
+    //     if(nova_senha == confirmar_senha){
+    //         window.location.href = "login.html";
+    //     } else{
+    //         exibir_frase_senha.style.display = "block";
+    //         exibir_frase_senha.style.color = "#ff5353";
+    //         exibir_frase_senha.style.fontWeight = "bold";
+    //     }
+    // }
 </script>
