@@ -60,15 +60,20 @@
         <div id="div_email" class="container">                                   
             <h1>Cadastre-se</h1>
             <p>Nome fantasia</p>
-            <input id="input_nomeFantasia" type="text" placeholder="ViaTech">
+            <input id="input_nomeFantasia" type="text">
+            <p id="errado_nomeFantasia" class="errado"></p>
             <p>CNPJ</p>
-            <input type="text" id="input_cnpj" pattern="\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}" placeholder="00.000.000/0000-00" required>
+            <input type="text" id="input_cnpj"  required>
+            <p id="errado_cnpj" class="errado"></p>
             <p>Telefone</p>
-            <input type="tel" id="input_telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}" placeholder="(00)1234-5678" required>
+            <input type="tel" id="input_telefone" required>
+            <p id="errado_telefone" class="errado"></p>
             <p>Email</p>
-            <input id="input_email" type="email" placeholder="viatech@hotmail.com">
+            <input id="input_email" type="email">
+            <p id="errado_email" class="errado"></p>
             <p>Senha</p>
-            <input id="input_senha" type="password" placeholder="**********">
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
             <button onclick="validarFormulario()" class="botaoAvancar">Cadastrar</button>
         </div>
         <i class="material-icons" onclick="clicarMenu()">menu</i>
@@ -87,31 +92,60 @@
             var telefone = document.getElementById("input_telefone").value;
             var email = document.getElementById("input_email").value;
             var senha = document.getElementById("input_senha").value;
+
+            var erradoNomeFantasia = document.getElementById("errado_nomeFantasia");
+            var erradoCnpj = document.getElementById("errado_cnpj");
+            var erradoTelefone = document.getElementById("errado_telefone");
+            var erradoEmail = document.getElementById("errado_email");
+            var erradoSenha = document.getElementById("errado_senha");
+
+
+            erradoNomeFantasia.textContent = "";
+            erradoCnpj.textContent = "";
+            erradoTelefone.textContent = "";
+            erradoEmail.textContent = "";
+            erradoSenha.textContent = "";
     
             if (nomeFantasia.trim() === "") {
-                alert("Por favor, insira o nome fantasia.");
-                return false;
+            erradoNomeFantasia.textContent = "Por favor, insira o nome fantasia.";
+            erradoNomeFantasia.style.display = "block";
+            erradoNomeFantasia.style.color = "#ff5353";
+            erradoNomeFantasia.style.fontWeight = "bold";
+            return false;
             }
     
             if (cnpj.trim() === "") {
-            alert("Por favor, insira um CNPJ válido.");
+            erradoCnpj.textContent = "Por favor, insira um CNPJ válido.";
+            erradoCnpj.style.display = "block";
+            erradoCnpj.style.color = "#ff5353";
+            erradoCnpj.style.fontWeight = "bold";
             return false;
-        }
-    
-            if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-            alert("Por favor, insira um número de telefone válido.");
-            return false;
-        }
-    
-            if (email.trim() === "" || email.indexOf("@") === -1) {
-            alert("Por favor, insira um email válido.");
-            return false;
-        }
-            if (senha.trim() === "") {
-                alert("Por favor, insira a senha.");
-                return false;
             }
-        }
+
+            if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+            erradoTelefone.textContent = "Por favor, insira um número de telefone válido.";
+            erradoTelefone.style.display = "block";
+            erradoTelefone.style.color = "#ff5353";
+            erradoTelefone.style.fontWeight = "bold";
+            return false;
+            }
+
+            if (email.trim() === "" || email.indexOf("@") === -1) {
+            erradoEmail.textContent = "Por favor, insira um email válido.";
+            erradoEmail.style.display = "block";
+            erradoEmail.style.color = "#ff5353";
+            erradoEmail.style.fontWeight = "bold";
+            return false;
+            }
+
+            if (senha.trim() === "") {
+            erradoSenha.textContent = "Por favor, insira a senha.";
+            erradoSenha.style.display = "block";
+            erradoSenha.style.color = "#ff5353";
+            erradoSenha.style.fontWeight = "bold";
+            return false;
+            }
+    }
 
         function Login(){
         window.location = "login.html"
