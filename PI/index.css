@@ -300,12 +300,13 @@
     .imagemSistema{
         display: flex;
         height: 45vh;
-        width: 30vw;
+        width: 70%;
     }
     
     .titulo{
         display: flex;
-        color: #091227;
+        color: white;
+        font-size: 28px;
     }
     
     .texto-saiba-mais{
@@ -315,7 +316,7 @@
         width: 50%;
         font-size: 20px;
         justify-content: center;
-        color: black;
+        color: white;
     }
     
     
@@ -769,7 +770,6 @@
         display: flex; 
         background-image: url("hardware.jpg");
         background-size: cover;
-        margin-top: 50px;
         background-repeat: no-repeat;
         height: fit-content;  
         justify-content: center;
@@ -783,5 +783,102 @@
         font-size: 40px;
         color: #ffffff;
         align-items: center;
+    }
+
+    .componentesServico{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+    }
+
+    .cpuMemoriaRam{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        width: 90%;
+    }
+
+    .textoCentral{
+        font-weight: bolder;
+    text-align: center;
+    width: 80%;
+    padding: 30px;
+    color: white;
+    margin: 80px 0;
+    background-color: #6075a557;
+    box-shadow: #f2795e79 0 0 12px 1px;
+    backdrop-filter: blur(20px);
+    }
+
+    .discoUSB{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        background-color: #091227;
+        width: 100%;
+    }
+
+    .imagemHardware{
+        width: 80px;
+        height: 80px;
+        padding-bottom: 10px;
+    }
+
+    .textoHardware{
+        width: 80%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px;
+        color: #091227;
+        background-color: #6075a557;
+        box-shadow: #f2795e79 0 0 12px 1px;
+        backdrop-filter: blur(30px);
+        margin: 20px 0;
+    }
+
+    .disco{
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .containerCpuRam{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer{
+        width: 100%;
+        height: 210px;
+        background-color: #142855;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .informacaoFooter{
+        padding-top: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .fraseFooter{
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
     }
 }
