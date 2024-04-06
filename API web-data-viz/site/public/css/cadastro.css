@@ -53,7 +53,6 @@
         position: absolute;
         z-index: 2;
         font-size: 60px;
-        top: 164px;
         width: 100%;
         display: none;
     }
@@ -193,8 +192,9 @@
     }
 
     .container{
+        margin-top: 80px;
         background-color: #01164070;
-        padding: 4%;
+        padding: 3%;
         display: flex;
         position: fixed;
         flex-direction: column;
@@ -202,14 +202,14 @@
         box-shadow: 2px 0 10px 4px rgba(0, 0, 0, 0.356);
         border: 1px solid #F27A5E;
         border-radius: 6px;
-        height: 40vh;
         width: 20vw;
-        justify-content: space-evenly;
+        justify-content: center;
     }
 
     .container h1{
         padding: 12px;
         width: 80%;
+        margin-bottom: 12px;
         font-size: 25px;
         display: flex;
     }
@@ -217,6 +217,7 @@
     input{
         border-radius: 6px;
         padding: 4px;
+        margin: 10px 0;
         color: black;
     }
 
@@ -254,7 +255,7 @@
         text-decoration: dashed;
     }
 
-@media only screen and (min-width: 50px) and (max-width: 850px) {
+@media only screen and (min-width: 50px) and (max-width: 750px) {
 /* TELA PRINCIPAL */
 .home {
     width: 100%;
@@ -263,25 +264,36 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: fixed;
     width: 100%;
     height: 100%;
 }
 
 .menu {
-    position: absolute;
     z-index: 2;
     font-size: 60px;
-    top: 164px;
-    width: 100%;
+    width: 40%;
     display: none;
+}
+
+.menu ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#abrirMenu{
+    width: 100%;
+    z-index: 3;
 }
 
 .navbarMenu{
     padding: 8px 0px;
-    background-color: black;
-    border-bottom: solid 1px;
+    background: #01164070;
+    backdrop-filter: blur(20px);
+    border: solid 1px #F27A5E;
 }
 
 .navbarMenu:hover {
@@ -289,6 +301,21 @@
     color: black;
     cursor: pointer;
 }
+
+i.material-icons {
+    z-index: 3;
+    display: block;
+    background: #01164070;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #F27A5E;
+    border-right: 1px solid #F27A5E;
+    width: 10%;
+    text-align: center;
+    padding: 8px 0 10px;
+    cursor: pointer;
+
+}
+
 
 .imagemHome{
     display: flex;
@@ -301,7 +328,7 @@
 .header{
     z-index: 2;
     position: fixed; 
-    display: flex;
+    display: none;
     width: 100%;
     height: 120px;
     justify-content: center;
@@ -345,15 +372,12 @@
     background-color: #01164070;
     padding: 10%;
     display: flex;
-    position: fixed;
     flex-direction: column;
     backdrop-filter: blur(20px);
     box-shadow: 2px 0 10px 4px rgba(0, 0, 0, 0.356);
     border: 1px solid #F27A5E;
     border-radius: 6px;
-    height: 35%;
-    width: 45%; 
-    max-width: 300px; 
+    width: 60%; 
     justify-content: space-evenly;
 }
 
@@ -368,7 +392,7 @@
 
 
 
-@media only screen and (min-width: 851px) and (max-width: 1050px) {
+@media only screen and (min-width: 751px) and (max-width: 1050px) {
     .home {
         width: 100%;
         height: 100%;
@@ -430,12 +454,12 @@
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;    
+        justify-content: space-evenly;    
     }
     
     .logo{
-        width: 50%;
-        height: 80%;
+        width: 30%;
+        height: 60%;
     }
     
     .containerNavegacao{
@@ -455,19 +479,18 @@
     
     /* CONTAINER */
     .container{
+        margin-top: 110px;
         background-color: #01164070;
-        padding: 8%;
+        padding: 3% 8%;
         display: flex;
-        position: fixed;
         flex-direction: column;
         backdrop-filter: blur(20px);
         box-shadow: 2px 0 10px 4px rgba(0, 0, 0, 0.356);
         border: 1px solid #F27A5E;
         border-radius: 6px;
-        height: 40%;
         width: 45%; 
         max-width: 300px; 
-        justify-content: space-evenly;
+        justify-content: center;
     }
     
     .conteudo{

@@ -10,16 +10,6 @@
 </head>
 <body>
     <!-- MOBILE -->
-    <menu id="itens" class="menu">
-        <ul>
-            <li class="navbarMenu"><a href="">Início</a></li>
-            <li class="navbarMenu"><a href="">Sobre nós</a></li>
-            <li class="navbarMenu"><a href="">Saiba Mais</a></li>
-            <li class="navbarMenu"><a href="">Serviços</a></li>
-            <li class="navbarMenu"><a href="">Login</a></li>
-            <li class="navbarMenu"><a href="">Cadastrar</a></li>
-        </ul>
-    </menu>
 
     <div class="header">
         <div class="navbar">
@@ -28,7 +18,7 @@
 
          <div class="containerLogo">
                 <img src="./assets/imgs/icon.svg" class="logo">ViaTech
-            </div>
+                </div>
         </a>
 
          <div class="containerNavegacao">
@@ -50,12 +40,22 @@
 
          <div class="containerBotaoHeader">
              <button onclick="Login()" class="btn-login">Login</button>
-             <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
+             <button onclick="telaCadastro()" class="btn-cadastrar">Cadastrar</button>
          </div>
         </div>
      </div> <!-- FINAL DO HEADER -->
 
      <div id="div_home" class="home">
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="">Início</a></li>
+                <li class="navbarMenu"><a href="">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="">Serviços</a></li>
+                <li class="navbarMenu"><a href="">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="">Login</a></li>
+                <li class="navbarMenu"><a href="">Cadastrar</a></li>
+            </ul>
+        </menu>
         <img src="./assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
         <div id="div_email" class="container">                                   
             <h1>Cadastre-se</h1>
@@ -74,9 +74,14 @@
             <p>Senha</p>
             <input id="input_senha" type="password">
             <p id="errado_senha" class="errado"></p>
-            <button onclick="validarFormulario()" class="botaoAvancar">Cadastrar</button>
+            <p>Confirmar senha</p>
+            <input id="input_senha2" type="password">
+            <p id="errado_senha2" class="errado"></p>
+            <button onclick="cadastrar()" class="botaoAvancar">Cadastrar</button>
         </div>
-        <i class="material-icons" onclick="clicarMenu()">menu</i>
+        <div id="abrirMenu">
+            <i class="material-icons" onclick="clicarMenu()"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214477.png" alt="" style="width: 80%;"></i>
+        </div>
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
     
     <script>
@@ -85,19 +90,28 @@
             $('#input_cnpj').mask('00.000.000/0000-00', {reverse: true});
             $('#input_telefone').mask('(00)00000-0000');
         });
+        
+        function cadastrar() {
+            var nomeFantasia = input_nomeFantasia.value;
+            var cnpjComCaractere = input_cnpj.value;
+            var telefoneComCaractere = input_telefone.value;
+            var email = input_email.value;
+            var senha = input_senha.value;
+            var senha2 = input_senha2.value;
+            
+            // TIRANDO CARACTERES
+            var cnpj = cnpjComCaractere.replace(/\D/g, '');
+            var telefone = telefoneComCaractere.replace(/\D/g, '');
 
-        function validarFormulario() {
-            var nomeFantasia = document.getElementById("input_nomeFantasia").value;
-            var cnpj = document.getElementById("input_cnpj").value;
-            var telefone = document.getElementById("input_telefone").value;
-            var email = document.getElementById("input_email").value;
-            var senha = document.getElementById("input_senha").value;
+            var validado = ((nomeFantasia.length >= 1 && nomeFantasia != '') && (cnpj.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+            
 
             var erradoNomeFantasia = document.getElementById("errado_nomeFantasia");
             var erradoCnpj = document.getElementById("errado_cnpj");
             var erradoTelefone = document.getElementById("errado_telefone");
             var erradoEmail = document.getElementById("errado_email");
             var erradoSenha = document.getElementById("errado_senha");
+            var erradoSenha2 = document.getElementById("errado_senha2");
 
 
             erradoNomeFantasia.textContent = "";
@@ -105,9 +119,10 @@
             erradoTelefone.textContent = "";
             erradoEmail.textContent = "";
             erradoSenha.textContent = "";
-    
+
+                
             if (nomeFantasia.trim() === "") {
-            erradoNomeFantasia.textContent = "Por favor, insira o nome fantasia.";
+            erradoNomeFantasia.textContent = "Insira o nome fantasia";
             erradoNomeFantasia.style.display = "block";
             erradoNomeFantasia.style.color = "#ff5353";
             erradoNomeFantasia.style.fontWeight = "bold";
@@ -115,7 +130,7 @@
             }
     
             if (cnpj.trim() === "") {
-            erradoCnpj.textContent = "Por favor, insira um CNPJ válido.";
+            erradoCnpj.textContent = "Insira um CNPJ válido.";
             erradoCnpj.style.display = "block";
             erradoCnpj.style.color = "#ff5353";
             erradoCnpj.style.fontWeight = "bold";
@@ -123,78 +138,65 @@
             }
 
             if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-            erradoTelefone.textContent = "Por favor, insira um número de telefone válido.";
+            erradoTelefone.textContent = "Insira um telefone válido.";
             erradoTelefone.style.display = "block";
             erradoTelefone.style.color = "#ff5353";
             erradoTelefone.style.fontWeight = "bold";
             return false;
             }
 
-            if (email.trim() === "" || email.indexOf("@") === -1) {
-            erradoEmail.textContent = "Por favor, insira um email válido.";
+            if (email.trim() === "" || email.indexOf("@") == -1) {
+            erradoEmail.textContent = "Insira um email válido.";
             erradoEmail.style.display = "block";
             erradoEmail.style.color = "#ff5353";
             erradoEmail.style.fontWeight = "bold";
             return false;
             }
 
-            if (senha.trim() === "") {
-            erradoSenha.textContent = "Por favor, insira a senha.";
-            erradoSenha.style.display = "block";
-            erradoSenha.style.color = "#ff5353";
-            erradoSenha.style.fontWeight = "bold";
-            return false;
+                if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+
+                    console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+                } else{
+                erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+                erradoSenha.style.display = "block";
+                erradoSenha.style.color = "#ff5353";
+                erradoSenha.style.fontWeight = "bold";
+                }
+
+            if(validado){
+             fetch("/usuarios/cadastrar", { /* Requisição */
+             method: "POST", /* Enviando para routers */
+             headers: {
+             "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+             /*cTransformando em JSON e enviando para o servidor */
+             nomeFantasiaServer: nomeFantasia, 
+             cnpjServer: cnpj,
+             telefoneSerer: telefone,
+             emailServer: email,
+             senhaServer: senha
+               }),
+             })
+             console.log("entrou")
             }
-    }
+        }
+
 
         function Login(){
         window.location = "login.html"
     }
-        function Cadastrar(){
+        function telaCadastro(){
             window.location ="cadastro.html"
     }
-    // function avancar(){
-        
-        
-    //     var exibir_frase = frase_validacao;
-    //     var validar_email = input_login.value;
-    //     var divEmail = div_email;
 
-    //     if(validar_email.indexOf("@") >= 1 && validar_email.indexOf(".") >= 1){
-    //     var divRedefinir = document.getElementById("div_redefinir");
+    function clicarMenu() {
+        if(itens.style.display == 'block'){
+            itens.style.display = 'none'
+        } else{
+            itens.style.display = 'block'
+        }
+    }
 
-    //     divEmail.style.display = "none";
-    //     divRedefinir.style.display = "block";
-    //     divRedefinir.style.display = "flex";
-        
-        
-    // } else{0
-    //         exibir_frase.style.display = "block";
-    //         exibir_frase.style.color = "#ff5353";
-    //         exibir_frase.style.fontWeight = "bold";
-    //     }
-    // }
-
-    // function voltar(){
-    //     var divEmail = document.getElementById("div_email");
-    //     divEmail.style.display = "block";
-        
-    //     var divRedefinir = document.getElementById("div_redefinir");
-    //     divRedefinir.style.display = "none";
-    // }
-
-    // function confirmar(){
-    //     var nova_senha = input_nova_senha.value;
-    //     var confirmar_senha = input_senha.value;
-    //     var exibir_frase_senha = frase_senha;
-
-
-    //     if(nova_senha == confirmar_senha){
-    //         window.location.href = "login.html";
-    //     } else{
-    //         exibir_frase_senha.style.display = "block";
-    //         exibir_frase_senha.style.color = "#ff5353";
-    //         exibir_frase_senha.style.fontWeight = "bold";
-    //     }
-    // }
+    
 </script>
