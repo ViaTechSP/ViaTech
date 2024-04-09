@@ -10,29 +10,27 @@
 <body>
     
     <div id="div_home" class="home">
-        <div class="menu-fixo">
-
-            <i class="material-icons" onclick="clicarMenu()"><img src="./assets/imgs/icon.svg" class="logo"><p>ViaTech</p></i>
-            <menu id="itens" class="menu">
-                <ul>
-                    <li class="navbarMenu"><a href="">Início</a></li>
-                    <li class="navbarMenu"><a href="">Sobre nós</a></li>
-                    <li class="navbarMenu"><a href="">Serviços</a></li>
-                    <li class="navbarMenu"><a href="">Saiba Mais</a></li>
-                    <li class="navbarMenu"><a href="">Login</a></li>
-                    <li class="navbarMenu"><a href="">Cadastrar</a></li>
-                </ul>
-            </menu>
-        </div>
-        <img src="./assets/imgs/imagemHome.jpg" alt="metro em movimento" class="imagemHome">
+        <img src="./assets/imgs/homeQualidadeMenor.jpg" alt="metro em movimento" class="imagemHome">
 
         <div class="frase">Nós não apenas monitoramos um computador, garantimos sua segurança.</div>
+        <i class="material-icons" onclick="clicarMenu()">menu</i>
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="">Início</a></li>
+                <li class="navbarMenu"><a href="">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="">Serviços</a></li>
+                <li class="navbarMenu"><a href="">Login</a></li>
+                <li class="navbarMenu"><a href="../API web-data-viz/site/public/cadastro.html">Cadastrar</a></li>
+            </ul>
+        </menu>
         
         <div class="header">
            <div class="navbar">
 
             <div class="containerLogo">
-                <img src="./assets/imgs/icon.svg" class="logo">ViaTech
+                <img src="./assets/imgs/icon.svg" class="logo">
+                <p class="tituloLogo">ViaTech</p>
             </div>
 
             <div class="containerNavegacao">
@@ -44,17 +42,17 @@
                         <a href="#div_sobre_nos">Sobre Nós</a>
                     </li>
                     <li>
-                        <a href="#div_servico">Serviços</a>
+                        <a href="#div_saiba_mais">Saiba Mais</a>
                     </li>
                     <li>
-                        <a href="#div_saiba_mais">Saiba Mais</a>
+                        <a href="#div_servico">Serviços</a>
                     </li>
                 </ul>
             </div>
 
             <div class="containerBotaoHeader">
-                <button onclick="Login()" class="btn-login">Login</button>
-                <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
+                <button onclick="Login" class="btn-login">Login</button>
+                <button onclick="Cadastrar" class="btn-cadastrar">Cadastrar</button>
             </div>
            </div>
         </div> 
@@ -74,7 +72,7 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/5527/5527004.png" alt="" class="iconValor">
 
                     <p>Confiança</p>
-                    <p class="texto-valor">Confiança  é fundamental em relacionamentos duradouros, nos orienta em nossos compromissos.</p>
+                    <p class="texto-valor">Confiança é fundamental em relacionamentos duradouros, nos orienta em nossos compromissos.</p>
 
                 </div>
                 
@@ -103,6 +101,16 @@
             <p class="texto-quem-somos"> Nossa startup foi fundada em fevereiro de 2024 com o propósito de oferecer serviços de monitoramento de hardware na indústria metroferroviária. Temos como foco principal a excelência na qualidade dos nossos serviços, baseada em três princípios fundamentais nos quais acreditamos firmemente</p>
          </div>
     </div> <!-- FINAL DA TELA SOBRE NÓS -->
+
+    <div class="saibaMais">
+        <h1 id="div_saiba_mais">Saiba Mais</h1>
+
+        <img src="./assets/imgs/error.png" class="imagemSistema">
+        <p class="titulo">Falhas Técnicas</p>
+        <p class="texto-saiba-mais">É comum a presença de falhas de serviços em diversas áreas, graças a falta de monitoramento dos hardware. A falta dessa monitoria na área metroferroviária, tem um impacto ainda maior por se tratar de um serviço público, ultilizado por muitas pessoas.
+
+        As falhas técnicas (sistema) ocupam 54% dos incidentes, elas geralmente estão relacionadas as sinaizações, motores, portas, freios, e interrupções de serviços.</p>
+    </div> <!-- FNAL DE SAIBA MAIS-->
     
     <div id="div_servico" class="servico">
             <h1>Serviços</h1>
@@ -150,16 +158,6 @@
         </div>       
     </div>  <!-- FINAL DE SERVIÇOS -->
 
-    <div class="saibaMais">
-        <h1 id="div_saiba_mais">Saiba Mais</h1>
-
-        <img src="./assets/imgs/error.png" class="imagemSistema">
-        <p class="titulo">Falhas Técnicas</p>
-        <p class="texto-saiba-mais">É comum a presença de falhas de serviços em diversas áreas, graças a falta de monitoramento dos hardware. A falta dessa monitoria na área metroferroviária, tem um impacto ainda maior por se tratar de um serviço público, ultilizado por muitas pessoas.
-
-        As falhas técnicas (sistema) ocupam 54% dos incidentes, elas geralmente estão relacionadas as sinaizações, motores, portas, freios, e interrupções de serviços.</p>
-    </div> <!-- FNAL DE SAIBA MAIS-->
-
     <div class="footer">
         <div>
             <a href="https://github.com/ViaTechSP/ViaTech">
@@ -188,12 +186,5 @@
         } else{
             itens.style.display = 'block'
         }
-    }
-
-    function Login(){
-        window.location = "login.html"
-    }
-    function Cadastrar(){
-        window.location ="cadastro.html"
     }
 </script>
