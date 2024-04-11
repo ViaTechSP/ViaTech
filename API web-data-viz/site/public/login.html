@@ -66,84 +66,104 @@
                                    
                     <h1>Login</h1>
                     <p>Email</p>
-                    <input id="input_login" type="text">
+                    <input id="input_email" type="text">
                     <p>Senha</p>
                    <input id="input_senha" type="password">
 
                     <p id="frase_validacao" style="display: none;">Email inválido!</p>
-                    <p id="frase_senha" style="display: none;">Senhas divergentes!</p>
-                    <button onclick="avancar()" class="botaoAvancar">Login</button>
+                    <button onclick="login()" class="botaoAvancar">Login</button>
 
                     <p id="frase-senha">Esquceu a senha? <u>
 
                         <a href="esqueceuSenha.html">Clique aqui</a></p>
-                    </u>
-                        
-
-              
-    
-            </div>
-            
-            
-        
-
+                    </u>          
+            </div>          
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
 
 
 </body>
 </html>
 
-<script>
-    function clicarMenu() {
-        if(itens.style.display == 'block'){
-            itens.style.display = 'none'
-        } else{
-            itens.style.display = 'block'
-        }
-    }
 
-    function avancar(){
-        
+<script>
+    function acessar() {
+
+     var email = input_email.value;
+     var senha = input_senha.value;
+         
+     if (email.indexOf('@') >= 0 && (email.indexOf('.com') >= 0 || email.indexOf('.br') >= 0) && senha.length >= 8 ) {
+     
+      /*Enviando para o servidor*/
+      fetch("/usuarios/autenticar",{
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+       },
+       body: JSON.stringify({
+        emailServer: email,
+        senhaServer: senha
+       })
+     })
+     
+     
+     .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+     
+       if (resposta.status == 200) {
+        resposta.json().then(json => {
+          
+          /*Como os dados vem em json dentro de um vetor, estou pegando a primeira posição*/
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+          sessionStorage.NOME_EMPRESA = json[0].nomeFantasia;
+          sessionStorage.EMAIL_EMPRESA = json[0].email;
+          sessionStorage.CNPJ_EMPRESA = json[0].CNPJ;
+          sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
+          sessionStorage.SENHA_EMPRESA = json[0].senha;
+          window.location.href = "./cadastroFuncionario.html";
+     
+         });
+     
+       }
+     
+       else {
+        console.log("Houve um erro ao tentar realizar o login!");
+        div_senha_errado.innerHTML = `Senha ou email invalidos!`
+     
+        resposta.text().then(texto => {
+          console.error(texto);
+         });
+       }
+     }).catch(function (erro) {
+       console.log(erro);
+     })
+     }
+     
+     else {
+     div_senha_errado.innerHTML = `Email ou senha incorreta!`;
+     }      
+     } 
+
+
+
+
+
+    function login(){
         
         var exibir_frase = frase_validacao;
-        var validar_email = input_login.value;
+        var validar_email = input_email.value;
         var divEmail = div_email;
 
         if(validar_email.indexOf("@") >= 1 && validar_email.indexOf(".") >= 1){
         var divRedefinir = document.getElementById("div_redefinir");
 
-        divEmail.style.display = "none";
-        divRedefinir.style.display = "block";
-        divRedefinir.style.display = "flex";
+        acessar();
         
-        
-    } else{0
+    } else{
             exibir_frase.style.display = "block";
             exibir_frase.style.color = "#ff5353";
             exibir_frase.style.fontWeight = "bold";
-        }
-    }
-
-    function voltar(){
-        var divEmail = document.getElementById("div_email");
-        divEmail.style.display = "block";
         
-        var divRedefinir = document.getElementById("div_redefinir");
-        divRedefinir.style.display = "none";
-    }
-
-    function confirmar(){
-        var nova_senha = input_nova_senha.value;
-        var confirmar_senha = input_senha.value;
-        var exibir_frase_senha = frase_senha;
-
-
-        if(nova_senha == confirmar_senha){
-            window.location.href = "login.html";
-        } else{
-            exibir_frase_senha.style.display = "block";
-            exibir_frase_senha.style.color = "#ff5353";
-            exibir_frase_senha.style.fontWeight = "bold";
         }
     }
 
