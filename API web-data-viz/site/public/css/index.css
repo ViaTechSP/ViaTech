@@ -28,7 +28,7 @@
     }
 
     i.material-icons {
-        top: 122px;
+        top: 120px;
         display: block;
         background-color: black;
         width: 100%;
@@ -471,7 +471,7 @@
 
     i.material-icons {
         position: fixed;
-        top: 122px;
+        top: 120px;
         display: block;
         background-color: black;
         width: 100%;
@@ -482,7 +482,7 @@
     }
 
     .menu {
-        position: absolute;
+        position: fixed;
         z-index: 2;
         font-size: 60px;
         top: 164px;
@@ -980,7 +980,7 @@
 
     i.material-icons {
         position: fixed;
-        top: 122px;
+        top: 120px;
         display: block;
         background-color: black;
         width: 100%;
@@ -991,7 +991,7 @@
     }
 
     .menu {
-        position: absolute;
+        position: fixed;
         z-index: 2;
         font-size: 60px;
         top: 164px;

@@ -53,7 +53,7 @@
         position: absolute;
         z-index: 2;
         font-size: 60px;
-        top: 164px;
+        top: 100px;
         width: 100%;
         display: none;
     }
@@ -273,15 +273,16 @@
     position: absolute;
     z-index: 2;
     font-size: 60px;
-    top: 164px;
+    top: 100px;
     width: 100%;
     display: none;
 }
 
 .navbarMenu{
     padding: 8px 0px;
-    background-color: black;
-    border-bottom: solid 1px;
+    background: #01164070;
+    backdrop-filter: blur(20px);
+    border: solid 1px #F27A5E;
 }
 
 .navbarMenu:hover {
@@ -300,11 +301,11 @@
 /* HEADER */
 .header{
     z-index: 2;
-    position: fixed; 
-    display: flex;
+    position: fixed;
+    /* display: none; */
     width: 100%;
-    height: 120px;
-    justify-content: center;
+    height: 100px;
+    justify-content: space-evenly;
     align-items: center;
     z-index: 2;
     background: #01164070;
@@ -317,27 +318,36 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;    
+    justify-content: left;    
 }
 
 .logo{
-    width: 50%;
+    width: 27%;
     height: 80%;
 }
 
 .containerNavegacao{
     width: 65%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
 }
 
 .containerBotaoHeader{
     width: 15%;
+    display: none;
+}
+
+i.material-icons {
     display: flex;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    padding: 8px 0 10px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 20px;
     justify-content: center;
-    justify-content: space-around;
+    width: 40px;
+
 }
 
 /* CONTAINER */
@@ -386,15 +396,16 @@
         position: absolute;
         z-index: 2;
         font-size: 60px;
-        top: 164px;
+        top: 100px;
         width: 100%;
         display: none;
     }
     
     .navbarMenu{
         padding: 8px 0px;
-        background-color: black;
-        border-bottom: solid 1px;
+        background: #01164070;
+        backdrop-filter: blur(20px);
+        border: solid 1px #F27A5E;
     }
     
     .navbarMenu:hover {

@@ -42,18 +42,21 @@
              <button onclick="Login()" class="btn-login">Login</button>
              <button onclick="telaCadastro()" class="btn-cadastrar">Cadastrar</button>
          </div>
+         <div id="abrirMenu">
+            <i class="material-icons" onclick="clicarMenu()"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214477.png" alt="" style="width: 80%;"></i>
+        </div>
         </div>
      </div> <!-- FINAL DO HEADER -->
 
      <div id="div_home" class="home">
         <menu id="itens" class="menu">
             <ul>
-                <li class="navbarMenu"><a href="">Início</a></li>
-                <li class="navbarMenu"><a href="">Sobre nós</a></li>
-                <li class="navbarMenu"><a href="">Serviços</a></li>
-                <li class="navbarMenu"><a href="">Saiba Mais</a></li>
-                <li class="navbarMenu"><a href="">Login</a></li>
-                <li class="navbarMenu"><a href="">Cadastrar</a></li>
+                <li class="navbarMenu"><a href="index.html">Início</a></li>
+                <li class="navbarMenu"><a href="index.html">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="index.html">Serviços</a></li>
+                <li class="navbarMenu"><a href="index.html">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="login.html">Login</a></li>
+                <li class="navbarMenu"><a href="cadastro.html">Cadastrar</a></li>
             </ul>
         </menu>
         <img src="./assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
@@ -79,9 +82,7 @@
             <p id="errado_senha2" class="errado"></p>
             <button onclick="cadastrar()" class="botaoAvancar">Cadastrar</button>
         </div>
-        <div id="abrirMenu">
-            <i class="material-icons" onclick="clicarMenu()"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214477.png" alt="" style="width: 80%;"></i>
-        </div>
+        
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
     
     <script>

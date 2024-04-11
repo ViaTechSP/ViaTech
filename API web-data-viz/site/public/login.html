@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 <body>
     <!-- MOBILE -->
-    <menu id="itens" class="menu">
-        <ul>
-            <li class="navbarMenu"><a href="">Início</a></li>
-            <li class="navbarMenu"><a href="">Sobre nós</a></li>
-            <li class="navbarMenu"><a href="">Saiba Mais</a></li>
-            <li class="navbarMenu"><a href="">Serviços</a></li>
-            <li class="navbarMenu"><a href="">Login</a></li>
-            <li class="navbarMenu"><a href="">Cadastrar</a></li>
-        </ul>
-    </menu>
+   
 
     <div class="header">
         <div class="navbar">
@@ -50,10 +43,23 @@
              <button onclick="Login()" class="btn-login">Login</button>
              <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
          </div>
+         <div id="abrirMenu">
+            <i class="material-icons" onclick="clicarMenu()"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214477.png" alt="" style="width: 80%;"></i>
+        </div>
         </div>
      </div> <!-- FINAL DO HEADER -->
 
     <div id="div_home" class="home">
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="index.html">Início</a></li>
+                <li class="navbarMenu"><a href="index.html">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="index.html">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="index.html">Serviços</a></li>
+                <li class="navbarMenu"><a href="login.html">Login</a></li>
+                <li class="navbarMenu"><a href="cadastro.html">Cadastrar</a></li>
+            </ul>
+        </menu>
         <img src="./assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
         
             <div id="div_email" class="container">
@@ -78,7 +84,8 @@
     
             </div>
             
-        <i class="material-icons" onclick="clicarMenu()">menu</i>
+            
+        
 
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
 
@@ -87,6 +94,14 @@
 </html>
 
 <script>
+    function clicarMenu() {
+        if(itens.style.display == 'block'){
+            itens.style.display = 'none'
+        } else{
+            itens.style.display = 'block'
+        }
+    }
+
     function avancar(){
         
         
