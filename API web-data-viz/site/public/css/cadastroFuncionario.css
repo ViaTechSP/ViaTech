@@ -23,7 +23,7 @@ body{
     height: 1px;
     background-color: #F27A5E;
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 0;
    
   }
@@ -44,6 +44,8 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .container-itens {
