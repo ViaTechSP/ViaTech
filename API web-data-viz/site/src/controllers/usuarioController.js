@@ -80,7 +80,56 @@ function cadastrar(req, res) {
     }
 }
 
+function pegarId(req, res) {
+
+    var email = req.body.emailServer;
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else {
+
+      usuarioModel.pegarId(email)
+        .then(
+             function (resposta) {
+                 if (resposta.length == 0) {
+                 res.status(403).send("Email inválido(s)");
+                } else {
+                 res.status(200).json(resposta);
+                }      
+            }
+        ).catch(
+             function (erro) {
+                 console.log(erro);
+                 console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                 res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function alterarSenha(req, res) {
+    var novaSenhaVar = req.body.novaSenha;
+    var idEmpresaVar = req.body.idEmpresa;
+
+    usuarioModel.alterarSenha(novaSenhaVar, idEmpresaVar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    pegarId,
+    alterarSenha
 }

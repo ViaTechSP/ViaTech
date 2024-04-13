@@ -12,4 +12,13 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+
+router.post("/pegarId", function (req, res) {
+    usuarioController.pegarId(req, res);
+});
+
+router.put("/alterarSenha", function (req, res) {
+    usuarioController.alterarSenha(req, res);
+});
+
 module.exports = router;

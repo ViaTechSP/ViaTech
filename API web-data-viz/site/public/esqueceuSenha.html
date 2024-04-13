@@ -102,15 +102,56 @@
 </html>
 
 <script>
-    function avancar(){
-        
+    function avancar(){        
         
         var exibir_frase = frase_validacao;
-        var validar_email = input_login.value;
+        var email = input_login.value;
         var divEmail = div_email;
 
-        if(validar_email.indexOf("@") >= 1 && validar_email.indexOf(".") >= 1){
+        if(email.indexOf("@") >= 1 && email.indexOf(".") >= 1){
         var divRedefinir = document.getElementById("div_redefinir");
+
+        /*Enviando para o servidor*/
+      fetch("/usuarios/pegarId",{
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+       },
+       body: JSON.stringify({
+        emailServer: email
+       })
+     })
+     
+     
+     .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+     
+       if (resposta.status == 200) {
+        resposta.json().then(json => {
+          
+          /*Como os dados vem em json dentro de um vetor, estou pegando a primeira posição*/
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+          sessionStorage.NOME_EMPRESA = json[0].nomeFantasia;
+          sessionStorage.EMAIL_EMPRESA = json[0].email;
+          sessionStorage.CNPJ_EMPRESA = json[0].CNPJ;
+          sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
+          sessionStorage.SENHA_EMPRESA = json[0].senha;
+         });
+     
+       }
+     
+       else {
+        console.log("Houve um erro ao tentar realizar o login!");
+        // div_senha_errado.innerHTML = `Email invalidos!`
+     
+        resposta.text().then(texto => {
+          console.error(texto);
+         });
+       }
+     }).catch(function (erro) {
+       console.log(erro);
+     })
 
         divEmail.style.display = "none";
         divRedefinir.style.display = "block";
@@ -124,6 +165,7 @@
         }
     }
 
+    
     function voltar(){
         var divEmail = document.getElementById("div_email");
         divEmail.style.display = "block";
@@ -133,19 +175,50 @@
     }
 
     function confirmar(){
-        var nova_senha = input_nova_senha.value;
+        var novaSenha = input_nova_senha.value;
         var confirmar_senha = input_senha.value;
         var exibir_frase_senha = frase_senha;
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        console.log(idEmpresa)
 
 
-        if(nova_senha == confirmar_senha){
-            window.location.href = "login.html";
+
+        if(novaSenha == confirmar_senha){
+            // window.location.href = "login.html";
         } else{
             exibir_frase_senha.style.display = "block";
             exibir_frase_senha.style.color = "#ff5353";
             exibir_frase_senha.style.fontWeight = "bold";
         }
+        
+        
+        fetch(`/usuarios/alterarSenha/`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                novaSenha: novaSenha,
+                idEmpresa: idEmpresa
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("ID_EMPRESA") + "!");
+                console.log("Funcionou!");
+                window.location = 'login.html';
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!" + idEmpresa);
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
     }
+    
+
 
     function Login(){
         window.location = "login.html"

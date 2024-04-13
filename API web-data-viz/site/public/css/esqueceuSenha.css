@@ -192,13 +192,11 @@
         background-color: #01164070;
         padding: 5%;
         display: flex;
-        position: fixed;
         flex-direction: column;
         backdrop-filter: blur(20px);
         box-shadow: 2px 0 10px 4px rgba(0, 0, 0, 0.356);
         border: 1px solid #F27A5E;
         border-radius: 6px;
-        height: 21vh;
         width: 19vw;
         justify-content: center;
     }
