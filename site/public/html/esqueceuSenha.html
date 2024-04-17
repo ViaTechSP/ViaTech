@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/esqueceuSenha.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</head>
+</head>
+<body>
+    <!-- MOBILE -->
+    
+
+    <div class="header">
+        <div class="navbar">
+
+        <a href="index.html#div_home">
+
+         <div class="containerLogo">
+                <img src="./assets/imgs/icon.svg" class="logo">ViaTech
+            </div>
+        </a>
+
+         <div class="containerNavegacao">
+             <ul>
+                 <li>
+                     <a href="index.html#div_home">Início</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_sobre_nos">Sobre Nós</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_saiba_mais">Saiba Mais</a>
+                 </li>
+                 <li>
+                     <a href="index.html#div_servico">Serviços</a>
+                 </li>
+             </ul>
+         </div>
+
+         <div class="containerBotaoHeader">
+             <button onclick="Login()" class="btn-login">Login</button>
+             <button onclick="Cadastrar()" class="btn-cadastrar">Cadastrar</button>
+         </div>
+
+         <div id="abrirMenu">
+            <i class="material-icons" onclick="clicarMenu()"><img src="https://cdn-icons-png.flaticon.com/128/1214/1214477.png" alt="" style="width: 80%;"></i>
+        </div>
+        </div>
+     </div> <!-- FINAL DO HEADER -->
+
+    <div id="div_home" class="home">
+        <menu id="itens" class="menu">
+            <ul>
+                <li class="navbarMenu"><a href="index.html">Início</a></li>
+                <li class="navbarMenu"><a href="index.html">Sobre nós</a></li>
+                <li class="navbarMenu"><a href="index.html">Saiba Mais</a></li>
+                <li class="navbarMenu"><a href="index.html">Serviços</a></li>
+                <li class="navbarMenu"><a href="login.html">Login</a></li>
+                <li class="navbarMenu"><a href="cadastro.html">Cadastrar</a></li>
+            </ul>
+        </menu>
+
+        <img src="../assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
+        
+            <div id="div_email" class="container">
+                <a href="login.html">
+                    <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="voltar" class="imagemVoltar">
+                </a>
+                                   
+                    <h1>Recuperar Senha</h1>
+                    <p>Email</p>
+                    <input id="input_login" type="text">
+                    <p id="frase_validacao" style="display: none;">Email inválido!</p>
+              
+    
+                <button onclick="avancar()" class="botaoAvancar">Avançar</button>
+            </div>
+            
+            <div id="div_redefinir" class="container" style="display: none;">
+                <a href="">
+                    <img onclick="voltar()" src="https://cdn-icons-png.flaticon.com/512/93/93634.png" alt="voltar" class="imagemVoltar">
+                </a>
+                <h1>Recuperar Senha</h1>
+                <p>Nova senha</p>
+                <input id="input_nova_senha" type="password">
+                <p>Confirmar senha</p>
+                <input id="input_senha" type="password">
+    
+                <button onclick="confirmar()" class="botaoAvancar">Redefinir</button>
+                <p id="frase_senha" style="display: none;">Senhas divergentes!</p>
+
+            </div>
+
+
+    </div> <!-- FINAL DA IMAGEM DE FUNDO-->
+
+
+</body>
+</html>
+
+<script>
+    function avancar(){        
+        
+        var exibir_frase = frase_validacao;
+        var email = input_login.value;
+        var divEmail = div_email;
+
+        if(email.indexOf("@") >= 1 && email.indexOf(".") >= 1){
+        var divRedefinir = document.getElementById("div_redefinir");
+
+        /*Enviando para o servidor*/
+      fetch("/usuarios/pegarId",{
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+       },
+       body: JSON.stringify({
+        emailServer: email
+       })
+     })
+     
+     
+     .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+     
+       if (resposta.status == 200) {
+        resposta.json().then(json => {
+          
+          /*Como os dados vem em json dentro de um vetor, estou pegando a primeira posição*/
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+          sessionStorage.NOME_EMPRESA = json[0].nomeFantasia;
+          sessionStorage.EMAIL_EMPRESA = json[0].email;
+          sessionStorage.CNPJ_EMPRESA = json[0].CNPJ;
+          sessionStorage.TELEFONE_EMPRESA = json[0].telefone;
+          sessionStorage.SENHA_EMPRESA = json[0].senha;
+         });
+     
+       }
+     
+       else {
+        console.log("Houve um erro ao tentar realizar o login!");
+     
+        resposta.text().then(texto => {
+          console.error(texto);
+         });
+       }
+     }).catch(function (erro) {
+       console.log(erro);
+     })
+
+        divEmail.style.display = "none";
+        divRedefinir.style.display = "block";
+        divRedefinir.style.display = "flex";
+        
+        
+    } else{
+            exibir_frase.style.display = "block";
+            exibir_frase.style.color = "#ff5353";
+            exibir_frase.style.fontWeight = "bold";
+        }
+    }
+
+    
+    function voltar(){
+        var divEmail = document.getElementById("div_email");
+        divEmail.style.display = "block";
+        
+        var divRedefinir = document.getElementById("div_redefinir");
+        divRedefinir.style.display = "none";
+    }
+
+    function confirmar(){
+        var novaSenha = input_nova_senha.value;
+        var confirmar_senha = input_senha.value;
+        var exibir_frase_senha = frase_senha;
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        console.log(idEmpresa)
+
+
+
+        if(novaSenha == confirmar_senha){
+            // window.location.href = "login.html";
+        } else{
+            exibir_frase_senha.style.display = "block";
+            exibir_frase_senha.style.color = "#ff5353";
+            exibir_frase_senha.style.fontWeight = "bold";
+        }
+        
+        
+        fetch(`/usuarios/alterarSenha/`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                novaSenha: novaSenha,
+                idEmpresa: idEmpresa
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                // window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("ID_EMPRESA") + "!");
+                console.log("Funcionou!");
+                window.location = 'login.html';
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!" + idEmpresa);
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+    
+
+
+    function Login(){
+        window.location = "login.html"
+    }
+    function Cadastrar(){
+        window.location ="cadastro.html"
+    }
+
+    function clicarMenu() {
+        if(itens.style.display == 'block'){
+            itens.style.display = 'none'
+        } else{
+            itens.style.display = 'block'
+        }
+    }
+</script>
