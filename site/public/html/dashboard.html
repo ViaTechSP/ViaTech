@@ -5,55 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViaTech</title>
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
-    <nav id="menuLateral">
-        <div class="container">
-            <p style="display: flex; align-items: center;">
-                <img id="imgViaTech" src="../assets/imgs/icon.svg">
-                ViaTech
-              </p>
-              
+    <div class="menuHeader">
 
-           
-
-            <p>Olá, Undefined <span id="ola"></span></p>
-
-            <div class="container-itens">
+        <nav id="menuLateral">
+            <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+            
+            <div class="container" id="containerMenuLateral">
+                
+                <p style="display: flex; align-items: center;">
+                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
+                    <i class="material-icons" onclick="clicarMenu()">menu</i>
+                </p>
+                
+                <p>Olá, <span id="ola">Undefined</span></p>
+                
+            <div id="containerItens" class="container-itens">
                 <div class="item">
                     <a href="dashboard.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
                 </div>
-
+                
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
                 </div>
-
+                
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
                 </div>
-
+                
                 
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Adicionar</a>
                 </div>
-
-
+                
+                
                 <div class="item">
-                        <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                    <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
                 </div>
-
+                
             </div>
-
+            
             <div class="buttonSair">
                 <a> <span class="material-symbols-outlined">logout</span>Sair</a>
             </div>
-
+            
         </div>
     </nav>
+    
+
+        <div class="header-info">
+            aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        </div>
+</div>
 
     
 </body>
 </html>
+
+<script>
+    function clicarMenu() {
+        const menu = document.getElementById('menuLateral');
+        menu.classList.toggle('escondido');
+
+        if (menu.classList.contains('escondido')) {
+            menuEscondido.style.display = 'block'
+            containerMenuLateral.style.display = 'none';
+        }
+        else {
+            menuEscondido.style.display = 'none'
+            containerMenuLateral.style.display = 'block'
+        }
+    }
+</script>

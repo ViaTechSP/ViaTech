@@ -10,7 +10,7 @@ body{
 
 #imgViaTech{
     float: left; /* Faz a imagem flutuar para a esquerda */
-    margin-right: 40px; /* Adiciona um espaço à direita da imagem */
+    margin-right: 10px; /* Adiciona um espaço à direita da imagem */
     width: 80px; /* Define a largura da imagem */
     height: 70px; /* Define a altura da imagem */
 
@@ -85,6 +85,21 @@ body{
 
 #conteudoPrincipal{
   margin-left: 23%;
+}
+
+.material-icons {
+  cursor: pointer;
+  margin-left: 50px;
+  color: white;
+}
+
+#menuLateral.escondido {
+  width: 100px;
+}
+
+.header-info {
+  background-color: red;
+  width: 100px;
 }
 
 
