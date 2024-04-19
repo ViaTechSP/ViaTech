@@ -1,11 +1,4 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql - banco local - ambiente de desenvolvimento
-*/
-
+DROP DATABASE ViaTech;
 CREATE DATABASE viatech;
 USE viatech;
 
@@ -43,17 +36,27 @@ CONSTRAINT fkLinha FOREIGN KEY (fkLinha) REFERENCES linha (idLinha),
 nome VARCHAR(100)
 );
 
-/*
-comandos para criar usuário em banco de dados azure, sqlserver,
-com permissão de insert + update + delete + select
-*/
+CREATE TABLE Computador (
+idComputador INT PRIMARY KEY AUTO_INCREMENT,
+Hostname VARCHAR(50) NOT NULL,
+Linha VARCHAR(50) NOT NULL,
+Estacao VARCHAR(100) NOT NULL,
+fkEmpresa INT NOT NULL,
+	FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+);
 
-CREATE USER [usuarioParaAPIWebDataViz_datawriter_datareader]
-WITH PASSWORD = '#Gf_senhaParaAPIWebDataViz',
-DEFAULT_SCHEMA = dbo;
+CREATE TABLE Hardware (
+idHardware INT PRIMARY KEY AUTO_INCREMENT,
+SistemaOperacional VARCHAR(50) NOT NULL,
+NomeCpu VARCHAR(255) NOT NULL,
+Arquitetura VARCHAR(255) NOT NULL,
+MemoriaEmUso VARCHAR(255) NOT NULL,
+MemoriaTotal VARCHAR(255) NOT NULL,
+SysAtividade VARCHAR(255)
+);
 
-EXEC sys.sp_addrolemember @rolename = N'db_datawriter',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+INSERT INTO Hardware VALUES 
+(null, 'Windows', '12th Gen Intel(R) Core(TM) i5-1235U', '16gb', '1TB', 'ON', null);
 
-EXEC sys.sp_addrolemember @rolename = N'db_datareader',
-@membername = N'usuarioParaAPIWebDataViz_datawriter_datareader';
+select * from empresa;
+

@@ -3,11 +3,109 @@
 .menuHeader {
   display: flex;
   flex-direction: row;
-  width: 100%
+  width: 100%;
 }
 
 .header-info {
-  width: 78%;
+  width: 95%;
+  height: 50px;
+  margin-left: 5%;
+  background-color: #efefef;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header-info .info {
+  padding-left: 10px;
 }
 
 
+.container-principal {
+  width: 100%;
+  height: 631px;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+}
+
+.coluna-1 {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  background-color: red;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.container-graficos{
+  height: 400px;
+  width: 95%;
+  background-color: #011640;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.graficos-coluna-1, .graficos-coluna-2{
+display: flex;
+flex-direction: column;
+}
+
+.grafico-cpu, .grafico-ram, .grafico-disco, .grafico-temperatura {
+  width: 270px;
+  height: 175px;
+  background-color: brown;
+  margin: 8px;
+}
+
+.container-kpis {
+  width: 550px;
+  height: 110px;
+  background-color: white;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.kpi-cpu, .kpi-disco, .kpi-ram, .kpi-temperatura {
+  height: 60px;
+  width: 110px;
+  background-color: #7ed957;
+}
+
+.kpi-ram {
+  background-color: #ffde59;
+}
+
+.kpi-temperatura {
+  background-color: #ff3131;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.coluna-2 {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  background-color: aqua;
+}
+
+.coluna-3 {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: blueviolet;
+}
