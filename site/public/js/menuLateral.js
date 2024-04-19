@@ -10,4 +10,8 @@ function clicarMenu() {
         menuEscondido.style.display = 'none'
         containerMenuLateral.style.display = 'block'
     }
+
+    if (window.location == '../html/dashboard.html') {
+        menu.classList.toggle('escondido');
+    }
 }

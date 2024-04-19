@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViaTech</title>
+    <title>ViaTech | Dashboard</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
-    <script src="../js/dashboard.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="../css/menuLateral.css">
+
+    <!-- JS -->
+    <script src="../js/menuLateral.js"></script>
+    <script src="../js/sessao.js"></script>
+
+    <!-- STYLE & ICONES-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
 
-    <!-- dashboard.css -->
-    <div class="menuHeader">
+<body onload="validarSessao(), obterDados(), clicarMenu()">
+<!-- <body> -->
         
-        <!-- menuLateral.css -->
+
         <nav id="menuLateral">
             <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
             
@@ -43,31 +49,103 @@
                 
                 
                 <div class="item">
-                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Adicionar</a>
+                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
                 </div>
                 
                 
                 <div class="item">
-                    <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                    <a href="cadastroFuncionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
                 </div>
                 
             </div>
             
-            <div class="buttonSair">
+            <div onclick="logout()" class="buttonSair">
                 <a> <span class="material-symbols-outlined">logout</span>Sair</a>
             </div>
             
         </nav>
-    </div>
-    
-    <!-- dashboard.css -->
-    
-    <div class="header-info">
-        Sistema Operacional
-    </div>
-    
-</div>
+        
+        <!-- dashboard.css -->
+        
+        <div class="header-info">
+            <div class="info">
+                Sistema Operacional: <span id="span_so" class="span-so"></span>
+                CPU: <span id="span_cpu" class="span_cpu"></span>
+                RAM: <span id="span_ram" class="span_ram"></span>
+                Disco: <span id="span_disco" class="span_disco"></span>
+                Em uso: <span id="span_uso" class="span_uso"></span>
+            </div>
+        </div>
+        
 
-    
+        <!-- 
+             O container principal é o quadrado ao lado do menu e abaixo da header
+             Ele será dividido em 3 colunas (alinhadas em display row) 
+             a primeira contendo os gráficos e as kpis
+             A segunda contém apenas os indicadores
+             E a terceira contém os alertas
+        -->
+        <div class="container-principal">
+
+
+            <div class="coluna-1">
+                <div class="container-graficos">
+                    <div class="graficos-coluna-1">
+                        <div class="grafico-cpu"></div>
+                        <div class="grafico-ram"></div>
+                    </div>
+
+                    <div class="graficos-coluna-2">
+                        <div class="grafico-disco"></div>
+                        <div class="grafico-temperatura"></div>
+                    </div>
+                </div>
+
+                <div class="container-kpis">
+                    <div class="kpi-cpu"></div>
+                    <div class="kpi-disco"></div>
+                    <div class="kpi-ram"></div>
+                    <div class="kpi-temperatura"></div>
+                </div>
+            </div>
+
+            <div class="coluna-2">
+                <div class="container-indicadores"></div>
+            </div>
+
+            <div class="coluna-3">
+                <div class="container-alertas"></div>
+            </div>
+
+        </div>
 </body>
 </html>
+
+<script>
+    function obterDados() {
+    fetch(`/dashboard/obterDados`, { cache: 'no-store' }).then(function (response) {
+        console.log('entrou no fetch')
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+            resposta.reverse();
+
+                console.log(resposta)
+                span_so.innerHTML = resposta[0].SistemaOperacional
+                span_cpu.innerHTML = resposta[0].NomeCpu
+                span_ram.innerHTML = resposta[0].Arquitetura
+                span_disco.innerHTML = resposta[0].MemoriaEmUso
+                span_uso.innerHTML = resposta[0].MemoriaTotal
+                // plotarGrafico(resposta);
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API' + error);
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+    }
+</script>
