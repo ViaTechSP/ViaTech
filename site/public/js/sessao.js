@@ -7,6 +7,8 @@ function validarSessao() {
 
     if (email != null && nome != null) {
         ola.innerHTML = nome;
+    } else {
+        window.location = "../html/login.html";
     }
 }
 

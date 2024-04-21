@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+h3 {
+  margin: 0; 
+  padding: 0;
+}
+
 .header-info {
   width: 95%;
   height: 50px;
@@ -18,8 +23,26 @@
 
 .header-info .info {
   padding-left: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
+.select-estacao {
+  color: black;
+}
+
+.info2 {
+  position: fixed;
+  right: 0;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.span-so, .span-cpu, .span-ram, .span-disco, .span-uso {
+  font-weight: normal;
+  color: #ff914d;
+  margin-right: 10px;
+}
 
 .container-principal {
   width: 100%;
@@ -32,10 +55,9 @@
 .coluna-1 {
   display: flex;
   flex-direction: column;
-  width: 45%;
-  background-color: red;
+  width: 57%;
   align-items: center;
-  padding-top: 30px;
+  margin-top: 30px;
 }
 
 .container-graficos{
@@ -54,14 +76,14 @@ flex-direction: column;
 }
 
 .grafico-cpu, .grafico-ram, .grafico-disco, .grafico-temperatura {
-  width: 270px;
+  width: 340px;
   height: 175px;
-  background-color: brown;
   margin: 8px;
+  /* background-color: white; */
 }
 
 .container-kpis {
-  width: 550px;
+  width: 100%;
   height: 110px;
   background-color: white;
   margin-top: 40px;
@@ -72,9 +94,12 @@ flex-direction: column;
 }
 
 .kpi-cpu, .kpi-disco, .kpi-ram, .kpi-temperatura {
-  height: 60px;
-  width: 110px;
+  height: 120px;
+  width: 150px;
   background-color: #7ed957;
+  font-size: 12px;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .kpi-ram {
@@ -86,26 +111,86 @@ flex-direction: column;
 }
 
 
-
-
-
-
-
-
-
-
-
-
 .coluna-2 {
   display: flex;
   flex-direction: column;
-  width: 20%;
-  background-color: aqua;
+  width: 18%;
+  margin-top: 30px;
+}
+
+.indicadores-linha {
+  display: flex;
+  flex-direction: line;
+}
+
+.indicadores-linha .indicador {
+  margin-right: 15px;
+}
+
+.indicador {
+  display: flex;
+  height: 50px;
+  width: 65px;
+  font-size: 12px;
+  word-wrap: break-word;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+}
+
+.usb-header {
+  display: flex;
+  width: 225px;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 30px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #011640;
+  background-color: #efefef;
+}
+
+.usb-body {
+  display: flex;
+  width: 225px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  border-top: none;
+  text-align: center;
+  color: #011640;
+  background-color: #efefef;
 }
 
 .coluna-3 {
   display: flex;
   flex-direction: column;
-  width: 30%;
-  background-color: blueviolet;
+  width: 20%;
+}
+
+.alertas-header {
+  display: flex;
+  width: 269px;
+  height: 30px;
+  margin-top: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.alertas-quadrado {
+  display: flex;
+  width: 269px;
+  height: 68.8px;
+  border: 2px solid black;
+  border-top: none;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  word-wrap: break-word;
 }

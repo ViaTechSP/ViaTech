@@ -39,6 +39,7 @@ body{
   overflow: hidden;
   text-align: center;
   display: block;
+  z-index: 999;
 }
 
 .container{
