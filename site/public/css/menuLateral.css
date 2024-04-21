@@ -39,6 +39,7 @@ body{
   overflow: hidden;
   text-align: center;
   display: block;
+  z-index: 999;
 }
 
 .container{
@@ -95,7 +96,7 @@ body{
 }
 
 #menuLateral.escondido {
-  width: 100px;
+  width: 5%;
 }
 
 
