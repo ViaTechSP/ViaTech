@@ -5,12 +5,13 @@ body{
   background-position: center;
   background-attachment: fixed;
   font-family: 'Poppins', sans-serif;
+  margin: 0px;
 
 }
 
 #imgViaTech{
     float: left; /* Faz a imagem flutuar para a esquerda */
-    margin-right: 40px; /* Adiciona um espaço à direita da imagem */
+    margin-right: 10px; /* Adiciona um espaço à direita da imagem */
     width: 80px; /* Define a largura da imagem */
     height: 70px; /* Define a altura da imagem */
 
@@ -23,7 +24,7 @@ body{
     height: 1px;
     background-color: #F27A5E;
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 0;
    
   }
@@ -44,8 +45,6 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .container-itens {
@@ -89,19 +88,173 @@ body{
   margin-left: 23%;
 }
 
-body {
+.material-icons {
+  cursor: pointer;
+  margin-left: 50px;
+  color: white;
+}
+
+#menuLateral.escondido {
+  width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&display=swap');
+
+#imgViaTech{
+    float: left; /* Faz a imagem flutuar para a esquerda */
+    margin-right: 40px; /* Adiciona um espaço à direita da imagem */
+    width: 80px; /* Define a largura da imagem */
+    height: 70px; /* Define a altura da imagem */
+}
+
+#ola::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #F27A5E;
+    position: absolute;
+    top: 15%;
+    left: 0;
+   
+  }
+
+.menuDireita {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10%; 
+    height: 100vh; /* Garante que o menu direito ocupe toda a altura da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+
+.container{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-itens {
+  margin-top: 40px;
+  
+}
+
+.item{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 280px;
+  border-bottom: solid white 1px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  
+}
+
+.itemDireita{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+  border-bottom: solid white 1px;
+  margin-top: 10px;
+  margin-bottom: 50px; 
+}
+
+.iconDireita{
+    color: black;
+    width: 300px;
+}
+
+#menuLateral a{
+  padding: 16px;
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+}
+
+#menuLateral a span {
+  padding-right: 25px;
+}
+
+#menuLateral p{
+  font-size: 20px;
+  color: white;
+  display: block;
+  font-weight: bold;
+ margin-bottom: 15px;
+}
+
+#conteudoPrincipal{
+  margin-left: 23%;
+}
+
+body {
+  /* display: flex; */
   justify-content: center; 
   align-items: center; 
   height: 100vh; 
   margin: 0; 
 }
 
-#formulario {
+#formularioAdd {
+  background-color: #0a3ca03d;
+  padding: 50px;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  margin-left: 25%;
-  margin-top: 50px;
+  margin-left: 28%;
+  margin-top: 5%;
+  width: 50%;
+  flex-wrap: wrap; 
+}
+
+#formularioExibir {
+  background-color: #e081813d;
+  padding: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 28%;
+  margin-top: 5%;
+  width: 50%;
+  flex-wrap: wrap; 
+}
+
+#formularioExcluir {
+  background-color: #4ac41a3d;
+  padding: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 28%;
+  margin-top: 5%;
+  width: 50%;
+  flex-wrap: wrap; 
+}
+
+#formularioEditar {
+  background-color: #e0de813d;
+  padding: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 28%;
+  margin-top: 5%;
   width: 50%;
   flex-wrap: wrap; 
 }
@@ -116,8 +269,9 @@ body {
 }
 
 .coluna input {
-  width: calc(100% - 10px);
+  width: calc(100% - 1px);
   height: 30px;
+  border-radius: 2px;
   margin-bottom: 15px;
 }
 
@@ -128,8 +282,27 @@ body {
   justify-content: center;
   margin-top: 15px;
 }
+
 .botao button {
   width: 200px; 
   height: 50px; 
   font-size: 18px; 
+}
+
+.botaoCadastrar{
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.botaoCadastrar:hover {
+    transition: 0.3s ease;
+    background-color: #698fdb;
+}
+
+h2{
+    color: #011640;
+    display: flex;
+    justify-content: center;
+    margin-left: 12%;
+    margin-top: 5%;
 }

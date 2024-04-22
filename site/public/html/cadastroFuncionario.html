@@ -4,193 +4,347 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViaTech</title>
+    <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
     <link rel="stylesheet" href="../css/cadastroFuncionario.css">
-    <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet" href="../css/menuLateral.css">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
-    
-    <nav id="menuLateral">
-        <div class="container">
-            <p style="display: flex; align-items: center;">
-                <img id="imgViaTech" src="../assets/imgs/icon.svg">
-                ViaTech
-              </p>
-              
-
-           
-
-            <p>Olá, Undefined <span id="ola"></span></p>
-
-            <div class="container-itens">
+    <!-- dashboard.css -->
+    <div class="menuHeader">
+        
+        <!-- menuLateral.css -->
+        <nav id="menuLateral">
+            <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+            
+            <div class="container" id="containerMenuLateral">
+                
+                <p style="display: flex; align-items: center;">
+                    <img id="imgViaTech" src="icon.svg"> ViaTech
+                    <i class="material-icons" onclick="clicarMenu()">menu</i>
+                </p>
+                
+                <p>Olá, <span id="ola">Undefined</span></p>
+                
+            <div id="containerItens" class="container-itens">
                 <div class="item">
                     <a href="dashboard.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
                 </div>
-
+                
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
                 </div>
-
+                
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
                 </div>
-
+                
                 
                 <div class="item">
                     <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Adicionar</a>
                 </div>
-
-
+                
+                
                 <div class="item">
-                        <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                    <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
                 </div>
-
+                
             </div>
-
+            
             <div class="buttonSair">
                 <a> <span class="material-symbols-outlined">logout</span>Sair</a>
             </div>
-
+            
+        </nav>
+    </div>
+    
+    <!-- dashboard.css -->
+    <h2>Funcionário</h2>
+    <div id="formularioAdd">
+        <div class="coluna">
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
         </div>
-    </nav>
-    
-    <div id="formulario">
-    <div class="coluna">
-        <p>Nome</p>
-        <input id="input_nome" type="text">
-        <p id="errado_nome" class="errado"></p>
-        
-        <p>CPF</p>
-        <input type="text" id="input_cpf"  required>
-        <p id="errado_Cpf" class="errado"></p>
-        
-        <p>Email</p>
-        <input type="text" id="input_email" required>
-        <p id="errado_email" class="errado"></p>
+        <div class="coluna">
+            <p>Telefone</p>
+            <input id="input_telefone" type="text" required>
+            <p id="errado_telefone" class="errado"></p>
+            
+            <p>Cargo</p>
+            <input id="input_cargo" type="text">
+            <p id="errado_cargo" class="errado"></p>
+            
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+        </div>
+        <div class="botao">
+            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
+        </div>
     </div>
-    <div class="coluna">
-        <p>Telefone</p>
-        <input id="input_telefone" type="text">
-        <p id="errado_telefone" class="errado"></p>
-        
-        <p>Cargo</p>
-        <input id="input_cargo" type="text">
-        <p id="errado_cargo" class="errado"></p>
-        
-        <p>Senha</p>
-        <input id="input_senha" type="password">
-        <p id="errado_senha" class="errado"></p>
+
+    <div id="formularioExibir">
+        <div class="coluna">
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
+        </div>
+        <div class="coluna">
+            <p>Telefone</p>
+            <input id="input_telefone" type="text" required>
+            <p id="errado_telefone" class="errado"></p>
+            
+            <p>Cargo</p>
+            <input id="input_cargo" type="text">
+            <p id="errado_cargo" class="errado"></p>
+            
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+        </div>
+        <div class="botao">
+            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
+        </div>
     </div>
-    <div class="botao">
-        <button onclick="cadastrar()" class="botaoCadastrar">Cadastrar</button>
+   
+    <div id="formularioExcluir">
+        <div class="coluna">
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
+        </div>
+        <div class="coluna">
+            <p>Telefone</p>
+            <input id="input_telefone" type="text" required>
+            <p id="errado_telefone" class="errado"></p>
+            
+            <p>Cargo</p>
+            <input id="input_cargo" type="text">
+            <p id="errado_cargo" class="errado"></p>
+            
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+        </div>
+        <div class="botao">
+            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
+        </div>
     </div>
+
+    <div id="formularioEditar">
+        <div class="coluna">
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
+        </div>
+        <div class="coluna">
+            <p>Telefone</p>
+            <input id="input_telefone" type="text" required>
+            <p id="errado_telefone" class="errado"></p>
+            
+            <p>Cargo</p>
+            <input id="input_cargo" type="text">
+            <p id="errado_cargo" class="errado"></p>
+            
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+        </div>
+        <div class="botao">
+            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
+        </div>
+    </div>
+
+
+    <div class="menuDireita">
+        <div id="containerItens" class="container-itens">
+            <div class="itemDireita">
+                <a href="#"><span onclick="exibirFun()" class="iconDireita material-symbols-outlined">visibility</span></a>
+            </div>
+            
+            <div class="item">
+                <a href=""> <span class="iconDireita material-symbols-outlined">Edit</span></a>
+            </div>
+            
+            <div class="item">
+                <a href=""> <span onclick="addFun()" class="iconDireita material-symbols-outlined">Person_Add</span></a>
+            </div>
+            
+            
+            <div class="item">
+                <a href=""> <span onclick="excluirFun()" class="iconDireita material-symbols-outlined">Person_Remove</span></a>
+            </div>
+            
+        </div>
+
+    </div>
+
 </div>
-</body>
 
-<script>
-
-    $(document).ready(function(){
-        $('#input_cpf').mask('000.000.000-00', {reverse: true});
-        $('#input_telefone').mask('(00)00000-0000');
-    });
     
-  
-    function cadastrar() {
-        var nome = input_nome.value;
-        var cpf = input_cpf.value;
-        var email = input_email.value;
-        var telefone = input_telefone.value;
-        var cargo = input_cargo.value;
-        var senha = input_senha.value;
-        
+</body>
+</html>
+<script>
+    
+    // $(document).ready(function(){
+    //         $('#input_cpf').mask('000.000.000-00', {reverse: true});
+    //         $('#input_telefone').mask('(00)00000-0000');
+    // });
 
 
+    function clicarMenu() {
+    const menu = document.getElementById('menuLateral');
+    menu.classList.toggle('escondido');
 
-        var erradoNome = document.getElementById("errado_nome");
-        var erradoCpf = document.getElementById("errado_Cpf");
-        var erradoEmail = document.getElementById("errado_email");
-        var erradoTelefone = document.getElementById("errado_telefone");
-        var erradoCargo = document.getElementById("errado_cargo");
-        var erradoSenha = document.getElementById("errado_senha");
-
-
-        erradoNome.textContent = "";
-        erradoCpf.textContent = "";
-        erradoEmail.textContent = "";
-        erradoTelefone.textContent = "";
-        erradoCargo.textContent = "";
-        erradoSenha.textContent = "";
-
-
-        if (nome.trim() === "") {
-            erradoNome.textContent = "Insira o nome";
-            erradoNome.style.display = "block";
-            erradoNome.style.color = "#ff5353";
-            erradoNome.style.fontWeight = "bold";
-            return false;
-        }
-
-        if (cpf.trim() === "") {
-            erradoCpf.textContent = "Insira um CPF válido.";
-            erradoCpf.style.display = "block";
-            erradoCpf.style.color = "#ff5353";
-            erradoCpf.style.fontWeight = "bold";
-            return false;
-        }
-        
-        if (email.trim() === "" || email.indexOf("@") == -1) {
-            erradoEmail.textContent = "Insira um email válido.";
-            erradoEmail.style.display = "block";
-            erradoEmail.style.color = "#ff5353";
-            erradoEmail.style.fontWeight = "bold";
-            return false;
-        }
-
-        if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-            erradoTelefone.textContent = "Insira um telefone válido.";
-            erradoTelefone.style.display = "block";
-            erradoTelefone.style.color = "#ff5353";
-            erradoTelefone.style.fontWeight = "bold";
-            return false;
-        }
-
-        if (cargo.trim() === "") {
-            erradoCargo.textContent = "Insira o cargo";
-            erradoCargo.style.display = "block";
-            erradoCargo.style.color = "#ff5353";
-            erradoCargo.style.fontWeight = "bold";
-            return false;
-        }
-
-        if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
-        console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
-        } else{
-        erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
-        erradoSenha.style.display = "block";
-        erradoSenha.style.color = "#ff5353";
-        erradoSenha.style.fontWeight = "bold";
-        }
-
-    //     if(validado){
-    //      fetch("/usuarios/cadastrar", { /* Requisição */
-    //      method: "POST", /* Enviando para routers */
-    //      headers: {
-    //      "Content-Type": "application/json",
-    //      },
-    //      body: JSON.stringify({
-    //      /*cTransformando em JSON e enviando para o servidor */
-    //      nomeFantasiaServer: nomeFantasia, 
-    //      cnpjServer: cnpj,
-    //      telefoneSerer: telefone,
-    //      emailServer: email,
-    //      senhaServer: senha
-    //        }),
-    //      })
-    //      console.log("entrou")
-    //     }
-    // }
+    if (menu.classList.contains('escondido')) {
+        menuEscondido.style.display = 'block'
+        containerMenuLateral.style.display = 'none';
     }
+    else {
+        menuEscondido.style.display = 'none'
+        containerMenuLateral.style.display = 'block'
+    }
+    }
+
+    function exibirFun() {
+        document.getElementById('formularioAdd').style.display = 'none';
+        document.getElementById('formularioExcluir').style.display = 'none';
+        document.getElementById('formularioEditar').style.display = 'none';
+        document.getElementById('formularioExibir').style.display = 'block';
+    }
+
+    function addFun() {
+        document.getElementById('formularioAdd').style.display = 'block';
+        document.getElementById('formularioExcluir').style.display = 'none';
+        document.getElementById('formularioEditar').style.display = 'none';
+        document.getElementById('formularioExibir').style.display = 'none';
+    }
+
+    function excluirFun() {
+        document.getElementById('formularioAdd').style.display = 'none';
+        document.getElementById('formularioExcluir').style.display = 'block';
+        document.getElementById('formularioEditar').style.display = 'none';
+        document.getElementById('formularioExibir').style.display = 'none';
+    }
+
+
+    function cadastrarFun(){
+         var nome = input_nome.value;
+         var cpfComCaractere = input_cpf.value;
+         var telefoneComCaractere = input_telefone.value;
+         var email = input_email.value;
+         var senha = input_senha.value;
+         var cargo = input_cargo.value;
+         
+         // TIRANDO CARACTERES
+         var cpf = cpfComCaractere.replace(/\D/g, '');
+         var telefone = telefoneComCaractere.replace(/\D/g, '');
+         var validado = ((nomeFantasia.length >= 1 && nomeFantasia != '') && (cpf.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+         
+         var erradoNome = document.getElementById("errado_nome");
+         var erradocpf = document.getElementById("errado_cpf");
+         var erradoTelefone = document.getElementById("errado_telefone");
+         var erradoEmail = document.getElementById("errado_email");
+         var erradoSenha = document.getElementById("errado_senha");
+         var erradoCargo = document.getElementById("errado_cargo");
+        
+         erradoNome.textContent = "";
+         erradocpf.textContent = "";
+         erradoTelefone.textContent = "";
+         erradoEmail.textContent = "";
+         erradoSenha.textContent = "";
+         erradoCargo.textContent = "";
+         
+         if (nome.trim() === "") {
+         erradoNome.textContent = "Insira o nome fantasia";
+         erradoNome.style.display = "block";
+         erradoNome.style.color = "#ff5353";
+         erradoNome.style.fontWeight = "bold";
+         return false;
+         }
+           if (cpf.trim() === "") {
+         erradocpf.textContent = "Insira um cpf válido.";
+         erradocpf.style.display = "block";
+         erradocpf.style.color = "#ff5353";
+         erradocpf.style.fontWeight = "bold";
+         return false;
+         }
+       if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+         erradoTelefone.textContent = "Insira um telefone válido.";
+         erradoTelefone.style.display = "block";
+         erradoTelefone.style.color = "#ff5353";
+         erradoTelefone.style.fontWeight = "bold";
+         return false;
+         }
+       if (email.trim() === "" || email.indexOf("@") == -1) {
+         erradoEmail.textContent = "Insira um email válido.";
+         erradoEmail.style.display = "block";
+         erradoEmail.style.color = "#ff5353";
+         erradoEmail.style.fontWeight = "bold";
+         return false;
+         }
+           if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+               console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+             } else{
+             erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+             erradoSenha.style.display = "block";
+             erradoSenha.style.color = "#ff5353";
+             erradoSenha.style.fontWeight = "bold";
+             }
+       if(validado){
+          fetch("/usuarios/cadastrar", { /* Requisição */
+          method: "POST", /* Enviando para routers */
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+          /*cTransformando em JSON e enviando para o servidor */
+          nomeServer: nome, 
+          cpfServer: cpf,
+          telefoneSerer: telefone,
+          emailServer: email,
+          senhaServer: senha,
+          cargoServer: cargo
+            }),
+          })
+          console.log("entrou")
+         }
+
+    }
+
 </script>
