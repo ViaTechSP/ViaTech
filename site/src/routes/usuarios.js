@@ -8,14 +8,18 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.post("/cadastrarFun", function (req, res) {
+    usuarioController.cadastrarFun(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
 
-router.post("/pegarId", function (req, res) {
-    usuarioController.pegarId(req, res);
-});
+// router.post("/pegarId", function (req, res) {
+//     usuarioController.pegarId(req, res);
+// });
 
 router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);

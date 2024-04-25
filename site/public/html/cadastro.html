@@ -164,7 +164,7 @@
                 erradoSenha.style.fontWeight = "bold";
                 }
 
-            if(validado){
+            
              fetch("/usuarios/cadastrar", { /* Requisição */
              method: "POST", /* Enviando para routers */
              headers: {
@@ -178,10 +178,12 @@
              emailServer: email,
              senhaServer: senha
                }),
-             })
+             }).then(function (resposta) {
+              console.log("ESTOU NO THEN DO entrar()!");
+              window.location = 'login.html'
+            })
              console.log("entrou")
-            }
-        }
+             }
 
 
         function Login(){

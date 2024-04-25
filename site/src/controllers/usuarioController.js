@@ -65,31 +65,31 @@ function cadastrar(req, res) {
     }
 }
 
-function pegarId(req, res) {
+// function pegarId(req, res) {
 
-    var email = req.body.emailServer;
-    if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else {
+//     var email = req.body.emailServer;
+//     if (email == undefined) {
+//         res.status(400).send("Seu email está undefined!");
+//     } else {
 
-      usuarioModel.pegarId(email)
-        .then(
-             function (resposta) {
-                 if (resposta.length == 0) {
-                 res.status(403).send("Email inválido(s)");
-                } else {
-                 res.status(200).json(resposta);
-                }      
-            }
-        ).catch(
-             function (erro) {
-                 console.log(erro);
-                 console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                 res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
-}
+//       usuarioModel.pegarId(email)
+//         .then(
+//              function (resposta) {
+//                  if (resposta.length == 0) {
+//                  res.status(403).send("Email inválido(s)");
+//                 } else {
+//                  res.status(200).json(resposta);
+//                 }      
+//             }
+//         ).catch(
+//              function (erro) {
+//                  console.log(erro);
+//                  console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+//                  res.status(500).json(erro.sqlMessage);
+//                 }
+//             );
+//     }
+// }
 
 function alterarSenha(req, res) {
     var novaSenhaVar = req.body.novaSenha;
@@ -111,10 +111,59 @@ function alterarSenha(req, res) {
 
 }
 
+function cadastrarFun(req, res){
+    var nomeVar = req.body.nomeServer;
+    var cpfVar = req.body.cpfServer;
+    var telefoneVar = req.body.telefoneSerer;
+    var emailVar = req.body.emailServer;
+    var senhaVar = req.body.senhaServer;
+    var cargoVar = req.body.cargoServer;  
+    var fkEmpresaVar = req.body.idEmpresaServer;
+
+
+    if (nomeVar == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (cpfVar == undefined) {
+        res.status(400).send("Seu cnpj está undefined!");
+    } else if (senhaVar == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else if(emailVar == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (telefoneVar == undefined) {
+        res.status(400).send("Seu telefone está undefined!");
+    } else if(cargoVar == undefined){
+        res.status(400).send("Seu cargo está undefined!");
+    } else if(fkEmpresaVar == undefined){
+        res.status(400).send("O id empresa está undefined!");
+    } else {
+
+        usuarioModel.cadastrarFun(fkEmpresaVar, nomeVar, cpfVar, telefoneVar, cargoVar, emailVar, senhaVar)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+
+
+
+
+}
 
 module.exports = {
     autenticar,
     cadastrar,
-    pegarId,
-    alterarSenha
+    // pegarId,
+    alterarSenha,
+    cadastrarFun
 }

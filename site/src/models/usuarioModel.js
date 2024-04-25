@@ -19,14 +19,14 @@ function cadastrar(nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar) {
     return database.executar(instrucao);
 }
 
-function pegarId(emailVar) {
-    var instrucao = `
-        SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ FROM empresa WHERE email = '${emailVar}';
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
+// function pegarId(emailVar) {
+//     var instrucao = `
+//         SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ FROM empresa WHERE email = '${emailVar}';
+//     `;
+//     console.log("Executando a instrução SQL: \n" + instrucao);
 
-    return database.executar(instrucao);
-}
+//     return database.executar(instrucao);
+// }
 
 function alterarSenha(novaSenhaVar, idEmpresaVar) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ");
@@ -37,9 +37,20 @@ function alterarSenha(novaSenhaVar, idEmpresaVar) {
     return database.executar(instrucao);
 }
 
+function cadastrarFun(fkEmpresaVar, nomeVar, cpfVar, telefoneVar, cargoVar, emailVar, senhaVar) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():");
+    
+    var instrucao = `
+        INSERT INTO funcionario (fkEmpresa, nome, cpf, telefone, cargo, email, senha) VALUES ('${fkEmpresaVar}', '${nomeVar}', '${cpfVar}', '${telefoneVar}', '${cargoVar}', '${emailVar}', '${senhaVar}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    pegarId,
-    alterarSenha
+    // pegarId,
+    alterarSenha,
+    cadastrarFun
 };

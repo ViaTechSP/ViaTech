@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/cadastroFuncionario.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="../css/menuLateral.css">
+    <script src="../js/cadastroFuncionario.js"></script>
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
@@ -22,7 +23,7 @@
             <div class="container" id="containerMenuLateral">
                 
                 <p style="display: flex; align-items: center;">
-                    <img id="imgViaTech" src="icon.svg"> ViaTech
+                    <img id="imgViaTech" src="../assets/icon/icon.svg"> ViaTech
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
                 
@@ -94,72 +95,16 @@
         </div>
     </div>
 
-    <div id="formularioExibir">
-        <div class="coluna">
-            <p>Nome</p>
-            <input id="input_nome" type="text">
-            <p id="errado_nome" class="errado"></p>
-            
-            <p>CPF</p>
-            <input type="text" id="input_cpf"  required>
-            <p id="errado_cpf" class="errado"></p>
-            
-            <p>Email</p>
-            <input type="text" id="input_email">
-            <p id="errado_email" class="errado"></p>
+    <div id="formularioExibir" style="display: none;">
+        <div class="funcionario">
+            <!-- vai listar funcionario -->
+            difhdswoqpldhjko
         </div>
-        <div class="coluna">
-            <p>Telefone</p>
-            <input id="input_telefone" type="text" required>
-            <p id="errado_telefone" class="errado"></p>
-            
-            <p>Cargo</p>
-            <input id="input_cargo" type="text">
-            <p id="errado_cargo" class="errado"></p>
-            
-            <p>Senha</p>
-            <input id="input_senha" type="password">
-            <p id="errado_senha" class="errado"></p>
-        </div>
-        <div class="botao">
-            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
-        </div>
-    </div>
-   
-    <div id="formularioExcluir">
-        <div class="coluna">
-            <p>Nome</p>
-            <input id="input_nome" type="text">
-            <p id="errado_nome" class="errado"></p>
-            
-            <p>CPF</p>
-            <input type="text" id="input_cpf"  required>
-            <p id="errado_cpf" class="errado"></p>
-            
-            <p>Email</p>
-            <input type="text" id="input_email">
-            <p id="errado_email" class="errado"></p>
-        </div>
-        <div class="coluna">
-            <p>Telefone</p>
-            <input id="input_telefone" type="text" required>
-            <p id="errado_telefone" class="errado"></p>
-            
-            <p>Cargo</p>
-            <input id="input_cargo" type="text">
-            <p id="errado_cargo" class="errado"></p>
-            
-            <p>Senha</p>
-            <input id="input_senha" type="password">
-            <p id="errado_senha" class="errado"></p>
-        </div>
-        <div class="botao">
-            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
-        </div>
-    </div>
 
-    <div id="formularioEditar">
-        <div class="coluna">
+    </div> 
+   
+    <!-- <div id="formularioExcluir" style="display: none;"> -->
+        <!-- <div class="coluna">
             <p>Nome</p>
             <input id="input_nome" type="text">
             <p id="errado_nome" class="errado"></p>
@@ -186,9 +131,41 @@
             <p id="errado_senha" class="errado"></p>
         </div>
         <div class="botao">
-            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
+            <button onclick="()" class="botaoCadastrar">Cadastrar</button>
+        </div> 
+    </div> -->
+
+    <!-- <div id="formularioEditar" style="display: none;"> -->
+        <!-- <div class="coluna">
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
         </div>
-    </div>
+        <div class="coluna">
+            <p>Telefone</p>
+            <input id="input_telefone" type="text" required>
+            <p id="errado_telefone" class="errado"></p>
+            
+            <p>Cargo</p>
+            <input id="input_cargo" type="text">
+            <p id="errado_cargo" class="errado"></p>
+            
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+        </div>
+        <div class="botao">
+            <button onclick="()" class="botaoCadastrar">Cadastrar</button>
+        </div> 
+    </div> -->
 
 
     <div class="menuDireita">
@@ -242,10 +219,15 @@
     }
 
     function exibirFun() {
+        document.getElementById('formularioExibir').style.display = 'block';
         document.getElementById('formularioAdd').style.display = 'none';
         document.getElementById('formularioExcluir').style.display = 'none';
         document.getElementById('formularioEditar').style.display = 'none';
-        document.getElementById('formularioExibir').style.display = 'block';
+
+
+
+
+
     }
 
     function addFun() {
@@ -263,88 +245,91 @@
     }
 
 
-    function cadastrarFun(){
-         var nome = input_nome.value;
-         var cpfComCaractere = input_cpf.value;
-         var telefoneComCaractere = input_telefone.value;
-         var email = input_email.value;
-         var senha = input_senha.value;
-         var cargo = input_cargo.value;
+    // function cadastrarFun(){
+    //      var nome = input_nome.value;
+    //      var cpfComCaractere = input_cpf.value;
+    //      var telefoneComCaractere = input_telefone.value;
+    //      var email = input_email.value;
+    //      var senha = input_senha.value;
+    //      var cargo = input_cargo.value;
          
-         // TIRANDO CARACTERES
-         var cpf = cpfComCaractere.replace(/\D/g, '');
-         var telefone = telefoneComCaractere.replace(/\D/g, '');
-         var validado = ((nomeFantasia.length >= 1 && nomeFantasia != '') && (cpf.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+    //      // TIRANDO CARACTERES
+    //      var cpf = cpfComCaractere.replace(/\D/g, '');
+    //      var telefone = telefoneComCaractere.replace(/\D/g, '');
+    //      var validado = ((nome.length >= 1 && nome != '') && (cpf.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
          
-         var erradoNome = document.getElementById("errado_nome");
-         var erradocpf = document.getElementById("errado_cpf");
-         var erradoTelefone = document.getElementById("errado_telefone");
-         var erradoEmail = document.getElementById("errado_email");
-         var erradoSenha = document.getElementById("errado_senha");
-         var erradoCargo = document.getElementById("errado_cargo");
+    //      var erradoNome = document.getElementById("errado_nome");
+    //      var erradocpf = document.getElementById("errado_cpf");
+    //      var erradoTelefone = document.getElementById("errado_telefone");
+    //      var erradoEmail = document.getElementById("errado_email");
+    //      var erradoSenha = document.getElementById("errado_senha");
+    //      var erradoCargo = document.getElementById("errado_cargo");
         
-         erradoNome.textContent = "";
-         erradocpf.textContent = "";
-         erradoTelefone.textContent = "";
-         erradoEmail.textContent = "";
-         erradoSenha.textContent = "";
-         erradoCargo.textContent = "";
+    //      erradoNome.textContent = "";
+    //      erradocpf.textContent = "";
+    //      erradoTelefone.textContent = "";
+    //      erradoEmail.textContent = "";
+    //      erradoSenha.textContent = "";
+    //      erradoCargo.textContent = "";
          
-         if (nome.trim() === "") {
-         erradoNome.textContent = "Insira o nome fantasia";
-         erradoNome.style.display = "block";
-         erradoNome.style.color = "#ff5353";
-         erradoNome.style.fontWeight = "bold";
-         return false;
-         }
-           if (cpf.trim() === "") {
-         erradocpf.textContent = "Insira um cpf válido.";
-         erradocpf.style.display = "block";
-         erradocpf.style.color = "#ff5353";
-         erradocpf.style.fontWeight = "bold";
-         return false;
-         }
-       if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-         erradoTelefone.textContent = "Insira um telefone válido.";
-         erradoTelefone.style.display = "block";
-         erradoTelefone.style.color = "#ff5353";
-         erradoTelefone.style.fontWeight = "bold";
-         return false;
-         }
-       if (email.trim() === "" || email.indexOf("@") == -1) {
-         erradoEmail.textContent = "Insira um email válido.";
-         erradoEmail.style.display = "block";
-         erradoEmail.style.color = "#ff5353";
-         erradoEmail.style.fontWeight = "bold";
-         return false;
-         }
-           if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
-               console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
-             } else{
-             erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
-             erradoSenha.style.display = "block";
-             erradoSenha.style.color = "#ff5353";
-             erradoSenha.style.fontWeight = "bold";
-             }
-       if(validado){
-          fetch("/usuarios/cadastrar", { /* Requisição */
-          method: "POST", /* Enviando para routers */
-          headers: {
-          "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-          /*cTransformando em JSON e enviando para o servidor */
-          nomeServer: nome, 
-          cpfServer: cpf,
-          telefoneSerer: telefone,
-          emailServer: email,
-          senhaServer: senha,
-          cargoServer: cargo
-            }),
-          })
-          console.log("entrou")
-         }
+    //      if (nome.trim() === "") {
+    //      erradoNome.textContent = "Insira o nome fantasia";
+    //      erradoNome.style.display = "block";
+    //      erradoNome.style.color = "#ff5353";
+    //      erradoNome.style.fontWeight = "bold";
+    //      return false;
+    //      }
+    //        if (cpf.trim() === "") {
+    //      erradocpf.textContent = "Insira um cpf válido.";
+    //      erradocpf.style.display = "block";
+    //      erradocpf.style.color = "#ff5353";
+    //      erradocpf.style.fontWeight = "bold";
+    //      return false;
+    //      }
+    //    if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+    //      erradoTelefone.textContent = "Insira um telefone válido.";
+    //      erradoTelefone.style.display = "block";
+    //      erradoTelefone.style.color = "#ff5353";
+    //      erradoTelefone.style.fontWeight = "bold";
+    //      return false;
+    //      }
+    //    if (email.trim() === "" || email.indexOf("@") == -1) {
+    //      erradoEmail.textContent = "Insira um email válido.";
+    //      erradoEmail.style.display = "block";
+    //      erradoEmail.style.color = "#ff5353";
+    //      erradoEmail.style.fontWeight = "bold";
+    //      return false;
+    //      }
+    //        if (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+    //            console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+    //          } else{
+    //          erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+    //          erradoSenha.style.display = "block";
+    //          erradoSenha.style.color = "#ff5353";
+    //          erradoSenha.style.fontWeight = "bold";
+    //          }
 
-    }
+    //          var idEmpresaSever = sessionStorage.ID_EMPRESA;
+    //    if(validado){
+    //       fetch("/usuarios/cadastrarFun", { /* Requisição */
+    //       method: "POST", /* Enviando para routers */
+    //       headers: {
+    //       "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //       /*cTransformando em JSON e enviando para o servidor */
+    //       nomeServer: nome, 
+    //       cpfServer: cpf,
+    //       telefoneSerer: telefone,
+    //       emailServer: email,
+    //       senhaServer: senha,
+    //       cargoServer: cargo,
+    //       idEmpresa: idEmpresaSever
+    //         }),
+    //       })
+    //       console.log("entrou")
+    //      }
+//
+//    }
 
 </script>
