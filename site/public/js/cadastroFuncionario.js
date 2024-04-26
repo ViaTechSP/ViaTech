@@ -138,5 +138,7 @@
            }),
          })
         //  console.log(body.ID_EMPRESA)
+        } else{
+          alert("Não foi possível realizar o cadastro!")
         }
   }
