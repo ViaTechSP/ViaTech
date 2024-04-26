@@ -28,6 +28,7 @@
       function exibirFun() {
        document.getElementById('formularioExibir').style.display = 'block';
        document.getElementById('ver').style.color = '#e6e62c';
+       document.getElementById('adicionarFuncionario').style.color = 'black';
        document.getElementById('formularioExibir').style.display = 'flex';
        document.getElementById('formularioExibir').style.flexDirection = 'row';
        document.getElementById('formularioAdd').style.display = 'none';
@@ -35,11 +36,12 @@
       //  document.getElementById('formularioExcluir').style.display = 'none';
       //  document.getElementById('formularioEditar').style.display = 'none';
       
-       var exibindoFuncionarioPar = document.getElementById('exibindoFuncionarioPar');  
-       exibindoFuncionarioPar.innerHTML = "";
+       var primeiraColuna = document.getElementById('primeiraColuna');  
+       primeiraColuna.innerHTML = "";
        
-       var exibindoFuncionarioImpar = document.getElementById('exibindoFuncionarioImpar');  
-       exibindoFuncionarioImpar.innerHTML = "";
+       var segundaColuna = document.getElementById('segundaColuna');  
+       segundaColuna.innerHTML = "";
+       
        var nome_funcionario = sessionStorage.NOME_EMPRESA;
        
        var lista_funcionario = [];
@@ -64,6 +66,8 @@
         var tamanho_funcionario = lista_funcionario.length;
         // var tamanho_nome6 = funcionario.length;
    
+       var auxiliar = 0;
+
        for (var i = 0; i < tamanho_funcionario; i++) {
    
         var id_fun = lista_funcionario[i].idFuncionario
@@ -72,12 +76,14 @@
         var email_atual = lista_funcionario[i].email;
         var cpf_atual = funcionario[i].cpf;
         
-
+        auxiliar++;
    
-        if(id_fun % 2 == 0){
-        exibindoFuncionarioPar.innerHTML += `<br>${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}<br>`;
+        if(auxiliar % 2 == 0){
+          primeiraColuna.innerHTML += `<div id="exibindoFuncionarioPar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
+        
         }  else{
-        exibindoFuncionarioImpar.innerHTML += `<br>${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}<br>`;
+          segundaColuna.innerHTML += `<div id="exibindoFuncionarioImpar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
+        
 
         }
        }
@@ -86,10 +92,13 @@
     }
   
       function addFun() {
-          document.getElementById('formularioAdd').style.display = 'block';
-          document.getElementById('formularioExcluir').style.display = 'none';
-          document.getElementById('formularioEditar').style.display = 'none';
-          document.getElementById('formularioExibir').style.display = 'none';
+        document.getElementById('formularioExibir').style.display = 'none';
+       document.getElementById('ver').style.color = 'black';
+        document.getElementById('adicionarFuncionario').style.color = '#e6e62c';
+        document.getElementById('formularioAdd').style.display = 'block';
+        document.getElementById('formularioAdd').style.display = 'flex';
+          // document.getElementById('formularioExcluir').style.display = 'none';
+          // document.getElementById('formularioEditar').style.display = 'none';
       }
   
       function excluirFun() {

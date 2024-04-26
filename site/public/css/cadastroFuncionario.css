@@ -216,7 +216,7 @@ body {
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  margin-left: 28%;
+  margin-left: 30%;
   margin-top: 5%;
   width: 50%;
   flex-wrap: wrap; 
@@ -229,11 +229,13 @@ body {
   padding: 30px;
   border-radius: 10px;
   justify-content: space-evenly;
-  align-items: center;
-  margin-left: 28%;
+  /* align-items: center; */
+  margin-left: 30%;
   margin-top: 5%;
   width: 50%; 
   z-index: 1;
+  overflow-y: auto;
+  height: 65vh;
   /* flex-wrap: wrap;  */
 }
 
@@ -243,7 +245,7 @@ body {
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  margin-left: 28%;
+  margin-left: 30%;
   margin-top: 5%;
   width: 50%;
   flex-wrap: wrap; 
@@ -255,7 +257,7 @@ body {
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  margin-left: 28%;
+  margin-left: 30%;
   margin-top: 5%;
   width: 50%;
   flex-wrap: wrap; 
@@ -306,7 +308,7 @@ h2{
     display: flex;
     justify-content: center;
     margin-left: 12%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .coluna1-inteira{
@@ -317,26 +319,27 @@ h2{
 
 .coluna1{
   display: flex;
-  justify-content: center;
-  background-color: aqua;
-  flex-direction: row;
+  justify-content: flex-start;
+  /* background-color: aqua; */
+  flex-direction: column;
   /* width: 50%; */
-  padding: 30px;
-  border: 1px solid #F27A5E;
-  
+  padding: 10px;
+  /* border: 1px solid #F27A5E; */
   z-index: 2;
 }
 
 
 
-.coluna2{
+.itemFun{
   display: flex;
   justify-content: center;
-  background-color: rgb(0, 255, 21);
   flex-direction: row;
-  padding: 30px;
+  padding: 12px;
+  background-color: #01164071;
+  margin-bottom: 18px;
+  font-size: 20px;
   border: 1px solid #F27A5E;
-  
+  width: 19vw;
   z-index: 2;
 }
 

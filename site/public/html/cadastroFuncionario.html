@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/cadastroFuncionario.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="../css/menuLateral.css">
-    <script src="../js/cadastroFuncionario.js"></script>
+    <script src="../js/cadastroFuncionario.js" defer></script>
     <script src="../js/sessao.js"></script>
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -97,8 +97,12 @@
     </div>
 
     <div id="formularioExibir" style="display: none;">
-        <div id="exibindoFuncionarioPar" class="coluna1"><!-- vai listar funcionario com id par--></div>
-        <div id="exibindoFuncionarioImpar" class="coluna2"><!-- vai listar funcionario impar--></div>
+        <div id="primeiraColuna" class="coluna1">
+            
+        </div>
+        <div id="segundaColuna" class="coluna1">
+
+        </div>
 
     </div> 
    
@@ -178,7 +182,7 @@
             </div>
             
             <div class="item">
-                <a href=""> <span onclick="addFun()" class="iconDireita material-symbols-outlined">Person_Add</span></a>
+                <a href="#"> <span id="adicionarFuncionario" onclick="addFun()" class="iconDireita material-symbols-outlined">Person_Add</span></a>
             </div>
             
             
