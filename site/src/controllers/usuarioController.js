@@ -112,13 +112,16 @@ function alterarSenha(req, res) {
 }
 
 function cadastrarFun(req, res){
+    console.log("To no controller")
     var nomeVar = req.body.nomeServer;
     var cpfVar = req.body.cpfServer;
     var telefoneVar = req.body.telefoneSerer;
     var emailVar = req.body.emailServer;
     var senhaVar = req.body.senhaServer;
     var cargoVar = req.body.cargoServer;  
-    var fkEmpresaVar = req.body.idEmpresaServer;
+    var fkEmpresaVar = params.body.idEmpresaServer;
+
+    console.log(fkEmpresaVar)
 
 
     if (nomeVar == undefined) {
@@ -141,6 +144,7 @@ function cadastrarFun(req, res){
             .then(
                 function (resultado) {
                     res.json(resultado);
+                    console.log("enviou p model")
                 }
             ).catch(
                 function (erro) {

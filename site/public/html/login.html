@@ -91,7 +91,7 @@
      var email = input_email.value;
      var senha = input_senha.value;
          
-     if (email.indexOf('@') >= 0 && (email.indexOf('.com') >= 0 || email.indexOf('.br') >= 0) && senha.length >= 8 ) {
+     if (email.indexOf('@') >= 0 && (email.indexOf('.com') >= 0 || email.indexOf('.br') >= 0) && senha.length >= 6 ) {
      
       /*Enviando para o servidor*/
       fetch("/usuarios/autenticar",{
@@ -128,7 +128,13 @@
      
        else {
         console.log("Houve um erro ao tentar realizar o login!");
-        div_senha_errado.innerHTML = `Senha ou email invalidos!`
+        var exibir_frase = frase_validacao;
+
+        exibir_frase.style.display = "block";
+        exibir_frase.style.color = "#ff5353";
+        exibir_frase.style.fontWeight = "bold";
+        
+        // div_senha_errado.innerHTML = `Senha ou email invalidos!`
      
         resposta.text().then(texto => {
           console.error(texto);
@@ -140,7 +146,7 @@
      }
      
      else {
-     div_senha_errado.innerHTML = `Email ou senha incorreta!`;
+    //  div_senha_errado.innerHTML = `Email ou senha incorreta!`;
      }      
      } 
 

@@ -9,11 +9,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet" href="../css/menuLateral.css">
     <script src="../js/cadastroFuncionario.js"></script>
+    <script src="../js/sessao.js"></script>
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
+<body onload="validarSessao()">
 
-    <!-- dashboard.css -->
+        <!-- dashboard.css -->
     <div class="menuHeader">
         
         <!-- menuLateral.css -->
@@ -27,7 +28,7 @@
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
                 
-                <p>Olá, <span id="ola">Undefined</span></p>
+                <p>Olá, <span id="ola"></span></p>
                 
             <div id="containerItens" class="container-itens">
                 <div class="item">
@@ -197,7 +198,6 @@
 </body>
 </html>
 <script>
-    
     // $(document).ready(function(){
     //         $('#input_cpf').mask('000.000.000-00', {reverse: true});
     //         $('#input_telefone').mask('(00)00000-0000');
@@ -245,91 +245,89 @@
     }
 
 
-    // function cadastrarFun(){
-    //      var nome = input_nome.value;
-    //      var cpfComCaractere = input_cpf.value;
-    //      var telefoneComCaractere = input_telefone.value;
-    //      var email = input_email.value;
-    //      var senha = input_senha.value;
-    //      var cargo = input_cargo.value;
-         
-    //      // TIRANDO CARACTERES
-    //      var cpf = cpfComCaractere.replace(/\D/g, '');
-    //      var telefone = telefoneComCaractere.replace(/\D/g, '');
-    //      var validado = ((nome.length >= 1 && nome != '') && (cpf.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
-         
-    //      var erradoNome = document.getElementById("errado_nome");
-    //      var erradocpf = document.getElementById("errado_cpf");
-    //      var erradoTelefone = document.getElementById("errado_telefone");
-    //      var erradoEmail = document.getElementById("errado_email");
-    //      var erradoSenha = document.getElementById("errado_senha");
-    //      var erradoCargo = document.getElementById("errado_cargo");
-        
-    //      erradoNome.textContent = "";
-    //      erradocpf.textContent = "";
-    //      erradoTelefone.textContent = "";
-    //      erradoEmail.textContent = "";
-    //      erradoSenha.textContent = "";
-    //      erradoCargo.textContent = "";
-         
-    //      if (nome.trim() === "") {
-    //      erradoNome.textContent = "Insira o nome fantasia";
-    //      erradoNome.style.display = "block";
-    //      erradoNome.style.color = "#ff5353";
-    //      erradoNome.style.fontWeight = "bold";
-    //      return false;
-    //      }
-    //        if (cpf.trim() === "") {
-    //      erradocpf.textContent = "Insira um cpf válido.";
-    //      erradocpf.style.display = "block";
-    //      erradocpf.style.color = "#ff5353";
-    //      erradocpf.style.fontWeight = "bold";
-    //      return false;
-    //      }
-    //    if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-    //      erradoTelefone.textContent = "Insira um telefone válido.";
-    //      erradoTelefone.style.display = "block";
-    //      erradoTelefone.style.color = "#ff5353";
-    //      erradoTelefone.style.fontWeight = "bold";
-    //      return false;
-    //      }
-    //    if (email.trim() === "" || email.indexOf("@") == -1) {
-    //      erradoEmail.textContent = "Insira um email válido.";
-    //      erradoEmail.style.display = "block";
-    //      erradoEmail.style.color = "#ff5353";
-    //      erradoEmail.style.fontWeight = "bold";
-    //      return false;
-    //      }
-    //        if (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
-    //            console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
-    //          } else{
-    //          erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
-    //          erradoSenha.style.display = "block";
-    //          erradoSenha.style.color = "#ff5353";
-    //          erradoSenha.style.fontWeight = "bold";
-    //          }
-
+    //  function cadastrarFun(){
+    //       var nome = input_nome.value;
+    //       var cpfComCaractere = input_cpf.value;
+    //       var telefoneComCaractere = input_telefone.value;
+    //       var email = input_email.value;
+    //       var senha = input_senha.value;
+    //       var cargo = input_cargo.value;
+       
+    //       // TIRANDO CARACTERES
+    //       var cpf = cpfComCaractere.replace(/\D/g, '');
+    //       var telefone = telefoneComCaractere.replace(/\D/g, '');
+    //       var validado = ((nome.length >= 1 && nome != '') && (cpf.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+       
+    //       var erradoNome = document.getElementById("errado_nome");
+    //       var erradocpf = document.getElementById("errado_cpf");
+    //       var erradoTelefone = document.getElementById("errado_telefone");
+    //       var erradoEmail = document.getElementById("errado_email");
+    //       var erradoSenha = document.getElementById("errado_senha");
+    //       var erradoCargo = document.getElementById("errado_cargo");
+      
+    //       erradoNome.textContent = "";
+    //       erradocpf.textContent = "";
+    //       erradoTelefone.textContent = "";
+    //       erradoEmail.textContent = "";
+    //       erradoSenha.textContent = "";
+    //       erradoCargo.textContent = "";
+       
+    //       if (nome.trim() === "") {
+    //       erradoNome.textContent = "Insira o nome fantasia";
+    //       erradoNome.style.display = "block";
+    //       erradoNome.style.color = "#ff5353";
+    //       erradoNome.style.fontWeight = "bold";
+    //       return false;
+    //       }
+    //         if (cpf.trim() === "") {
+    //       erradocpf.textContent = "Insira um cpf válido.";
+    //       erradocpf.style.display = "block";
+    //       erradocpf.style.color = "#ff5353";
+    //       erradocpf.style.fontWeight = "bold";
+    //       return false;
+    //       }
+    //     if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+    //       erradoTelefone.textContent = "Insira um telefone válido.";
+    //       erradoTelefone.style.display = "block";
+    //       erradoTelefone.style.color = "#ff5353";
+    //       erradoTelefone.style.fontWeight = "bold";
+    //       return false;
+    //       }
+    //     if (email.trim() === "" || email.indexOf("@") == -1) {
+    //       erradoEmail.textContent = "Insira um email válido.";
+    //       erradoEmail.style.display = "block";
+    //       erradoEmail.style.color = "#ff5353";
+    //       erradoEmail.style.fontWeight = "bold";
+    //       return false;
+    //       }
+    //         if (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+    //             console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+    //           } else{
+    //           erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+    //           erradoSenha.style.display = "block";
+    //           erradoSenha.style.color = "#ff5353";
+    //           erradoSenha.style.fontWeight = "bold";
+    //           }
     //          var idEmpresaSever = sessionStorage.ID_EMPRESA;
-    //    if(validado){
-    //       fetch("/usuarios/cadastrarFun", { /* Requisição */
-    //       method: "POST", /* Enviando para routers */
-    //       headers: {
-    //       "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //       /*cTransformando em JSON e enviando para o servidor */
-    //       nomeServer: nome, 
-    //       cpfServer: cpf,
-    //       telefoneSerer: telefone,
-    //       emailServer: email,
-    //       senhaServer: senha,
-    //       cargoServer: cargo,
-    //       idEmpresa: idEmpresaSever
-    //         }),
-    //       })
-    //       console.log("entrou")
-    //      }
-//
-//    }
+    //     if(validado){
+    //        fetch("/usuarios/cadastrarFun", { /* Requisição */
+    //        method: "POST", /* Enviando para routers */
+    //        headers: {
+    //        "Content-Type": "application/json",
+    //        },
+    //        body: JSON.stringify({
+    //        /*cTransformando em JSON e enviando para o servidor */
+    //        nomeServer: nome, 
+    //        cpfServer: cpf,
+    //        telefoneSerer: telefone,
+    //        emailServer: email,
+    //        senhaServer: senha,
+    //        cargoServer: cargo,
+    //        idEmpresa: idEmpresaSever
+    //          }),
+    //        })
+    //        console.log("entrou")
+    //       }
+    // }
 
 </script>
