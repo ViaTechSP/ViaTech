@@ -160,7 +160,6 @@ body{
   border-bottom: solid white 1px;
   margin-top: 10px;
   margin-bottom: 50px;
-  
 }
 
 .itemDireita{
@@ -224,16 +223,18 @@ body {
 }
 
 #formularioExibir {
-  background-color: #e081813d;
-  padding: 50px;
-  border-radius: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  background-color: #0a3ca03d;
+  padding: 30px;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  align-items: center;
   margin-left: 28%;
   margin-top: 5%;
-  width: 50%;
+  width: 50%; 
   z-index: 1;
-  flex-wrap: wrap; 
+  /* flex-wrap: wrap;  */
 }
 
 #formularioExcluir {
@@ -308,10 +309,44 @@ h2{
     margin-top: 5%;
 }
 
-.funcionario{
-  background-color: burlywood;
-  /* display: flex; */
-  width: 100%;
+.coluna1-inteira{
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.coluna1{
+  display: flex;
+  justify-content: center;
+  background-color: aqua;
+  flex-direction: row;
+  /* width: 50%; */
+  padding: 30px;
+  border: 1px solid #F27A5E;
   
   z-index: 2;
 }
+
+
+
+.coluna2{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(0, 255, 21);
+  flex-direction: row;
+  padding: 30px;
+  border: 1px solid #F27A5E;
+  
+  z-index: 2;
+}
+
+
+/* Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+
+*/

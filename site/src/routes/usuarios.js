@@ -25,4 +25,13 @@ router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);
 });
 
+
+
+
+
+
+router.get("/exibirFun", function (req, res) {
+    usuarioController.exibirFun(req, res);
+});
+
 module.exports = router;

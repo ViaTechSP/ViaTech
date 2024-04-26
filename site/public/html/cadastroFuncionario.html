@@ -50,7 +50,7 @@
                 
                 
                 <div class="item">
-                    <a> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                    <a style="color: #e6e62c;"> <span class="material-symbols-outlined item-atual">groups</span> Funcionários</a>
                 </div>
                 
             </div>
@@ -97,10 +97,8 @@
     </div>
 
     <div id="formularioExibir" style="display: none;">
-        <div class="funcionario">
-            <!-- vai listar funcionario -->
-            difhdswoqpldhjko
-        </div>
+        <div id="exibindoFuncionarioPar" class="coluna1"><!-- vai listar funcionario com id par--></div>
+        <div id="exibindoFuncionarioImpar" class="coluna2"><!-- vai listar funcionario impar--></div>
 
     </div> 
    
@@ -172,7 +170,7 @@
     <div class="menuDireita">
         <div id="containerItens" class="container-itens">
             <div class="itemDireita">
-                <a href="#"><span onclick="exibirFun()" class="iconDireita material-symbols-outlined">visibility</span></a>
+                <a href="#"><span id="ver" onclick="exibirFun()" class="iconDireita material-symbols-outlined">visibility</span></a>
             </div>
             
             <div class="item">
@@ -218,7 +216,7 @@
     }
     }
 
-    function exibirFun() {
+    /*function exibirFun() {
         document.getElementById('formularioExibir').style.display = 'block';
         document.getElementById('formularioAdd').style.display = 'none';
         document.getElementById('formularioExcluir').style.display = 'none';

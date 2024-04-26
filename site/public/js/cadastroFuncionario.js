@@ -26,20 +26,64 @@
       }
   
       function exibirFun() {
-          document.getElementById('formularioExibir').style.display = 'block';
-          document.getElementById('formularioAdd').style.display = 'none';
-          document.getElementById('formularioExcluir').style.display = 'none';
-          document.getElementById('formularioEditar').style.display = 'none';
-  
-  
-          var lista_funcionario = [];
+       document.getElementById('formularioExibir').style.display = 'block';
+       document.getElementById('ver').style.color = '#e6e62c';
+       document.getElementById('formularioExibir').style.display = 'flex';
+       document.getElementById('formularioExibir').style.flexDirection = 'row';
+       document.getElementById('formularioAdd').style.display = 'none';
 
-          var nome_funcionario = sessionStorage.NOME_EMPRESA;
-          
+      //  document.getElementById('formularioExcluir').style.display = 'none';
+      //  document.getElementById('formularioEditar').style.display = 'none';
+      
+       var exibindoFuncionarioPar = document.getElementById('exibindoFuncionarioPar');  
+       exibindoFuncionarioPar.innerHTML = "";
+       
+       var exibindoFuncionarioImpar = document.getElementById('exibindoFuncionarioImpar');  
+       exibindoFuncionarioImpar.innerHTML = "";
+       var nome_funcionario = sessionStorage.NOME_EMPRESA;
+       
+       var lista_funcionario = [];
+       var funcionario = [];
+
+       fetch("/usuarios/exibirFun", { 
+          method: "GET", 
+        })     
+   
+       .then(function (resposta) {
+          if (!resposta.ok) { 
+            throw new Error('Erro na requisição');
+           }
+          return resposta.json();
+         })
   
+        /*Criando uma função anonima, e na 'resposta' será armazenado os dados coletados antes*/ 
+       .then((resposta) => { 
+        lista_funcionario = resposta;
+        funcionario = resposta;
+        
+        var tamanho_funcionario = lista_funcionario.length;
+        // var tamanho_nome6 = funcionario.length;
+   
+       for (var i = 0; i < tamanho_funcionario; i++) {
+   
+        var id_fun = lista_funcionario[i].idFuncionario
+        var nome_atual = lista_funcionario[i].nome;
+        var cargo_atual = lista_funcionario[i].cargo;
+        var email_atual = lista_funcionario[i].email;
+        var cpf_atual = funcionario[i].cpf;
+        
+
+   
+        if(id_fun % 2 == 0){
+        exibindoFuncionarioPar.innerHTML += `<br>${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}<br>`;
+        }  else{
+        exibindoFuncionarioImpar.innerHTML += `<br>${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}<br>`;
+
+        }
+       }
+     });
   
-  
-      }
+    }
   
       function addFun() {
           document.getElementById('formularioAdd').style.display = 'block';

@@ -47,10 +47,17 @@ function cadastrarFun(fkEmpresaVar, nomeVar, cpfVar, telefoneVar, cargoVar, emai
     return database.executar(instrucao);
 }
 
+function exibirFun(){
+    var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE fkEmpresa = 2;`;
+
+    return database.executar(query);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     // pegarId,
     alterarSenha,
-    cadastrarFun
+    cadastrarFun, 
+    exibirFun
 };

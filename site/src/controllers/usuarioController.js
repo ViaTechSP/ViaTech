@@ -163,10 +163,58 @@ function cadastrarFun(req, res){
 
 }
 
+// function exibirFun(req, res){
+
+//     var usuario_receber = require("../routes/usuarios");
+//     // var comentario_post1 = req.body.comentario_post1Server;
+//     var comentario_post6 = req.body.comentario_post6Server;
+//     var fk_usuario = req.params.fk_usuario;
+
+
+//     // Faça as validações dos valores
+//     if (comentario_post6 == undefined) {
+//         res.status(400).send("Seu comentario está undefined!");
+//     // }
+//     } else if (fk_usuario == undefined) {
+//         res.status(400).send("Seu id está undefined!");
+//     } else if (fk_post == undefined) {
+//         res.status(400).send("Seu id está undefined!");
+//     } 
+//     else {
+    
+//         usuarioModel.comentar_6(fk_usuario, comentario_post6)
+//           .then(
+//               function (resultado) {
+//                   res.json(resultado);
+       
+//               }
+//           )
+//             .catch(
+//                 function (erro) {
+//                     console.log(erro);
+//                     console.log(
+//                         "\nHouve um erro ao realizar o cadastro! Erro: ",
+//                         erro.sqlMessage
+//                     );
+//                     res.status(500).json(erro.sqlMessage);
+//                 }
+//             );
+//     }
+// }
+
+function exibirFun(req, res){
+    usuarioModel.exibirFun().then((resultado) => {
+        res.status(200).json(resultado);
+      });
+}
+
+
+
 module.exports = {
     autenticar,
     cadastrar,
     // pegarId,
     alterarSenha,
-    cadastrarFun
+    cadastrarFun,
+    exibirFun
 }
