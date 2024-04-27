@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaTech | Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/dashboard_geral.css">
+    <link rel="stylesheet" href="../css/menuLateral.css">
+
+    <!-- JS -->
+    <script src="../js/menuLateral.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <!-- STYLE & ICONES-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body onload="clicarMenu()">
+        
+
+        <nav id="menuLateral">
+            <i style="display: none; font-size: 50px;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+            
+            <div class="container" id="containerMenuLateral">
+                
+                <p style="display: flex; align-items: center;">
+                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
+                    <i class="material-icons" onclick="clicarMenu()">menu</i>
+                </p>
+                
+                <p>Olá, <span id="ola">Undefined</span></p>
+                
+            <div id="containerItens" class="container-itens">
+                <div class="item">
+                    <a href="dashboard.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
+                </div>
+                
+                <div class="item">
+                    <a href="dashboard.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+                </div>
+                
+                <div class="item">
+                    <a href="dashboard.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="cadastroFuncionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                </div>
+                
+            </div>
+            
+            <div onclick="logout()" class="buttonSair">
+                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+            </div>
+            
+        </nav>
+
+
+        <div class="conteudo-principal">
+            
+            <div class="container-informacoes">
+
+                <div class="coluna-filtro">
+                    <div class="header-select-linha">
+                        <div class="header-texto">
+                            <h3>Dashboard Geral - </h3>
+                        </div>
+                        <div class="header-select">
+                            <select id="select_linha" class="select-linha">
+                                <option value="0" disabled selected>Selecione uma linha</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="filtros-pesquisa">
+                        <div class="texto-pesquisa">
+                            <h3>Máquinas da sua empresa</h3>
+                        </div>
+                            <sl-input class="ipt-pesquisar-estacao" placeholder="Buscar estação" size="large">
+                                <sl-icon name="search" slot="prefix"></sl-icon>
+                              </sl-input>
+
+                        <div class="filtros-prontos">
+                                <sl-button size="medium" class="filtrar-botoes" pill>A-Z </sl-button>
+
+                                <sl-button size="medium" class="filtrar-botoes" pill>Problema
+                                    <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                </sl-button>
+
+                                <sl-button size="medium" class="filtrar-botoes" pill>Cuidado
+                                    <sl-icon name="exclamation-triangle" style="color: #fec23e;"></sl-icon>
+                                </sl-button>
+
+                                <sl-button size="medium" onclick="clicarMenu()" class="filtrar-botoes" pill>Buscar </sl-button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coluna-kpis"></div>
+
+            </div>
+
+            <div class="container-maquinas"></div>
+        </div>
+</body>
+</html>

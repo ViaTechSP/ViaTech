@@ -13,7 +13,7 @@ function buscarComputadores(idEmpresa) {
 	WHERE idEmpresa = ${idEmpresa}
     LIMIT 20;
     `
-
+    
     return database.executar(instrucao);
 }
 
