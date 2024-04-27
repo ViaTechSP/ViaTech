@@ -203,9 +203,11 @@ function cadastrarFun(req, res){
 // }
 
 function exibirFun(req, res){
-    usuarioModel.exibirFun().then((resultado) => {
+    var idEmpresa = req.params.idEmpresa;
+    
+    usuarioModel.exibirFun(idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
-      });
+    });
 }
 
 

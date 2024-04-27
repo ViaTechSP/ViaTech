@@ -11,21 +11,22 @@
     // nome_usuario.innerHTML = nome;
 
 
-    function clicarMenu() {
-      const menu = document.getElementById('menuLateral');
-      menu.classList.toggle('escondido');
-  
-      if (menu.classList.contains('escondido')) {
-          menuEscondido.style.display = 'block'
-          containerMenuLateral.style.display = 'none';
-      }
-      else {
-          menuEscondido.style.display = 'none'
-          containerMenuLateral.style.display = 'block'
-      }
-      }
+function clicarMenu() {
+  const menu = document.getElementById('menuLateral');
+  menu.classList.toggle('escondido');
+  if (menu.classList.contains('escondido')) {
+      menuEscondido.style.display = 'block'
+      containerMenuLateral.style.display = 'none';
+  }
+  else {
+      menuEscondido.style.display = 'none'
+      containerMenuLateral.style.display = 'block'
+}
+}
   
       function exibirFun() {
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
        document.getElementById('formularioExibir').style.display = 'block';
        document.getElementById('ver').style.color = '#e6e62c';
        document.getElementById('adicionarFuncionario').style.color = 'black';
@@ -42,12 +43,12 @@
        var segundaColuna = document.getElementById('segundaColuna');  
        segundaColuna.innerHTML = "";
        
-       var nome_funcionario = sessionStorage.NOME_EMPRESA;
+      //  var nome_funcionario = sessionStorage.NOME_EMPRESA;
        
        var lista_funcionario = [];
        var funcionario = [];
 
-       fetch("/usuarios/exibirFun", { 
+       fetch(`/usuarios/exibirFun/${idEmpresa}`, { 
           method: "GET", 
         })     
    
@@ -74,7 +75,7 @@
         var nome_atual = lista_funcionario[i].nome;
         var cargo_atual = lista_funcionario[i].cargo;
         var email_atual = lista_funcionario[i].email;
-        var cpf_atual = funcionario[i].cpf;
+        var cpf_atual = lista_funcionario[i].cpf;
         
         auxiliar++;
    
@@ -83,8 +84,6 @@
         
         }  else{
           segundaColuna.innerHTML += `<div id="exibindoFuncionarioImpar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
-        
-
         }
        }
      });

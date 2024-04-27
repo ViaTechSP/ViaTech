@@ -77,9 +77,10 @@ function cadastrarFun(fkEmpresaVar, nomeVar, cpfVar, telefoneVar, cargoVar, emai
     return database.executar(instrucao);
 }
 
-function exibirFun(){
-    var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE fkEmpresa = 2;`;
-
+function exibirFun(idEmpresa){
+    var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
+    
+    console.log('executando query: ', query)
     return database.executar(query);
 }
 

@@ -24,7 +24,7 @@ router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);
 });
 
-router.get("/exibirFun", function (req, res) {
+router.get("/exibirFun/:idEmpresa", function (req, res) {
     usuarioController.exibirFun(req, res);
 });
 

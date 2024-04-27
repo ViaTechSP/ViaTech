@@ -123,14 +123,14 @@
             }
             else if (json.tipo == 'funcionario') {
                 sessionStorage.ID_FUNCIONARIO = json.dados[0].idFuncionario;
-                sessionStorage.FK_EMPRESA = json.dados[0].fkEmpresa;
+                sessionStorage.ID_EMPRESA = json.dados[0].fkEmpresa;
                 sessionStorage.NOME = json.dados[0].nome;
                 sessionStorage.CARGO_FUNCIONARIO = json.dados[0].cargo;
                 sessionStorage.EMAIL = json.dados[0].email;
                 sessionStorage.SENHA_FUNCIONARIO = json.dados[0].senha;
             }
             sessionStorage.setItem('TIPO_USUARIO', json.tipo);
-            window.location.href = "cadastroFuncionario.html";
+            window.location.href = "dashboard_geral.html";
             
      
          });

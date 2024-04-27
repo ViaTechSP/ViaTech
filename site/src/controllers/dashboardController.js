@@ -19,12 +19,35 @@ function buscarComputadores(req, res) {
     });
 }
 
+function buscarLinhas(req, res) {
+
+    var idEmpresa = req.params.idEmpresa;
+
+    dashboardModel.buscarLinhas(idEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarEstacoes(req, res){
+    var idEmpresa = req.params.idEmpresa;
+    
+    dashboardModel.buscarEstacoes(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 
 function obterInfoHardware(req, res) {
 
     var fkComputador = req.body.fkComputadorServer;
 
-    
     if (fkComputador == undefined) {
         res.status(400).send("Seu computador está undefined!");
     } else {
@@ -48,5 +71,7 @@ function obterInfoHardware(req, res) {
 
 module.exports = {
     buscarComputadores,
+    buscarLinhas,
+    buscarEstacoes,
     obterInfoHardware
 }

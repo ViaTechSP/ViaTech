@@ -17,6 +17,7 @@
     <!-- JS -->
     <script src="../js/menuLateral.js"></script>
     <script src="../js/sessao.js"></script>
+    <script src="../js/dashboard_geral.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
@@ -28,51 +29,51 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body onload="clicarMenu()">
+<body onload="clicarMenu(), listarLinhas()">
         
 
-        <nav id="menuLateral">
-            <i style="display: none; font-size: 50px;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+    <nav id="menuLateral">
+        <i style="display: none; font-size: 50px;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+        
+        <div class="container" id="containerMenuLateral">
             
-            <div class="container" id="containerMenuLateral">
-                
-                <p style="display: flex; align-items: center;">
-                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
-                    <i class="material-icons" onclick="clicarMenu()">menu</i>
-                </p>
-                
-                <p>Olá, <span id="ola">Undefined</span></p>
-                
-            <div id="containerItens" class="container-itens">
-                <div class="item">
-                    <a href="dashboard.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
-                </div>
-                
-                <div class="item">
-                    <a href="dashboard.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
-                </div>
-                
-                <div class="item">
-                    <a href="dashboard.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
-                </div>
-                
-                
-                <div class="item esconder-item">
-                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
-                </div>
-                
-                
-                <div class="item esconder-item">
-                    <a href="cadastroFuncionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
-                </div>
-                
+            <p style="display: flex; align-items: center;">
+                <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
+                <i class="material-icons" onclick="clicarMenu()">menu</i>
+            </p>
+            
+            <p>Olá, <span id="ola">Undefined</span></p>
+            
+        <div id="containerItens" class="container-itens">
+            <div class="item">
+                <a href="dashboard.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
             </div>
             
-            <div onclick="logout()" class="buttonSair">
-                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+            <div class="item">
+                <a href="dashboard_geral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
             </div>
             
-        </nav>
+            <div class="item">
+                <a href="dashboard.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
+            </div>
+            
+            
+            <div class="item esconder-item">
+                <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
+            </div>
+            
+            
+            <div class="item esconder-item">
+                <a href="cadastroFuncionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+            </div>
+            
+        </div>
+        
+        <div onclick="logout()" class="buttonSair">
+            <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+        </div>
+        
+    </nav>
 
 
         <div class="conteudo-principal">
@@ -110,17 +111,64 @@
                                     <sl-icon name="exclamation-triangle" style="color: #fec23e;"></sl-icon>
                                 </sl-button>
 
-                                <sl-button size="medium" onclick="clicarMenu()" class="filtrar-botoes" pill>Buscar </sl-button>
+                                <sl-button size="medium" onclick="clicarMenu()" class="filtrar-botoes" pill>Buscar</sl-button>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="coluna-kpis"></div>
+                <div class="coluna-kpis">
+
+                    <div class="kpis-alertas">
+                            <div class="card-alerta">
+                                 Nº de alertas na semana
+                                <span class="span-numero">37</span>alertas
+                            </div>
+                            <div class="card-alerta">
+                                <span class="span-numero">30%</span>
+                                  <br>
+                                Das estações possuem alerta
+                            </div>
+                    </div>
+                    <div class="kpis-problemas">
+                        <div class="card-problema">
+                            <div class="card-titulo">
+                                Nº de problemas na semana
+                            </div>
+                            <div class="card-footer">
+                                <div class="div-numero">16</div>
+                                <div class="footer-texto">problemas 
+                                    <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-problema">
+                            <div class="card-titulo">
+                                Estação com mais problemas
+                            </div>
+                            <div class="card-footer">
+                                <div class="pc">
+                                    <sl-icon style="font-size: 32px;" name="pc-display-horizontal"></sl-icon>
+                                    <div class="nome-estacao">Luz</div>
+                                </div>
+                                <div class="qtd-problemas">
+                                    <div class="div-numero">4</div>
+                                    <div class="alinhar-horizontal">
+                                        <div class="texto">problemas</div>
+                                        <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
-            <div class="container-maquinas"></div>
+            <div class="container-maquinas">
+                <div class="primeira-linha"></div>
+                <div class="segunda-linha"></div>
+            </div>
         </div>
 </body>
 </html>
