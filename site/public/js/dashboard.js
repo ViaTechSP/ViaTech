@@ -1,137 +1,183 @@
-window.onload = obterInfoHardware(), clicarMenu();
+// FUNÇÃO DO SELECT DE ESTAÇÃO
+function listarComputadores(idEmpresa) {
+  var idEmpresa = sessionStorage.ID_EMPRESA;
 
+fetch(`/dashboard/listarComputadores/${idEmpresa}`)
+    .then(resposta => {
+        if (resposta.status == 200) {
+            resposta.json().then(resposta => {
 
-function obterInfoHardware() {
-    var fkComputador = estacao.value;
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-fetch(`/dashboard/obterInfoHardware`,{
-    method: "POST",
-    headers: {
-    "Content-Type": "application/json"
-   },
-   body: JSON.stringify({
-    fkComputadorServer: fkComputador
-   })
- })
-.then(function (response) {
-if (response.ok) {
-    response.json().then(function (resposta) {
-            
-        resposta.reverse();
+                var select = document.getElementById("select_estacao");
 
-            console.log(resposta)
-            span_so.innerHTML = resposta[0].SistemaOperacional
-            span_cpu.innerHTML = resposta[0].NomeCpu
-            span_ram.innerHTML = resposta[0].Arquitetura
-            span_disco.innerHTML = resposta[0].MemoriaEmUso
-            span_uso.innerHTML = resposta[0].MemoriaTotal
-            // plotarGrafico(resposta);
+                // Limpar o select
+                // select.innerHTML = "";
 
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API' + error);
-    }
-})
-.catch(function (error) {
-    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-});
+                // Iterar sobre os dados recebidos e adicionar opções ao select
+                resposta.forEach(function(resposta) {
+                    var option = document.createElement("option");
+                    option.value = resposta.idComputador;
+                    option.text = resposta.nome;
+                    select.appendChild(option);
+                });
+            });
+        } else {
+            console.error(`Nenhum dado encontrado para o id ${fkEmpresa} ou erro na API`);
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+    });
+
 }
 
-google.charts.load('current', { packages: ['coreChart'] });
-google.charts.setOnLoadCallback(drawCPU);
-google.charts.setOnLoadCallback(drawRAM);
-google.charts.setOnLoadCallback(drawDisco);
-google.charts.setOnLoadCallback(drawTemperatura);
+// FUNÇÃO PARA CARREGAR AS INFORMAÇÕES DA HEADER
+  function obterInfoHardware() {
+      var fkComputador = select_estacao.value;
+
+  fetch(`/dashboard/obterInfoHardware/`,{
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify({
+      fkComputadorServer: fkComputador
+     })
+   })
+  .then(function (response) {
+  if (response.ok) {
+      response.json().then(function (resposta) {
+              
+          resposta.reverse();
+              console.log(resposta)
+              span_so.innerHTML = resposta[0].sistemaOperacional
+              span_cpu.innerHTML = resposta[0].nomeCpu
+              span_ram.innerHTML = resposta[0].ramTotal
+              span_disco.innerHTML = resposta[0].volumeTotal
+              span_uso.innerHTML = resposta[0].tempoAtividade
+          });
+      } else {
+          console.error('Nenhum dado encontrado ou erro na API' + error);
+      }
+  })
+  .catch(function (error) {
+      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+  }
+
+  /*------------------\
+  |                   |
+  |    FUNÇÕES DE     |
+  |  GRÁFICOS ABAIXO  |
+  |                   |
+  \-------------------/
+
+
+// FUNÇÃO PARA INICIALIZAR TODOS OS GRÁFICOS 
+  /*
+  ainda precisa criar uma função para dar select no banco de dados
+  e depois inicializar os charts com os dados atuais de cada máquina
+  */
+  function init() {
+      google.charts.load('current', {
+          packages: ['corechart']
+      });
+      google.charts.setOnLoadCallback(function() {
+          drawCPU();
+          drawRAM();
+          drawDisco();
+          drawTemperatura();
+      });
+  }
 
 function drawCPU() {
-var data = new google.visualization.DataTable();
-data.addColumn("string", "Data/Hora");
-data.addColumn("number", "% de uso");
-data.addRow(['10', 10]);
-data.addRow(['20', 20]);
-data.addRow(['30', 30]);
-data.addRow(['40', 40]);
-data.addRow(['90', 90]);
+ var data = new google.visualization.DataTable();
+ data.addColumn("string", "Data/Hora");
+ data.addColumn("number", "% de uso");
+ data.addRow(['10', 10]);
+ data.addRow(['20', 20]);
+ data.addRow(['30', 30]);
+ data.addRow(['40', 40]);
+ data.addRow(['90', 90]);
 
-var options = {
-  title: 'Uso de CPU %',
-  legend: 'none',
-  chartArea: { 'width': '84%' },
-  backgroundColor: '#efefef',
-  colors: ['#9747FF']
-};
+ var options = {
+    title: 'Uso de CPU %',
+    legend: 'none',
+    chartArea: { 'width': '84%' },
+    backgroundColor: '#efefef',
+    colors: ['#9747FF']
+ };
 
-var chart = new google.visualization.AreaChart(document.getElementById("grafico_cpu"));
-chart.draw(data, options);
+ var chart = new google.visualization.AreaChart(document.getElementById("grafico_cpu"));
+ chart.draw(data, options);
 }
 
 function drawRAM(dados) {
-var data = new google.visualization.DataTable();
-data.addColumn("string", "Data/Hora");
-data.addColumn("number", "% de uso");
-data.addRow(['10', 10]);
-data.addRow(['20', 20]);
-data.addRow(['30', 30]);
-data.addRow(['40', 40]);
-data.addRow(['90', 90]);
+ var data = new google.visualization.DataTable();
+ data.addColumn("string", "Data/Hora");
+ data.addColumn("number", "% de uso");
+ data.addRow(['10', 10]);
+ data.addRow(['20', 20]);
+ data.addRow(['30', 30]);
+ data.addRow(['40', 40]);
+ data.addRow(['90', 90]);
 
 
-var options = {
-  title: 'Uso de RAM %',
-  legend: 'none',
-  chartArea: { 'width': '84%' },
-  backgroundColor: '#efefef',
-  colors: ['green']
-};
+ var options = {
+    title: 'Uso de RAM %',
+    legend: 'none',
+    chartArea: { 'width': '84%' },
+    backgroundColor: '#efefef',
+    colors: ['green']
+ };
 
-var chart = new google.visualization.AreaChart(document.getElementById("grafico_ram"));
-chart.draw(data, options);
+ var chart = new google.visualization.AreaChart(document.getElementById("grafico_ram"));
+ chart.draw(data, options);
 }
 
 function drawDisco(dados) {
-var data = new google.visualization.DataTable();
-data.addColumn("string", "Data/Hora");
-data.addColumn("number", "% de uso");
-data.addRow(['10', 10]);
-data.addRow(['20', 20]);
-data.addRow(['30', 30]);
-data.addRow(['40', 40]);
-data.addRow(['90', 90]);
+ var data = new google.visualization.DataTable();
+ data.addColumn("string", "Data/Hora");
+ data.addColumn("number", "% de uso");
+ data.addRow(['10', 10]);
+ data.addRow(['20', 20]);
+ data.addRow(['30', 30]);
+ data.addRow(['40', 40]);
+ data.addRow(['90', 90]);
 
 
-var options = {
-  title: "Uso de Disco %",
-  legend: 'none',
-  chartArea: { 'width': '84%' },
-  backgroundColor: '#efefef',
-  colors: ['blue']
-};
+ var options = {
+    title: "Uso de Disco %",
+    legend: 'none',
+    chartArea: { 'width': '84%' },
+    backgroundColor: '#efefef',
+    colors: ['blue']
+ };
 
-var chart = new google.visualization.AreaChart(document.getElementById("grafico_disco"));
-chart.draw(data, options);
+ var chart = new google.visualization.AreaChart(document.getElementById("grafico_disco"));
+ chart.draw(data, options);
 }
 
 function drawTemperatura(dados) {
-var data = new google.visualization.DataTable();
-data.addColumn("string", "Data/Hora");
-data.addColumn("number", "% de uso");
-data.addRow(['10', 10]);
-data.addRow(['20', 20]);
-data.addRow(['30', 30]);
-data.addRow(['40', 40]);
-data.addRow(['90', 90]);
+ var data = new google.visualization.DataTable();
+ data.addColumn("string", "Data/Hora");
+ data.addColumn("number", "% de uso");
+ data.addRow(['10', 10]);
+ data.addRow(['20', 20]);
+ data.addRow(['30', 30]);
+ data.addRow(['40', 40]);
+ data.addRow(['90', 90]);
 
 
-var options = {
-  title: "Temperatura ºC",
-  legend: 'none',
-  chartArea: { 'width': '84%' },
-  backgroundColor: '#efefef',
-  colors: ['red']
-};
+ var options = {
+    title: "Temperatura ºC",
+    legend: 'none',
+    chartArea: { 'width': '84%' },
+    backgroundColor: '#efefef',
+    colors: ['red']
+ };
 
-var chart = new google.visualization.AreaChart(document.getElementById("grafico_temperatura"));
-chart.draw(data, options);
+ var chart = new google.visualization.AreaChart(document.getElementById("grafico_temperatura"));
+ chart.draw(data, options);
 }
-
-

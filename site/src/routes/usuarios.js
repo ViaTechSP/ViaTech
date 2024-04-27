@@ -16,7 +16,6 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
-
 // router.post("/pegarId", function (req, res) {
 //     usuarioController.pegarId(req, res);
 // });
@@ -24,11 +23,6 @@ router.post("/autenticar", function (req, res) {
 router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);
 });
-
-
-
-
-
 
 router.get("/exibirFun", function (req, res) {
     usuarioController.exibirFun(req, res);

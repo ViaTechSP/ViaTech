@@ -1,12 +1,42 @@
 var database = require("../database/config")
 
 function autenticar(emailVar, senhaVar) {
-    var instrucao = `
-        SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ FROM empresa WHERE email = '${emailVar}' AND senha = '${senhaVar}';
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
+    return new Promise((resolve, reject) => {
+        // Consulta para empresa
+        var instrucaoEmpresa = `
+            SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ 
+            FROM empresa 
+            WHERE email = '${emailVar}' AND senha = '${senhaVar}';
+        `;
+        
+        var instrucaoFuncionario = `
+            SELECT idFuncionario, nome, email, senha, cargo 
+            FROM funcionario 
+            WHERE email = '${emailVar}' AND senha = '${senhaVar}';
+        `;
 
-    return database.executar(instrucao);
+        console.log("Executando a instrução SQL para empresa: \n" + instrucaoEmpresa);
+        console.log("Executando a instrução SQL para funcionário: \n" + instrucaoFuncionario);
+
+        database.executar(instrucaoEmpresa, [emailVar, senhaVar])
+            .then(resultadoEmpresa => {
+                if (resultadoEmpresa.length > 0) {
+                    resolve({ tipo: 'empresa', dados: resultadoEmpresa });
+                } else {
+                    return database.executar(instrucaoFuncionario, [emailVar, senhaVar]);
+                }
+            })
+            .then(resultadoFuncionario => {
+                if (resultadoFuncionario && resultadoFuncionario.length > 0) {
+                    resolve({ tipo: 'funcionario', dados: resultadoFuncionario });
+                } else {
+                    reject(new Error("Autenticação falhou"));
+                }
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
 }
 
 function cadastrar(nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar) {

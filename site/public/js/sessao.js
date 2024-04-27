@@ -1,7 +1,6 @@
-// sessão
 function validarSessao() {
-    var email = sessionStorage.EMAIL_EMPRESA;
-    var nome = sessionStorage.NOME_EMPRESA;
+    var email = sessionStorage.EMAIL;
+    var nome = sessionStorage.NOME;
 
     var ola = document.getElementById("ola");
 
@@ -12,10 +11,34 @@ function validarSessao() {
     }
 }
 
+function esconderItens() {
+    var tipo = sessionStorage.TIPO_USUARIO;
+
+    console.log('tipo: ', tipo)
+
+    if (tipo == 'funcionario') {
+        var elementosParaOcultar = document.querySelectorAll('.esconder-item');
+        
+        elementosParaOcultar.forEach(function(elemento) {
+            elemento.style.display = 'none';
+        });
+
+        var info2 = document.querySelector('.info2');
+        info2.style.right = 'auto';
+    }
+}
+
 function logout() {
     sessionStorage.clear();
     window.location = "../html/login.html";
 }
 
 
-
+function gerarDashboard() {
+    validarSessao();
+    esconderItens();
+    obterInfoHardware();
+    clicarMenu();
+    listarComputadores();
+    init();
+}
