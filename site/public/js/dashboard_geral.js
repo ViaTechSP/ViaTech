@@ -22,7 +22,7 @@ function listarLinhas(idEmpresa) {
           }
       })
       .catch(function (error) {
-          console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+          console.error(`Erro na obtenção das linhas disponíveis para listagem: ${error.message}`);
       });
   
   }
@@ -31,12 +31,14 @@ function listarLinhas(idEmpresa) {
 
 
   function exibirEstacoes() {
+    var idEmpresa = sessionStorage.ID_EMPRESA;
+    console.log('id: ', idEmpresa)
     var primeiraLinha = document.getElementById('primeira_linha');  
     
     var segundaLinha = document.getElementById('segunda_linha');  
     
     
-    fetch("/dashboard/exibirEstacoes", { 
+    fetch(`/dashboard/exibirEstacoes/${idEmpresa}`, { 
        method: "GET", 
      })     
 
@@ -48,23 +50,26 @@ function listarLinhas(idEmpresa) {
       })
 
     .then((resposta) => { 
+      console.log('resposta: ', resposta)
      var qtd_estacoes = resposta.length;
 
     var auxiliar = 0;
 
-    for (var i = 0; i < qtd_estacoes; i++) {
-     var nome_atual = lista_funcionario[i].nome;
-     var cargo_atual = lista_funcionario[i].cargo;
-     var email_atual = lista_funcionario[i].email;
-     var cpf_atual = lista_funcionario[i].cpf;
+    for (var i = 0; i < 10; i++) {
+
      
      auxiliar++;
 
      if(auxiliar % 2 == 0){
-       primeiraLinha.innerHTML += `<div id="exibindoFuncionarioPar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
+       primeiraLinha.innerHTML += `<sl-card class="card-basic" style="max-width: 200px; height: 48.5%;">
+       This is just a basic card. No image, no header, and no footer. Just your content.
+     </sl-card>
+     `;
      
      }  else{
-       segundaLinha.innerHTML += `<div id="exibindoFuncionarioImpar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
+       segundaLinha.innerHTML += `<sl-card class="card-basic" style="max-width: 200px; height: 48.5%;">
+       This is just a basic card. No image, no header, and no footer. Just your content.
+     </sl-card>`;
      }
     }
   });

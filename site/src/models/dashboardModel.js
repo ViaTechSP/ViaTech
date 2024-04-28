@@ -31,8 +31,15 @@ function buscarLinhas(idEmpresa) {
 
 function buscarEstacoes(idEmpresa) {
     var query =
-    `SELECT 
+    `SELECT idEstacao, estacao.nome FROM estacao
+    JOIN linha
+    ON fkLinha = idLinha
+    JOIN empresa
+    ON fkEmpresa = idEmpresa
+    where idEmpresa = ${idEmpresa};
     `
+
+    return database.executar(query);
 }
 
 function obterInfoHardware(fkComputador) {
@@ -47,5 +54,6 @@ function obterInfoHardware(fkComputador) {
 module.exports = {
     buscarComputadores,
     buscarLinhas,
+    buscarEstacoes,
     obterInfoHardware
 };

@@ -29,7 +29,7 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body onload="clicarMenu(), listarLinhas()">
+<body onload="clicarMenu(), listarLinhas(), exibirEstacoes(), validarSessao()">
         
 
     <nav id="menuLateral">
@@ -166,8 +166,8 @@
             </div>
 
             <div class="container-maquinas">
-                <div class="primeira-linha"></div>
-                <div class="segunda-linha"></div>
+                <div id="primeira_linha" class="primeira-linha"></div>
+                <div id="segunda_linha" class="segunda-linha"></div>
             </div>
         </div>
 </body>

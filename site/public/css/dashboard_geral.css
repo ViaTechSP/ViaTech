@@ -155,6 +155,11 @@
 .container-maquinas {
     width: 100%;
     height: 50%;
-    /* background-color: #8c52ff; */
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
 }
 
+.primeira-linha {
+    
+}
