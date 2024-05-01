@@ -1,7 +1,7 @@
 function listarLinhas(idEmpresa) {
     var idEmpresa = sessionStorage.ID_EMPRESA;
   
-  fetch(`/dashboard/listarLinhas/${idEmpresa}`)
+  fetch(`/dashboard/listarLinhas/${idEmpresa}/`)
       .then(resposta => {
           if (resposta.status == 200) {
               resposta.json().then(resposta => {
@@ -16,6 +16,7 @@ function listarLinhas(idEmpresa) {
                       option.text = resposta.nome;
                       select.appendChild(option);
                   });
+
               });
           } else {
               console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
@@ -32,13 +33,15 @@ function listarLinhas(idEmpresa) {
 
   function exibirEstacoes() {
     var idEmpresa = sessionStorage.ID_EMPRESA;
+    var idLinha = select_linha.value;
+
+
     console.log('id: ', idEmpresa)
     var primeiraLinha = document.getElementById('primeira_linha');  
-    
     var segundaLinha = document.getElementById('segunda_linha');  
+    var total_maquinas = document.getElementById('total_maquinas')
     
-    
-    fetch(`/dashboard/exibirEstacoes/${idEmpresa}`, { 
+    fetch(`/dashboard/exibirEstacoes/${idEmpresa}/${idLinha}`, { 
        method: "GET", 
      })     
 
@@ -50,27 +53,42 @@ function listarLinhas(idEmpresa) {
       })
 
     .then((resposta) => { 
-      console.log('resposta: ', resposta)
-     var qtd_estacoes = resposta.length;
+    console.log('resposta: ', resposta)
+    
+    var qtd_estacoes = resposta.length;
+    total_maquinas.innerHTML = qtd_estacoes;
 
     var auxiliar = 0;
+    primeira_linha.innerHTML = "";  
+    segunda_linha.innerHTML = "";  
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < qtd_estacoes; i++) {
+      auxiliar++ 
 
-     
-     auxiliar++;
+      if (auxiliar <= 8) {
+        primeira_linha.innerHTML += `
+        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
 
-     if(auxiliar % 2 == 0){
-       primeiraLinha.innerHTML += `<sl-card class="card-basic" style="max-width: 200px; height: 48.5%;">
-       This is just a basic card. No image, no header, and no footer. Just your content.
-     </sl-card>
-     `;
-     
-     }  else{
-       segundaLinha.innerHTML += `<sl-card class="card-basic" style="max-width: 200px; height: 48.5%;">
-       This is just a basic card. No image, no header, and no footer. Just your content.
-     </sl-card>`;
-     }
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">${resposta[i].nome}</span>
+                            </div>
+                        </div>` 
+      } else {
+        segunda_linha.innerHTML += 
+        `
+        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">${resposta[i].nome}</span>
+                            </div>
+                        </div>
+        `
+      }
+      
     }
   });
 

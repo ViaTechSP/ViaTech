@@ -29,18 +29,28 @@ body{
    
   }
 
-#menuLateral{
-  height: 100%;
-  width: 22%;
-  background-color: #011640;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  text-align: center;
-  display: block;
-  z-index: 999;
-}
+  #menuLateral {
+    height: 100%;
+    width: 22%;
+    background-color: #011640;
+    position: fixed;
+    /* top: 0; */
+    /* left: 0; */
+    overflow: hidden;
+    display: flex;
+    /* justify-content: center; Centraliza horizontalmente */
+    /* align-items: center; Centraliza verticalmente */
+    z-index: 999;
+    
+  }
+
+  #menuEscondido {
+    font-size: 50px;
+    position: absolute;
+    right: 10px;
+    /* margin-top: auto; Define a margem superior para auto */
+    /* margin-bottom: auto; Define a margem inferior para auto */
+  }
 
 .container{
   display: flex;

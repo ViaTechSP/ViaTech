@@ -29,14 +29,14 @@ function buscarLinhas(idEmpresa) {
     return database.executar(instrucao);
 }
 
-function buscarEstacoes(idEmpresa) {
+function buscarEstacoes(idEmpresa, idLinha) {
     var query =
     `SELECT idEstacao, estacao.nome FROM estacao
     JOIN linha
     ON fkLinha = idLinha
     JOIN empresa
     ON fkEmpresa = idEmpresa
-    where idEmpresa = ${idEmpresa};
+    where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha};
     `
 
     return database.executar(query);

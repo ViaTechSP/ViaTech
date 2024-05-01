@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViaTech | Dashboard</title>
 
     <!-- CSS -->
@@ -20,26 +15,26 @@
     <script src="../js/dashboard_geral.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-
-    <!-- STYLE & ICONES-->
+    <!-- ICONES-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
-
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
 
-<body onload="clicarMenu(), listarLinhas(), exibirEstacoes(), validarSessao()">
+<body>
+<!-- <body onload="clicarMenu(), listarLinhas()"> -->
         
 
-    <nav id="menuLateral">
-        <i style="display: none; font-size: 50px;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+    <nav id="menuLateral" style="width: 5%;">
+        <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
         
-        <div class="container" id="containerMenuLateral">
+        <div style="display: none;" class="container" id="containerMenuLateral">
             
             <p style="display: flex; align-items: center;">
                 <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
-                <i class="material-icons" onclick="clicarMenu()">menu</i>
+                <i class="material-icons" onclick="clicarMenu()">menu_open</i>
             </p>
             
             <p>Olá, <span id="ola">Undefined</span></p>
@@ -50,7 +45,7 @@
             </div>
             
             <div class="item">
-                <a href="dashboard_geral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+                <a href="dashboard_geral.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
             </div>
             
             <div class="item">
@@ -83,10 +78,10 @@
                 <div class="coluna-filtro">
                     <div class="header-select-linha">
                         <div class="header-texto">
-                            <h3>Dashboard Geral - </h3>
+                            <h3>Linha - </h3>
                         </div>
                         <div class="header-select">
-                            <select id="select_linha" class="select-linha">
+                            <select  onchange="exibirEstacoes()" id="select_linha" class="select-linha">
                                 <option value="0" disabled selected>Selecione uma linha</option>
                             </select>
                         </div>
@@ -103,12 +98,12 @@
                         <div class="filtros-prontos">
                                 <sl-button size="medium" class="filtrar-botoes" pill>A-Z </sl-button>
 
-                                <sl-button size="medium" class="filtrar-botoes" pill>Problema
-                                    <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
-                                </sl-button>
-
                                 <sl-button size="medium" class="filtrar-botoes" pill>Cuidado
                                     <sl-icon name="exclamation-triangle" style="color: #fec23e;"></sl-icon>
+                                </sl-button>
+
+                                <sl-button size="medium" class="filtrar-botoes" pill>Problema
+                                    <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
                                 </sl-button>
 
                                 <sl-button size="medium" onclick="clicarMenu()" class="filtrar-botoes" pill>Buscar</sl-button>
@@ -121,8 +116,8 @@
 
                     <div class="kpis-alertas">
                             <div class="card-alerta">
-                                 Nº de alertas na semana
-                                <span class="span-numero">37</span>alertas
+                                 Nº de máquinas da linha
+                                <span id="total_maquinas" class="span-numero">00</span>máquinas
                             </div>
                             <div class="card-alerta">
                                 <span class="span-numero">30%</span>
@@ -149,13 +144,14 @@
                             <div class="card-footer">
                                 <div class="pc">
                                     <sl-icon style="font-size: 32px;" name="pc-display-horizontal"></sl-icon>
-                                    <div class="nome-estacao">Luz</div>
+                                    <div>Luz</div>
                                 </div>
                                 <div class="qtd-problemas">
                                     <div class="div-numero">4</div>
-                                    <div class="alinhar-horizontal">
-                                        <div class="texto">problemas</div>
-                                        <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                        <div class="texto">problemas
+
+                                            <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -163,11 +159,160 @@
                     </div>
                 </div>
 
-            </div>
+                <div class="container-maquinas">
+                    <div id="primeira_linha">
+    
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
 
-            <div class="container-maquinas">
-                <div id="primeira_linha" class="primeira-linha"></div>
-                <div id="segunda_linha" class="segunda-linha"></div>
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Luz</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Morumbi</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Paulista</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">República</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Butantã</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Vila Sônia</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Oscar Freire</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Faria Lima</span>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div id="segunda_linha">
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Mackenzie</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Pinheiros</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Brás</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Itaquera</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Tatuapé</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Paulista</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon>
+                                <span id="nome_estacao">Paulista</span>
+                            </div>
+                        </div>
+
+                        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">Paulista</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 </body>
