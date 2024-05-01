@@ -1,7 +1,7 @@
 function listarLinhas(idEmpresa) {
     var idEmpresa = sessionStorage.ID_EMPRESA;
   
-  fetch(`/dashboard/listarLinhas/${idEmpresa}`)
+  fetch(`/dashboard/listarLinhas/${idEmpresa}/`)
       .then(resposta => {
           if (resposta.status == 200) {
               resposta.json().then(resposta => {
@@ -16,13 +16,14 @@ function listarLinhas(idEmpresa) {
                       option.text = resposta.nome;
                       select.appendChild(option);
                   });
+
               });
           } else {
               console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
           }
       })
       .catch(function (error) {
-          console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+          console.error(`Erro na obtenção das linhas disponíveis para listagem: ${error.message}`);
       });
   
   }
@@ -31,12 +32,16 @@ function listarLinhas(idEmpresa) {
 
 
   function exibirEstacoes() {
+    var idEmpresa = sessionStorage.ID_EMPRESA;
+    var idLinha = select_linha.value;
+
+
+    console.log('id: ', idEmpresa)
     var primeiraLinha = document.getElementById('primeira_linha');  
-    
     var segundaLinha = document.getElementById('segunda_linha');  
+    var total_maquinas = document.getElementById('total_maquinas')
     
-    
-    fetch("/dashboard/exibirEstacoes", { 
+    fetch(`/dashboard/exibirEstacoes/${idEmpresa}/${idLinha}`, { 
        method: "GET", 
      })     
 
@@ -48,24 +53,42 @@ function listarLinhas(idEmpresa) {
       })
 
     .then((resposta) => { 
-     var qtd_estacoes = resposta.length;
+    console.log('resposta: ', resposta)
+    
+    var qtd_estacoes = resposta.length;
+    total_maquinas.innerHTML = qtd_estacoes;
 
     var auxiliar = 0;
+    primeira_linha.innerHTML = "";  
+    segunda_linha.innerHTML = "";  
 
     for (var i = 0; i < qtd_estacoes; i++) {
-     var nome_atual = lista_funcionario[i].nome;
-     var cargo_atual = lista_funcionario[i].cargo;
-     var email_atual = lista_funcionario[i].email;
-     var cpf_atual = lista_funcionario[i].cpf;
-     
-     auxiliar++;
+      auxiliar++ 
 
-     if(auxiliar % 2 == 0){
-       primeiraLinha.innerHTML += `<div id="exibindoFuncionarioPar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
-     
-     }  else{
-       segundaLinha.innerHTML += `<div id="exibindoFuncionarioImpar" class="itemFun">${nome_atual} - ${cargo_atual}<br>${cpf_atual}<br>${email_atual}</div>`;
-     }
+      if (auxiliar <= 8) {
+        primeira_linha.innerHTML += `
+        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">${resposta[i].nome}</span>
+                            </div>
+                        </div>` 
+      } else {
+        segunda_linha.innerHTML += 
+        `
+        <div class="card-maquina">
+                            <img class="img-pc" src="../assets/imgs/computador.png">
+
+                            <div class="estacao-alerta">
+                                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                                <span id="nome_estacao">${resposta[i].nome}</span>
+                            </div>
+                        </div>
+        `
+      }
+      
     }
   });
 

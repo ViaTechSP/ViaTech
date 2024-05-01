@@ -37,8 +37,10 @@ function buscarLinhas(req, res) {
 
 function buscarEstacoes(req, res){
     var idEmpresa = req.params.idEmpresa;
+    var idLinha = req.params.idLinha;
+
     
-    dashboardModel.buscarEstacoes(idEmpresa).then((resultado) => {
+    dashboardModel.buscarEstacoes(idEmpresa, idLinha).then((resultado) => {
         res.status(200).json(resultado);
     });
 }

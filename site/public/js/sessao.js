@@ -35,10 +35,9 @@ function logout() {
 
 
 function gerarDashboard() {
-    validarSessao();
+    // validarSessao();
     esconderItens();
     obterInfoHardware();
-    clicarMenu();
     listarComputadores();
     init();
 }

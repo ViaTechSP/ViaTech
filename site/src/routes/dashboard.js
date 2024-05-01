@@ -11,7 +11,7 @@ router.get("/listarLinhas/:idEmpresa", function (req, res) {
     dashboardController.buscarLinhas(req, res);
 })
 
-router.get("/exibirEstacoes/:idEmpresa", function (req, res) {
+router.get("/exibirEstacoes/:idEmpresa/:idLinha", function (req, res) {
     dashboardController.buscarEstacoes(req, res);
 })
 
