@@ -52,8 +52,6 @@ espacoDisponivel VARCHAR (40) NOT NULL
 
 CREATE TABLE ram (
 idRam INT PRIMARY KEY AUTO_INCREMENT,
-fkMaquina INT NOT NULL,
-CONSTRAINT FOREIGN KEY (fkMaquina) REFERENCES maquinaMonitorada (idMaquina),
 memoriaDisponivel VARCHAR (40),
 memoriaTotal VARCHAR(40),
 memoriaUtilizada VARCHAR (40)
@@ -70,4 +68,4 @@ tempoAtividade VARCHAR (255)
 );
 
 
-SELECT * FROM empresa;
+SELECT * FROM ram;
