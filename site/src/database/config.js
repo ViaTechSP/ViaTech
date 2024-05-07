@@ -4,7 +4,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "viatech",
     user: "root",
-    password: "rabello",
+    password: "Renan12.",
 };
 
 function executar(instrucao) {

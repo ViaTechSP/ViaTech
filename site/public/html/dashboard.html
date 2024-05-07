@@ -74,7 +74,12 @@
                 <div class="info1">
 
                     <select onchange="obterInfoHardware()" id="select_estacao" class="select-estacao esconder-item">
-                        <option value="" disabled selected>Selecione uma estação</option>
+                        <option value="" disabled selected>Selecione uma Linha</option>
+                        <option value="" disabled selected>Linha  4</option>
+                    </select>
+                    <select onchange="obterInfoEstacao()" id="select_estacao" class="select-estacao esconder-item">
+                        <option value="" disabled selected>Selecione uma Estação</option>
+                        <option value="" disabled selected>Luz</option>
                     </select>
                 </div>
                 <div class="info2">
@@ -89,9 +94,9 @@
             </div>
         </div>
         
+  
+        
         <div class="container-principal">
-
-
             <div class="coluna-1">
                 <div class="container-graficos">
                     <div class="graficos-coluna-1">
@@ -109,28 +114,38 @@
                     </div>
                 </div>
 
+
                 <div class="container-kpis">
                     <div class="kpi-cpu">
                         <strong>Quantidade de problemas na última semana:</strong> <br>
-                        10
+                        4
                     </div>
                     <div class="kpi-disco">
-                        <strong>Utilização de disco</strong> <br>
-                        90%
+                        <strong>Quantidade de cuidados na última semana:</strong> <br>
+                        10
                     </div>
                     <div class="kpi-ram">
-                        <strong>Utilização de ram</strong> <br>
-                        90%
+                        <strong>Tempo total que a Temperatura da CPU ficou em Problema na última vez:</strong> <br>
+                      0 days  02:55h
                     </div>
                     <div class="kpi-temperatura">
-                        <strong>Utilização de cpu</strong> <br>
-                        90%
+                        <strong>Utilização da Capacidade do Disco Rígido no atual momento</strong> <br>
+                        178 GB
                     </div>
                 </div>
             </div>
 
             <div class="coluna-2">
                 <div class="container-indicadores">
+
+                    <h3>Métricas Info:</h3>
+                    <div class="indicadores-linha">
+                        <div class="indicador" style="background-color: #7ed957">Ideal</div>
+                        <div class="indicador" style="background-color: #ffde59">Cuidado</div>
+                        <div class="indicador" style="background-color: #ff3131">Problema</div>
+                    </div>
+
+
                     <h3>Disco Rígido:</h3>
                     <div class="indicadores-linha">
                         <div class="indicador" style="background-color: #7ed957">1% á 75%</div>
@@ -154,9 +169,11 @@
 
                     <h3>Temperatura CPU:</h3>
                     <div class="indicadores-linha">
-                        <div class="indicador" style="background-color: #7ed957">15°C á 44°C</div>
-                        <div class="indicador" style="background-color: #ffde59">45°C Á 56°C</div>
-                        <div class="indicador" style="background-color: #ff3131">56°C></div>
+                        <div class="indicadorTemperatura" style="background-color: #ff3131"> -10ºC </div>
+                        <div class="indicadorTemperatura" style="background-color: #ffde59">11°C a 19°C</div>
+                        <div class="indicadorTemperatura" style="background-color: #7ed957">20ºC a 58°C</div>
+                        <div class="indicadorTemperatura" style="background-color: #ffde59">59ºC a 65°C</div>
+                        <div class="indicadorTemperatura" style="background-color: #ff3131">66°C+</div>
                     </div>
                 </div>
 
@@ -173,22 +190,22 @@
 
             <div class="coluna-3">
                 <div class="container-alertas">
-                    <div class="alertas-header"><strong>Notificações - Alertas</strong></div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-header"><strong>Alertas - Linha 4</strong></div>
+                    <div class="alertas-quadrado">Problema - Estação Luz <br>
                         CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
+                        CPU > 76%</div>
+                    <div class="alertas-quadrado">Problema - Estação Luz <br>
                         CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-quadrado">Problema - Estação Luz <br>
                         CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
+                        CPU > 76%</div>
+                    <div class="alertas-quadrado">Problema - Estação Luz <br>
                         CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
                         CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Disaster - Estação Luz <br>
+                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
                         CPU > 89%</div>
                 </div>
             </div>
@@ -196,3 +213,4 @@
         </div>
 </body>
 </html>
+

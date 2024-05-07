@@ -178,6 +178,8 @@ function drawTemperatura(dados) {
     colors: ['red']
  };
 
+
  var chart = new google.visualization.AreaChart(document.getElementById("grafico_temperatura"));
  chart.draw(data, options);
 }
+
