@@ -14,9 +14,10 @@ senha VARCHAR(100) NOT NULL
 CREATE TABLE funcionario(
 idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 fkEmpresa INT NOT NULL,
-CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa),
+CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa) ON DELETE CASCADE,
 nome VARCHAR(100) NOT NULL,
 cargo VARCHAR(100) NOT NULL,
+cpf CHAR(11) NOT NULL,
 email VARCHAR(100) NOT NULL UNIQUE,
 senha VARCHAR(100) NOT NULL
 );
@@ -26,20 +27,20 @@ idLinha INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100) NOT NULL,
 numero INT,
 fkEmpresa INT,
-	FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa)
+	FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa) ON DELETE CASCADE
 );
 
 CREATE TABLE estacao (
 idEstacao INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(255),
 fkLinha INT,
-	FOREIGN KEY (fkLinha) REFERENCES linha (idLinha)
+	FOREIGN KEY (fkLinha) REFERENCES linha (idLinha) ON DELETE CASCADE
 );
 
 CREATE TABLE Computador (
 idComputador INT PRIMARY KEY AUTO_INCREMENT,
 fkEstacao INT,
-	FOREIGN KEY (fkEstacao) REFERENCES estacao(idEstacao)
+	FOREIGN KEY (fkEstacao) REFERENCES estacao(idEstacao) ON DELETE CASCADE
 );
 
 CREATE TABLE Componente (
@@ -50,7 +51,7 @@ ramTotal VARCHAR(255) NOT NULL,
 volumeTotal VARCHAR(255) NOT NULL,
 tempoAtividade VARCHAR(255),
 fkComputador INT,
-	FOREIGN KEY (fkComputador) REFERENCES Computador(idComputador)
+	FOREIGN KEY (fkComputador) REFERENCES Computador(idComputador) ON DELETE CASCADE
 );
 
 -- INSERTS --
@@ -60,10 +61,10 @@ INSERT INTO empresa VALUES
 (null, 'mobilidade', '55555123456789', '13245768910', 'felipe@admin.com', 'Admin123!');
 
 INSERT INTO funcionario VALUES
-(null, 1, 'Rabello', 'gerente', 'rabello@ortem.com', 'Ortem123!'),
-(null, 1, 'Castrillo', 'técnico', 'castrillo@ortem.com', 'Ortem123!'),
-(null, 2, 'Renan', 'gerente', 'renan@quatro.com', 'Quatro123!'),
-(null, 2, 'samarah', 'técnico', 'felipe@quatro.com', 'Quatro123!');
+(null, 1, '12345678912','Rabello', 'gerente', 'rabello@ortem.com', 'Ortem123!'),
+(null, 1, '12345678913','Castrillo', 'técnico', 'castrillo@ortem.com', 'Ortem123!'),
+(null, 2, '12345678911','Renan', 'gerente', 'renan@quatro.com', 'Quatro123!'),
+(null, 2, '12345678910','samarah', 'técnico', 'felipe@quatro.com', 'Quatro123!');
 
 INSERT INTO linha VALUES 
 (null, 'Azul', 1, 1),
@@ -290,5 +291,14 @@ select idComputador, estacao.nome from  computador
 		ON fkEmpresa = idEmpresa
 	WHERE idEmpresa = 2;
     
+    select idLinha, linha.nome from linha
+	JOIN empresa
+		ON fkEmpresa = idEmpresa
+        WHERE idEmpresa = 3;
     
-    select * from estacao;
+    use viatech;
+    select * from estacao
+    -- JOIN computador 
+    -- ON fkEstacao = idEstacao;
+    
+    

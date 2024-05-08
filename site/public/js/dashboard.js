@@ -1,3 +1,10 @@
+function colorirPalavra() {
+    var div = document.getElementsByClassName("alertas-quadrado");
+    var texto = div.innerHTML;
+    var textoColorido = texto.replace(new RegExp(palavra, 'g'), '<span style="color:' + cor + ';">' + palavra + '</span>');
+    div.innerHTML = textoColorido;
+}
+
 // FUNÇÃO DO SELECT DE ESTAÇÃO
 function listarComputadores(idEmpresa) {
   var idEmpresa = sessionStorage.ID_EMPRESA;
@@ -95,11 +102,11 @@ function drawCPU() {
  var data = new google.visualization.DataTable();
  data.addColumn("string", "Data/Hora");
  data.addColumn("number", "% de uso");
- data.addRow(['10', 10]);
- data.addRow(['20', 20]);
- data.addRow(['30', 30]);
- data.addRow(['40', 40]);
- data.addRow(['90', 90]);
+ data.addRow(['19:30', 10]);
+ data.addRow(['19:32', 20]);
+ data.addRow(['19:34', 30]);
+ data.addRow(['19:36', 40]);
+ data.addRow(['19:38', 90]);
 
  var options = {
     title: 'Uso de CPU %',
@@ -117,12 +124,11 @@ function drawRAM(dados) {
  var data = new google.visualization.DataTable();
  data.addColumn("string", "Data/Hora");
  data.addColumn("number", "% de uso");
- data.addRow(['10', 10]);
- data.addRow(['20', 20]);
- data.addRow(['30', 30]);
- data.addRow(['40', 40]);
- data.addRow(['90', 90]);
-
+ data.addRow(['19:30', 10]);
+ data.addRow(['19:32', 20]);
+ data.addRow(['19:34', 30]);
+ data.addRow(['19:36', 40]);
+ data.addRow(['19:38', 90]);
 
  var options = {
     title: 'Uso de RAM %',
@@ -140,12 +146,11 @@ function drawDisco(dados) {
  var data = new google.visualization.DataTable();
  data.addColumn("string", "Data/Hora");
  data.addColumn("number", "% de uso");
- data.addRow(['10', 10]);
- data.addRow(['20', 20]);
- data.addRow(['30', 30]);
- data.addRow(['40', 40]);
- data.addRow(['90', 90]);
-
+ data.addRow(['19:30', 10]);
+ data.addRow(['19:32', 20]);
+ data.addRow(['19:34', 30]);
+ data.addRow(['19:36', 40]);
+ data.addRow(['19:38', 90]);
 
  var options = {
     title: "Uso de Disco %",
@@ -163,11 +168,11 @@ function drawTemperatura(dados) {
  var data = new google.visualization.DataTable();
  data.addColumn("string", "Data/Hora");
  data.addColumn("number", "% de uso");
- data.addRow(['10', 10]);
- data.addRow(['20', 20]);
- data.addRow(['30', 30]);
- data.addRow(['40', 40]);
- data.addRow(['90', 90]);
+ data.addRow(['19:30', 10]);
+ data.addRow(['19:32', 20]);
+ data.addRow(['19:34', 30]);
+ data.addRow(['19:36', 40]);
+ data.addRow(['19:38', 90]);
 
 
  var options = {
