@@ -1,4 +1,3 @@
-DROP DATABASE ViaTech;
 CREATE DATABASE viatech;
 USE viatech;
 
@@ -17,7 +16,7 @@ fkEmpresa INT NOT NULL,
 CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa) ON DELETE CASCADE,
 nome VARCHAR(100) NOT NULL,
 cargo VARCHAR(100) NOT NULL,
-cpf CHAR(11) NOT NULL,
+cpf CHAR(11) NOT NULL UNIQUE,
 email VARCHAR(100) NOT NULL UNIQUE,
 senha VARCHAR(100) NOT NULL
 );
@@ -61,10 +60,10 @@ INSERT INTO empresa VALUES
 (null, 'mobilidade', '55555123456789', '13245768910', 'felipe@admin.com', 'Admin123!');
 
 INSERT INTO funcionario VALUES
-(null, 1, '12345678912','Rabello', 'gerente', 'rabello@ortem.com', 'Ortem123!'),
-(null, 1, '12345678913','Castrillo', 'técnico', 'castrillo@ortem.com', 'Ortem123!'),
-(null, 2, '12345678911','Renan', 'gerente', 'renan@quatro.com', 'Quatro123!'),
-(null, 2, '12345678910','samarah', 'técnico', 'felipe@quatro.com', 'Quatro123!');
+(null, 1, 'Rabello','Gerente', '12345678912', 'rabello@ortem.com', 'Ortem123!'),
+(null, 1, 'Castrillo','Técnico', '12345678913', 'castrillo@ortem.com', 'Ortem123!'),
+(null, 2, 'Renan','Gerente', '12345678911', 'renan@quatro.com', 'Quatro123!'),
+(null, 2, 'Samarah','Técnico', '12345678910', 'felipe@quatro.com', 'Quatro123!');
 
 INSERT INTO linha VALUES 
 (null, 'Azul', 1, 1),
@@ -300,5 +299,7 @@ select idComputador, estacao.nome from  computador
     select * from estacao
     -- JOIN computador 
     -- ON fkEstacao = idEstacao;
-    
-    
+    ;
+    use viatech;
+    select * from empresa;
+    select * from funcionario;
