@@ -1,5 +1,7 @@
 function listarLinhas(idEmpresa) {
     var idEmpresa = sessionStorage.ID_EMPRESA;
+
+    var total_maquinas = document.getElementById('total_maquinas');
   
   fetch(`/dashboard/listarLinhas/${idEmpresa}/`)
       .then(resposta => {
@@ -16,6 +18,8 @@ function listarLinhas(idEmpresa) {
                       option.text = resposta.nome;
                       select.appendChild(option);
                   });
+
+                  total_maquinas.innerHTML = resposta.length;
 
               });
           } else {

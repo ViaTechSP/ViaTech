@@ -20,10 +20,7 @@ function buscarComputadores(idEmpresa) {
 function buscarLinhas(idEmpresa) {
     var instrucao = 
     `
-    select idLinha, linha.nome from linha
-	JOIN empresa
-	ON fkEmpresa = idEmpresa
-	WHERE idEmpresa = ${idEmpresa};
+    select idLinha, linha.nome from linha JOIN empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa};
     `
     
     return database.executar(instrucao);

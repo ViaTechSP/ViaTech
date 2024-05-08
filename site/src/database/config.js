@@ -2,9 +2,9 @@ var mysql = require("mysql2");
 
 var mySqlConfig = {
     host: "localhost",
-    database: "viatech",
+    database: "Viatech",
     user: "root",
-    password: "rabello",
+    password: "Tove@123",
 };
 
 function executar(instrucao) {
