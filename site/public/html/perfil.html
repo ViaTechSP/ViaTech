@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaTech | Perfil</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="stylesheet" href="../css/menuLateral.css">
+
+    <!-- JS -->
+    <script src="../js/menuLateral.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/perfil.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- STYLE & ICONES-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    
+    <nav id="menuLateral" style="width: 5%;">
+        <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+        
+        <div class="container" id="containerMenuLateral" style="display: none;">
+            
+            <p style="display: flex; align-items: center;">
+                <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
+                <i class="material-icons" onclick="clicarMenu()">menu</i>
+            </p>
+            
+            <p>Olá, <span id="ola">Undefined</span></p>
+            
+        <div id="containerItens" class="container-itens">
+            <div class="item">
+                <a href="perfil.html"  style="color: #e6e62c;"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
+            </div>
+            
+            <div class="item">
+                <a href="dashboard_geral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+            </div>
+            
+            <div class="item">
+                <a href="alertas.html"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
+            </div>
+            
+            
+            <div class="item esconder-item">
+                <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
+            </div>
+            
+            
+            <div class="item esconder-item">
+                <a href="funcionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+            </div>
+            
+        </div>
+        
+        <div onclick="logout()" class="buttonSair">
+            <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+        </div>
+        
+    </nav>
+
+    <div class="header">
+        <h3>Perfil</h3>
+    </div>
+    <div class="container">
+        <div class="quadrado-perfil">
+            <div class="profile-header">
+                <div class="profile-photo">
+                    <img id="profileImage" src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Foto Perfil">
+                    <button class="alter-image-btn" id="alterImageBtn">Alterar Imagem</button>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <div class="profile-inputs">
+                <div class="secao-esquerda">
+                    <div class="input-container">
+                        <label for="ipt_nome">Nome:</label>
+                        <input id="ipt_nome" value="Matheus Rabello" disabled>
+                    </div>
+                    <div class="input-container">
+                        <label for="ipt_cpf">CPF:</label>
+                        <input id="ipt_cpf" value="412.148.389-04" disabled>
+                    </div>
+                    <div class="input-container">
+                        <label for="ipt_cargo">Cargo:</label>
+                        <input id="ipt_cargo" value="Gerente" disabled>
+                    </div>
+                </div>
+                <div class="secao-direita">
+                    <div class="input-container">
+                        <label for="ipt_empresa">Empresa:</label>
+                        <input id="ipt_empresa" value="ViaQuatro" disabled>
+                    </div>
+                    <div class="input-container">
+                        <label for="ipt_email">Email:</label>
+                        <input type="email" id="ipt_email" value="rabello@viatech" disabled>
+                    </div>
+                    <div class="input-container">
+                        <label for="ipt_senha">Senha:</label>
+                        <input type="password" id="ipt_senha" value="Senha123!" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-footer">
+                <button onclick="alterar()" id="botao_alterar" class="botao-alterar">Alterar informações</button>
+                <button onclick="salvar()" id="botao_salvar" style="display: none;" class="botao-alterar">Salvar informações</button>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>
