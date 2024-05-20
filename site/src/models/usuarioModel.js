@@ -39,11 +39,11 @@ function autenticar(emailVar, senhaVar) {
     });
 }
 
-function cadastrar(nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar);
+function cadastrar(nomeFantasiaVar, cnpjVar, apelidoVar) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeFantasiaVar, apelidoVar, cnpjVar);
     
     var instrucao = `
-        INSERT INTO empresa (nomeFantasia, CNPJ, telefone, email, senha) VALUES ('${nomeFantasiaVar}', '${cnpjVar}', '${telefoneVar}', '${emailVar}', '${senhaVar}');
+        INSERT INTO empresa (razaoSocial, apelido, CNPJ) VALUES ('${nomeFantasiaVar}', '${apelidoVar}', '${cnpjVar}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -52,6 +52,15 @@ function cadastrar(nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar) {
 function pegarId(emailVar) {
     var instrucao = `
         SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ FROM empresa WHERE email = '${emailVar}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+
+    return database.executar(instrucao);
+}
+
+function pegarIdEmpresa() {
+    var instrucao = `
+        SELECT MAX(idEmpresa) FROM empresa WHERE idEmpresa;';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
 
@@ -90,5 +99,6 @@ module.exports = {
     pegarId,
     alterarSenha,
     cadastrarFun, 
-    exibirFun
+    exibirFun,
+    pegarIdEmpresa
 };

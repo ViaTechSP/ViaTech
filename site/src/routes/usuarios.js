@@ -20,6 +20,10 @@ router.post("/pegarId", function (req, res) {
     usuarioController.pegarId(req, res);
 });
 
+router.post("/pegarIdEmpresa", function (req, res) {
+    usuarioController.pegarIdEmpresa(req, res);
+});
+
 router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);
 });

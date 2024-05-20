@@ -30,24 +30,20 @@ function autenticar(req, res) {
 function cadastrar(req, res) {
     var nomeFantasiaVar = req.body.nomeFantasiaServer;
     var cnpjVar = req.body.cnpjServer;
-    var telefoneVar = req.body.telefoneSerer;
-    var emailVar = req.body.emailServer;
-    var senhaVar = req.body.senhaServer;    
+    var apelidoVar = req.body.apelidoServer;
+    // var telefoneVar = req.body.telefoneSerer;
+    // var senhaVar = req.body.senhaServer;    
 
     if (nomeFantasiaVar == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cnpjVar == undefined) {
         res.status(400).send("Seu cnpj está undefined!");
-    } else if (senhaVar == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    } else if (telefoneVar == undefined) {
-        res.status(400).send("Seu telefone está undefined!");
-    } else if(emailVar == undefined) {
+    } else if(apelidoVar == undefined) {
         res.status(400).send("Seu email está undefined!");
     } 
     else {
 
-        usuarioModel.cadastrar(nomeFantasiaVar, cnpjVar, telefoneVar, emailVar, senhaVar)
+        usuarioModel.cadastrar(nomeFantasiaVar, cnpjVar, apelidoVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -89,6 +85,48 @@ function pegarId(req, res) {
                 }
             );
     }
+}
+
+function pegarIdEmpresa(req, res) {
+
+    // var email = req.body.emailServer;
+    // if (email == undefined) {
+    //     res.status(400).send("Seu email está undefined!");
+    // } else {
+
+    //   usuarioModel.pegarIdEmpresa()
+    //     .then(
+    //          function (resposta) {
+    //              if (resposta.length == 0) {
+    //              res.status(403).send("Email inválido(s)");
+    //             } else {
+    //              res.status(200).json(resposta);
+    //             }      
+    //         }
+    //     ).catch(
+    //          function (erro) {
+    //              console.log(erro);
+    //              console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+    //              res.status(500).json(erro.sqlMessage);
+    //             }
+    //         );
+    // }
+
+    
+    
+      usuarioModel.pegarIdEmpresa()
+        .then(
+             function (resposta) {
+                 
+                 res.status(200).json(resposta);
+                }      
+        ).catch(
+             function (erro) {
+                 console.log(erro);
+                 console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                 res.status(500).json(erro.sqlMessage);
+                }
+            );
 }
 
 function alterarSenha(req, res) {
@@ -218,5 +256,6 @@ module.exports = {
     pegarId,
     alterarSenha,
     cadastrarFun,
-    exibirFun
+    exibirFun,
+    pegarIdEmpresa
 }

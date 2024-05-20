@@ -60,27 +60,58 @@
             </ul>
         </menu>
         <img src="../assets/imgs/imagemEsqueceuSenha.jpg" alt="metro em movimento" class="imagemHome">
+        
         <div id="div_email" class="container">                                   
             <h1>Cadastre-se</h1>
-            <p>Nome fantasia</p>
+
+
+            <p>Razão Social:</p>
             <input id="input_nomeFantasia" type="text">
             <p id="errado_nomeFantasia" class="errado"></p>
-            <p>CNPJ</p>
+
+            <p>Nome Fantasia:</p>
+            <input id="input_apelido" type="email">
+            <p id="errado_email" class="errado"></p>
+
+            <p>CNPJ:</p>
             <input type="text" id="input_cnpj"  required>
             <p id="errado_cnpj" class="errado"></p>
-            <p>Telefone</p>
+
+            
+        <!-- 
+             <p>Telefone</p>
             <input type="tel" id="input_telefone" required>
-            <p id="errado_telefone" class="errado"></p>
-            <p>Email</p>
-            <input id="input_email" type="email">
-            <p id="errado_email" class="errado"></p>
+            <p id="errado_telefone" class="errado"></p> 
+            
             <p>Senha</p>
             <input id="input_senha" type="password">
             <p id="errado_senha" class="errado"></p>
             <p>Confirmar senha</p>
             <input id="input_senha2" type="password">
-            <p id="errado_senha2" class="errado"></p>
-            <button onclick="cadastrar()" class="botaoAvancar">Cadastrar</button>
+            <p id="errado_senha2" class="errado"></p>  -->
+
+            <button onclick="cadastrar()" class="botaoAvancar">Avançar</button>
+        </div>
+
+
+        <div id="divPrimerioFun" style="display: none;">                                   
+            <p>Nome</p>
+            <input id="input_nome" type="text">
+            <p id="errado_nome" class="errado"></p>
+            
+            <p>CPF</p>
+            <input type="text" id="input_cpf"  required>
+            <p id="errado_cpf" class="errado"></p>
+            
+            <p>Email</p>
+            <input type="text" id="input_email">
+            <p id="errado_email" class="errado"></p>
+                        
+            <p>Senha</p>
+            <input id="input_senha" type="password">
+            <p id="errado_senha" class="errado"></p>
+
+            <button onclick="cadastrarPrimeiroFun()" class="botaoAvancar">Cadastrar</button>
         </div>
         
     </div> <!-- FINAL DA IMAGEM DE FUNDO-->
@@ -89,41 +120,84 @@
 
         $(document).ready(function(){
             $('#input_cnpj').mask('00.000.000/0000-00', {reverse: true});
-            $('#input_telefone').mask('(00)00000-0000');
         });
         
-        function cadastrar() {
+        var idEmpresaCadastrada;
+
+    function pegarIdEmpresa(){
+ 
+         /*Enviando para o servidor*/
+         fetch("/usuarios/pegarIdEmpresa",{
+         method: "POST",
+         headers: {
+         "Content-Type": "application/json"
+       },
+    })
+     .then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+     
+       if (resposta.status == 200) {
+        resposta.json().then(json => {
+          
+          /*Como os dados vem em json dentro de um vetor, estou pegando a primeira posição*/
+          console.log(JSON.stringify(json));
+          sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+         });
+
+         idEmpresaCadastrada =  sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+         
+         console.log(idEmpresaCadastrada);
+         
+       }
+     
+       else {
+        console.log("Houve um erro ao tentar realizar o resgate do id!");
+     
+        resposta.text().then(texto => {
+          console.error(texto);
+         });
+       }
+     }).catch(function (erro) {
+       console.log(erro);
+     })       
+        
+    } 
+    
+    function cadastrar() {
             var nomeFantasia = input_nomeFantasia.value;
-            var cnpjComCaractere = input_cnpj.value;
-            var telefoneComCaractere = input_telefone.value;
-            var email = input_email.value;
-            var senha = input_senha.value;
-            var senha2 = input_senha2.value;
+            var cnpj = input_cnpj.value;
+            var apelido = input_apelido.value;
+
+            // var telefoneComCaractere = input_telefone.value;
+            // var senha = input_senha.value;
+            // var senha2 = input_senha2.value;
             
             // TIRANDO CARACTERES
-            var cnpj = cnpjComCaractere.replace(/\D/g, '');
-            var telefone = telefoneComCaractere.replace(/\D/g, '');
+            // var cnpj = cnpjComCaractere.replace(/\D/g, '');
+            // var telefone = telefoneComCaractere.replace(/\D/g, '');
 
-            var validado = ((nomeFantasia.length >= 1 && nomeFantasia != '') && (cnpj.length == 14) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+            var validado = ((nomeFantasia.length >= 1 && nomeFantasia != '') && (cnpj.length == 18) && (apelido.length >= 1 && apelido != ''))
             
 
             var erradoNomeFantasia = document.getElementById("errado_nomeFantasia");
             var erradoCnpj = document.getElementById("errado_cnpj");
-            var erradoTelefone = document.getElementById("errado_telefone");
             var erradoEmail = document.getElementById("errado_email");
-            var erradoSenha = document.getElementById("errado_senha");
-            var erradoSenha2 = document.getElementById("errado_senha2");
+
+            // var erradoTelefone = document.getElementById("errado_telefone");
+            // var erradoSenha = document.getElementById("errado_senha");
+            // var erradoSenha2 = document.getElementById("errado_senha2");
 
 
             erradoNomeFantasia.textContent = "";
             erradoCnpj.textContent = "";
-            erradoTelefone.textContent = "";
             erradoEmail.textContent = "";
-            erradoSenha.textContent = "";
+
+            // erradoTelefone.textContent = "";
+            // erradoSenha.textContent = "";
 
                 
             if (nomeFantasia.trim() === "") {
-            erradoNomeFantasia.textContent = "Insira o nome fantasia";
+            erradoNomeFantasia.textContent = "Insira um nome válido!";
             erradoNomeFantasia.style.display = "block";
             erradoNomeFantasia.style.color = "#ff5353";
             erradoNomeFantasia.style.fontWeight = "bold";
@@ -138,31 +212,31 @@
             return false;
             }
 
-            if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-            erradoTelefone.textContent = "Insira um telefone válido.";
-            erradoTelefone.style.display = "block";
-            erradoTelefone.style.color = "#ff5353";
-            erradoTelefone.style.fontWeight = "bold";
-            return false;
-            }
+            // if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
+            // erradoTelefone.textContent = "Insira um telefone válido.";
+            // erradoTelefone.style.display = "block";
+            // erradoTelefone.style.color = "#ff5353";
+            // erradoTelefone.style.fontWeight = "bold";
+            // return false;
+            // }
 
-            if (email.trim() === "" || email.indexOf("@") == -1) {
-            erradoEmail.textContent = "Insira um email válido.";
+            if (apelido.trim() === "") {
+            erradoEmail.textContent = "Insira um apelido válido.";
             erradoEmail.style.display = "block";
             erradoEmail.style.color = "#ff5353";
             erradoEmail.style.fontWeight = "bold";
             return false;
             }
 
-                if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+                // if (senha.length >= 6 && (senha == senha2) && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
 
-                    console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
-                } else{
-                erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
-                erradoSenha.style.display = "block";
-                erradoSenha.style.color = "#ff5353";
-                erradoSenha.style.fontWeight = "bold";
-                }
+                //     console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+                // } else{
+                // erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+                // erradoSenha.style.display = "block";
+                // erradoSenha.style.color = "#ff5353";
+                // erradoSenha.style.fontWeight = "bold";
+                // }
 
             
              fetch("/usuarios/cadastrar", { /* Requisição */
@@ -174,22 +248,115 @@
              /*cTransformando em JSON e enviando para o servidor */
              nomeFantasiaServer: nomeFantasia, 
              cnpjServer: cnpj,
-             telefoneSerer: telefone,
-             emailServer: email,
-             senhaServer: senha
+             apelidoServer: apelido
+            //  telefoneSerer: telefone,
+            //  senhaServer: senha
                }),
              }).then(function (resposta) {
               console.log("ESTOU NO THEN DO entrar()!");
-              window.location = 'login.html'
+              var div_cadastro = document.getElementById("div_email");
+              var div_primerio_fun = document.getElementById("divPrimerioFun");
+              
+              div_cadastro.style.display = 'none';
+              div_primerio_fun.style.display = 'block';
+              div_primerio_fun.style.display = 'flex';
+
+              pegarIdEmpresa();
+
             })
              console.log("entrou")
              }
 
+             $(document).ready(function(){
+            $('#input_cpf').mask('000.000.000-00', {reverse: true});
+        });
 
-        function Login(){
+
+    function cadastrarPrimeiroFun(){
+        
+        var nome = input_nome.value;
+        var cpf = input_cpf.value;
+        var email = input_email.value;
+        var senha = input_senha.value;
+        var cargo = 'Gerente';
+        var idEmpresa = sessionStorage.ID_EMPRESA;
+
+        console.log(idEmpresa);
+
+     
+  
+        var validado = ((nome.length >= 1 && nome != '') && (cpf.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+     
+        var erradoNome = document.getElementById("errado_nome");
+        var erradocpf = document.getElementById("errado_cpf");
+     
+        var erradoEmail = document.getElementById("errado_email");
+        var erradoSenha = document.getElementById("errado_senha");
+        var erradoCargo = document.getElementById("errado_cargo");
+    
+        erradoNome.textContent = "";
+        erradocpf.textContent = "";
+        erradoEmail.textContent = "";
+        erradoSenha.textContent = "";
+        erradoCargo.textContent = "";
+     
+        if (nome.trim() === "") {
+        erradoNome.textContent = "Insira o nome fantasia";
+        erradoNome.style.display = "block";
+        erradoNome.style.color = "#ff5353";
+        erradoNome.style.fontWeight = "bold";
+        return false;
+        }
+          if (cpf.trim() === "") {
+        erradocpf.textContent = "Insira um cpf válido.";
+        erradocpf.style.display = "block";
+        erradocpf.style.color = "#ff5353";
+        erradocpf.style.fontWeight = "bold";
+        return false;
+        }
+      if (email.trim() === "" || email.indexOf("@") == -1) {
+        erradoEmail.textContent = "Insira um email válido.";
+        erradoEmail.style.display = "block";
+        erradoEmail.style.color = "#ff5353";
+        erradoEmail.style.fontWeight = "bold";
+        return false;
+        }
+          if (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
+              console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
+            } else{
+            erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
+            erradoSenha.style.display = "block";
+            erradoSenha.style.color = "#ff5353";
+            erradoSenha.style.fontWeight = "bold";
+            }
+      if(validado){
+         fetch("/usuarios/cadastrarFun", { /* Requisição */
+         method: "POST", /* Enviando para routers */
+         headers: {
+         "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+         /*cTransformando em JSON e enviando para o servidor */
+         nomeServer: nome, 
+         cpfServer: cpf,
+         emailServer: email,
+         senhaServer: senha,
+         cargoServer: cargo,
+         idEmpresaSever: idEmpresa
+           }),
+         })
+        //  console.log(body.ID_EMPRESA)
+        } else{
+          alert("Não foi possível realizar o cadastro!")
+        }
+        }     
+            
+    
+    function Login(){
         window.location = "login.html"
     }
-        function telaCadastro(){
+        
+    function telaCadastro(){
             window.location ="cadastro.html"
     }
 
