@@ -126,6 +126,8 @@
 
     function pegarIdEmpresa(){
  
+        // var idEmpresaExibir = receber_idade30.json().idade_30;
+
          /*Enviando para o servidor*/
          fetch("/usuarios/pegarIdEmpresa",{
          method: "POST",
@@ -141,10 +143,10 @@
           
           /*Como os dados vem em json dentro de um vetor, estou pegando a primeira posição*/
           console.log(JSON.stringify(json));
-          sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+          sessionStorage.ID_EMPRESA = json[0];
          });
 
-         idEmpresaCadastrada =  sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+         idEmpresaCadastrada = sessionStorage.ID_EMPRESA;
          
          console.log(idEmpresaCadastrada);
          
@@ -159,7 +161,7 @@
        }
      }).catch(function (erro) {
        console.log(erro);
-     })       
+     })  
         
     } 
     
@@ -270,6 +272,8 @@
              $(document).ready(function(){
             $('#input_cpf').mask('000.000.000-00', {reverse: true});
         });
+
+
 
 
     function cadastrarPrimeiroFun(){

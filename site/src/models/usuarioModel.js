@@ -60,7 +60,7 @@ function pegarId(emailVar) {
 
 function pegarIdEmpresa() {
     var instrucao = `
-        SELECT MAX(idEmpresa) FROM empresa WHERE idEmpresa;';
+    SELECT idEmpresa FROM empresa ORDER BY idEmpresa DESC LIMIT 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
 

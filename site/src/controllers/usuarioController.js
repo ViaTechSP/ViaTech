@@ -1,3 +1,4 @@
+const { json } = require("express");
 var usuarioModel = require("../models/usuarioModel");
 
 function autenticar(req, res) {
@@ -116,9 +117,16 @@ function pegarIdEmpresa(req, res) {
     
       usuarioModel.pegarIdEmpresa()
         .then(
-             function (resposta) {
-                 
-                 res.status(200).json(resposta);
+                function (resposta) {
+                
+                    if(resposta){
+                        const idEmpresaVarVar = resposta[0]['idEmpresa'];
+                        console.log('USUARIO CONTROLLER idempresavarvar ==>', idEmpresaVarVar)
+                        res.status(200).json({idEmpresaVarVar: idEmpresaVarVar});
+                        console.log('USUARIO CONTROLLER idempresavarvar ==>', json({idEmpresaVarVar: idEmpresaVarVar}));
+                    }else{
+                        res.status(204).json([]);
+                    }
                 }      
         ).catch(
              function (erro) {
