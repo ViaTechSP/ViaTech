@@ -88,32 +88,7 @@ function pegarId(req, res) {
     }
 }
 
-function pegarIdEmpresa(req, res) {
-
-    // var email = req.body.emailServer;
-    // if (email == undefined) {
-    //     res.status(400).send("Seu email está undefined!");
-    // } else {
-
-    //   usuarioModel.pegarIdEmpresa()
-    //     .then(
-    //          function (resposta) {
-    //              if (resposta.length == 0) {
-    //              res.status(403).send("Email inválido(s)");
-    //             } else {
-    //              res.status(200).json(resposta);
-    //             }      
-    //         }
-    //     ).catch(
-    //          function (erro) {
-    //              console.log(erro);
-    //              console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-    //              res.status(500).json(erro.sqlMessage);
-    //             }
-    //         );
-    // }
-
-    
+function pegarIdEmpresa(req, res) { 
     
       usuarioModel.pegarIdEmpresa()
         .then(
@@ -122,8 +97,7 @@ function pegarIdEmpresa(req, res) {
                     if(resposta){
                         const idEmpresaVarVar = resposta[0]['idEmpresa'];
                         console.log('USUARIO CONTROLLER idempresavarvar ==>', idEmpresaVarVar)
-                        res.status(200).json({idEmpresaVarVar: idEmpresaVarVar});
-                        console.log('USUARIO CONTROLLER idempresavarvar ==>', json({idEmpresaVarVar: idEmpresaVarVar}));
+
                     }else{
                         res.status(204).json([]);
                     }
@@ -135,6 +109,8 @@ function pegarIdEmpresa(req, res) {
                  res.status(500).json(erro.sqlMessage);
                 }
             );
+
+            return idEmpresaVarVar  = variavelTeste;
 }
 
 function alterarSenha(req, res) {
