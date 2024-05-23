@@ -49,12 +49,12 @@ function alterarInfo(idFuncionario, nome, cpf, email, senha, cargo) {
     return database.executar(instrucao);
 }
 
-// function exibirFun(idEmpresa){
-//     var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
+function exibirFun(idEmpresa){
+    var query = `SELECT funcionario.* FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
     
-//     console.log('executando query: ', query)
-//     return database.executar(query);
-// }
+    console.log('executando query: ', query)
+    return database.executar(query);
+}
 
 module.exports = {
     autenticar,
@@ -63,5 +63,5 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    // exibirFun
+    exibirFun
 };
