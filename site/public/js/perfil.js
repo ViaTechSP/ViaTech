@@ -1,3 +1,31 @@
+function atualizarInfo() {
+    document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
+    var idFuncionario = sessionStorage.ID_FUNCIONARIO;
+    console.log('id =>', idFuncionario)
+
+    fetch(`/usuarios/buscarInfo/${idFuncionario}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          if (resposta.length > 0) {
+            document.getElementById('ipt_nome').value = resposta[0].nome;
+            document.getElementById('ipt_cpf').value = resposta[0].cpf;
+            document.getElementById('ipt_cargo').value = resposta[0].cargo;
+            document.getElementById('ipt_email').value = resposta[0].email;
+            document.getElementById('ipt_senha').value = resposta[0].senha;
+          } else {
+            console.error('Nenhuma informação encontrada');
+          }
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+    .catch(function (error) {
+      console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
+    });
+}
+
 function alterar() {
     const inputs = document.querySelectorAll('input');
     const botaoAlterar = document.getElementById('botao_alterar');
@@ -17,15 +45,41 @@ function salvar() {
     var cargo = ipt_cargo.value;
     var email = ipt_email.value;
     var senha = ipt_senha.value;
+    var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 
-    const inputs = document.querySelectorAll('input');
-    const botaoAlterar = document.getElementById('botao_alterar');
-    const botaoSalvar = document.getElementById('botao_salvar');
+    if(nome != '' && cpf != '' && cargo != '' && email != '' && senha != '' && idFuncionario != '') {
+    
+    fetch(`/usuarios/alterarInfo/`,{
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            idFuncionario: idFuncionario,
+            nome: nome,
+            cpf: cpf,
+            email: email,
+            senha: senha,
+            cargo: cargo 
+        })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            atualizarInfo();
+            const inputs = document.querySelectorAll('input');
+            const botaoAlterar = document.getElementById('botao_alterar');
+            const botaoSalvar = document.getElementById('botao_salvar');
+            
+            inputs.forEach(input => {
+                if(input.id != 'ipt_empresa') input.toggleAttribute('disabled');
+            })
+            
+            botaoAlterar.style.display = 'flex';
+            botaoSalvar.style.display = 'none';
+            swal('sucesso!', "Informações alteradas!");
 
-    inputs.forEach(input => {
-        if(input.id != 'ipt_empresa') input.toggleAttribute('disabled');
-    })
-
-    botaoAlterar.style.display = 'flex';
-    botaoSalvar.style.display = 'none';
+        } else {
+            swal('error', "Não foi possível trocar a senha!");
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+    }
 }
