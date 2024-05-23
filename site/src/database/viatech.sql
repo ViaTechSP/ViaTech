@@ -75,3 +75,4 @@ CREATE TABLE registro (
 
 select * from empresa;
 select * from funcionario;
+use viatech;
