@@ -1,7 +1,12 @@
 var database = require("../database/config")
 
-function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, fkEmpresaVar) {
-    var instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'gerente', ${fkEmpresaVar});`;
+function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargo, fkEmpresaVar) {
+    var instrucao = '';
+    if (cargo == null || cargo == undefined || cargo == '') {
+        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'gerente', ${fkEmpresaVar});`;
+    } else {
+        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', '${cargo}', ${fkEmpresaVar});`;
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

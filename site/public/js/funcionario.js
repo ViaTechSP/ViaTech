@@ -1,20 +1,6 @@
-
 $(document).ready(function(){
   $('#input_cpf').mask('000.000.000-00');
 });
-
-function clicarMenu() {
-  const menu = document.getElementById('menuLateral');
-  menu.classList.toggle('escondido');
-  if (menu.classList.contains('escondido')) {
-      menuEscondido.style.display = 'block'
-      containerMenuLateral.style.display = 'none';
-  }
-  else {
-      menuEscondido.style.display = 'none'
-      containerMenuLateral.style.display = 'block'
-}
-}
   
       function exibirFun() {
         var idEmpresa = sessionStorage.ID_EMPRESA;
@@ -124,6 +110,7 @@ function clicarMenu() {
                 cpfServer: cpf,
                 emailServer: email,
                 senhaServer: senha,
+                cargoServer: cargo,
                 fkEmpresaServer: fkEmpresa
               }),
             }).then(function (resposta) {

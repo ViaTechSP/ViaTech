@@ -24,6 +24,7 @@ function cadastrarFun(req, res){
     var cpfVar = req.body.cpfServer;
     var emailVar = req.body.emailServer;
     var senhaVar = req.body.senhaServer;
+    var cargoVar = req.body.cargoServer;
     var fkEmpresaVar = req.body.fkEmpresaServer;
 
     if (nomeVar == undefined) {
@@ -37,7 +38,7 @@ function cadastrarFun(req, res){
     } else if(fkEmpresaVar == undefined){
         res.status(400).send("O id empresa está undefined!");
     } else {
-        usuarioModel.cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, fkEmpresaVar)
+        usuarioModel.cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
