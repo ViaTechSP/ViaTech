@@ -3,29 +3,28 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
-router.post("/cadastrar", function (req, res) {
-    usuarioController.cadastrar(req, res);
-})
-
 router.post("/cadastrarFun", function (req, res) {
     usuarioController.cadastrarFun(req, res);
-})
+});
 
-router.post("/autenticar", function (req, res) {
+router.get("/autenticar/:email/:senha", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
-router.post("/pegarId", function (req, res) {
-    usuarioController.pegarId(req, res);
-});
-
-router.post("/pegarIdEmpresa", function (req, res) {
-    usuarioController.pegarIdEmpresa(req, res);
+router.get("/buscarId/:email", function (req, res) {
+    usuarioController.buscarId(req, res);
 });
 
 router.put("/alterarSenha", function (req, res) {
     usuarioController.alterarSenha(req, res);
+});
+
+router.get("/buscarInfo/:idFuncionario", function (req, res) {
+    usuarioController.buscarInfo(req, res);
+});
+
+router.put("/alterarInfo", function (req, res) {
+    usuarioController.alterarInfo(req, res);
 });
 
 router.get("/exibirFun/:idEmpresa", function (req, res) {

@@ -1,104 +1,67 @@
 var database = require("../database/config")
 
+function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, fkEmpresaVar) {
+    var instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'gerente', ${fkEmpresaVar});`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function autenticar(emailVar, senhaVar) {
-    return new Promise((resolve, reject) => {
-        // Consulta para empresa
-        var instrucaoEmpresa = `
-            SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ 
-            FROM empresa 
-            WHERE email = '${emailVar}' AND senha = '${senhaVar}';
-        `;
-        
-        var instrucaoFuncionario = `
-            SELECT idFuncionario, nome, email, senha, cargo 
-            FROM funcionario 
-            WHERE email = '${emailVar}' AND senha = '${senhaVar}';
-        `;
+    var instrucao = `SELECT * FROM Funcionario JOIN Empresa ON fkEmpresa = idEmpresa WHERE email = '${emailVar}' AND senha = '${senhaVar}';`;
 
-        console.log("Executando a instrução SQL para empresa: \n" + instrucaoEmpresa);
-        console.log("Executando a instrução SQL para funcionário: \n" + instrucaoFuncionario);
-
-        database.executar(instrucaoEmpresa, [emailVar, senhaVar])
-            .then(resultadoEmpresa => {
-                if (resultadoEmpresa.length > 0) {
-                    resolve({ tipo: 'empresa', dados: resultadoEmpresa });
-                } else {
-                    return database.executar(instrucaoFuncionario, [emailVar, senhaVar]);
-                }
-            })
-            .then(resultadoFuncionario => {
-                if (resultadoFuncionario && resultadoFuncionario.length > 0) {
-                    resolve({ tipo: 'funcionario', dados: resultadoFuncionario });
-                } else {
-                    reject(new Error("Autenticação falhou"));
-                }
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
-function cadastrar(nomeFantasiaVar, cnpjVar, apelidoVar) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeFantasiaVar, apelidoVar, cnpjVar);
+function buscarId(email) {
+    var instrucao = `SELECT id FROM Funcionario WHERE email = '${email}';`;
     
-    var instrucao = `
-        INSERT INTO empresa (razaoSocial, apelido, CNPJ) VALUES ('${nomeFantasiaVar}', '${apelidoVar}', '${cnpjVar}');
-    `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function pegarId(emailVar) {
-    var instrucao = `
-        SELECT idEmpresa, nomeFantasia, email, senha, telefone, CNPJ FROM empresa WHERE email = '${emailVar}';
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
+function alterarSenha(novaSenha, idFuncionario) {
+    var instrucao = `UPDATE funcionario SET senha = '${novaSenha}' WHERE id = ${idFuncionario};`;
 
-    return database.executar(instrucao);
-}
-
-function pegarIdEmpresa() {
-    var instrucao = `
-    SELECT idEmpresa FROM empresa ORDER BY idEmpresa DESC LIMIT 1;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-
-    return database.executar(instrucao);
-}
-
-function alterarSenha(novaSenhaVar, idEmpresaVar) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ");
-    var instrucao = `
-        UPDATE empresa SET senha = '${novaSenhaVar}' WHERE idEmpresa = ${idEmpresaVar};
-    `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function cadastrarFun(fkEmpresaVar, nomeVar, cpfVar, telefoneVar, cargoVar, emailVar, senhaVar) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():");
+function buscarInfo(idFuncionario) {
+    var instrucao = `SELECT * FROM Funcionario WHERE id = '${idFuncionario}';`;
     
-    var instrucao = `
-        INSERT INTO funcionario (fkEmpresa, nome, cpf, telefone, cargo, email, senha) VALUES ('${fkEmpresaVar}', '${nomeVar}', '${cpfVar}', '${telefoneVar}', '${cargoVar}', '${emailVar}', '${senhaVar}');
-    `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function exibirFun(idEmpresa){
-    var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
-    
-    console.log('executando query: ', query)
-    return database.executar(query);
+function alterarInfo(idFuncionario, nome, cpf, email, senha, cargo) {
+    var instrucao = 
+    `UPDATE funcionario SET 
+    nome = '${nome}',
+    cpf = '${cpf}',
+    email = '${email}',
+    senha = '${senha}',
+    cargo = '${cargo}' 
+    WHERE id = ${idFuncionario};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
+
+// function exibirFun(idEmpresa){
+//     var query = `SELECT idFuncionario, funcionario.nome, funcionario.cargo, funcionario.cpf, funcionario.email FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
+    
+//     console.log('executando query: ', query)
+//     return database.executar(query);
+// }
 
 module.exports = {
     autenticar,
-    cadastrar,
-    pegarId,
+    cadastrarFun,
+    buscarId,
     alterarSenha,
-    cadastrarFun, 
-    exibirFun,
-    pegarIdEmpresa
+    buscarInfo,
+    alterarInfo,
+    // exibirFun
 };

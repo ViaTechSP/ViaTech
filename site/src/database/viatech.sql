@@ -1,25 +1,26 @@
+DROP DATABASE viatech;
 CREATE DATABASE viatech;
 USE viatech;
 
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 razaoSocial VARCHAR(245) NOT NULL,
-nomeFantasia VARCHAR(245),
-apelido VARCHAR (245),
-CNPJ CHAR(14) NOT NULL
+nomeFantasia VARCHAR (245),
+CNPJ VARCHAR(18) NOT NULL UNIQUE
 );
 
 CREATE TABLE funcionario(
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 urlFoto VARCHAR(300) NULL,
 nome VARCHAR(100) NOT NULL,
-cpf CHAR(11) NOT NULL,
-email VARCHAR(100) NOT NULL,
+cpf CHAR(14) NOT NULL UNIQUE,
+email VARCHAR(100) NOT NULL UNIQUE,
 senha VARCHAR(100) NOT NULL,
 cargo VARCHAR(100) NOT NULL,
 fkEmpresa INT NOT NULL,
 CONSTRAINT FOREIGN KEY (fkEmpresa) REFERENCES empresa (idEmpresa)
 );
+use viatech;
 
 CREATE TABLE linha(
 idLinha INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -72,9 +73,5 @@ CREATE TABLE registro (
   CONSTRAINT FOREIGN KEY (fkEspecificacaoMaquina) REFERENCES especificacaoMaquina (idEspecificacaoMaquina)
 );
 
-INSERT INTO empresa VALUES
-	(null, "ViaMobilidade LTDA", "Viaiznha", "12345678911234");
-    
-INSERT INTO funcionario  VALUES
-	(null, null, "Teste", "12345678901", "teste@teste.com", "123#Ee", "gerencia", 1);
-    
+select * from empresa;
+select * from funcionario;
