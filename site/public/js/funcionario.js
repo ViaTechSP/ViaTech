@@ -1,15 +1,7 @@
 
-     //$(document).ready(function(){
-     //         $('#input_cpf').mask('000.000.000-00', {reverse: true});
-     //         $('#input_telefone').mask('(00)00000-0000');
-     // });
-    // var nome = sessionStorage.NOME_EMPRESA;
-    // console.log(nome);
-    // var nome_usuario = document.getElementById("nome_atual");
-    // var exibir_nome = document.getElementById('nome_atual');
-    
-    // nome_usuario.innerHTML = nome;
-
+$(document).ready(function(){
+  $('#input_cpf').mask('000.000.000-00');
+});
 
 function clicarMenu() {
   const menu = document.getElementById('menuLateral');
@@ -107,90 +99,58 @@ function clicarMenu() {
           document.getElementById('formularioExibir').style.display = 'none';
       }
   
-      function cadastrarFun(){
+      function cadastrarFun() {
         var nome = input_nome.value;
-        var cpf = input_cpf.value;
-        var telefone = input_telefone.value;
+        var cpf = input_cpf.value
         var email = input_email.value;
         var senha = input_senha.value;
         var cargo = input_cargo.value;
-        var idEmpresa = sessionStorage.ID_EMPRESA;
-
-        console.log(idEmpresa);
-
-     
-  
-        var validado = ((nome.length >= 1 && nome != '') && (cpf.length == 11) && (telefone.length == 11) && ((senha.indexOf("!") >= 0) || (senha.indexOf("@") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf("$") >= 0) || (senha.indexOf("&") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
-     
-        var erradoNome = document.getElementById("errado_nome");
-        var erradocpf = document.getElementById("errado_cpf");
-        var erradoTelefone = document.getElementById("errado_telefone");
-        var erradoEmail = document.getElementById("errado_email");
-        var erradoSenha = document.getElementById("errado_senha");
-        var erradoCargo = document.getElementById("errado_cargo");
+        var fkEmpresa = sessionStorage.ID_EMPRESA;
+        
+        var validacaoNulo = nome != null && cpf != null && email != null && senha != null && fkEmpresa != null;
+        var validacaoVazio = nome != '' && cpf != '' && email != '' && senha != '' && fkEmpresa != '';
+        var validacaoSenha = (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+      
+        if (validacaoNulo && validacaoVazio) {
+          if (validacaoSenha) {
+      
+            fetch("/usuarios/cadastrarFun", {
+              method: "POST", 
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                nomeServer: nome,
+                cpfServer: cpf,
+                emailServer: email,
+                senhaServer: senha,
+                fkEmpresaServer: fkEmpresa
+              }),
+            }).then(function (resposta) {
+              if (resposta.ok) {
+              //   swal.fire({
+              //     title: 'Redirecionando para o login',
+              //     text: 'Aguarde...',
+              //     icon: 'info',
+              //     timer: 2500,
+              //     showConfirmButton: false,
+              // }).then(() => {
+                  window.location = "login.html";
+              // });
+              } else {
+                resposta.text().then(function (texto) {
+                });
+              }
+            }).catch(function (error) {
+              console.error('Erro na requisição:', error);
+              alert('Erro ao cadastrar: ' + error.message);
+            });
+            
+          } else {
+            swal('Erro', "Senha inválida!");
+          }
+      } else {
+        swal('Erro', "Preencha todos os campos corretamente");
+      }
+      }
     
-        erradoNome.textContent = "";
-        erradocpf.textContent = "";
-        erradoTelefone.textContent = "";
-        erradoEmail.textContent = "";
-        erradoSenha.textContent = "";
-        erradoCargo.textContent = "";
-     
-        if (nome.trim() === "") {
-        erradoNome.textContent = "Insira o nome fantasia";
-        erradoNome.style.display = "block";
-        erradoNome.style.color = "#ff5353";
-        erradoNome.style.fontWeight = "bold";
-        return false;
-        }
-          if (cpf.trim() === "") {
-        erradocpf.textContent = "Insira um cpf válido.";
-        erradocpf.style.display = "block";
-        erradocpf.style.color = "#ff5353";
-        erradocpf.style.fontWeight = "bold";
-        return false;
-        }
-      if (telefone.trim() === "" || telefone.replace(/\D/g, '').length !== 11) {
-        erradoTelefone.textContent = "Insira um telefone válido.";
-        erradoTelefone.style.display = "block";
-        erradoTelefone.style.color = "#ff5353";
-        erradoTelefone.style.fontWeight = "bold";
-        return false;
-        }
-      if (email.trim() === "" || email.indexOf("@") == -1) {
-        erradoEmail.textContent = "Insira um email válido.";
-        erradoEmail.style.display = "block";
-        erradoEmail.style.color = "#ff5353";
-        erradoEmail.style.fontWeight = "bold";
-        return false;
-        }
-          if (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0))) {
-              console.log("Essa senha tem caractere especial e tem no minimo 6 letras!")
-            } else{
-            erradoSenha.textContent = "Mínimo 6 caracteres e um caractere especial.";
-            erradoSenha.style.display = "block";
-            erradoSenha.style.color = "#ff5353";
-            erradoSenha.style.fontWeight = "bold";
-            }
-      if(validado){
-         fetch("/usuarios/cadastrarFun", { /* Requisição */
-         method: "POST", /* Enviando para routers */
-         headers: {
-         "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-         /*cTransformando em JSON e enviando para o servidor */
-         nomeServer: nome, 
-         cpfServer: cpf,
-         telefoneSerer: telefone,
-         emailServer: email,
-         senhaServer: senha,
-         cargoServer: cargo,
-         idEmpresaSever: idEmpresa
-           }),
-         })
-        //  console.log(body.ID_EMPRESA)
-        } else{
-          alert("Não foi possível realizar o cadastro!")
-        }
-  }
