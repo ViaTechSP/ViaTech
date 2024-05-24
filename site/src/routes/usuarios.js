@@ -31,4 +31,8 @@ router.get("/exibirFun/:idEmpresa", function (req, res) {
     usuarioController.exibirFun(req, res);
 });
 
+router.get("/buscarInfoAlerta/", function (req, res) {
+    usuarioController.buscarInfoAlerta(req, res);
+});
+
 module.exports = router;
