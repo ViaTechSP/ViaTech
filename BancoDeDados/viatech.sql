@@ -1,13 +1,20 @@
+DROP DATABASE viatech;
 CREATE DATABASE viatech;
 USE viatech;
+
+-- CRIANDO USUÁRIO COM A SENHA PADRÃO	
+-- CREATE USER 'usuario_viatech'@'localhost' IDENTIFIED BY 'viatech';
+-- GRANT ALL PRIVILEGES ON `viatech`.* TO 'usuario_viatech'@'localhost';
+-- FLUSH PRiVILEGES;
+
 
 CREATE TABLE empresa(
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 razaoSocial VARCHAR(245) NOT NULL,
 nomeFantasia VARCHAR(245),
-apelido VARCHAR (245),
 CNPJ CHAR(14) NOT NULL
 );
+
 
 CREATE TABLE funcionario(
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -38,20 +45,17 @@ CONSTRAINT fkLinha FOREIGN KEY (fkLinha) REFERENCES linha (idLinha)
 
 CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-dominio VARCHAR(50) NOT NULL,
+dominio VARCHAR(50) NOT NULL UNIQUE,
 ip VARCHAR(50) NOT NULL,
 sistemaOperacional VARCHAR(45) NOT NULL,
 fkEstacao INT NOT NULL,
 CONSTRAINT fkEstacao FOREIGN KEY (fkEstacao) REFERENCES estacao (idEstacao)
 );
 
-
 CREATE TABLE especificacaoMaquina(
 idEspecificacaoMaquina INT PRIMARY KEY AUTO_INCREMENT,
 nomeCpu  VARCHAR(255),
 frequenciaCpu VARCHAR(50),
-qtdCpuFisica VARCHAR(45),
-qtdCpuLogica VARCHAR(45),
 capacidadeTotalArmazenamento DOUBLE,
 ramTotal DOUBLE,
 fkMaquina INT,
@@ -61,20 +65,14 @@ CONSTRAINT FOREIGN KEY (fkMaquina) REFERENCES maquina (idMaquina)
 CREATE TABLE registro (
   idRegistro INT PRIMARY KEY AUTO_INCREMENT,
   dtHora DATETIME NOT NULL,
-  discoGigabyteLeitura DOUBLE NOT NULL,
-  discoGigabyteEscrita DOUBLE NOT NULL,
   cpuPorcentagemUso DOUBLE,
   cpuTemperatura DOUBLE,
-  nomeDispositivo VARCHAR(100),
+  discoUtilizado DOUBLE,
   ramUtilizada DOUBLE,
-  usbNomeDispositivos VARCHAR(245)  ,
+  qtdDispositivos INT,
   fkEspecificacaoMaquina INT,
   CONSTRAINT FOREIGN KEY (fkEspecificacaoMaquina) REFERENCES especificacaoMaquina (idEspecificacaoMaquina)
 );
 
-INSERT INTO empresa VALUES
-	(null, "ViaMobilidade LTDA", "Viaiznha", "12345678911234");
-    
-INSERT INTO funcionario  VALUES
-	(null, null, "Teste", "12345678901", "teste@teste.com", "123#Ee", "gerencia", 1);
-    
+
+SELECT * FROM EMPRESA;
