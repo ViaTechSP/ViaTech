@@ -43,13 +43,28 @@ fkLinha INT NOT NULL,
 CONSTRAINT fkLinha FOREIGN KEY (fkLinha) REFERENCES linha (idLinha)
 );
 
+
+CREATE TABLE metrica(
+idMetrica INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+minCuidadoDisco INT,
+maxCuidadoDisco INT,
+minCUidadoCpu INT,
+maxCUidadoCpu INT,
+minCUidadoRam INT,
+maxCUidadoRam INT,
+minIdealTemp INT,
+maxIdealTemp INT 
+);
+
 CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 dominio VARCHAR(50) NOT NULL UNIQUE,
 ip VARCHAR(50) NOT NULL,
 sistemaOperacional VARCHAR(45) NOT NULL,
 fkEstacao INT NOT NULL,
-CONSTRAINT fkEstacao FOREIGN KEY (fkEstacao) REFERENCES estacao (idEstacao)
+FkMetrica INT NOT NULL,
+CONSTRAINT fkEstacao FOREIGN KEY (fkEstacao) REFERENCES estacao (idEstacao),
+CONSTRAINT fkMetrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
 );
 
 CREATE TABLE especificacaoMaquina(
@@ -64,7 +79,7 @@ CONSTRAINT FOREIGN KEY (fkMaquina) REFERENCES maquina (idMaquina)
 
 CREATE TABLE registro (
   idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-  dtHora DATETIME NOT NULL,
+  dtHora DATETIME DEFAULT CURRENT_TIMESTAMP  NOT NULL,
   cpuPorcentagemUso DOUBLE,
   cpuTemperatura DOUBLE,
   discoUtilizado DOUBLE,
@@ -74,5 +89,12 @@ CREATE TABLE registro (
   CONSTRAINT FOREIGN KEY (fkEspecificacaoMaquina) REFERENCES especificacaoMaquina (idEspecificacaoMaquina)
 );
 
+CREATE TABLE historicoAlerta(
+idHistoricoAlerta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+tipo VARCHAR(100),
+fkRegistro INT,
+fkRegistroMaquina INT,
+dtHora DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
 
 SELECT * FROM EMPRESA;
