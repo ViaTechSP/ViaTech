@@ -1,13 +1,21 @@
+
 var mysql = require("mysql2");
 var sql = require('mssql');
 
-// CONEXÃO DO SQL SERVER - AZURE (NUVEM)
+// CONEXÃO DO BANCO MYSQL SERVER
+var mySqlConfig = {
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
+};
+
 var sqlServerConfig = {
     server: "34.197.44.86",
     database: "viatech",
     user: "sa",
     password: "urubu100",
-    port: 1433,
     pool: {
         max: 10,
         min: 0,
@@ -16,18 +24,10 @@ var sqlServerConfig = {
     options: {
         encrypt: true, // for azure
     }
-}
-
-// CONEXÃO DO MYSQL WORKBENCH (LOCAL)
-var mySqlConfig = {
-    host: "localhost",
-    database: "SEU_DATABASE",
-    user: "SEU_USUARIO",
-    password: "SUA_SENHA",
 };
 
 function executar(instrucao) {
-    // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
+
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         return new Promise(function (resolve, reject) {
             sql.connect(sqlServerConfig).then(function () {
@@ -60,7 +60,7 @@ function executar(instrucao) {
             });
         });
     } else {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (_resolve, reject) {
             console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
             reject("AMBIENTE NÃO CONFIGURADO EM app.js")
         });
@@ -69,4 +69,4 @@ function executar(instrucao) {
 
 module.exports = {
     executar
-}
+};
