@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="../css/alerta.css">
 
     <script src="../js/alerta.js"></script>
+    <script src="../js/sessao.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body onload="buscarInfoAlerta()">  
+<body onload="buscarInfoAlerta(); validarSessao()">  
         
         <nav id="menuLateral" style="width: 5%;">
             <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
@@ -90,19 +91,19 @@
                     <div class="setting">
                         <h3>Disco Rígido:</h3>
                         <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minDisco" >% máximo<input type="number" disabled id="ipt_maxDisco">%</p>
-                        <p class="problema">❌ Problema maior ou igual <input id="ipt_minProblemaDisco"></input>%</p>
+                        <p class="problema">❌ Problema maior ou igual <input id="ipt_minProblemaDisco" disabled></input>%</p>
                     </div>
 
                     <div class="setting">
                         <h3>CPU:</h3>
                         <p class="cuidado">⚠ Cuidado mínimo: <input type="number" disabled id="ipt_minCpu" >% máximo: <input type="number" disabled id="ipt_maxCpu" >%</p>
-                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaCpu"></input>%</p>
+                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaCpu" disabled></input>%</p>
                     </div>
 
                     <div class="setting">
                         <h3>Memória RAM:</h3>
                         <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minRam" >% máximo<input type="number" disabled id="ipt_maxRam">%</p>
-                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaRam"></input>%</p>
+                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaRam" disabled></input>%</p>
                     </div>
 
                     <div class="setting">
@@ -110,13 +111,14 @@
                         <p class="problema">❌Menor que <input type="number" id="ipt_minProblema" disabled >ºC</p>
                         <p class="cuidado">⚠ Entre<input type="number" disabled id="ipt_minCuidado">ºC e <input type="number" disabled id="ipt_maxCuidado" >ºC</p>
                         <p class="ideal">✔ Entre<input type="number" disabled id="ipt_minIdeal" >ºC e <input type="number" disabled id="ipt_maxIdeal">.</p>
-                        <p class="cuidado">⚠ Entre<input type="number" disabled >ºC e <input type="number" disabled >ºC</p>
-                        <p class="problema">❌ Maior que <input type="number" disabled >ºC</p>
+
+                        <p class="cuidado">⚠ Entre<input type="number" disabled id="ipt_minCuidado2">ºC e <input type="number" disabled id="ipt_maxCuidado2" >ºC</p>
+                        <p class="problema">❌ Maior que <input type="number" disabled id="ipt_minProblema2">ºC</p>
                     </div>
 
                 </div>
-                <button onclick="alterarMetricas()" id="botao_alterar" class="botao-alterar">Alterar informações</button>
-                <button onclick="salvarMetricas()" id="botao_salvar" style="display: none;" class="botao-alterar">Salvar informações</button>
+                <button onclick="alterarMetricas()" id="botao_alterarMetrica" class="botao-alterar">Alterar informações</button>
+                <button onclick="salvarMetricas()" id="botao_salvarMetrica" style="display: none;" class="botao-alterar">Salvar informações</button>
             </div> 
         </div>
 </body>

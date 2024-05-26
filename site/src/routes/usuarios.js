@@ -35,4 +35,8 @@ router.get("/buscarInfoAlerta/", function (req, res) {
     usuarioController.buscarInfoAlerta(req, res);
 });
 
+router.put("/alterarInfoAlerta", function (req, res) {
+    usuarioController.alterarInfoAlerta(req, res);
+});
+
 module.exports = router;

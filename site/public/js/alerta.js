@@ -38,9 +38,12 @@ function buscarInfoAlerta() {
             document.getElementById('ipt_minProblema').value = resposta[0].minProblTemp;
             document.getElementById('ipt_minCuidado').value = resposta[0].minProblTemp + 1;
             document.getElementById('ipt_maxCuidado').value = resposta[0].minIdealTemp - 1;
-            document.getElementById('ipt_maxIdeal').value = resposta[0].maxCuidadoTemp - 1;
+            document.getElementById('ipt_minIdeal').value = resposta[0].minIdealTemp; 
+            document.getElementById('ipt_maxIdeal').value = resposta[0].maxCuidadoTemp - 1; 
+            document.getElementById('ipt_minCuidado2').value = resposta[0].maxCuidadoTemp;
+            document.getElementById('ipt_maxCuidado2').value = resposta[0].maxProblTemp - 1;
+            document.getElementById('ipt_minProblema2').value = resposta[0].maxProblTemp;
             
-            document.getElementById('ipt_minIdeal').value = resposta[0].minIdealTemp;
 
           } else {
             console.error('Nenhuma informação encontrada');
@@ -55,19 +58,94 @@ function buscarInfoAlerta() {
     });
 }
 
-function alterar() {
-    const inputs = document.querySelectorAll('input');
-    const botaoAlterar = document.getElementById('botao_alterar');
-    const botaoSalvar = document.getElementById('botao_salvar');
+function alterarMetricas() {
+  const inputs = document.querySelectorAll('input');
+  const botaoAlterar = document.getElementById('botao_alterarMetrica');
+  const botaoSalvar = document.getElementById('botao_salvarMetrica');
 
-    inputs.forEach(input => {
-        if(input.id != 'ipt_empresa') input.toggleAttribute('disabled');
-    })
+  // Itera sobre cada input
+  inputs.forEach(input => {
+      // Verifica se o id do input NÃO contém a palavra "Problema"
+      if (!input.id.includes('Problema')) {
+        
+          // Se não contém, desabilita o input
+          input.removeAttribute('disabled', true);
 
-    botaoAlterar.style.display = 'none';
-    botaoSalvar.style.display = 'flex';
+          botaoAlterar.style.display = 'none';
+          botaoSalvar.style.display = 'flex';
+          botaoSalvar.style.alignItems = 'center';
+          botaoSalvar.style.justifyContent = 'center';
+      } 
+  });
 }
 
+
+function salvarMetricas() {
+  var minimoDisco = ipt_minDisco.value;
+  var maximoDisco = ipt_maxDisco.value;
+  
+  var minimoCpu = ipt_minCpu.value;
+  var maximoCpu = ipt_maxCpu.value;
+
+  var minimoRam = ipt_minRam.value;
+  var maximoRam = ipt_maxRam.value;
+
+  // TEMPERATURA
+
+  var minimoProblema = ipt_minProblema.value;
+  var minimoIdeal = ipt_minIdeal.value;
+  var maximoCuidado = ipt_minCuidado2.value;
+  var maximoProblema = ipt_minProblema2.value;
+
+
+  var idFuncionario = sessionStorage.ID_FUNCIONARIO;
+
+  if (minimoDisco != '' && maximoDisco != '' && minimoCpu != '' && maximoCpu != '' && minimoRam != '' && maximoRam != '' && minimoProblema != '' && minimoIdeal != '' && maximoCuidado != '' && maximoProblema != '') {
+  
+  fetch(`/usuarios/alterarInfoAlerta/`,{
+      method: "PUT", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        minimoDisco: minimoDisco,
+        maximoDisco: maximoDisco,
+        minimoCpu: minimoCpu,
+        maximoCpu: maximoCpu,
+        minimoRam: minimoRam,
+        maximoRam: maximoRam,
+        minimoProblema: minimoProblema,
+        minimoIdeal: minimoIdeal,
+        maximoCuidado: maximoCuidado,
+        maximoProblema: maximoProblema
+    })
+  }).then(function (resposta) {
+      if (resposta.ok) {
+          buscarInfoAlerta();
+          const inputs = document.querySelectorAll('input');
+          const botaoAlterar = document.getElementById('botao_alterarMetrica');
+          const botaoSalvar = document.getElementById('botao_salvarMetrica');
+
+          inputs.forEach(input => {
+            // Verifica se o id do input NÃO contém a palavra "Problema"
+            if (!input.id.includes('Problema')) {
+              
+                // Se não contém, desabilita o input
+                input.toggleAttribute('disabled', true);
+      
+                botaoSalvar.style.display = 'none';
+                botaoAlterar.style.display = 'flex';
+                botaoAlterar.style.alignItems = 'center';
+                botaoAlterar.style.justifyContent = 'center';
+            } 
+        });
+
+      } else {
+          swal('error', "Não foi possível trocar a senha!");
+          throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+      }
+  }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+  });
+  }
+}
 
 
 

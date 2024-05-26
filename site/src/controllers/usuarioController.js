@@ -108,13 +108,15 @@ function alterarSenha(req, res) {
     
     function alterarInfo(req, res) {
         var idFuncionario = req.body.idFuncionario;
+
+        var imagem = req.body.imagem ;
         var nome = req.body.nome ;
         var cpf = req.body.cpf;
         var email = req.body.email;
         var senha = req.body.senha;
         var cargo = req.body.cargo;
         
-        usuarioModel.alterarInfo(idFuncionario, nome, cpf, email, senha, cargo)
+        usuarioModel.alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo)
         .then(function (resultado) {
                 res.json(resultado);
             })
@@ -151,6 +153,32 @@ function buscarInfoAlerta(req, res) {
     // }
 }
 
+function alterarInfoAlerta(req, res) {
+    // var idFuncionario = req.body.idFuncionario;
+
+    var minimoDisco = req.body.minimoDisco ;
+    var maximoDisco = req.body.maximoDisco ;
+    var minimoCpu = req.body.minimoCpu;
+    var maximoCpu = req.body.maximoCpu;
+    var minimoRam = req.body.minimoRam;
+    var maximoRam = req.body.maximoRam;
+    var minimoProblema = req.body.minimoProblema;
+    var minimoIdeal = req.body.minimoIdeal;
+    var maximoCuidado = req.body.maximoCuidado;
+    var maximoProblema = req.body.maximoProblema;
+    
+    usuarioModel.alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, minimoProblema, minimoIdeal, maximoCuidado, maximoProblema)
+    .then(function (resultado) {
+            res.json(resultado);
+        })
+    .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 
 
 module.exports = {
@@ -161,5 +189,6 @@ module.exports = {
     buscarInfo,
     alterarInfo,
     exibirFun,
-    buscarInfoAlerta
+    buscarInfoAlerta,
+    alterarInfoAlerta
 }

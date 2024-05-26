@@ -31,7 +31,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     border: 1px solid black;
-    width: 500px;
+    width: 675px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,6 +48,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
 }
 
 .profile-photo img {
@@ -59,12 +60,14 @@ body {
 
 .alter-image-btn {
     margin-top: 10px;
-    background-color: #5c4fa9;
-    color: white;
+    /* color: white; */
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+    /* cursor: pointer; */
 }
 
 .profile-inputs {

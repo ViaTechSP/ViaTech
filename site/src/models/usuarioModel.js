@@ -40,9 +40,10 @@ function buscarInfo(idFuncionario) {
     return database.executar(instrucao);
 }
 
-function alterarInfo(idFuncionario, nome, cpf, email, senha, cargo) {
+function alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo) {
     var instrucao = 
     `UPDATE funcionario SET 
+    urlFoto = '${imagem}',
     nome = '${nome}',
     cpf = '${cpf}',
     email = '${email}',
@@ -69,6 +70,25 @@ function buscarInfoAlerta() {
     return database.executar(instrucao);
 }
 
+function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, minimoProblema, minimoIdeal, maximoCuidado, maximoProblema) {
+    var instrucao = 
+    `UPDATE metrica SET 
+    minCuidadoDisco = '${minimoDisco}',
+    maxCuidadoDisco = '${maximoDisco}',
+    minCUidadoCpu = '${minimoCpu}',
+    maxCUidadoCpu = '${maximoCpu}',
+    minCUidadoRam = '${minimoRam}',
+    maxCUidadoRam = '${maximoRam}',
+    minProblTemp = '${minimoProblema}',
+    minIdealTemp = '${minimoIdeal}',
+    maxCuidadoTemp = '${maximoCuidado}',
+    maxProblTemp = '${maximoProblema}'`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 module.exports = {
     autenticar,
     cadastrarFun,
@@ -77,5 +97,6 @@ module.exports = {
     buscarInfo,
     alterarInfo,
     exibirFun,
-    buscarInfoAlerta
+    buscarInfoAlerta,
+    alterarInfoAlerta
 };
