@@ -8,7 +8,6 @@ var mySqlConfig = {
 };
 
 function executar(instrucao) {
-
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
             var conexao = mysql.createConnection(mySqlConfig);

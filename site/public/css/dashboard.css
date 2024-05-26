@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&display=swap');
 
+body {
+  overflow: hidden;
+}
+
 .menuHeader {
   display: flex;
   flex-direction: row;
@@ -181,7 +185,7 @@ flex-direction: column;
 .usb-body {
   display: flex;
   width: 225px;
-  height: 200px;
+  height: 150px;
   border: 2px solid black;
   border-radius: 5px;
   border-top: none;
@@ -198,7 +202,7 @@ flex-direction: column;
 
 .alertas-header {
   display: flex;
-  width: 269px;
+  width: 260px;
   height: 30px;
   margin-top: 10px;
   border: 2px solid black;
@@ -210,7 +214,7 @@ flex-direction: column;
 
 .alertas-quadrado {
   display: flex;
-  width: 269px;
+  width: 260px;
   height: 68.8px;
   border: 2px solid black;
   border-top: none;

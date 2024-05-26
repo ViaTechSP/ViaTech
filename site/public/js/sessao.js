@@ -1,6 +1,6 @@
 function validarSessao() {
-    var email = sessionStorage.EMAIL;
-    var nome = sessionStorage.NOME;
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
 
     var ola = document.getElementById("ola");
 
@@ -36,8 +36,8 @@ function logout() {
 
 function gerarDashboard() {
     // validarSessao();
-    esconderItens();
-    obterInfoHardware();
-    listarComputadores();
-    init();
+    // esconderItens();
+    // obterInfoHardware();
+    // listarEstacoes();
+    // init();
 }

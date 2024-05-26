@@ -13,6 +13,10 @@ function listarLinhas(idEmpresa) {
                   var select = document.getElementById("select_linha");
   
                   resposta.forEach(function(resposta) {
+                    `<div class="alertas-quadrado">Problema - Estação Luz <br>
+                    CPU > 89%</div>`
+
+                    
                       var option = document.createElement("option");
                       option.value = resposta.idLinha;
                       option.text = resposta.nome;

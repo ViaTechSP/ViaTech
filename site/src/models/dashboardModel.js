@@ -1,16 +1,12 @@
 var database = require("../database/config")
 
-function buscarComputadores(idEmpresa) {
+function buscarMaquinas(idEmpresa) {
     var instrucao = 
     `
-    select idComputador, estacao.nome from  computador
-	JOIN estacao
-		ON fkEstacao = idEstacao
-	JOIN linha
-		ON fkLinha = idLinha
-	JOIN empresa
-		ON fkEmpresa = idEmpresa
-	WHERE idEmpresa = ${idEmpresa}
+    select * from Estacao 
+    JOIN Linha ON fkLinha = idLinha
+    JOIN Empresa on FkEmpresa = idEmpresa
+    WHERE fkEmpresa = ${idEmpresa}
     LIMIT 20;
     `
     
@@ -21,6 +17,28 @@ function buscarLinhas(idEmpresa) {
     var instrucao = 
     `
     select idLinha, linha.nome from linha JOIN empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa};
+    `
+    
+    return database.executar(instrucao);
+}
+
+function obterHistoricoAlerta(idEmpresa) {
+    var instrucao = 
+    `
+    SELECT h.tipo, r.*, e.nome 
+	FROM historicoAlerta AS h
+    JOIN registro AS r
+    ON fkRegistro = idRegistro
+    JOIN especificacaoMaquina
+    ON fkEspecificacaoMaquina = idEspecificacaoMaquina
+    JOIN maquina
+    ON fkMaquina = idMaquina
+    JOIN estacao as E
+    ON fkEstacao = idEstacao
+    JOIN linha 
+    ON fkLinha = idLinha
+    WHERE fkEmpresa = ${idEmpresa}
+    LIMIT 8
     `
     
     return database.executar(instrucao);
@@ -39,18 +57,21 @@ function buscarEstacoes(idEmpresa, idLinha) {
     return database.executar(query);
 }
 
-function obterInfoHardware(fkComputador) {
+function obterInfoHardware(fkEstacao) {
     console.log('entrou na model')
     var instrucao = `
-        SELECT * from componente WHERE fkComputador = ${fkComputador};
+        SELECT * from Maquina JOIN especificacaoMaquina 
+        ON fkMaquina = idMaquina 
+        WHERE fkEstacao = ${fkEstacao};
     `;
 
     return database.executar(instrucao);
 }
 
 module.exports = {
-    buscarComputadores,
+    buscarMaquinas,
     buscarLinhas,
     buscarEstacoes,
-    obterInfoHardware
+    obterInfoHardware,
+    obterHistoricoAlerta
 };

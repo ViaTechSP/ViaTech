@@ -14,7 +14,6 @@
     <script src="../js/sessao.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../js/sessao.js"></script>
 
 
     <!-- STYLE & ICONES-->
@@ -22,7 +21,7 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<!-- <body onload="gerarDashboard(); validarSessao()"> -->
+<body onload="listarMaquinas(); obterHistoricoAlerta();">
 <body>
         
 
@@ -73,7 +72,7 @@
         <div class="header-info">
             <div class="info">
                 <div class="info1">
-
+                    <button><a href="dashboard_geral.html">VOLTAR</a></button>
                     <select onchange="obterInfoHardware()" id="select_estacao" class="select-estacao esconder-item">
                         <option value="" disabled selected>Selecione uma Estação</option>
                     </select>
@@ -88,7 +87,6 @@
                     CPU: <span id="span_cpu" class="span-cpu">undefined</span>
                     RAM: <span id="span_ram" class="span-ram">undefined</span>
                     Disco: <span id="span_disco" class="span-disco">undefined</span>
-                    Em uso: <span id="span_uso" class="span-uso">undefined</span>
                 </div>
 
             </div>
@@ -191,22 +189,7 @@
             <div class="coluna-3">
                 <div class="container-alertas">
                     <div class="alertas-header"><strong>Alertas - Linha 4</strong></div>
-                    <div class="alertas-quadrado">Problema - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
-                        CPU > 76%</div>
-                    <div class="alertas-quadrado">Problema - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Problema - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
-                        CPU > 76%</div>
-                    <div class="alertas-quadrado">Problema - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
-                        CPU > 89%</div>
-                    <div class="alertas-quadrado">Cuidado - Estação Luz <br>
-                        CPU > 89%</div>
+                   
                 </div>
             </div>
 
