@@ -6,73 +6,78 @@ function colorirPalavra() {
 }
 
 // FUNÇÃO DO SELECT DE ESTAÇÃO
-function listarComputadores(idEmpresa) {
+function listarMaquinas(idEmpresa) {
   var idEmpresa = sessionStorage.ID_EMPRESA;
 
-fetch(`/dashboard/listarComputadores/${idEmpresa}`)
+fetch(`/dashboard/listarMaquinas/${idEmpresa}`)
     .then(resposta => {
         if (resposta.status == 200) {
             resposta.json().then(resposta => {
-
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
+                
                 var select = document.getElementById("select_estacao");
-
-                // Limpar o select
-                // select.innerHTML = "";
-
-                // Iterar sobre os dados recebidos e adicionar opções ao select
                 resposta.forEach(function(resposta) {
                     var option = document.createElement("option");
-                    option.value = resposta.idComputador;
+                    option.value = resposta.idEstacao;
                     option.text = resposta.nome;
                     select.appendChild(option);
                 });
             });
         } else {
-            console.error(`Nenhum dado encontrado para o id ${fkEmpresa} ou erro na API`);
+            console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
         }
     })
     .catch(function (error) {
-        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+        console.error(`Erro na obtenção dos dados de estação ${error.message}`);
     });
 
 }
 
 // FUNÇÃO PARA CARREGAR AS INFORMAÇÕES DA HEADER
-  function obterInfoHardware() {
-      var fkComputador = select_estacao.value;
+    function obterInfoHardware() {
+      var fkEstacao = select_estacao.value;
 
-  fetch(`/dashboard/obterInfoHardware/`,{
-      method: "POST",
-      headers: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify({
-      fkComputadorServer: fkComputador
-     })
-   })
-  .then(function (response) {
-  if (response.ok) {
-      response.json().then(function (resposta) {
-              
-          resposta.reverse();
-              console.log(resposta)
-              span_so.innerHTML = resposta[0].sistemaOperacional
-              span_cpu.innerHTML = resposta[0].nomeCpu
-              span_ram.innerHTML = resposta[0].ramTotal
-              span_disco.innerHTML = resposta[0].volumeTotal
-              span_uso.innerHTML = resposta[0].tempoAtividade
-          });
+      fetch(`/dashboard/obterInfoHardware/${fkEstacao}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                    console.log(resposta)
+                    span_so.innerHTML = resposta[0].sistemaOperacional
+                    span_cpu.innerHTML = resposta[0].nomeCpu
+                    span_ram.innerHTML = resposta[0].ramTotal
+                    span_disco.innerHTML = resposta[0].discoTotal
+                });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
+      });
+}
+
+function obterHistoricoAlerta() {
+    var fkEmpresa = sessionStorage.ID_EMPRESA;
+
+    fetch(`/dashboard/obterHistoricoAlerta/${fkEmpresa}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+          response.json().then(function (resposta) {
+            resposta.forEach(function(resposta) {
+                var option = document.createElement("option");
+                option.value = resposta.idLinha;
+                option.text = resposta.nome;
+                select.appendChild(option);
+            });
+              });
       } else {
-          console.error('Nenhum dado encontrado ou erro na API' + error);
+        console.error('Nenhum dado encontrado ou erro na API');
       }
-  })
-  .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  });
-  }
-
+    })
+    .catch(function (error) {
+      console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
+    });
+}
   /*------------------\
   |                   |
   |    FUNÇÕES DE     |
