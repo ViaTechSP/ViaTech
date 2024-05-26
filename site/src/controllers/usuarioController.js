@@ -104,6 +104,7 @@ function alterarSenha(req, res) {
         }
     }
 
+    
     function alterarInfo(req, res) {
         var idFuncionario = req.body.idFuncionario;
         var nome = req.body.nome ;
@@ -133,6 +134,23 @@ function exibirFun(req, res){
 }
 
 
+function buscarInfoAlerta(req, res) {
+    // var idFuncionario = req.params.idFuncionario;
+    
+    // if (idFuncionario == undefined) {
+    //     res.status(400).send("Seu id está undefined!");
+    // } else {
+        usuarioModel.buscarInfoAlerta()
+        .then((resultado) => {
+          res.status(200).json(resultado);
+        })
+        .catch((erro) => {
+          res.status(500).json({ mensagem: 'Erro ao buscar ID da empresa', erro });
+        });
+    // }
+}
+
+
 
 module.exports = {
     autenticar,
@@ -141,5 +159,6 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    exibirFun
+    exibirFun,
+    buscarInfoAlerta
 }

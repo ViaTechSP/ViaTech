@@ -56,6 +56,14 @@ function exibirFun(idEmpresa){
     return database.executar(query);
 }
 
+
+function buscarInfoAlerta() {
+    var instrucao = `SELECT * FROM metrica;`;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     autenticar,
     cadastrarFun,
@@ -63,5 +71,6 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    exibirFun
+    exibirFun,
+    buscarInfoAlerta
 };

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaTech | Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/alerta.css">
+
+    <script src="../js/alerta.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body onload="buscarInfoAlerta()">  
+        
+        <nav id="menuLateral" style="width: 5%;">
+            <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+            
+            <div class="container" id="containerMenuLateral" style="display: none;">
+                
+                <p style="display: flex; align-items: center;">
+                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
+                    <i class="material-icons" onclick="clicarMenu()">menu</i>
+                </p>
+                
+                <p>Olá, <span id="ola">Undefined</span></p>
+                
+            <div id="containerItens" class="container-itens">
+                <div class="item">
+                    <a href="perfil.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
+                </div>
+                
+                <div class="item">
+                    <a href="dashboard_geral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+                </div>
+                
+                <div class="item">
+                    <a href="dashboard.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="funcionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                </div>
+                
+            </div>
+            
+            <div onclick="logout()" class="buttonSair">
+                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+            </div>
+            
+        </nav>   
+        
+        
+
+        <div class="containerAlerta">
+            <div class="side-panel" style="background-color: #6b6e6e34;">
+                <h2>Alertas</h2>
+
+                Observação:<br>
+                Referente ao uso do hardware de 1% a 100% e a temperatura (ºC), poderá ser definido a emissão de alertas (cuidado e problema). Os símbulos usados são de comparação, onde > representa maior que, < menor que, e = igual a.
+                <b id="atencao">ATENÇÂO ⚠:</b>As informações INICIAIS são as quais nós recomendamos!
+
+                <div class="status">
+                    <h3 class="ideal">Ideal - <span class="icon">✔</span></h3>
+                    <p>Quando o hardware está em processo estável.</p>
+                
+        
+                    <h3 class="cuidado">Cuidado - <span class="icon">⚠</span></h3>
+                    <p>Quando o hardware está em processo irregular mas sem agravamentos.</p>
+
+        
+                    <h3 class="problema">Problema - <span class="icon">❌</span></h3>
+                    <p>Quando o hardware está em processo grave.</p>
+                </div>
+
+            </div>
+
+
+
+            <div class="main-panel">
+                <h2>Emitir Alertas na linha Amarela partir de:</h2>
+                <div class="alert-settings">
+                    <div class="setting">
+                        <h3>Disco Rígido:</h3>
+                        <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minDisco" >% máximo<input type="number" disabled id="ipt_maxDisco">%</p>
+                        <p class="problema">❌ Problema maior ou igual <input id="ipt_minProblemaDisco"></input>%</p>
+                    </div>
+
+                    <div class="setting">
+                        <h3>CPU:</h3>
+                        <p class="cuidado">⚠ Cuidado mínimo: <input type="number" disabled id="ipt_minCpu" >% máximo: <input type="number" disabled id="ipt_maxCpu" >%</p>
+                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaCpu"></input>%</p>
+                    </div>
+
+                    <div class="setting">
+                        <h3>Memória RAM:</h3>
+                        <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minRam" >% máximo<input type="number" disabled id="ipt_maxRam">%</p>
+                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaRam"></input>%</p>
+                    </div>
+
+                    <div class="setting">
+                        <h3>Temperatura:</h3>
+                        <p class="problema">❌Menor que <input type="number" id="ipt_minProblema" disabled >ºC</p>
+                        <p class="cuidado">⚠ Entre<input type="number" disabled id="ipt_minCuidado">ºC e <input type="number" disabled id="ipt_maxCuidado" >ºC</p>
+                        <p class="ideal">✔ Entre<input type="number" disabled id="ipt_minIdeal" >ºC e <input type="number" disabled id="ipt_maxIdeal">.</p>
+                        <p class="cuidado">⚠ Entre<input type="number" disabled >ºC e <input type="number" disabled >ºC</p>
+                        <p class="problema">❌ Maior que <input type="number" disabled >ºC</p>
+                    </div>
+
+                </div>
+                <button onclick="alterarMetricas()" id="botao_alterar" class="botao-alterar">Alterar informações</button>
+                <button onclick="salvarMetricas()" id="botao_salvar" style="display: none;" class="botao-alterar">Salvar informações</button>
+            </div> 
+        </div>
+</body>
+</html>
+
