@@ -1,15 +1,49 @@
 var mysql = require("mysql2");
+var sql = require('mssql');
 
+// CONEXÃO DO BANCO MYSQL SERVER
 var mySqlConfig = {
-    host: "localhost",
-    database: "Viatech",
-    user: "root",
-    password: "root",
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
+};
+
+var sqlServerConfig = {
+    server: "34.197.44.86",
+    database: "viatech",
+    user: "sa",
+    password: "urubu100",
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30000
+    },
+    options: {
+        encrypt: true, // for azure
+        trustServerCertificate: true
+    }
 };
 
 function executar(instrucao) {
 
-    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        return new Promise(function (resolve, reject) {
+            sql.connect(sqlServerConfig).then(function () {
+                return sql.query(instrucao);
+            }).then(function (resultados) {
+                console.log(resultados);
+                resolve(resultados.recordset);
+            }).catch(function (erro) {
+                reject(erro);
+                console.log('ERRO: ', erro);
+            });
+            sql.on('error', function (erro) {
+                return ("ERRO NO SQL SERVER (Azure): ", erro);
+            });
+        });
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
             var conexao = mysql.createConnection(mySqlConfig);
             conexao.connect();
@@ -22,11 +56,11 @@ function executar(instrucao) {
                 resolve(resultados);
             });
             conexao.on('error', function (erro) {
-                return ("ERRO NO MySQL WORKBENCH: ", erro.sqlMessage);
+                return ("ERRO NO MySQL WORKBENCH (Local): ", erro.sqlMessage);
             });
         });
     } else {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (_resolve, reject) {
             console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
             reject("AMBIENTE NÃO CONFIGURADO EM app.js")
         });
@@ -35,4 +69,4 @@ function executar(instrucao) {
 
 module.exports = {
     executar
-}
+};
