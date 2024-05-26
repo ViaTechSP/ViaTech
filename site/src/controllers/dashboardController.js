@@ -1,12 +1,12 @@
 var dashboardModel = require("../models/dashboardModel");
 
-function buscarComputadores(req, res) {
+function buscarMaquinas(req, res) {
 
     var idEmpresa = req.params.idEmpresa;
 
-    console.log(`Recuperando computadores`);
+    console.log(`Recuperando Maquinas`);
 
-    dashboardModel.buscarComputadores(idEmpresa).then(function (resultado) {
+    dashboardModel.buscarMaquinas(idEmpresa).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -35,6 +35,21 @@ function buscarLinhas(req, res) {
     });
 }
 
+function obterHistoricoAlerta(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    dashboardModel.obterHistoricoAlerta(idEmpresa).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarEstacoes(req, res){
     var idEmpresa = req.params.idEmpresa;
     var idLinha = req.params.idLinha;
@@ -48,15 +63,13 @@ function buscarEstacoes(req, res){
 
 function obterInfoHardware(req, res) {
 
-    var fkComputador = req.body.fkComputadorServer;
+    var fkEstacao = req.params.fkEstacao;
 
-    if (fkComputador == undefined) {
-        res.status(400).send("Seu computador está undefined!");
+    if (fkEstacao == undefined) {
+        res.status(400).send("Sua estação está undefined!");
     } else {
 
-    console.log(`Recuperando os últimos dados`);
-
-    dashboardModel.obterInfoHardware(fkComputador)
+    dashboardModel.obterInfoHardware(fkEstacao)
     .then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
@@ -72,8 +85,9 @@ function obterInfoHardware(req, res) {
 }
 
 module.exports = {
-    buscarComputadores,
+    buscarMaquinas,
     buscarLinhas,
     buscarEstacoes,
-    obterInfoHardware
+    obterInfoHardware,
+    obterHistoricoAlerta
 }
