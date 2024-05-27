@@ -1,195 +1,212 @@
-function colorirPalavra() {
-    var div = document.getElementsByClassName("alertas-quadrado");
-    var texto = div.innerHTML;
-    var textoColorido = texto.replace(new RegExp(palavra, 'g'), '<span style="color:' + cor + ';">' + palavra + '</span>');
-    div.innerHTML = textoColorido;
-}
-
-// FUNÇÃO DO SELECT DE ESTAÇÃO
 function listarMaquinas(idEmpresa) {
   var idEmpresa = sessionStorage.ID_EMPRESA;
+  var select = document.getElementById("select_estacao");
 
-fetch(`/dashboard/listarMaquinas/${idEmpresa}`)
+  fetch(`/dashboard/listarMaquinas/${idEmpresa}`)
     .then(resposta => {
-        if (resposta.status == 200) {
-            resposta.json().then(resposta => {
-                
-                var select = document.getElementById("select_estacao");
-                resposta.forEach(function(resposta) {
-                    var option = document.createElement("option");
-                    option.value = resposta.idEstacao;
-                    option.text = resposta.nome;
-                    select.appendChild(option);
-                });
-            });
-        } else {
-            console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
-        }
+      if (resposta.status == 200) {
+        resposta.json().then(resposta => {
+          resposta.forEach(function (resposta) {
+            var option = document.createElement("option");
+            option.value = resposta.idEstacao;
+            option.text = resposta.nome;
+            select.appendChild(option);
+          });
+        });
+      } else console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
     })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados de estação ${error.message}`);
-    });
-
 }
 
-// FUNÇÃO PARA CARREGAR AS INFORMAÇÕES DA HEADER
-    function obterInfoHardware() {
-      var fkEstacao = select_estacao.value;
+function obterInfoHeader(fkEstacao) {
+  if (fkEstacao == undefined || fkEstacao == null) {
+    var fkEstacao = select_estacao.value;
+  }
 
-      fetch(`/dashboard/obterInfoHardware/${fkEstacao}`, { cache: 'no-store' })
-      .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                    console.log(resposta)
-                    span_so.innerHTML = resposta[0].sistemaOperacional
-                    span_cpu.innerHTML = resposta[0].nomeCpu
-                    span_ram.innerHTML = resposta[0].ramTotal
-                    span_disco.innerHTML = resposta[0].discoTotal
-                });
-        } else {
-          console.error('Nenhum dado encontrado ou erro na API');
-        }
-      })
-      .catch(function (error) {
-        console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
-      });
+  fetch(`/dashboard/obterInfoHeader/${fkEstacao}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          resposta.reverse();
+          span_so.innerHTML = resposta[0].sistemaOperacional
+          span_cpu.innerHTML = resposta[0].nomeCpu
+          span_ram.innerHTML = resposta[0].ramTotal
+          span_disco.innerHTML = resposta[0].discoTotal
+        });
+      } else console.error('Nenhum dado encontrado ou erro na API');
+    })
 }
 
-function obterHistoricoAlerta() {
-    var fkEmpresa = sessionStorage.ID_EMPRESA;
+function obterHistoricoAlerta(fkEmpresa) {
+  var fkEmpresa = sessionStorage.ID_EMPRESA;
 
-    fetch(`/dashboard/obterHistoricoAlerta/${fkEmpresa}`, { cache: 'no-store' })
+  fetch(`/dashboard/obterHistoricoAlerta/${fkEmpresa}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          container_alertas.innerHTML = ''
+          resposta.forEach(function (resposta) {
+
+            if (resposta.tipo == 'Problema' || resposta.tipo == 'Alerta') {
+              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+              ${resposta.componente} > ${resposta.valor}%</div>`
+            } else if (resposta.tipo == 'Cuidado') {
+              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+              ${resposta.componente} > ${resposta.valor}%</div>`
+            } 
+
+          });
+
+          colorizeWord('Problema - Estação Paulista', 'Problema', 'red')
+        });
+      } else console.error('Nenhum dado encontrado ou erro na API');
+    })
+}
+
+function atualizarKPIs(fkEstacao) {
+  var fkEstacao = select_estacao.value;
+
+  fetch(`/dashboard/obterInfoKPIAlertas/${fkEstacao}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          resposta.forEach(function (resposta) {
+            if (resposta.tipo == 'Cuidado') {
+              span_kpi_cuidado.innerHTML = resposta.total;
+            }
+            else if (resposta.tipo == 'Problema') {
+              span_kpi_problema.innerHTML = resposta.total;
+            } 
+            else {
+              span_kpi_cuidado.innerHTML = 0;
+              span_kpi_problema.innerHTML = 0;
+            }
+          });
+        });
+      } else console.error('Nenhum dado encontrado ou erro na API');
+    })
+    
+    fetch(`/dashboard/obterInfoKPIComponente/${fkEstacao}`, { cache: 'no-store' })
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+            span_kpi_componente.innerHTML = resposta[0].componente + ', com '+ resposta[0].total + ' alertas'
+        });
+      } else console.error('Nenhum dado encontrado ou erro na API');
+    })
+}
+
+function obterDadosGrafico(fkEstacao) {
+  var fkEstacao = select_estacao.value;
+  
+  fetch(`/dashboard/obterDadosGrafico/${fkEstacao}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
           response.json().then(function (resposta) {
-            resposta.forEach(function(resposta) {
-                var option = document.createElement("option");
-                option.value = resposta.idLinha;
-                option.text = resposta.nome;
-                select.appendChild(option);
-            });
-              });
+              resposta.reverse();
+              plotarGrafico(resposta);
+
+          });
       } else {
-        console.error('Nenhum dado encontrado ou erro na API');
+          console.error('Nenhum dado encontrado ou erro na API');
       }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
-    });
+  })
+      .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
 }
-  /*------------------\
-  |                   |
-  |    FUNÇÕES DE     |
-  |  GRÁFICOS ABAIXO  |
-  |                   |
-  \-------------------/
 
+function plotarGrafico(resposta) {
+  let labels = [];
+  let cpuData = [];
+  let discoData = [];
+  let ramData = [];
+  let temperaturaData = [];
 
-// FUNÇÃO PARA INICIALIZAR TODOS OS GRÁFICOS 
-  /*
-  ainda precisa criar uma função para dar select no banco de dados
-  e depois inicializar os charts com os dados atuais de cada máquina
-  */
-  function init() {
-      google.charts.load('current', {
-          packages: ['corechart']
-      });
-      google.charts.setOnLoadCallback(function() {
-          drawCPU();
-          drawRAM();
-          drawDisco();
-          drawTemperatura();
-      });
+  for (let i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(formatDateTime(registro.dtHora));
+      cpuData.push(registro.cpuPorcentagemUso);
+      discoData.push(registro.discoUtilizado);
+      ramData.push(registro.ramUtilizada);
+      temperaturaData.push(registro.cpuTemperatura);
   }
 
-function drawCPU() {
- var data = new google.visualization.DataTable();
- data.addColumn("string", "Data/Hora");
- data.addColumn("number", "% de uso");
- data.addRow(['19:30', 10]);
- data.addRow(['19:32', 20]);
- data.addRow(['19:34', 30]);
- data.addRow(['19:36', 40]);
- data.addRow(['19:38', 90]);
+  const createChart = (ctx, label, data, borderColor, backgroundColor) => {
+      return new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: label,
+                  data: data,
+                  fill: true,
+                  borderColor: borderColor,
+                  backgroundColor: backgroundColor,
+                  tension: 0.4,
+                  pointBackgroundColor: 'white',
+                  pointBorderColor: borderColor,
+                  pointHoverBackgroundColor: borderColor,
+                  pointHoverBorderColor: 'white'
+              }]
+          },
+          options: {
+              plugins: {
+                  title: {
+                      display: true,
+                      text: label,
+                      font: {
+                          size: 20
+                      }
+                  }
+              },
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      ticks: {
+                          callback: function(value) {
+                              return value + '%';
+                          }
+                      }
+                  }
+              },
+              elements: {
+                  line: {
+                      borderWidth: 2
+                  },
+                  point: {
+                      radius: 5,
+                      hoverRadius: 7
+                  }
+              }
+          }
+      });
+  };
 
- var options = {
-    title: 'Uso de CPU %',
-    legend: 'none',
-    chartArea: { 'width': '84%' },
-    backgroundColor: '#efefef',
-    colors: ['#9747FF']
- };
-
- var chart = new google.visualization.AreaChart(document.getElementById("grafico_cpu"));
- chart.draw(data, options);
+  createChart(document.getElementById('cpuChart'), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  createChart(document.getElementById('discoChart'), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  createChart(document.getElementById('ramChart'), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  createChart(document.getElementById('temperaturaChart'), 'Temperatura º', temperaturaData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
 }
 
-function drawRAM(dados) {
- var data = new google.visualization.DataTable();
- data.addColumn("string", "Data/Hora");
- data.addColumn("number", "% de uso");
- data.addRow(['19:30', 10]);
- data.addRow(['19:32', 20]);
- data.addRow(['19:34', 30]);
- data.addRow(['19:36', 40]);
- data.addRow(['19:38', 90]);
+function formatDateTime(dtHora) {
+  const date = new Date(dtHora);
 
- var options = {
-    title: 'Uso de RAM %',
-    legend: 'none',
-    chartArea: { 'width': '84%' },
-    backgroundColor: '#efefef',
-    colors: ['green']
- };
+  // const formattedDate = date.toLocaleDateString('pt-BR', {
+  //     month: '2-digit',
+  //     day: '2-digit'
+  // });
 
- var chart = new google.visualization.AreaChart(document.getElementById("grafico_ram"));
- chart.draw(data, options);
+  const formattedTime = date.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+  });
+
+  return `${formattedTime}`;
 }
 
-function drawDisco(dados) {
- var data = new google.visualization.DataTable();
- data.addColumn("string", "Data/Hora");
- data.addColumn("number", "% de uso");
- data.addRow(['19:30', 10]);
- data.addRow(['19:32', 20]);
- data.addRow(['19:34', 30]);
- data.addRow(['19:36', 40]);
- data.addRow(['19:38', 90]);
-
- var options = {
-    title: "Uso de Disco %",
-    legend: 'none',
-    chartArea: { 'width': '84%' },
-    backgroundColor: '#efefef',
-    colors: ['blue']
- };
-
- var chart = new google.visualization.AreaChart(document.getElementById("grafico_disco"));
- chart.draw(data, options);
+function chamarFuncoes() {
+  obterDadosGrafico(),
+  obterInfoHeader(),
+  atualizarKPIs()
 }
-
-function drawTemperatura(dados) {
- var data = new google.visualization.DataTable();
- data.addColumn("string", "Data/Hora");
- data.addColumn("number", "% de uso");
- data.addRow(['19:30', 10]);
- data.addRow(['19:32', 20]);
- data.addRow(['19:34', 30]);
- data.addRow(['19:36', 40]);
- data.addRow(['19:38', 90]);
-
-
- var options = {
-    title: "Temperatura ºC",
-    legend: 'none',
-    chartArea: { 'width': '84%' },
-    backgroundColor: '#efefef',
-    colors: ['red']
- };
-
-
- var chart = new google.visualization.AreaChart(document.getElementById("grafico_temperatura"));
- chart.draw(data, options);
-}
-

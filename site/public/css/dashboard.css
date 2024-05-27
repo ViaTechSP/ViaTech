@@ -218,8 +218,21 @@ flex-direction: column;
   height: 68.8px;
   border: 2px solid black;
   border-top: none;
-  text-align: center;
+  padding-top: 2px;
+  /* text-align: center;
   justify-content: center;
-  align-items: center;
-  word-wrap: break-word;
+  align-items: center; */
+  /* word-wrap: break-word; */
+}
+
+.vermelho {
+  margin: 0 5px 0 5px;
+  color: red;
+  font-weight: bold;
+}
+
+.amarelo {
+  margin: 0 5px 0 5px;
+  color: #ff914d;
+  font-weight: bold;
 }

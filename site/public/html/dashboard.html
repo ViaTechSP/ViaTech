@@ -13,7 +13,7 @@
     <script src="../js/menuLateral.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/dashboard.js"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <!-- STYLE & ICONES-->
@@ -21,7 +21,7 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body onload="listarMaquinas(); obterHistoricoAlerta();">
+<body onload="listarMaquinas(); validarSessao(), obterHistoricoAlerta()">
 <body>
         
 
@@ -73,7 +73,7 @@
             <div class="info">
                 <div class="info1">
                     <button><a href="dashboard_geral.html">VOLTAR</a></button>
-                    <select onchange="obterInfoHardware()" id="select_estacao" class="select-estacao esconder-item">
+                    <select onchange="chamarFuncoes()" id="select_estacao" class="select-estacao esconder-item">
                         <option value="" disabled selected>Selecione uma Estação</option>
                     </select>
                     <!-- <select onchange="obterInfoEstacao()" id="select_estacao" class="select-estacao esconder-item">
@@ -92,23 +92,17 @@
             </div>
         </div>
         
-  
-        
         <div class="container-principal">
             <div class="coluna-1">
                 <div class="container-graficos">
                     <div class="graficos-coluna-1">
-                        <!-- <h3>Uso de CPU %</h3> -->
-                        <div id="grafico_cpu" class="grafico-cpu"></div>
-                        <!-- <h3>Uso de RAM %</h3> -->
-                        <div id="grafico_ram" class="grafico-ram"></div>
+                        <canvas id="cpuChart" class="grafico-cpu"></canvas>
+                        <canvas id="discoChart" class="grafico-cpu"></canvas>
                     </div>
-
+                    
                     <div class="graficos-coluna-2">
-                        <!-- <h3>Uso de disco %</h3> -->
-                        <div id="grafico_disco" class="grafico-disco"></div>
-                        <!-- <h3>Temperatura da máquina ºC</h3> -->
-                        <div id="grafico_temperatura" class="grafico-temperatura"></div>
+                        <canvas id="ramChart" class="grafico-cpu"></canvas>
+                        <canvas id="temperaturaChart" class="grafico-cpu"></canvas>
                     </div>
                 </div>
 
@@ -116,20 +110,20 @@
                 <div class="container-kpis">
                     <div class="kpi-cpu">
                         <strong>Quantidade de problemas na última semana:</strong> <br>
-                        4
+                        <span id="span_kpi_problema">0</span>
                     </div>
                     <div class="kpi-disco">
                         <strong>Quantidade de cuidados na última semana:</strong> <br>
-                        10
+                        <span id="span_kpi_cuidado">0</span>
                     </div>
                     <div class="kpi-ram">
-                        <strong>Tempo total que a Temperatura da CPU ficou em Problema na última vez:</strong> <br>
-                      0 days  02:55h
+                        <strong>Componente que mais apresentou erros na última semana:</strong> <br>
+                        <span id="span_kpi_componente">Indefinido</span>
                     </div>
-                    <div class="kpi-temperatura">
+                    <!-- <div class="kpi-temperatura">
                         <strong>Utilização da Capacidade do Disco Rígido no atual momento</strong> <br>
                         178 GB
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -140,7 +134,7 @@
                     <div class="indicadores-linha">
                         <div class="indicador" style="background-color: #7ed957">Ideal</div>
                         <div class="indicador" style="background-color: #ffde59">Cuidado</div>
-                        <div class="indicador" style="background-color: #ff3131">Problema</div>
+                        <div class="indicador" style="background-color: #ff3131; color:white">Problema</div>
                     </div>
 
 
@@ -148,30 +142,30 @@
                     <div class="indicadores-linha">
                         <div class="indicador" style="background-color: #7ed957">1% á 75%</div>
                         <div class="indicador" style="background-color: #ffde59">76% á 88%</div>
-                        <div class="indicador" style="background-color: #ff3131">89% á 100%</div>
+                        <div class="indicador" style="background-color: #ff3131; color:white">89% á 100%</div>
                     </div>
 
                     <h3>Memória RAM:</h3>
                     <div class="indicadores-linha">
                         <div class="indicador" style="background-color: #7ed957">1% á 75%</div>
                         <div class="indicador" style="background-color: #ffde59">76% á 88%</div>
-                        <div class="indicador" style="background-color: #ff3131">89% á 100%</div>
+                        <div class="indicador" style="background-color: #ff3131; color:white">89% á 100%</div>
                     </div>
 
                     <h3>CPU:</h3>
                     <div class="indicadores-linha">
                         <div class="indicador" style="background-color: #7ed957">1% á 75%</div>
                         <div class="indicador" style="background-color: #ffde59">76% á 88%</div>
-                        <div class="indicador" style="background-color: #ff3131">89% á 100%</div>
+                        <div class="indicador" style="background-color: #ff3131; color:white">89% á 100%</div>
                     </div>
 
                     <h3>Temperatura CPU:</h3>
                     <div class="indicadores-linha">
-                        <div class="indicadorTemperatura" style="background-color: #ff3131"> -10ºC </div>
+                        <div class="indicadorTemperatura" style="background-color: #ff3131; color:white"> -10ºC </div>
                         <div class="indicadorTemperatura" style="background-color: #ffde59">11°C a 19°C</div>
                         <div class="indicadorTemperatura" style="background-color: #7ed957">20ºC a 58°C</div>
                         <div class="indicadorTemperatura" style="background-color: #ffde59">59ºC a 65°C</div>
-                        <div class="indicadorTemperatura" style="background-color: #ff3131">66°C+</div>
+                        <div class="indicadorTemperatura" style="background-color: #ff3131; color:white">66°C+</div>
                     </div>
                 </div>
 
@@ -187,9 +181,16 @@
             </div>
 
             <div class="coluna-3">
-                <div class="container-alertas">
-                    <div class="alertas-header"><strong>Alertas - Linha 4</strong></div>
-                   
+                <div class="alertas-header"><strong>Alertas</strong></div>
+                <div id="container_alertas" class="container-alertas">
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
+                    <div class="alertas-quadrado">NENHUM ALERTA</div>
                 </div>
             </div>
 
