@@ -22,7 +22,7 @@ function acessar() {
 
                 window.location = "perfil.html"
               } else {
-                swal('erro', 'nenhum usuário encontrado!', "error")
+                swal('Puts', 'nenhum usuário encontrado!', "error")
               }
             });
           } else {
@@ -33,7 +33,7 @@ function acessar() {
           console.error(`Erro na obtenção do usuário: ${error.message}`);
         });    
     } else {
-        swal('erro', 'preencha todos os dados corretamente');
+        swal('Eii', 'preencha todos os dados corretamente!');
     }
 
 }

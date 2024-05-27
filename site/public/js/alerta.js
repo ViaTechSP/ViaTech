@@ -35,14 +35,14 @@ function buscarInfoAlerta() {
             document.getElementById('ipt_minProblemaDisco').value = resposta[0].maxCuidadoDisco + 1;
             document.getElementById('ipt_minProblemaCpu').value = resposta[0].maxCUidadoCpu + 1;
             document.getElementById('ipt_minProblemaRam').value = resposta[0].maxCUidadoRam + 1;
-            document.getElementById('ipt_minProblema').value = resposta[0].minProblTemp;
-            document.getElementById('ipt_minCuidado').value = resposta[0].minProblTemp + 1;
-            document.getElementById('ipt_maxCuidado').value = resposta[0].minIdealTemp - 1;
-            document.getElementById('ipt_minIdeal').value = resposta[0].minIdealTemp; 
-            document.getElementById('ipt_maxIdeal').value = resposta[0].maxCuidadoTemp - 1; 
-            document.getElementById('ipt_minCuidado2').value = resposta[0].maxCuidadoTemp;
-            document.getElementById('ipt_maxCuidado2').value = resposta[0].maxProblTemp - 1;
-            document.getElementById('ipt_minProblema2').value = resposta[0].maxProblTemp;
+            /* document.getElementById('ipt_minProblema').value = resposta[0].minProblTemp;
+              document.getElementById('ipt_minCuidado').value = resposta[0].minProblTemp + 1;
+              document.getElementById('ipt_maxCuidado').value = resposta[0].minIdealTemp - 1;
+              document.getElementById('ipt_minIdeal').value = resposta[0].minIdealTemp; 
+              document.getElementById('ipt_maxIdeal').value = resposta[0].maxCuidadoTemp - 1; 
+              document.getElementById('ipt_minCuidado2').value = resposta[0].maxCuidadoTemp;
+              document.getElementById('ipt_maxCuidado2').value = resposta[0].maxProblTemp - 1;
+              document.getElementById('ipt_minProblema2').value = resposta[0].maxProblTemp; */
             
 
           } else {
@@ -92,15 +92,16 @@ function salvarMetricas() {
 
   // TEMPERATURA
 
-  var minimoProblema = ipt_minProblema.value;
-  var minimoIdeal = ipt_minIdeal.value;
-  var maximoCuidado = ipt_minCuidado2.value;
-  var maximoProblema = ipt_minProblema2.value;
+  // var minimoProblema = ipt_minProblema.value;
+  // var minimoIdeal = ipt_minIdeal.value;
+  // var maximoCuidado = ipt_minCuidado2.value;
+  // var maximoProblema = ipt_minProblema2.value;
 
 
-  var idFuncionario = sessionStorage.ID_FUNCIONARIO;
+  
+  if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam)){
 
-  if (minimoDisco != '' && maximoDisco != '' && minimoCpu != '' && maximoCpu != '' && minimoRam != '' && maximoRam != '' && minimoProblema != '' && minimoIdeal != '' && maximoCuidado != '' && maximoProblema != '') {
+  if (minimoDisco != '' && maximoDisco != '' && minimoCpu != '' && maximoCpu != '' && minimoRam != '' && maximoRam != '') {
   
   fetch(`/usuarios/alterarInfoAlerta/`,{
       method: "PUT", headers: { "Content-Type": "application/json" },
@@ -110,11 +111,11 @@ function salvarMetricas() {
         minimoCpu: minimoCpu,
         maximoCpu: maximoCpu,
         minimoRam: minimoRam,
-        maximoRam: maximoRam,
-        minimoProblema: minimoProblema,
-        minimoIdeal: minimoIdeal,
-        maximoCuidado: maximoCuidado,
-        maximoProblema: maximoProblema
+        maximoRam: maximoRam
+        // minimoProblema: minimoProblema,
+        // minimoIdeal: minimoIdeal,
+        // maximoCuidado: maximoCuidado,
+        // maximoProblema: maximoProblema
     })
   }).then(function (resposta) {
       if (resposta.ok) {
@@ -138,12 +139,16 @@ function salvarMetricas() {
         });
 
       } else {
-          swal('error', "Não foi possível trocar a senha!");
-          throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-      }
-  }).catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-  });
+            swal('error', "Não foi possível trocar a senha!");
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+    }
+  } else{
+      swal("Valores incorretos!", "O valor mínimo não pode ser maior ou igual ao valor máximo. 🥺", "error");
+    
   }
 }
 

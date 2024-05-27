@@ -9,9 +9,9 @@ function cadastrarEmpresa() {
     var cnpj = input_cnpj.value.replace(/[^\d]/g, '');
 
     if (nomeFantasia == '' || razaoSocial == '' || cnpj == '') {
-      swal("erro", "Preencha todos os campos", "error");
+      swal("Ei!", "Preencha todos os campos ", "error");
     } else if (cnpj.length != 14) {
-      swal("erro", "Preencha o campo CNPJ corretamente")
+      swal("CNPJ incorreto!", "Preencha o campo corretamente.")
     } else {
 
     fetch("/empresa/cadastrarEmpresa", {
@@ -39,7 +39,7 @@ function buscarIdEmpresa() {
   var cnpj = input_cnpj.value.replace(/[^\d]/g, '');
 
   if (cnpj.length != 14 || cnpj == null || cnpj == '') {
-    swal("erro", "CNPJ não encontrado", "error");
+    swal("Puts!", "CNPJ não encontrado", "error");
   } 
   else {
 

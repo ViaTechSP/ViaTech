@@ -18,9 +18,9 @@ CNPJ CHAR(14) NOT NULL
 
 CREATE TABLE funcionario(
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-urlFoto VARCHAR(300) NULL,
+urlFoto VARCHAR(800) NULL,
 nome VARCHAR(100) NOT NULL,
-cpf CHAR(11) NOT NULL,
+cpf CHAR(14) NOT NULL,
 email VARCHAR(100) NOT NULL,
 senha VARCHAR(100) NOT NULL,
 cargo VARCHAR(100) NOT NULL,
@@ -52,9 +52,17 @@ minCUidadoCpu INT,
 maxCUidadoCpu INT,
 minCUidadoRam INT,
 maxCUidadoRam INT,
+minProblTemp INT,
 minIdealTemp INT,
-maxIdealTemp INT 
+maxCuidadoTemp INT,
+maxProblTemp INT,
+fkLinha INT,
+CONSTRAINT FOREIGN KEY (fkLinha) REFERENCES linha (idLinha)
 );
+
+INSERT INTO metrica VALUES (null, 70, 85, 70, 85, 60, 80, 5, 11, 50, 70, null);
+SELECT * FROM metrica;
+
 
 CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -63,8 +71,7 @@ ip VARCHAR(50) NOT NULL,
 sistemaOperacional VARCHAR(45) NOT NULL,
 fkEstacao INT NOT NULL,
 FkMetrica INT NOT NULL,
-CONSTRAINT fkEstacao FOREIGN KEY (fkEstacao) REFERENCES estacao (idEstacao),
-CONSTRAINT fkMetrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
+CONSTRAINT fkEstacao FOREIGN KEY (fkEstacao) REFERENCES estacao (idEstacao)
 );
 
 CREATE TABLE especificacaoMaquina(
@@ -78,15 +85,15 @@ CONSTRAINT FOREIGN KEY (fkMaquina) REFERENCES maquina (idMaquina)
 );
 
 CREATE TABLE registro (
-  idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-  dtHora DATETIME DEFAULT CURRENT_TIMESTAMP  NOT NULL,
-  cpuPorcentagemUso DOUBLE,
-  cpuTemperatura DOUBLE,
-  discoUtilizado DOUBLE,
-  ramUtilizada DOUBLE,
-  qtdDispositivos INT,
-  fkEspecificacaoMaquina INT,
-  CONSTRAINT FOREIGN KEY (fkEspecificacaoMaquina) REFERENCES especificacaoMaquina (idEspecificacaoMaquina)
+idRegistro INT PRIMARY KEY AUTO_INCREMENT,
+dtHora DATETIME DEFAULT CURRENT_TIMESTAMP  NOT NULL,
+cpuPorcentagemUso DOUBLE,
+cpuTemperatura DOUBLE,
+discoUtilizado DOUBLE,
+ramUtilizada DOUBLE,
+qtdDispositivos INT,
+fkEspecificacaoMaquina INT,
+CONSTRAINT FOREIGN KEY (fkEspecificacaoMaquina) REFERENCES especificacaoMaquina (idEspecificacaoMaquina)
 );
 
 CREATE TABLE historicoAlerta(
@@ -96,5 +103,3 @@ fkRegistro INT,
 fkRegistroMaquina INT,
 dtHora DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
-
-SELECT * FROM EMPRESA;

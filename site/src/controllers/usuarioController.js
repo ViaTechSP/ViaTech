@@ -162,12 +162,12 @@ function alterarInfoAlerta(req, res) {
     var maximoCpu = req.body.maximoCpu;
     var minimoRam = req.body.minimoRam;
     var maximoRam = req.body.maximoRam;
-    var minimoProblema = req.body.minimoProblema;
-    var minimoIdeal = req.body.minimoIdeal;
-    var maximoCuidado = req.body.maximoCuidado;
-    var maximoProblema = req.body.maximoProblema;
+    // var minimoProblema = req.body.minimoProblema;
+    // var minimoIdeal = req.body.minimoIdeal;
+    // var maximoCuidado = req.body.maximoCuidado;
+    // var maximoProblema = req.body.maximoProblema;
     
-    usuarioModel.alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, minimoProblema, minimoIdeal, maximoCuidado, maximoProblema)
+    usuarioModel.alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam)
     .then(function (resultado) {
             res.json(resultado);
         })

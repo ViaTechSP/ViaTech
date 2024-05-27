@@ -1,5 +1,7 @@
 var database = require("../database/config")
 
+// <==================================================================== FUNCIONARIO ==================================================================================>
+
 function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargo, fkEmpresaVar) {
     var instrucao = '';
     if (cargo == null || cargo == undefined || cargo == '') {
@@ -63,6 +65,10 @@ function exibirFun(idEmpresa){
 }
 
 
+
+
+// <=========================================================================== ALERTAS ==================================================================================>
+
 function buscarInfoAlerta() {
     var instrucao = `SELECT * FROM metrica;`;
     
@@ -70,7 +76,7 @@ function buscarInfoAlerta() {
     return database.executar(instrucao);
 }
 
-function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, minimoProblema, minimoIdeal, maximoCuidado, maximoProblema) {
+function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam) {
     var instrucao = 
     `UPDATE metrica SET 
     minCuidadoDisco = '${minimoDisco}',
@@ -78,11 +84,7 @@ function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minim
     minCUidadoCpu = '${minimoCpu}',
     maxCUidadoCpu = '${maximoCpu}',
     minCUidadoRam = '${minimoRam}',
-    maxCUidadoRam = '${maximoRam}',
-    minProblTemp = '${minimoProblema}',
-    minIdealTemp = '${minimoIdeal}',
-    maxCuidadoTemp = '${maximoCuidado}',
-    maxProblTemp = '${maximoProblema}'`;
+    maxCUidadoRam = '${maximoRam}'`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
