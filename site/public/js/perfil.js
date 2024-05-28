@@ -1,4 +1,4 @@
-const { columns } = require("mssql");
+// const { columns } = require("mssql");
 
 function atualizarInfo() {
     document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
@@ -35,9 +35,8 @@ function atualizarInfo() {
             document.getElementById('ipt_email').value = resposta[0].email;
             document.getElementById('ipt_senha').value = resposta[0].senha;
 
-            if(resposta[0].urlFoto == null){
+            if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
             exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
-
             }
 
           } else {
@@ -80,8 +79,6 @@ function salvar() {
     var senha = ipt_senha.value;
     var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 
-    if(imagem != '' && nome != '' && cpf != '' && cargo != '' && email != '' && senha != '' && idFuncionario != '') {
-    
     fetch(`/usuarios/alterarInfo/`,{
         method: "PUT", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -115,5 +112,4 @@ function salvar() {
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
-    }
 }
