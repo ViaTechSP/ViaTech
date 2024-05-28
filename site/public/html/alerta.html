@@ -13,10 +13,11 @@
     <!-- SCRIPT -->
     <script src="../js/alerta.js"></script>
     <script src="../js/sessao.js"></script>
+    <script src="../js/dashboard_geral.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 </head>
-<body onload="buscarInfoAlerta(); validarSessao()">  
+<body onload="buscarInfoAlerta(); validarSessao(); listarLinhas()">  
         
         <nav id="menuLateral" style="width: 5%;">
             <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
@@ -40,12 +41,12 @@
                 </div>
                 
                 <div class="item">
-                    <a href="dashboard.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
+                    <a href="alerta.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">notifications_active</span> Alertas</a>
                 </div>
                 
                 
                 <div class="item esconder-item">
-                    <a href="dashboard.html"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
+                    <a href="#"> <span class="material-symbols-outlined">add_circle</span> Máquinas</a>
                 </div>
                 
                 
@@ -87,7 +88,11 @@
 
 
             <div class="main-panel">
-                <h2>Emitir Alertas na linha Amarela partir de:</h2>
+                <h2>Emitir Alertas na linha 
+                    <select  onchange="buscarInfoAlerta()" id="select_linha" class="select-linha">
+                        <option value="0" disabled selected>Selecione uma linha</option>
+                    </select>                    
+                </select> partir de:</h2>
                 <div class="alert-settings">
                     <div class="setting">
                         <h3>Disco Rígido:</h3>
@@ -109,7 +114,7 @@
 
                     <div class="setting">
                         <h3>USB:</h3>
-                        <p class="ideal">✔ Quantidade permitida:<input type="number" disabled id="usb" ></p>
+                        <p class="ideal">✔ Quantidade permitida:<input type="number" disabled id="ipt_qtd_usb" ></p>
                         <!-- <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaRam" disabled></input>%</p> -->
                     </div>
 

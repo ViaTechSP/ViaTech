@@ -103,10 +103,13 @@ function salvar() {
             
             botaoAlterar.style.display = 'flex';
             botaoSalvar.style.display = 'none';
-            swal('sucesso!', "Informações alteradas!");
+            swal('Sucesso!', "Informações alteradas!");
 
-        } else {
-            swal('error', "Não foi possível trocar a senha!");
+        } else if(imagem.length > 800){
+          swal('Não deu!', "O link da imagem é muito grande!", "error");
+        }
+          else {
+            swal('Erro', "Não foi possível trocar a senha!");
             throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
         }
     }).catch(function (resposta) {

@@ -69,14 +69,14 @@ function exibirFun(idEmpresa){
 
 // <=========================================================================== ALERTAS ==================================================================================>
 
-function buscarInfoAlerta() {
-    var instrucao = `SELECT * FROM metrica;`;
+function buscarInfoAlerta(idLinha) {
+    var instrucao = `SELECT * FROM metrica WHERE fkLinha = ${idLinha};`;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam) {
+function alterarInfoAlerta(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb) {
     var instrucao = 
     `UPDATE metrica SET 
     minCuidadoDisco = '${minimoDisco}',
@@ -84,7 +84,9 @@ function alterarInfoAlerta(minimoDisco, maximoDisco, minimoCpu, maximoCpu, minim
     minCUidadoCpu = '${minimoCpu}',
     maxCUidadoCpu = '${maximoCpu}',
     minCUidadoRam = '${minimoRam}',
-    maxCUidadoRam = '${maximoRam}'`;
+    maxCUidadoRam = '${maximoRam}',
+    qtdUsb = '${qtdUsb}' 
+    WHERE fkLinha = '${idLinha}'`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -43,4 +43,10 @@ router.get("/exibirEstacoes/:idEmpresa/:idLinha", function (req, res) {
 })
 
 
+// ALERTAS
+router.get("/listarLinhasAlerta/:idEmpresa", function (req, res) {
+    dashboardController.buscarLinhasAlerta(req, res);
+})
+
+
 module.exports = router;

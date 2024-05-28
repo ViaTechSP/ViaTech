@@ -20,7 +20,10 @@ function buscarInfoAlerta() {
     // var idFuncionario = sessionStorage.ID_FUNCIONARIO;
     // console.log('id =>', idFuncionario)
 
-    fetch(`/usuarios/buscarInfoAlerta/`, { cache: 'no-store' })
+    var idLinha = select_linha.value;
+    
+
+    fetch(`/usuarios/buscarInfoAlerta/${idLinha}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -35,6 +38,8 @@ function buscarInfoAlerta() {
             document.getElementById('ipt_minProblemaDisco').value = resposta[0].maxCuidadoDisco + 1;
             document.getElementById('ipt_minProblemaCpu').value = resposta[0].maxCUidadoCpu + 1;
             document.getElementById('ipt_minProblemaRam').value = resposta[0].maxCUidadoRam + 1;
+            document.getElementById('ipt_qtd_usb').value = resposta[0].qtdUsb;
+
             /* document.getElementById('ipt_minProblema').value = resposta[0].minProblTemp;
               document.getElementById('ipt_minCuidado').value = resposta[0].minProblTemp + 1;
               document.getElementById('ipt_maxCuidado').value = resposta[0].minIdealTemp - 1;
@@ -46,7 +51,20 @@ function buscarInfoAlerta() {
             
 
           } else {
+
+            document.getElementById('ipt_minDisco').value = '';
+            document.getElementById('ipt_maxDisco').value = '';
+            document.getElementById('ipt_minCpu').value = '';
+            document.getElementById('ipt_maxCpu').value = '';
+            document.getElementById('ipt_minRam').value = '';
+            document.getElementById('ipt_maxRam').value = '';
+            document.getElementById('ipt_minProblemaDisco').value = '';
+            document.getElementById('ipt_minProblemaCpu').value = '';
+            document.getElementById('ipt_minProblemaRam').value = '';
+            document.getElementById('ipt_qtd_usb').value = '';
+
             console.error('Nenhuma informação encontrada');
+            
           }
         });
       } else {
@@ -89,6 +107,12 @@ function salvarMetricas() {
 
   var minimoRam = ipt_minRam.value;
   var maximoRam = ipt_maxRam.value;
+  var qtdUsb = ipt_qtd_usb.value;
+
+  
+  var idLinha = select_linha.value;
+
+
 
   // TEMPERATURA
 
@@ -99,11 +123,11 @@ function salvarMetricas() {
 
 
   
-  if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam)){
+  if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)){
 
-  if (minimoDisco != '' && maximoDisco != '' && minimoCpu != '' && maximoCpu != '' && minimoRam != '' && maximoRam != '') {
+  if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
   
-  fetch(`/usuarios/alterarInfoAlerta/`,{
+  fetch(`/usuarios/alterarInfoAlerta/${idLinha}`,{
       method: "PUT", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         minimoDisco: minimoDisco,
@@ -111,7 +135,8 @@ function salvarMetricas() {
         minimoCpu: minimoCpu,
         maximoCpu: maximoCpu,
         minimoRam: minimoRam,
-        maximoRam: maximoRam
+        maximoRam: maximoRam,
+        qtdUsb: qtdUsb
         // minimoProblema: minimoProblema,
         // minimoIdeal: minimoIdeal,
         // maximoCuidado: maximoCuidado,
@@ -137,22 +162,24 @@ function salvarMetricas() {
                 botaoAlterar.style.justifyContent = 'center';
             } 
         });
+        swal('Sucesso', "Suas alterações foram salvas! 😀", "success" );
+
 
       } else {
-            swal('error', "Não foi possível trocar a senha!");
             throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
         }
       }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
+    } else{
+      swal('Eii', "Preencha todos os campos! 😠");
+
     }
   } else{
-      swal("Valores incorretos!", "O valor mínimo não pode ser maior ou igual ao valor máximo. 🥺", "error");
+      swal("Valores incorretos!", "Valor mínimo não pode ser maior ou igual ao valor máximo, ou negativo. 🥺", "error");
     
   }
 }
-
-
 
 
 
