@@ -24,7 +24,7 @@
 </head>
 
 <!-- <body onload="validarSessao()"> -->
-<body onload="clicarMenu(); listarLinhas()">
+<body onload="listarLinhas()">
         
 
     <nav id="menuLateral" style="width: 5%;">
@@ -117,10 +117,10 @@
                     <div class="kpis-alertas">
                             <div class="card-alerta">
                                  Nº de máquinas da linha
-                                <span id="total_maquinas" class="span-numero">16</span>máquinas
+                                <span id="total_maquinas" class="span-numero">0</span>máquinas
                             </div>
                             <div class="card-alerta">
-                                <span class="span-numero">30%</span>
+                                <span id="span_qtd_alerta" class="span-numero">0</span>
                                   <br>
                                 Das estações possuem alerta
                             </div>
@@ -131,7 +131,7 @@
                                 Nº de problemas na semana
                             </div>
                             <div class="card-footer">
-                                <div class="div-numero">16</div>
+                                <span id="span_qtd_problemas" class="div-numero">0</span>
                                 <div class="footer-texto">problemas 
                                     <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
                                 </div>
@@ -139,18 +139,16 @@
                         </div>
                         <div class="card-problema">
                             <div class="card-titulo">
-                                Estação com mais problemas
+                                Estação com mais alertas
                             </div>
                             <div class="card-footer">
                                 <div class="pc">
                                     <sl-icon style="font-size: 32px;" name="pc-display-horizontal"></sl-icon>
-                                    <div>Luz</div>
+                                    <div id="span_estacao_alerta">Luz</div>
                                 </div>
                                 <div class="qtd-problemas">
-                                    <div class="div-numero">4</div>
-                                        <div class="texto">problemas
-
-                                            <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
+                                    <span id="span_qtd_alertas" class="div-numero">0</span>
+                                        <div class="texto">alertas
                                         </div>
                                     </div>
                                 </div>
