@@ -109,6 +109,7 @@ function buscarLinhas(idEmpresa) {
     return database.executar(instrucao);
 }
 
+
 function buscarEstacoes(idEmpresa, idLinha) {
     var query =
     `SELECT idEstacao, estacao.nome FROM estacao
@@ -118,13 +119,22 @@ function buscarEstacoes(idEmpresa, idLinha) {
     ON fkEmpresa = idEmpresa
     where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha};
     `
-
+    
     return database.executar(query);
+}
+    function buscarLinhasAlerta(idEmpresa) {
+    var instrucao = 
+    `
+    select idLinha, linha.nome from linha JOIN empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa};
+    `
+    
+    return database.executar(instrucao);
 }
 
 module.exports = {
     buscarMaquinas,
     buscarLinhas,
+    buscarLinhasAlerta,
     buscarEstacoes,
     obterInfoHeader,
     obterDadosGrafico,

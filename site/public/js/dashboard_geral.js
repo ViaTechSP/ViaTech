@@ -16,7 +16,8 @@ function listarLinhas(idEmpresa) {
                     `<div class="alertas-quadrado">Problema - Estação Luz <br>
                     CPU > 89%</div>`
 
-                    
+                    console.log('id linha =>', resposta.idLinha);
+                    console.log('nome linha =>', resposta.nome);
                       var option = document.createElement("option");
                       option.value = resposta.idLinha;
                       option.text = resposta.nome;
