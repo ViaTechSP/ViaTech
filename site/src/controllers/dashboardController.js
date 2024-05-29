@@ -96,6 +96,32 @@ function buscarLinhas(req, res) {
     })
 }
 
+function exibirLinha(req, res){
+    var idEmpresa = req.params.idEmpresa;
+    
+    dashboardModel.exibirLinha(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function deletarLinha(req, res) {
+    var idLinha = req.params.idLinha;
+
+    dashboardModel.deletarLinha(idLinha)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar a linha: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     buscarMaquinas,
     buscarLinhas,
@@ -104,5 +130,7 @@ module.exports = {
     obterDadosGrafico,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
-    obterHistoricoAlerta
+    obterHistoricoAlerta,
+    exibirLinha,
+    deletarLinha
 }

@@ -43,10 +43,20 @@ router.get("/exibirEstacoes/:idEmpresa/:idLinha", function (req, res) {
 })
 
 
-// ALERTAS
+// ALERTAS LINHAS E ESTAÇÕES
 router.get("/listarLinhasAlerta/:idEmpresa", function (req, res) {
     dashboardController.buscarLinhasAlerta(req, res);
 })
+
+router.get("/exibirLinha/:idEmpresa", function (req, res) {
+    dashboardController.exibirLinha(req, res);
+});
+
+router.delete("/deletarLinha/:idLinha", function (req, res) {
+    console.log('entrou')
+    dashboardController.deletarLinha(req, res);
+});
+
 
 
 module.exports = router;
