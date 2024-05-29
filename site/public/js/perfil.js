@@ -1,4 +1,9 @@
 // const { columns } = require("mssql");
+$(document).ready(function(){
+  $('#ipt_cpf').mask('000.000.000-00');
+});
+
+
 
 function atualizarInfo() {
     document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
@@ -79,6 +84,10 @@ function salvar() {
     var senha = ipt_senha.value;
     var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 
+
+
+    if(nome !== '' && cpf !== '' && cargo !== '' && email !== '' && senha !== ''){
+
     fetch(`/usuarios/alterarInfo/`,{
         method: "PUT", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -114,5 +123,8 @@ function salvar() {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-    });
+    })
+  } else{
+    swal('Eii', "Preencha todas as informações!");
+  };
 }

@@ -72,7 +72,7 @@ $(document).ready(function(){
         document.getElementById('formularioExibir').style.display = 'none';
        document.getElementById('ver').style.color = 'black';
         document.getElementById('adicionarFuncionario').style.color = '#e6e62c';
-        document.getElementById('formularioAdd').style.display = 'block';
+        document.getElementById('formularioAdd').style.display = '  block';
         document.getElementById('formularioAdd').style.display = 'flex';
           // document.getElementById('formularioExcluir').style.display = 'none';
           // document.getElementById('formularioEditar').style.display = 'none';

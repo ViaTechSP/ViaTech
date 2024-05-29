@@ -25,7 +25,22 @@ function buscarId(req, res) {
   }
 
 
+  // LINHA E ESTAÇÃO
+
+  function cadastrarLinha(req, res){
+    var nome = req.body.nome;
+    var numero = req.body.numero;
+    var idEmpresa = req.body.idEmpresa;
+    
+    
+    empresaModel.cadastrarLinha(nome, numero, idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+
 module.exports = {
     cadastrarEmpresa,
-    buscarId
+    buscarId,
+    cadastrarLinha
 }

@@ -19,7 +19,17 @@ function buscarId(cnpj) {
 }
 
 
+function cadastrarLinha(nome, numero, idEmpresa) {
+
+    var instrucao = 
+    `INSERT INTO linha (nome, numero, fkEmpresa) VALUES ('${nome}', ${numero}, ${idEmpresa});`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     cadastrarEmpresa,
-    buscarId
+    buscarId,
+    cadastrarLinha
 };

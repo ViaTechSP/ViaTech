@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.header {
+    background-color: #efefef;
+    width: 92%;
+    height: 50px;
+    padding-left: 4%;
+    margin-right: 80px;
+    text-align: left;
+    font-size: 24px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+
+.header h3 {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;   
+    /* padding: 30px; */
+    /* overflow:hidden; */
+}
+
+.quadrado-perfil {
+    background-color: #f3f3f3;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container label {
+    margin-bottom: 2px;
+    margin-top: 5px;
+    padding: 2px;
+}
+
+.input-container input {
+    padding: 5px;
+    border: 1px solid #797979;
+    border-radius: 5px;
+    width: 97%;
+}
+
+.botao-cadastrar {
+    background-color: #5c4fa9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.menuDireita {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10%; 
+    height: 100vh; /* Garante que o menu direito ocupe toda a altura da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .itemDireita{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 300px;
+    border-bottom: solid white 1px;
+    margin-top: 10px;
+    margin-bottom: 50px; 
+    cursor: pointer;
+  }
+
+.item{
+    cursor: pointer;
+}

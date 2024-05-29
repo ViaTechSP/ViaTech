@@ -114,7 +114,7 @@ function cadastrarFun(idEmpresa) {
       swal('Erro', "Senha inválida!");
     }
 } else {
-  swal('Erro', "Preencha todos os campos corretamente");
+  swal('Ei!', "Preencha todos os campos.", 'error');
 }
 }
 

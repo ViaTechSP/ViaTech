@@ -22,7 +22,7 @@ function acessar() {
 
                 window.location = "perfil.html"
               } else {
-                swal('Puts', 'nenhum usuário encontrado!', "error")
+                swal('Puts', 'nenhum usuário encontrado!', "error");
               }
             });
           } else {
