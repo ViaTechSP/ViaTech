@@ -21,10 +21,9 @@
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
-<body onload="listarMaquinas(); validarSessao(), obterHistoricoAlerta()">
+<body onload="listarMaquinas(); validarSessao(); chamarFuncoes(); obterHistoricoAlerta()">
 <body>
         
-
         <nav id="menuLateral" style="width: 5%;">
             <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
             
@@ -73,13 +72,9 @@
             <div class="info">
                 <div class="info1">
                     <button><a href="dashboard_geral.html">VOLTAR</a></button>
-                    <select onchange="chamarFuncoes()" id="select_estacao" class="select-estacao esconder-item">
+                    <select onchange="" id="select_estacao" class="select-estacao esconder-item">
                         <option value="" disabled selected>Selecione uma Estação</option>
                     </select>
-                    <!-- <select onchange="obterInfoEstacao()" id="select_estacao" class="select-estacao esconder-item">
-                        <option value="" disabled selected>Selecione uma Estação</option>
-                        <option value="" disabled selected>Luz</option>
-                    </select> -->
                 </div>
                 <div class="info2">
 

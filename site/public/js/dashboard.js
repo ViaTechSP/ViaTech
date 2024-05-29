@@ -18,10 +18,6 @@ function listarMaquinas(idEmpresa) {
 }
 
 function obterInfoHeader(fkEstacao) {
-  if (fkEstacao == undefined || fkEstacao == null) {
-    var fkEstacao = select_estacao.value;
-  }
-
   fetch(`/dashboard/obterInfoHeader/${fkEstacao}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
@@ -55,16 +51,12 @@ function obterHistoricoAlerta(fkEmpresa) {
             } 
 
           });
-
-          colorizeWord('Problema - Estação Paulista', 'Problema', 'red')
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
 }
 
 function atualizarKPIs(fkEstacao) {
-  var fkEstacao = select_estacao.value;
-
   fetch(`/dashboard/obterInfoKPIAlertas/${fkEstacao}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
@@ -95,9 +87,7 @@ function atualizarKPIs(fkEstacao) {
     })
 }
 
-function obterDadosGrafico(fkEstacao) {
-  var fkEstacao = select_estacao.value;
-  
+function obterDadosGrafico(fkEstacao) {  
   fetch(`/dashboard/obterDadosGrafico/${fkEstacao}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
@@ -191,10 +181,10 @@ function plotarGrafico(resposta) {
 function formatDateTime(dtHora) {
   const date = new Date(dtHora);
 
-  // const formattedDate = date.toLocaleDateString('pt-BR', {
-  //     month: '2-digit',
-  //     day: '2-digit'
-  // });
+  const formattedDate = date.toLocaleDateString('pt-BR', {
+      month: '2-digit',
+      day: '2-digit'
+  });
 
   const formattedTime = date.toLocaleTimeString('pt-BR', {
       hour: '2-digit',
@@ -202,11 +192,17 @@ function formatDateTime(dtHora) {
       hour12: false
   });
 
-  return `${formattedTime}`;
+  return `${formattedDate} ${formattedTime}`;
 }
 
 function chamarFuncoes() {
-  obterDadosGrafico(),
-  obterInfoHeader(),
-  atualizarKPIs()
+  var fkEstacao = localStorage.getItem("estacaoId");
+  document.getElementById("select_estacao").value = localStorage.getItem("estacaoId");
+  
+  obterDadosGrafico(fkEstacao),
+  obterInfoHeader(fkEstacao),
+  atualizarKPIs(fkEstacao);
+  localStorage.removeItem("estacaoId");
+  var fkEstacao = null;
+
 }

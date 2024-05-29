@@ -37,7 +37,7 @@ function exibirEstacoes() {
 
           if (auxiliar % 2 == 0) {
             primeira_linha.innerHTML += `
-            <div class="card-maquina">
+            <div onclick="verDash(${resposta.idEstacao})" class="card-maquina">
               <img class="img-pc" src="../assets/imgs/computador.png">
                 <div class="estacao-alerta">
                   <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
@@ -46,7 +46,7 @@ function exibirEstacoes() {
             </div>`
           } else {
             segunda_linha.innerHTML += `
-            <div onclick="irParaDashboard(${resposta.idEstacao})" class="card-maquina">
+            <div onclick="verDash(${resposta.idEstacao})" class="card-maquina">
               <img class="img-pc" src="../assets/imgs/computador.png">
                 <div class="estacao-alerta">
                   <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
@@ -59,4 +59,10 @@ function exibirEstacoes() {
       });
     } else console.error('Nenhum dado encontrado ou erro na API');
   })
+}
+
+function verDash(idEstacao) {
+  localStorage.setItem("estacaoId", idEstacao);
+  console.log(localStorage.getItem("estacaoId"));
+  window.location = '../html/dashboard.html'
 }

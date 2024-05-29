@@ -9,24 +9,13 @@ function atualizarInfo() {
     document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
     var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 
-
-
     var exibirPerfil = document.getElementById("profileImage");
     var urlDaImagem = document.getElementById("ipt_alterImage");
     // var urlDaImagem = ipt_alterImage.value;
 
-    // console.log('imageeem', urlDaImagem)
-
-
-
-
     if(exibirPerfil && urlDaImagem){
         exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
     }
-
-    var testeDeImagem;
-
-    console.log('id =>', idFuncionario)
 
     fetch(`/usuarios/buscarInfo/${idFuncionario}`, { cache: 'no-store' })
     .then(function (response) {
@@ -39,40 +28,18 @@ function atualizarInfo() {
             document.getElementById('ipt_cargo').value = resposta[0].cargo;
             document.getElementById('ipt_email').value = resposta[0].email;
             document.getElementById('ipt_senha').value = resposta[0].senha;
+            ola.innerHTML = resposta[0].nome;
 
             if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
             exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
             }
 
-          } else {
-            console.error('Nenhuma informação encontrada');
-          }
+          } else console.error('Nenhuma informação encontrada');
         });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
+      } else  console.error('Nenhum dado encontrado ou erro na API');
+    }).catch(function (error) {
       console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
     });
-
-    
-
-
-
-}
-
-function alterar() {
-    const inputs = document.querySelectorAll('input');
-    const botaoAlterar = document.getElementById('botao_alterar');
-    const botaoSalvar = document.getElementById('botao_salvar');
-
-    inputs.forEach(input => {
-        if(input.id != 'ipt_empresa') input.toggleAttribute('disabled');
-    })
-
-    botaoAlterar.style.display = 'none';
-    botaoSalvar.style.display = 'flex';
 }
 
 function salvar() {
@@ -123,8 +90,20 @@ function salvar() {
         }
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-    })
-  } else{
-    swal('Eii', "Preencha todas as informações!");
-  };
+       });
+}
+}
+
+
+function alterar() {
+  const inputs = document.querySelectorAll('input');
+  const botaoAlterar = document.getElementById('botao_alterar');
+  const botaoSalvar = document.getElementById('botao_salvar');
+
+  inputs.forEach(input => {
+      if(input.id != 'ipt_empresa') input.toggleAttribute('disabled');
+  })
+
+  botaoAlterar.style.display = 'none';
+  botaoSalvar.style.display = 'flex';
 }
