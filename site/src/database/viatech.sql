@@ -1,7 +1,7 @@
 DROP DATABASE viatech;
 CREATE DATABASE viatech;
 USE viatech;
-
+select * from funcionario;
 -- CRIANDO USUÁRIO COM A SENHA PADRÃO     
 -- CREATE USER 'usuario_viatech'@'localhost' IDENTIFIED BY 'viatech';
 -- GRANT ALL PRIVILEGES ON `viatech`.* TO 'usuario_viatech'@'localhost';
@@ -98,6 +98,7 @@ fkRegistro INT,
 
 
 -- INSERTS -- 
+select * FROM Estacao;
 
 INSERT INTO EMPRESA (razaoSocial, nomeFantasia, CNPJ) VALUES 
 ('Via Tecnológica de São Paulo', 'ViaTechSP', '45904145652564');
