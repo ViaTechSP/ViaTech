@@ -131,6 +131,22 @@ function buscarEstacoes(idEmpresa, idLinha) {
     return database.executar(instrucao);
 }
 
+function exibirLinha(idEmpresa){
+    var query = `SELECT linha.* FROM linha WHERE fkEmpresa = ${idEmpresa};`;
+    
+    console.log('executando query: ', query)
+    return database.executar(query);
+}
+
+
+function deletarLinha(idLinha) {
+    
+    var instrucaoSql = `DELETE FROM linha WHERE idLinha = ${idLinha};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarMaquinas,
     buscarLinhas,
@@ -140,5 +156,7 @@ module.exports = {
     obterDadosGrafico,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
-    obterHistoricoAlerta
+    obterHistoricoAlerta,
+    exibirLinha,
+    deletarLinha
 };

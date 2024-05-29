@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
     <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body onload="validarSessao()">
+<body onload="validarSessao(); exibirLinha()">
     
     <div class="menuHeader">
         
@@ -74,7 +74,7 @@
     </div>
 
 
-    <div class="container">
+    <div id="divAdd" class="container" style="display: none;">
         <div class="quadrado-perfil">
             <h2>Cadastrar linha</h2>           
             <div class="input-container">
@@ -87,9 +87,25 @@
             </div>
 
             <button onclick="cadastrarLinha()" id="botao_alterar" class="botao-cadastrar">Adicionar</button>
-
         </div>
     </div>
+
+
+
+
+
+
+
+    <div class="containerExibir" id="container-linha">
+        <!-- <div id="container-linha" class="quadrado-linha">
+            <div class="nomeNumero">
+                <p> Nome: <span>Amarela</span></p> <span class="material-symbols-outlined">delete</span>
+            </div>
+            <div class="nomeNumero">
+                <p> Número: <span>2</span></p> <span class="material-symbols-outlined">edit</span>
+            </div>
+        </div> -->
+    </div> 
 
 
 

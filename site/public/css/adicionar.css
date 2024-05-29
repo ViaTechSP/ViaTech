@@ -24,11 +24,23 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 90%;   
     /* padding: 30px; */
     /* overflow:hidden; */
+}
+
+.containerExibir {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* position: relative; */
+    height: 80%;
+    z-index: 2;
+    overflow-x: auto;
 }
 
 .quadrado-perfil {
@@ -95,4 +107,28 @@ body {
 
 .item{
     cursor: pointer;
+}
+
+
+.quadrado-linha {
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+
+#container-linha{
+    justify-content: space-evenly;
+    /* height: 30% ; */
+}
+
+.nomeNumero{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

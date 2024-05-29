@@ -1,11 +1,107 @@
 function exibirLinha(){
+    document.getElementById('divAdd').style.display = 'none';
     document.getElementById('ver').style.color = '#F27A5E';
-    // document.getElementById('ver').style.backgroundcolor = '#F27A5E';
+    document.getElementById('add').style.color = 'black';
+    document.getElementById('container-linha').style.display = 'block';
+    document.getElementById('container-linha').style.display = 'flex';
+
+
+    var idEmpresa = sessionStorage.ID_EMPRESA;
+    var container = document.getElementById('container-linha');  
+    var lista_linha = [];
+
+    container.innerHTML ="";
+
+
+
+     fetch(`/dashboard/exibirLinha/${idEmpresa}`, { 
+        method: "GET", 
+      }).then(function (resposta) {
+     
+        if (!resposta.ok) { 
+          swal("Ops", 'Parce que você ainda não possuí linhas cadastradas!');
+          throw new Error('Erro na requisição');
+         }
+        return resposta.json();
+       })
+       
+
+       .then((resposta) => { 
+       lista_linha = resposta;
+
+       if (lista_linha.length === 0) {
+        swal({
+            title: "Ops",
+            text: "Parece que você ainda não possui linhas cadastradas!",
+            icon: "warning",
+            // buttons: {
+            //     cancel: "Cancelar",
+            //     confirm: "OK"
+            // }
+        }).then((confirmacao) => {
+            if (confirmacao) {
+                // Se o usuário confirmar, chama a função exibirDivAddLinha
+                exibirDivAddLinha();
+            }
+        });
+    }
+          
+     var tamanhoLinha = lista_linha.length;
+     var auxiliar = 0;
+
+     for (var i = 0; i < tamanhoLinha; i++) {
+       var id_linha = lista_linha[i].idLinha
+       var nome_atual = lista_linha[i].nome;
+       var numero_atual = lista_linha[i].numero;
+      
+       auxiliar++;
+
+       container.innerHTML += `<div class="quadrado-linha">
+       <div class="nomeNumero">
+         <p> Nome: ${nome_atual}</p> <span class="material-symbols-outlined" onclick="deletarLinha(${id_linha})">delete</span>
+       </div>
+      
+       <div class="nomeNumero">
+         <p> Número: ${numero_atual}</p> <span class="material-symbols-outlined">edit</span>
+       </div> `;
+
+     }
+   });
 }
 
+function deletarLinha(idLinha) {
+  console.log('id linha=>', idLinha);
+  fetch(`/dashboard/deletarLinha/${idLinha}`, {
+    method: "DELETE", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(function (resposta) {
+    if (resposta.ok) {
+      alert('eba');
+      exibirLinha();
+    } else {
+      resposta.text().then(function (texto) {
+      });
+    }
+  }).catch(function (error) {
+  });
+}
+
+
+
 function exibirDivAddLinha(){
-    document.getElementById('add').style.color = '#F27A5E';
-    document.getElementById('ver').display = 'none';
+
+
+  document.getElementById('divAdd').style.display = 'block';
+  document.getElementById('divAdd').style.display = 'flex';
+  document.getElementById('container-linha').style.display = 'none';
+  document.getElementById('ver').style.color = 'black';
+  document.getElementById('add').style.color = '#F27A5E';
+  
+  // var container = document.getElementById('container-linha');  
+  // container.display = 'none';
+
 }
 
 function cadastrarLinha(){
@@ -14,7 +110,7 @@ function cadastrarLinha(){
     var idEmpresa = sessionStorage.ID_EMPRESA
 
 
-    if(numero >= 0 && nome !== ''){
+    if(numero !== '' && nome !== '' && numero >= 0){
         fetch("/empresa/cadastrarLinha", {
             method: "POST", 
             headers: {
@@ -34,3 +130,5 @@ function cadastrarLinha(){
     }
 
 }
+
+
