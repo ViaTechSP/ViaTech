@@ -91,18 +91,19 @@
                         <div class="texto-pesquisa">
                             <h3>Máquinas da sua empresa</h3>
                         </div>
-                            <sl-input class="ipt-pesquisar-estacao" placeholder="Buscar estação" size="large">
+                        <!-- <input type="text" id="ipt_pesquisar" onkeyup="pesquisarEstacao()"> -->
+                            <sl-input id="ipt_pesquisar" onkeyup="filtrarEstacao()" class="ipt-pesquisar-estacao" placeholder="Buscar estação" size="large">
                                 <sl-icon name="search" slot="prefix"></sl-icon>
                               </sl-input>
 
                         <div class="filtros-prontos">
                                 <sl-button size="medium" class="filtrar-botoes" pill>A-Z </sl-button>
 
-                                <sl-button size="medium" class="filtrar-botoes" pill>Cuidado
+                                <sl-button size="medium" class="filtrar-botoes" id="botao_cuidado" onclick="alternarSelecionadoCuidado()" type="checkbox" pill>Cuidado
                                     <sl-icon name="exclamation-triangle" style="color: #fec23e;"></sl-icon>
                                 </sl-button>
 
-                                <sl-button size="medium" class="filtrar-botoes" pill>Problema
+                                <sl-button size="medium" class="filtrar-botoes" id="botao_problema" onclick="alternarSelecionadoProblema()" pill>Problema
                                     <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
                                 </sl-button>
 
