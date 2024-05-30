@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="item">
-                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Metricas</a>
+                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Métricas</a>
                 </div>
                 
                 
@@ -79,11 +79,11 @@
             <h2>Cadastrar linha</h2>           
             <div class="input-container">
                 <label for="ipt_nome">Nome:</label>
-                <input id="ipt_nome" placeholder="Insira uma linha">
+                <input id="ipt_nome" class="nomeNumero" placeholder="Insira uma linha">
             </div>
             <div class="input-container">
                 <label for="ipt_numero">Número:</label>
-                <input id="ipt_numero" placeholder="Insira o número">
+                <input id="ipt_numero" class="nomeNumero" placeholder="Insira o número">
             </div>
 
             <button onclick="cadastrarLinha()" id="botao_alterar" class="botao-cadastrar">Adicionar</button>
@@ -99,6 +99,7 @@
     <div class="containerExibir" id="container-linha">
         
         <!-- <div id="container-linha" class="quadrado-linha">
+            <span class="material-symbols-outlined cancelar" id="cancelar" style="display: none;">cancel</span>
             <div class="nomeNumero">
                 <p> Nome: <span>Amarela</span></p> <span class="material-symbols-outlined">delete</span>
             </div>
