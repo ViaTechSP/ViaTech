@@ -58,34 +58,57 @@ function exibirLinha(){
 
        container.innerHTML += `<div class="quadrado-linha">
        <div class="nomeNumero">
-         <p> Nome: ${nome_atual}</p> <span class="material-symbols-outlined" onclick="deletarLinha(${id_linha})">delete</span>
+         <p> Nome: <input id="input_nome" type="text" disabled value="${nome_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar" onclick="deletarLinha(${id_linha})">delete</span>
        </div>
       
        <div class="nomeNumero">
-         <p> Número: ${numero_atual}</p> <span class="material-symbols-outlined">edit</span>
+         <p> Número: <input id="input_numero" type="text" disabled value="${numero_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar">edit</span>
        </div> `;
+
+       
 
      }
    });
 }
 
 function deletarLinha(idLinha) {
-  console.log('id linha=>', idLinha);
-  fetch(`/dashboard/deletarLinha/${idLinha}`, {
-    method: "DELETE", 
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(function (resposta) {
-    if (resposta.ok) {
-      alert('eba');
-      exibirLinha();
-    } else {
-      resposta.text().then(function (texto) {
-      });
+  swal({
+    title: "Cuidado!",
+    text: "Todas as estações dessa linha serão escluidas. Você tem certeza que deseja continuar?",
+    icon: "warning",
+    buttons: {
+       cancel: "Cancelar",
+       confirm: "SIM!"
     }
-  }).catch(function (error) {
-  });
+}).then((confirmacao) => {
+    if (confirmacao) {
+
+        console.log('id linha=>', idLinha);
+        fetch(`/dashboard/deletarLinha/${idLinha}`, {
+          method: "DELETE", 
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then(function (resposta) {
+          if (resposta.ok) {
+            swal({
+              title: "Sucesso!",
+              text: "A linha foi excluída!",
+              icon: "success",
+          }).then((confirmacao) => {
+            if(confirmacao){
+              exibirLinha();
+            }
+          })
+      
+          } else {
+            resposta.text().then(function (texto) {
+            });
+          }
+        }).catch(function (error) {
+        });
+    }
+});
 }
 
 
