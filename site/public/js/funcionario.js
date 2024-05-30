@@ -115,15 +115,13 @@ $(document).ready(function(){
               }),
             }).then(function (resposta) {
               if (resposta.ok) {
-              //   swal.fire({
-              //     title: 'Redirecionando para o login',
-              //     text: 'Aguarde...',
-              //     icon: 'info',
-              //     timer: 2500,
-              //     showConfirmButton: false,
-              // }).then(() => {
-                  window.location = "login.html";
-              // });
+                swal({
+                  title: 'Sucesso',
+                  text: 'Cadastro realizado',
+                  icon: 'success',
+                  timer: 2000,
+                  showConfirmButton: false,
+              })
               } else {
                 resposta.text().then(function (texto) {
                 });

@@ -12,7 +12,7 @@ function acessar() {
                 console.log('resposta ====>', resposta);
 
                 sessionStorage.ID_EMPRESA = resposta[0].fkEmpresa;
-                sessionStorage.ID_FUNCIONARIO = resposta[0].id;
+                sessionStorage.ID_FUNCIONARIO = resposta[0].idFuncionario;
                 sessionStorage.NOME_EMPRESA = resposta[0].nomeFantasia;
                 sessionStorage.NOME_USUARIO = resposta[0].nome;
                 sessionStorage.CPF_USUARIO = resposta[0].cpf;
@@ -58,11 +58,4 @@ function acessar() {
            exibir_frase.style.fontWeight = "bold";
        
        }
-   }
-
-   function Login(){
-       window.location = "login.html"
-   }
-       function Cadastrar(){
-           window.location ="cadastro.html"
    }

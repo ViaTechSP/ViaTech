@@ -31,12 +31,4 @@ router.get("/exibirFun/:idEmpresa", function (req, res) {
     usuarioController.exibirFun(req, res);
 });
 
-router.get("/buscarInfoAlerta/:idLinha", function (req, res) {
-    usuarioController.buscarInfoAlerta(req, res);
-});
-
-router.put("/alterarInfoAlerta/:idLinha", function (req, res) {
-    usuarioController.alterarInfoAlerta(req, res);
-});
-
 module.exports = router;

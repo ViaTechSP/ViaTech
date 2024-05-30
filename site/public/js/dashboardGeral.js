@@ -2,7 +2,7 @@ function listarLinhas(idEmpresa) {
     var idEmpresa = sessionStorage.ID_EMPRESA;
     var select = document.getElementById("select_linha");
   
-    fetch(`/dashboard/listarLinhas/${idEmpresa}`, { cache: 'no-store' })
+    fetch(`/linha/exibirLinha/${idEmpresa}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -23,7 +23,7 @@ function exibirEstacoes() {
   var idEmpresa = sessionStorage.ID_EMPRESA;
   var idLinha = select_linha.value;
 
-  fetch(`/dashboard/exibirEstacoes/${idEmpresa}/${idLinha}`, { cache: 'no-store' })
+  fetch(`/dashGeral/exibirEstacoes/${idEmpresa}/${idLinha}`, { cache: 'no-store' })
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
