@@ -4,34 +4,23 @@ function buscarInfoMetricas() {
     // console.log('id =>', idFuncionario)
 
     var idLinha = select_linha.value;
-    
 
+    
     fetch(`/metrica/buscarInfoMetrica/${idLinha}`, { cache: 'no-store' })
     .then(function (response) {
+        
       if (response.ok) {
         response.json().then(function (resposta) {
           if (resposta.length > 0) {
             console.log('resposta ==>', resposta)
-            document.getElementById('ipt_minDisco').value = resposta[0].minCuidadoDisco;
-            document.getElementById('ipt_maxDisco').value = resposta[0].maxCuidadoDisco;
-            document.getElementById('ipt_minCpu').value = resposta[0].minCUidadoCpu;
-            document.getElementById('ipt_maxCpu').value = resposta[0].maxCUidadoCpu;
-            document.getElementById('ipt_minRam').value = resposta[0].minCUidadoRam;
-            document.getElementById('ipt_maxRam').value = resposta[0].maxCUidadoRam;
-            document.getElementById('ipt_minProblemaDisco').value = resposta[0].maxCuidadoDisco + 1;
-            document.getElementById('ipt_minProblemaCpu').value = resposta[0].maxCUidadoCpu + 1;
-            document.getElementById('ipt_minProblemaRam').value = resposta[0].maxCUidadoRam + 1;
-            document.getElementById('ipt_qtd_usb').value = resposta[0].qtdUsb;
 
-            /* document.getElementById('ipt_minProblema').value = resposta[0].minProblTemp;
-              document.getElementById('ipt_minCuidado').value = resposta[0].minProblTemp + 1;
-              document.getElementById('ipt_maxCuidado').value = resposta[0].minIdealTemp - 1;
-              document.getElementById('ipt_minIdeal').value = resposta[0].minIdealTemp; 
-              document.getElementById('ipt_maxIdeal').value = resposta[0].maxCuidadoTemp - 1; 
-              document.getElementById('ipt_minCuidado2').value = resposta[0].maxCuidadoTemp;
-              document.getElementById('ipt_maxCuidado2').value = resposta[0].maxProblTemp - 1;
-              document.getElementById('ipt_minProblema2').value = resposta[0].maxProblTemp; */
-            
+            document.getElementById('ipt_minDisco').value = resposta[0].cuidadoDisco;
+            document.getElementById('ipt_minProblemaDisco').value = resposta[0].problemaDisco;
+            document.getElementById('ipt_minCpu').value = resposta[0].cuidadoCpu;
+            document.getElementById('ipt_minProblemaCpu').value = resposta[0].cuidadoCpu;
+            document.getElementById('ipt_minRam').value = resposta[0].cuidadoRam;
+            document.getElementById('ipt_minProblemaRam').value = resposta[0].problemaRam;
+            document.getElementById('ipt_qtd_usb').value = resposta[0].maxUsb;           
 
           } else {
 
@@ -53,13 +42,16 @@ function buscarInfoMetricas() {
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
       }
-    })
-    .catch(function (error) {
+    }).catch(function (error) {
       console.error(`Erro na obtenção do idEmpresa: ${error.message}`);
     });
+    
+
+  
 }
 
 function alterarMetricas() {
+  if(option.value !== 0){
   const inputs = document.querySelectorAll('input');
   const botaoAlterar = document.getElementById('botao_alterarMetrica');
   const botaoSalvar = document.getElementById('botao_salvarMetrica');
@@ -67,17 +59,21 @@ function alterarMetricas() {
   // Itera sobre cada input
   inputs.forEach(input => {
       // Verifica se o id do input NÃO contém a palavra "Problema"
-      if (!input.id.includes('Problema')) {
         
           // Se não contém, desabilita o input
           input.removeAttribute('disabled', true);
 
+          input.classList.remove('setting');
+          input.classList.add('setting2');
           botaoAlterar.style.display = 'none';
           botaoSalvar.style.display = 'flex';
           botaoSalvar.style.alignItems = 'center';
           botaoSalvar.style.justifyContent = 'center';
-      } 
+      
   });
+  } else{
+    swal('Ei!', 'Selecione uma linha primeiro!', 'warning')
+  }
 }
 
 

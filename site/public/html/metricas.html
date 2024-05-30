@@ -42,7 +42,7 @@
                 </div>
                 
                 <div class="item">
-                    <a href="metricas.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">notifications_active</span> Metricas</a>
+                    <a href="metricas.html" style="color: #e6e62c;"> <span class="material-symbols-outlined">notifications_active</span>Métricas</a>
                 </div>
                 
                 
@@ -65,7 +65,7 @@
         
         <div class="containerAlerta">
             <div class="side-panel" style="background-color: #6b6e6e34;">
-                <h2>Alertas</h2>
+                <h2>Métricas</h2>
 
                 Observação:<br>
                 Referente ao uso do hardware de 1% a 100%, poderá ser definido a emissão de alertas (cuidado e problema). Os símbulos usados são de comparação.
@@ -91,26 +91,26 @@
             <div class="main-panel">
                 <h2>Emitir Alertas na linha 
                     <select  onchange="buscarInfoMetricas()" id="select_linha" class="select-linha">
-                        <option value="0" disabled selected>Selecione uma linha</option>
+                        <option id="option" value="0" disabled selected>Selecione uma linha</option>
                     </select>                    
                 </select> partir de:</h2>
                 <div class="alert-settings">
                     <div class="setting">
                         <h3>Disco Rígido:</h3>
-                        <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minDisco" >em Gb máximo<input type="number" disabled id="ipt_maxDisco">%</p>
-                        <p class="problema">❌ Problema maior ou igual <input id="ipt_minProblemaDisco" disabled></input>%</p>
+                        <p class="cuidado">⚠ Cuidado a partir de <input type="number" disabled id="ipt_minDisco">Gb disponível</p>
+                        <p class="problema">❌ Problema a partir de <input id="ipt_minProblemaDisco" disabled>Gb disponível</input></p>
                     </div>
 
                     <div class="setting">
                         <h3>CPU:</h3>
-                        <p class="cuidado">⚠ Cuidado mínimo: <input type="number" disabled id="ipt_minCpu" >% máximo: <input type="number" disabled id="ipt_maxCpu" >%</p>
-                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaCpu" disabled></input>%</p>
+                        <p class="cuidado">⚠ Cuidado a partir de: <input type="number" disabled id="ipt_minCpu" >%</p>
+                        <p class="problema">❌ Problema a partir de:<input type="number" id="ipt_minProblemaCpu" disabled></input>%</p>
                     </div>
 
                     <div class="setting">
                         <h3>Memória RAM:</h3>
-                        <p class="cuidado">⚠ Cuidado mínimo:<input type="number" disabled id="ipt_minRam" >% máximo<input type="number" disabled id="ipt_maxRam">%</p>
-                        <p class="problema">❌ Problema maior ou igual á <input type="number" id="ipt_minProblemaRam" disabled></input>%</p>
+                        <p class="cuidado">⚠ Cuidado a partir de<input type="number" disabled id="ipt_minRam" >%</p>
+                        <p class="problema">❌ Problema a partir de <input type="number" id="ipt_minProblemaRam" disabled></input>%</p>
                     </div>
 
                     <div class="setting">

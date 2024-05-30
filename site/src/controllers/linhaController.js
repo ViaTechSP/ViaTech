@@ -49,9 +49,33 @@ function cadastrarLinha(req, res){
     });
 }
 
+function salvarLinha(req, res) {
+    console.log("tamo no controler")
+
+    var idLinha = req.params.idLinha;
+    var nome = req.body.nome;
+    var numero = req.body.numero;
+    
+    console.log('id =>', idLinha)
+    console.log('nome =>', nome)
+    console.log('numero =>', numero)
+
+    linhaModel.salvarLinha(numero, nome, idLinha)
+    .then(function (resultado) {
+            res.json(resultado);
+        })
+    .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     // buscarLinhas,
     exibirLinha,
     deletarLinha,
-    cadastrarLinha
+    cadastrarLinha,
+    salvarLinha
 }

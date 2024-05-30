@@ -16,6 +16,10 @@ router.post("/cadastrarLinha", function (req, res) {
     linhaController.cadastrarLinha(req, res);
 })
 
+router.put("/salvarLinha/:idLinha", function (req, res) {
+    linhaController.salvarLinha(req, res);
+});
+
 // router.get("/listarLinhas/:idEmpresa", function (req, res) {
 //     linhaController.buscarLinhas(req, res);
 // })

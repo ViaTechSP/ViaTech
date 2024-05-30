@@ -74,7 +74,10 @@ body {
     padding: 5px;
     border: 1px solid #797979;
     border-radius: 5px;
-    width: 97%;
+    /* width: 97%;
+     */
+    width: 480px;
+
 }
 
 .botao-cadastrar {
@@ -146,4 +149,26 @@ body {
 .selecionar:hover{
     color: #F27A5E;
     transition: 2.0 ease;
+}
+
+
+.input-container-editar {
+    /* display: ; */
+    /* border: none; */
+    border-radius: 5px;
+    background-color: #ebd8d876;
+    padding: 5px;
+    width: 80px;
+    justify-content: center;
+}
+
+.botao_salvar{
+    background-color: #5c4fa9;
+    color: white;
+    border-radius: 25px;
+    border: white 1px solid;
+}
+
+.cancelar{
+    margin-left: 95%;
 }
