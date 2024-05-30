@@ -55,8 +55,13 @@ body {
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
+    /* display: ; */
+    border: none;
+    border-radius: 5px;
+    /* background-color: #c6bdbd76; */
+    padding: 5px;
+    width: 80px;
+    justify-content: center;
 }
 
 .input-container label {
@@ -131,4 +136,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.selecionar{
+    cursor: pointer;
+    /* color: #5c4fa9; */
+}
+
+.selecionar:hover{
+    color: #F27A5E;
+    transition: 2.0 ease;
 }
