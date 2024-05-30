@@ -214,3 +214,7 @@
     color: #fec23e;
     margin: 5px 5px 0px 0px;
 }
+
+.selecionado {
+    background-color: #f21d3c;
+}

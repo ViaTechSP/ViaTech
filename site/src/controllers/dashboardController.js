@@ -1,6 +1,6 @@
 var dashboardModel = require("../models/dashboardModel");
 
-// DASHBOARD MÁQUINA
+    // DASHBOARD MÁQUINA
 function obterDadosGrafico(req, res) {
     var fkEstacao = req.params.fkEstacao;
 
@@ -84,6 +84,24 @@ function buscarEstacoes(req, res){
     });
 }
 
+function filtrarPorAlerta(req, res){
+    var alerta = req.params.alerta;
+
+    dashboardModel.filtrarPorAlerta(alerta).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function pesquisarEstacao(req, res){
+    var pesquisa = req.params.pesquisarVar;
+
+    console.log('pesquisa: ', pesquisa)
+
+    dashboardModel.pesquisarEstacao(pesquisa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 function buscarLinhas(req, res) {
     var idEmpresa = req.params.idEmpresa;
 
@@ -129,6 +147,8 @@ module.exports = {
     obterInfoHeader,
     obterDadosGrafico,
     obterInfoKPIAlertas,
+    filtrarPorAlerta,
+    pesquisarEstacao,
     obterInfoKPIComponente,
     obterHistoricoAlerta,
     exibirLinha,

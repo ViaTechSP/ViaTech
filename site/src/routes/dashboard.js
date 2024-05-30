@@ -42,6 +42,13 @@ router.get("/exibirEstacoes/:idEmpresa/:idLinha", function (req, res) {
     dashboardController.buscarEstacoes(req, res);
 })
 
+router.get("/filtrarPorAlerta/:alerta", function (req, res) {
+    dashboardController.filtrarPorAlerta(req, res);
+})
+
+router.get("/pesquisarEstacao/:pesquisarVar", function (req, res) {
+    dashboardController.pesquisarEstacao(req, res);
+})
 
 // ALERTAS LINHAS E ESTAÇÕES
 router.get("/listarLinhasAlerta/:idEmpresa", function (req, res) {
