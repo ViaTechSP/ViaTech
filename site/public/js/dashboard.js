@@ -26,7 +26,7 @@ function obterInfoHeader(fkEstacao) {
           span_so.innerHTML = resposta[0].sistemaOperacional
           span_cpu.innerHTML = resposta[0].nomeCpu
           span_ram.innerHTML = resposta[0].ramTotal
-          span_disco.innerHTML = resposta[0].discoTotal
+          span_disco.innerHTML = resposta[0].armazenamentoTotal
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
@@ -116,7 +116,7 @@ function plotarGrafico(resposta) {
       var registro = resposta[i];
       labels.push(formatDateTime(registro.dtHora));
       cpuData.push(registro.cpuPorcentagemUso);
-      discoData.push(registro.discoUtilizado);
+      discoData.push(registro.discoDisponivel);
       ramData.push(registro.ramUtilizada);
       temperaturaData.push(registro.cpuTemperatura);
   }

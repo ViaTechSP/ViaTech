@@ -63,7 +63,7 @@ CREATE TABLE registro (
 idRegistro INT PRIMARY KEY AUTO_INCREMENT,
 dtHora DATETIME DEFAULT CURRENT_TIMESTAMP,
 cpuUtilizada DOUBLE,
-discoUtilizado DOUBLE,
+discoDisponivel DOUBLE,
 ramUtilizada DOUBLE,
 qtdDispositivosUsb INT,
 fkEspecificacaoMaquina INT NOT NULL,
