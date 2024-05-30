@@ -10,7 +10,7 @@ function avancar(){
       if (response.ok) {
         response.json().then(function (resposta) {
           if (resposta.length > 0) {
-            sessionStorage.ID_FUNCIONARIO = resposta[0].id;
+            sessionStorage.ID_FUNCIONARIO = resposta[0].idFuncionario;
             console.log(resposta[0].id);
 
             divEmail.style.display = "none";

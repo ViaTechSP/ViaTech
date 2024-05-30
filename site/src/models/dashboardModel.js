@@ -1,6 +1,5 @@
 var database = require("../database/config")
 
-
 function obterDadosGrafico(fkEstacao) {
     var instrucao = `
         SELECT * from Registro JOIN especificacaoMaquina 
@@ -42,7 +41,7 @@ function obterHistoricoAlerta(idEmpresa) {
     JOIN Linha
     ON fkLinha = idLinha
     WHERE fkEmpresa = ${idEmpresa}
-    ORDER BY idHistoricoAlerta DESC
+    ORDER BY idHistorico DESC
     LIMIT 8;
     `
     
@@ -78,7 +77,7 @@ function obterInfoKPIAlertas(fkEstacao) {
 
 function obterInfoKPIComponente(fkEstacao) {
     var instrucao = `
-    SELECT COUNT(h.idHistoricoAlerta) AS total, h.componente FROM historicoAlerta AS H
+    SELECT COUNT(h.idHistorico) AS total, h.componente FROM historicoAlerta AS H
 	JOIN registro
     ON fkRegistro = idRegistro
     JOIN especificacaoMaquina
@@ -97,95 +96,11 @@ function obterInfoKPIComponente(fkEstacao) {
     return database.executar(instrucao);
 }
 
-
-
-
-function buscarLinhas(idEmpresa) {
-    var instrucao = 
-    `
-    select idLinha, linha.nome from linha JOIN empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa};
-    `
-    
-    return database.executar(instrucao);
-}
-
-
-function buscarEstacoes(idEmpresa, idLinha) {
-    var query =
-    `SELECT idEstacao, estacao.nome FROM estacao
-    JOIN linha
-    ON fkLinha = idLinha
-    JOIN empresa
-    ON fkEmpresa = idEmpresa
-    where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha};
-    `
-    
-    return database.executar(query);
-}
-
-function filtrarPorAlerta(alerta) {
-    var query =
-    `SELECT DISTINCT estacao.idEstacao, estacao.nome FROM Estacao
-	JOIN Maquina ON fkEstacao = idEstacao
-    JOIN especificacaoMaquina ON fkMaquina = idMaquina
-    JOIN registro ON fkEspecificacaoMaquina = idEspecificacaoMaquina
-    JOIN historicoAlerta ON fkRegistro
-    WHERE tipo = '${alerta}';
-    `
-    
-    return database.executar(query);
-}
-
-function pesquisarEstacao(pesquisa) {
-    var query =
-    `SELECT idEstacao, estacao.nome FROM estacao
-    JOIN linha
-    ON fkLinha = idLinha
-    JOIN empresa
-    ON fkEmpresa = idEmpresa
-    where estacao.nome = '${pesquisa}';
-    `
-    
-    return database.executar(query);
-}
-
-    function buscarLinhasAlerta(idEmpresa) {
-    var instrucao = 
-    `
-    select idLinha, linha.nome from linha JOIN empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa};
-    `
-    
-    return database.executar(instrucao);
-}
-
-function exibirLinha(idEmpresa){
-    var query = `SELECT linha.* FROM linha WHERE fkEmpresa = ${idEmpresa};`;
-    
-    console.log('executando query: ', query)
-    return database.executar(query);
-}
-
-
-function deletarLinha(idLinha) {
-    
-    var instrucaoSql = `DELETE FROM linha WHERE idLinha = ${idLinha};`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 module.exports = {
     buscarMaquinas,
-    buscarLinhas,
-    buscarLinhasAlerta,
-    buscarEstacoes,
     obterInfoHeader,
     obterDadosGrafico,
     obterInfoKPIAlertas,
-    filtrarPorAlerta,
-    pesquisarEstacao,
     obterInfoKPIComponente,
-    obterHistoricoAlerta,
-    exibirLinha,
-    deletarLinha
+    obterHistoricoAlerta
 };

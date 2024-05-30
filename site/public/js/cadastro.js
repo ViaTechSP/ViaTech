@@ -66,7 +66,7 @@ function buscarIdEmpresa() {
 
 function cadastrarFun(idEmpresa) {
   var nome = input_nome.value;
-  var cpf = input_cpf.value
+  var cpf = input_cpf.value.replace(/[^\d]/g, '');
   var email = input_email.value;
   var senha = input_senha.value;
   var fkEmpresa = idEmpresa;

@@ -5,7 +5,7 @@ var database = require("../database/config")
 function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargo, fkEmpresaVar) {
     var instrucao = '';
     if (cargo == null || cargo == undefined || cargo == '') {
-        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'gerente', ${fkEmpresaVar});`;
+        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'Gerente', ${fkEmpresaVar});`;
     } else {
         instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', '${cargo}', ${fkEmpresaVar});`;
     }
@@ -22,21 +22,21 @@ function autenticar(emailVar, senhaVar) {
 }
 
 function buscarId(email) {
-    var instrucao = `SELECT id FROM Funcionario WHERE email = '${email}';`;
+    var instrucao = `SELECT idFuncionario FROM Funcionario WHERE email = '${email}';`;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function alterarSenha(novaSenha, idFuncionario) {
-    var instrucao = `UPDATE funcionario SET senha = '${novaSenha}' WHERE id = ${idFuncionario};`;
+    var instrucao = `UPDATE funcionario SET senha = '${novaSenha}' WHERE idFuncionario = ${idFuncionario};`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function buscarInfo(idFuncionario) {
-    var instrucao = `SELECT * FROM Funcionario WHERE id = '${idFuncionario}';`;
+    var instrucao = `SELECT * FROM Funcionario WHERE idFuncionario = '${idFuncionario}';`;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -51,7 +51,7 @@ function alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo) {
     email = '${email}',
     senha = '${senha}',
     cargo = '${cargo}' 
-    WHERE id = ${idFuncionario};`;
+    WHERE idFuncionario = ${idFuncionario};`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -64,35 +64,6 @@ function exibirFun(idEmpresa){
     return database.executar(query);
 }
 
-
-
-
-// <=========================================================================== ALERTAS ==================================================================================>
-
-function buscarInfoAlerta(idLinha) {
-    var instrucao = `SELECT * FROM metrica WHERE fkLinha = ${idLinha};`;
-    
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
-function alterarInfoAlerta(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb) {
-    var instrucao = 
-    `UPDATE metrica SET 
-    minCuidadoDisco = '${minimoDisco}',
-    maxCuidadoDisco = '${maximoDisco}',
-    minCUidadoCpu = '${minimoCpu}',
-    maxCUidadoCpu = '${maximoCpu}',
-    minCUidadoRam = '${minimoRam}',
-    maxCUidadoRam = '${maximoRam}',
-    qtdUsb = '${qtdUsb}' 
-    WHERE fkLinha = '${idLinha}'`;
-
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
-
-
 module.exports = {
     autenticar,
     cadastrarFun,
@@ -100,7 +71,5 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    exibirFun,
-    buscarInfoAlerta,
-    alterarInfoAlerta
+    exibirFun
 };

@@ -1,21 +1,4 @@
-function clicarMenu() {
-    const menu = document.getElementById('menuLateral');
-    menu.classList.toggle('escondido');
-
-    if (!menu.classList.contains('escondido')) {
-        menu.style.width = '5%';
-        menuEscondido.style.display = 'block';
-        containerMenuLateral.style.display = 'none';
-    }
-    else {
-        menu.style.width = '22%';
-        menuEscondido.style.display = 'none'
-        containerMenuLateral.style.display = 'flex'
-    }
-}
-
-
-function buscarInfoAlerta() {
+function buscarInfoMetricas() {
     // document.getElementById('span_minProblemaDisco').value = sessionStorage.MAXIMO_CUIDADO;
     // var idFuncionario = sessionStorage.ID_FUNCIONARIO;
     // console.log('id =>', idFuncionario)
@@ -23,7 +6,7 @@ function buscarInfoAlerta() {
     var idLinha = select_linha.value;
     
 
-    fetch(`/usuarios/buscarInfoAlerta/${idLinha}`, { cache: 'no-store' })
+    fetch(`/metrica/buscarInfoMetrica/${idLinha}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -127,7 +110,7 @@ function salvarMetricas() {
 
   if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
   
-  fetch(`/usuarios/alterarInfoAlerta/${idLinha}`,{
+  fetch(`/metrica/alterarInfoMetrica/${idLinha}`,{
       method: "PUT", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         minimoDisco: minimoDisco,
@@ -144,7 +127,7 @@ function salvarMetricas() {
     })
   }).then(function (resposta) {
       if (resposta.ok) {
-          buscarInfoAlerta();
+          buscarInfoMetricas();
           const inputs = document.querySelectorAll('input');
           const botaoAlterar = document.getElementById('botao_alterarMetrica');
           const botaoSalvar = document.getElementById('botao_salvarMetrica');

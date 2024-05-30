@@ -12,9 +12,7 @@ function exibirLinha(){
 
     container.innerHTML ="";
 
-
-
-     fetch(`/dashboard/exibirLinha/${idEmpresa}`, { 
+     fetch(`/linha/exibirLinha/${idEmpresa}`, { 
         method: "GET", 
       }).then(function (resposta) {
      
@@ -25,7 +23,6 @@ function exibirLinha(){
         return resposta.json();
        })
        
-
        .then((resposta) => { 
        lista_linha = resposta;
 
@@ -74,7 +71,7 @@ function exibirLinha(){
 function deletarLinha(idLinha) {
   swal({
     title: "Cuidado!",
-    text: "Todas as estações dessa linha serão escluidas. Você tem certeza que deseja continuar?",
+    text: "Todas as estações dessa linha serão excluidas. Você tem certeza que deseja continuar?",
     icon: "warning",
     buttons: {
        cancel: "Cancelar",
@@ -84,7 +81,7 @@ function deletarLinha(idLinha) {
     if (confirmacao) {
 
         console.log('id linha=>', idLinha);
-        fetch(`/dashboard/deletarLinha/${idLinha}`, {
+        fetch(`/linha/deletarLinha/${idLinha}`, {
           method: "DELETE", 
           headers: {
             "Content-Type": "application/json",
@@ -134,7 +131,7 @@ function cadastrarLinha(){
 
 
     if(numero !== '' && nome !== '' && numero >= 0){
-        fetch("/empresa/cadastrarLinha", {
+        fetch("/linha/cadastrarLinha", {
             method: "POST", 
             headers: {
               "Content-Type": "application/json",
