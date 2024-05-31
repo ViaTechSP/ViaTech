@@ -34,6 +34,8 @@ function exibirEstacoes() {
 
         resposta.forEach(function (resposta) {
           auxiliar++ 
+          console.log('nome estação =>', resposta.nome);
+          console.log('id estação =>', resposta.idEstacao);
 
           if (auxiliar % 2 == 0) {
             primeira_linha.innerHTML += string(resposta);
@@ -80,7 +82,6 @@ function filtrarPorAlerta(alerta) {
 
         resposta.forEach(function (resposta) {
           auxiliar++ 
-
           if (auxiliar % 2 == 0) {
             primeira_linha.innerHTML += string(resposta);
           } else {
@@ -97,6 +98,9 @@ function alternarSelecionadoCuidado() {
   botao_cuidado.classList.toggle('selecionado');
 
   if(botao_cuidado.classList.contains('selecionado')) {
+    const botao_problema = document.getElementById('botao_problema');
+    botao_problema.classList.remove('selecionado');
+
     filtrarPorAlerta('Cuidado');
   }
 }
@@ -106,14 +110,16 @@ function alternarSelecionadoProblema() {
   botao_problema.classList.toggle('selecionado');
   
   if(botao_problema.classList.contains('selecionado')) {
-    document.getElementById('botao_problema').classList.remove('selecionado');
+    const botao_cuidado = document.getElementById('botao_cuidado');
+    botao_cuidado.classList.remove('selecionado');
+
     filtrarPorAlerta('Problema');
   }
 }
 
 
 function verDash(idEstacao) {
-  localStorage.setItem("estacaoId", idEstacao);
+  sessionStorage.setItem("estacaoId", idEstacao);
   window.location = '../html/dashboard.html';
 }
 

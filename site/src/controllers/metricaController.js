@@ -14,7 +14,7 @@ function buscarInfoMetrica(req, res) {
 
 function alterarInfoMetrica(req, res) {
     // var idFuncionario = req.body.idFuncionario;
-
+    
     var idLinha = req.params.idLinha;
 
     var minimoDisco = req.body.minimoDisco ;
@@ -31,9 +31,9 @@ function alterarInfoMetrica(req, res) {
     
     metricaModel.alterarInfoMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb)
     .then(function (resultado) {
-            res.json(resultado);
-            
-        })
+        res.json(resultado);
+        
+    })
     .catch(function (erro) {
             console.log(erro);
             console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
@@ -42,7 +42,16 @@ function alterarInfoMetrica(req, res) {
     );
 }
 
+function obterMetricasEstacao(req, res) {
+    var fkEstacao = req.params.fkEstacao;
+
+    metricaModel.obterMetricasEstacao(fkEstacao).then((resultado) => {
+      res.status(200).json(resultado);
+    })
+}
+
 module.exports = {
     buscarInfoMetrica,
-    alterarInfoMetrica
+    alterarInfoMetrica,
+    obterMetricasEstacao
 }

@@ -3,8 +3,6 @@ $(document).ready(function(){
   $('#ipt_cpf').mask('000.000.000-00');
 });
 
-
-
 function atualizarInfo() {
     document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
     var idFuncionario = sessionStorage.ID_FUNCIONARIO;

@@ -2,12 +2,14 @@ var database = require("../database/config")
 
 function obterDadosGrafico(fkEstacao) {
     var instrucao = `
-        SELECT * from Registro JOIN especificacaoMaquina 
+        SELECT r.dtHora, cpuUtilizada, discoDisponivel, 
+        ramUtilizada, qtdDispositivosUsb 
+        from Registro r JOIN especificacaoMaquina 
         ON fkespecificacaoMaquina = idespecificacaoMaquina 
         JOIN maquina
         ON fkMaquina = idMaquina 
         WHERE fkEstacao = ${fkEstacao}
-        ORDER BY dtHora DESC;
+        ORDER BY dtHora;
     `;
 
     return database.executar(instrucao);

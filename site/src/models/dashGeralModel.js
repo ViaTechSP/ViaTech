@@ -7,7 +7,7 @@ function buscarEstacoes(idEmpresa, idLinha) {
     ON fkLinha = idLinha
     JOIN empresa
     ON fkEmpresa = idEmpresa
-    where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha};
+    where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha} ORDER BY idEstacao DESC;
     `
     
     return database.executar(query);

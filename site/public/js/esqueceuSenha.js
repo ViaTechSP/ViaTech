@@ -11,7 +11,7 @@ function avancar(){
         response.json().then(function (resposta) {
           if (resposta.length > 0) {
             sessionStorage.ID_FUNCIONARIO = resposta[0].idFuncionario;
-            console.log(resposta[0].id);
+            console.log(resposta[0].idFuncionario);
 
             divEmail.style.display = "none";
             divRedefinir.style.display = "block";

@@ -23,7 +23,18 @@ function alterarInfoMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximo
     return database.executar(instrucao);
 }
 
+function obterMetricasEstacao(fkEstacao) {
+    var instrucao =
+    `SELECT m.* FROM Metrica m 
+	JOIN Linha l ON m.fkLinha = l.idLinha
+    JOIN Estacao e ON e.fkLinha = l.idLinha
+    WHERE idEstacao = ${fkEstacao};`
+
+    return database.executar(instrucao);
+}
+
 module.exports = {
     buscarInfoMetrica,
-    alterarInfoMetrica
+    alterarInfoMetrica,
+    obterMetricasEstacao
 };

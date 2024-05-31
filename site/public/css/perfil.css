@@ -18,7 +18,7 @@ body {
     margin: 0;
 }
 
-.container {
+.container-perfil {
     display: flex;
     justify-content: center;
     align-items: center;
