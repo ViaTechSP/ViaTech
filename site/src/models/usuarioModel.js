@@ -2,12 +2,12 @@ var database = require("../database/config")
 
 // <==================================================================== FUNCIONARIO ==================================================================================>
 
-function cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargo, fkEmpresaVar) {
+function cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargo, fkEmpresaVar) {
     var instrucao = '';
     if (cargo == null || cargo == undefined || cargo == '') {
-        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'Gerente', ${fkEmpresaVar});`;
+        instrucao = `INSERT INTO funcionario (urlFoto, nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${imagemVar}', '${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', 'Gerente', ${fkEmpresaVar});`;
     } else {
-        instrucao = `INSERT INTO funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', '${cargo}', ${fkEmpresaVar});`;
+        instrucao = `INSERT INTO funcionario (urlFoto, nome, cpf, email, senha, cargo, fkEmpresa) VALUES ('${imagemVar}', '${nomeVar}', '${cpfVar}', '${emailVar}', '${senhaVar}', '${cargo}', ${fkEmpresaVar});`;
     }
 
     console.log("Executando a instrução SQL: \n" + instrucao);

@@ -20,6 +20,7 @@ function autenticar(req, res) {
 }
 
 function cadastrarFun(req, res){
+    var imagemVar = req.body.imagemServer;
     var nomeVar = req.body.nomeServer;
     var cpfVar = req.body.cpfServer;
     var emailVar = req.body.emailServer;
@@ -27,7 +28,9 @@ function cadastrarFun(req, res){
     var cargoVar = req.body.cargoServer;
     var fkEmpresaVar = req.body.fkEmpresaServer;
 
-    if (nomeVar == undefined) {
+    if(imagemVar == undefined){
+        res.status(400).send("Sua imagem está undefined!");
+    }else if (nomeVar == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cpfVar == undefined) {
         res.status(400).send("Seu cpf está undefined!");
@@ -38,7 +41,7 @@ function cadastrarFun(req, res){
     } else if(fkEmpresaVar == undefined){
         res.status(400).send("O id empresa está undefined!");
     } else {
-        usuarioModel.cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
+        usuarioModel.cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
             .then(
                 function (resultado) {
                     res.json(resultado);

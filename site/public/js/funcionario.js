@@ -1,8 +1,4 @@
-$(document).ready(function(){
-  $('#input_cpf').mask('000.000.000-00');
-});
-  
-      function exibirFun() {
+function exibirFun() {
         var idEmpresa = sessionStorage.ID_EMPRESA;
 
        document.getElementById('formularioExibir').style.display = 'block';
@@ -66,9 +62,9 @@ $(document).ready(function(){
        }
      });
   
-    }
+}
   
-      function addFun() {
+function addFun() {
         document.getElementById('formularioExibir').style.display = 'none';
        document.getElementById('ver').style.color = 'black';
         document.getElementById('adicionarFuncionario').style.color = '#e6e62c';
@@ -76,18 +72,19 @@ $(document).ready(function(){
         document.getElementById('formularioAdd').style.display = 'flex';
           // document.getElementById('formularioExcluir').style.display = 'none';
           // document.getElementById('formularioEditar').style.display = 'none';
-      }
+}
   
-      function excluirFun() {
+function excluirFun() {
           document.getElementById('formularioAdd').style.display = 'none';
           document.getElementById('formularioExcluir').style.display = 'block';
           document.getElementById('formularioEditar').style.display = 'none';
           document.getElementById('formularioExibir').style.display = 'none';
-      }
+}
   
-      function cadastrarFun() {
+function cadastrarFun() {
         var nome = input_nome.value;
-        var cpf = input_cpf.value
+        var cpf = input_cpf.value.replace(/[^\d]/g, '');
+        var imagem =input_imagem.value;
         var email = input_email.value;
         var senha = input_senha.value;
         var cargo = input_cargo.value;
@@ -96,16 +93,22 @@ $(document).ready(function(){
         var validacaoNulo = nome != null && cpf != null && email != null && senha != null && fkEmpresa != null;
         var validacaoVazio = nome != '' && cpf != '' && email != '' && senha != '' && fkEmpresa != '';
         var validacaoSenha = (senha.length >= 6 && ((senha.indexOf("@") >= 0) || (senha.indexOf("!") >= 0) || (senha.indexOf("#") >= 0) || (senha.indexOf(".") >= 0) || (senha.indexOf("?") >= 0)))
+        var validacaoImagem = imagem != null && imagem !== '';
       
+        if(imagem == null || imagem == ''){
+          imagem = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
+        }
+
         if (validacaoNulo && validacaoVazio) {
-          if (validacaoSenha) {
-      
+          if (validacaoSenha) { 
+            
             fetch("/usuarios/cadastrarFun", {
               method: "POST", 
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
+                imagemSever, imagem,
                 nomeServer: nome,
                 cpfServer: cpf,
                 emailServer: email,
@@ -132,10 +135,10 @@ $(document).ready(function(){
             });
             
           } else {
-            swal('Erro', "Senha inválida!");
+            swal('Erro', "Senha inválida!", 'error');
           }
       } else {
-        swal('Erro', "Preencha todos os campos corretamente");
+        swal('Erro!', "Preencha todos os campos corretamente", 'error');
       }
-      }
+}
     

@@ -2,6 +2,8 @@ DROP DATABASE viatech;
 CREATE DATABASE viatech;
 USE viatech;
 
+select * from funcionario;
+
 -- CRIANDO USUÁRIO COM A SENHA PADRÃO     
 -- CREATE USER 'usuario_viatech'@'localhost' IDENTIFIED BY 'viatech';
 -- GRANT ALL PRIVILEGES ON `viatech`.* TO 'usuario_viatech'@'localhost';
@@ -14,9 +16,10 @@ nomeFantasia VARCHAR(245) NOT NULL,
 CNPJ CHAR(14) NOT NULL UNIQUE
 );
 
+
 CREATE TABLE funcionario(
 idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-urlFoto VARCHAR(300) NULL,
+urlFoto VARCHAR(800) NULL,
 nome VARCHAR(100) NOT NULL,
 cpf CHAR(11) NOT NULL UNIQUE,
 email VARCHAR(100) NOT NULL,
