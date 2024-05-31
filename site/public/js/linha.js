@@ -54,13 +54,16 @@ function exibirLinha(){
        auxiliar++;
 
        container.innerHTML += `<div class="quadrado-linha">
+       <span class="material-symbols-outlined cancelar selecionar" onclick="exibirLinha()" id="cancelar" style="display: none;">cancel</span>
        <div class="nomeNumero">
          <p> Nome: <input id="input_nome" type="text" disabled value="${nome_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar" onclick="deletarLinha(${id_linha})">delete</span>
        </div>
       
        <div class="nomeNumero">
-         <p> Número: <input id="input_numero" type="text" disabled value="${numero_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar">edit</span>
-       </div> `;
+         <p> Número: <input id="input_numero" type="text" disabled value="${numero_atual}" class="input-container"></p> <span onclick="editarLinha()" class="material-symbols-outlined selecionar">edit</span>
+       </div> 
+       <button id="botao_salvar" onclick="salvarLinha(${id_linha})" class="botao-cadastrar" style="display: none;">SALVAR</button>
+       `;
 
        
 
@@ -151,4 +154,71 @@ function cadastrarLinha(){
 
 }
 
+
+function editarLinha(){
+
+   var mudarClasseNome = document.getElementById("input_nome");
+   var mudarClasseNumero = document.getElementById("input_numero");
+
+    
+    mudarClasseNome.classList.remove('input-container'); 
+    mudarClasseNumero.classList.remove('input-container'); 
+    mudarClasseNome.classList.add('input-container-editar');
+    mudarClasseNumero.classList.add('input-container-editar');
+
+    mudarClasseNome.disabled = false; 
+    mudarClasseNumero.disabled = false; 
+    
+
+  document.getElementById('botao_salvar').style.display = 'block';
+  document.getElementById('cancelar').style.display = 'block';
+}
+
+function salvarLinha(idLinha){
+  var idLinha = idLinha;
+  var nome = input_nome.value;
+  var numero = input_numero.value;
+  console.log('id da linha ==>',idLinha);
+
+  // alert(idLinha, nome)
+
+
+
+  if(nome !== '' && numero !== '' && idLinha !== ''){
+    fetch(`/linha/salvarLinha/${idLinha}`,{
+       method: "PUT", headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({
+         nome: nome,
+         numero: numero
+        //  idLinha: idLinha
+      })
+    }).then(function (resposta) {
+        if (resposta.ok) {
+
+          swal('Sucesso!', "Informações alteradas!", 'success');
+
+           exibirLinha();          
+          
+           var mudarClasseNome = document.getElementById("input_nome");
+           var mudarClasseNumero = document.getElementById("input_numero");
+
+           mudarClasseNome.classList.remove('input-container-editar'); 
+           mudarClasseNumero.classList.remove('input-container-editar'); 
+           mudarClasseNome.classList.add('input-container');
+           mudarClasseNumero.classList.add('input-container');
+
+           mudarClasseNome.disabled = true; 
+           mudarClasseNumero.disabled = true; 
+           
+           document.getElementById('botao_salvar').style.display = 'none';
+        } else {
+         swal('Erro!', 'Não foi possível alterar os dados da linha', 'error')
+        }
+      }).catch(function (resposta) {
+       console.log(`#ERRO: ${resposta}`);
+      });
+  } else{
+   swal("Ei!", "Preencha todos os campos!");
+  }
+}
 

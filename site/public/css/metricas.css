@@ -193,13 +193,28 @@ body{
 }
 
 .setting input {
-    width: 30px;
+    width: 50px;
     margin-left: 5px;
     margin-right: 5px;
     padding: 5px;
-    border: 1px solid #ccc;
-    background-color: #e9e5e5;
-    border-radius: 4px;
+    /* border: 1px solid #ccc; */
+    /* background-color: #e9e5e5; */
+    /* border-radius: 4px; */
+    border: none;
+    font-size: 16px;
+    color: #000000;
+}
+
+.setting2{
+  width: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #e9e5e5;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #000000;
 }
 
 .save-button {
