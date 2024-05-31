@@ -79,13 +79,13 @@ function alterarMetricas() {
 
 function salvarMetricas() {
   var minimoDisco = ipt_minDisco.value;
-  var maximoDisco = ipt_maxDisco.value;
+  var maximoDisco = ipt_minProblemaDisco.value;
   
   var minimoCpu = ipt_minCpu.value;
-  var maximoCpu = ipt_maxCpu.value;
+  var maximoCpu = ipt_minProblemaCpu.value;
 
   var minimoRam = ipt_minRam.value;
-  var maximoRam = ipt_maxRam.value;
+  var maximoRam = ipt_minProblemaRam.value;
   var qtdUsb = ipt_qtd_usb.value;
 
   

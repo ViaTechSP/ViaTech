@@ -77,7 +77,7 @@ tipo VARCHAR(100),
 componente VARCHAR(30),
 valorRegistrado DOUBLE,
 fkRegistro INT NOT NULL,
-FOREIGN KEY (fkRegistro) REFERENCES registro (idRegistro)
+FOREIGN KEY (fkRegistro) REFERENCES registro (idRegistro) ON DELETE CASCADE
 );
 
 CREATE TABLE metrica(
@@ -92,6 +92,8 @@ maxUsb INT,
 fkLinha INT,
 FOREIGN KEY (fkLinha) REFERENCES linha (idLinha) ON DELETE CASCADE
 );
+
+-------------------------------------------------------------------- INSERTS --------------------------------------------------------------
 
 INSERT INTO empresa (razaoSocial, nomeFantasia, CNPJ) VALUES
 ('Via Tecnológica de São Paulo', 'ViaTechSP', '45904145652564'),
@@ -120,10 +122,39 @@ INSERT INTO especificacaoMaquina (nomeCpu, armazenamentoTotal, ramTotal, fkMaqui
 ('Intel Core i5', 500, 8, 1),
 ('AMD Ryzen 7', 1000, 16, 2);
 
-INSERT INTO metrica (cuidadoDisco, problemaDisco, cuidadoCpu, problemaCpu, cuidadoRam, problemaRam, maxUsb, fkLinha)
-VALUES 
+INSERT INTO metrica (cuidadoDisco, problemaDisco, cuidadoCpu, problemaCpu, cuidadoRam, problemaRam, maxUsb, fkLinha) VALUES 
 (70.5, 90.0, 80.0, 95.0, 75.0, 90.0, 5, 1),
 (60.0, 85.0, 70.0, 90.0, 65.0, 85.0, 4, 2);
 -- (75.0, 95.0, 85.0, 98.0, 80.0, 95.0, 6, 3),
 -- (-65.0, 88.0, 78.0, 92.0, 70.0, 88.0, 5, 4);
 
+INSERT INTO registro (cpuUtilizada, discoDisponivel, ramUtilizada, qtdDispositivosUsb, fkEspecificacaoMaquina) VALUES 
+(50.5, 200.0, 60.0, 3, 1),
+(70.2, 150.5, 75.0, 4, 2),
+
+(45.2, 120.5, 75.6, 3, 1),
+(30.1, 110.0, 60.3, 2, 1),
+(55.3, 115.7, 80.1, 4, 1),
+(48.8, 125.2, 77.8, 3, 1),
+(52.6, 130.4, 72.9, 5, 1),
+(49.7, 122.0, 70.4, 4, 1),
+
+(40.2, 115.0, 65.2, 3, 2),
+(35.7, 112.5, 60.0, 2, 2),
+(50.5, 118.3, 78.4, 4, 2),
+(47.9, 121.7, 74.1, 3, 2),
+(53.4, 117.2, 80.3, 5, 2),
+(45.6, 119.5, 68.9, 4, 2);
+
+       
+INSERT INTO historicoAlerta (tipo, componente, valorRegistrado, fkRegistro) VALUES 
+('Problema', 'CPU', 90.0, 1),
+('Cuidado', 'Disco', 50.0, 1),
+('Problema', 'RAM', 80.0, 2),
+('Cuidado', 'USB', 5, 2);
+
+-------------------------------------------------------------------- SELECTS --------------------------------------------------------------
+SELECT m.* FROM Metrica m 
+	JOIN Linha l ON m.fkLinha = l.idLinha
+    JOIN Estacao e ON e.fkLinha = l.idLinha
+    WHERE idEstacao = 1;
