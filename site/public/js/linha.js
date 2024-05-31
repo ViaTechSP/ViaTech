@@ -1,4 +1,4 @@
-function exibirLinha(){
+function exibirLinha(idLinha){
     document.getElementById('divAdd').style.display = 'none';
     document.getElementById('ver').style.color = '#F27A5E';
     document.getElementById('add').style.color = 'black';
@@ -15,6 +15,8 @@ function exibirLinha(){
      fetch(`/linha/exibirLinha/${idEmpresa}`, { 
         method: "GET", 
       }).then(function (resposta) {
+        // var teste = resposta[0].idLinha;
+        // console.log(teste)
      
         if (!resposta.ok) { 
           swal("Ops", 'Parce que você ainda não possuí linhas cadastradas!');
@@ -54,18 +56,16 @@ function exibirLinha(){
        auxiliar++;
 
        container.innerHTML += `<div class="quadrado-linha">
-       <span class="material-symbols-outlined cancelar selecionar" onclick="exibirLinha()" id="cancelar" style="display: none;">cancel</span>
+       <span class="material-symbols-outlined cancelar selecionar" onclick="exibirLinha(${id_linha})" id="cancelar_${id_linha}" style="display: none;">cancel</span>
+
        <div class="nomeNumero">
-         <p> Nome: <input id="input_nome" type="text" disabled value="${nome_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar" onclick="deletarLinha(${id_linha})">delete</span>
+         <p> Nome: <input id="input_nome_${id_linha}" type="text" disabled value="${nome_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar" onclick="deletarLinha(${id_linha})">delete</span>
        </div>
       
        <div class="nomeNumero">
-         <p> Número: <input id="input_numero" type="text" disabled value="${numero_atual}" class="input-container"></p> <span onclick="editarLinha()" class="material-symbols-outlined selecionar">edit</span>
-       </div> 
-       <button id="botao_salvar" onclick="salvarLinha(${id_linha})" class="botao-cadastrar" style="display: none;">SALVAR</button>
-       `;
-
-       
+         <p> Número: <input id="input_numero_${id_linha}" type="text" disabled value="${numero_atual}" class="input-container"></p> <span onclick="editarLinha(${id_linha})" class="material-symbols-outlined selecionar">edit</span>
+         </div> 
+         <button id="botao_salvar_${id_linha}" onclick="salvarLinha(${id_linha})" class="botao-cadastrar" style="display: none;">SALVAR</button>`;       
 
      }
    });
@@ -155,10 +155,11 @@ function cadastrarLinha(){
 }
 
 
-function editarLinha(){
+function editarLinha(idLinha){
+  console.log('numero do id -> ', idLinha)
 
-   var mudarClasseNome = document.getElementById("input_nome");
-   var mudarClasseNumero = document.getElementById("input_numero");
+   var mudarClasseNome = document.getElementById(`input_nome_${idLinha}`);
+   var mudarClasseNumero = document.getElementById(`input_numero_${idLinha}`);
 
     
     mudarClasseNome.classList.remove('input-container'); 
@@ -169,15 +170,25 @@ function editarLinha(){
     mudarClasseNome.disabled = false; 
     mudarClasseNumero.disabled = false; 
     
+    document.getElementById(`cancelar_${idLinha}`).style.display = 'block';
 
-  document.getElementById('botao_salvar').style.display = 'block';
-  document.getElementById('cancelar').style.display = 'block';
+    var botaoSalvar = document.getElementById(`botao_salvar_${idLinha}`);
+    if (botaoSalvar) {
+        botaoSalvar.style.display = 'block';
+    } else {
+        console.error(`Elemento com ID "botao_salvar_${idLinha}" não encontrado.`);
+    }
+    // if (botaoSalvar) {
+    //     botaoSalvar.style.display = 'block';
+    // }
+
+  // document.querySelector('button').style.display = 'block';
 }
 
 function salvarLinha(idLinha){
-  var idLinha = idLinha;
-  var nome = input_nome.value;
-  var numero = input_numero.value;
+
+  var nome = document.getElementById(`input_nome_${idLinha}`).value;
+  var numero = document.getElementById(`input_numero_${idLinha}`).value;
   console.log('id da linha ==>',idLinha);
 
   // alert(idLinha, nome)
@@ -210,7 +221,7 @@ function salvarLinha(idLinha){
            mudarClasseNome.disabled = true; 
            mudarClasseNumero.disabled = true; 
            
-           document.getElementById('botao_salvar').style.display = 'none';
+           document.querySelector('button').style.display = 'none';
         } else {
          swal('Erro!', 'Não foi possível alterar os dados da linha', 'error')
         }
