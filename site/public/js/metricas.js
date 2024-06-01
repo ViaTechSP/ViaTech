@@ -8,11 +8,10 @@ function buscarInfoMetricas() {
     
     fetch(`/metrica/buscarInfoMetrica/${idLinha}`, { cache: 'no-store' })
     .then(function (response) {
-        
       if (response.ok) {
         response.json().then(function (resposta) {
-          if (resposta.length > 0) {
-            console.log('resposta ==>', resposta)
+
+          if (resposta.length > 0) {          
 
             document.getElementById('ipt_minDisco').value = resposta[0].cuidadoDisco;
             document.getElementById('ipt_minProblemaDisco').value = resposta[0].problemaDisco;
@@ -23,19 +22,16 @@ function buscarInfoMetricas() {
             document.getElementById('ipt_qtd_usb').value = resposta[0].maxUsb;           
 
           } else {
-
             document.getElementById('ipt_minDisco').value = '';
-            document.getElementById('ipt_maxDisco').value = '';
             document.getElementById('ipt_minCpu').value = '';
-            document.getElementById('ipt_maxCpu').value = '';
             document.getElementById('ipt_minRam').value = '';
-            document.getElementById('ipt_maxRam').value = '';
             document.getElementById('ipt_minProblemaDisco').value = '';
             document.getElementById('ipt_minProblemaCpu').value = '';
             document.getElementById('ipt_minProblemaRam').value = '';
             document.getElementById('ipt_qtd_usb').value = '';
 
             console.error('Nenhuma informação encontrada');
+            primeiraMetrica();
             
           }
         });
@@ -76,6 +72,39 @@ function alterarMetricas() {
   }
 }
 
+function resetarMetrica(){
+  var minimoDisco = 13;
+  var maximoDisco = 19;
+  
+  var minimoCpu = 75;
+  var maximoCpu = 85;
+
+  var minimoRam = 70;
+  var maximoRam = 90;
+
+  var qtdUsb = 3;
+
+  
+  var idLinha = select_linha.value;
+
+  fetch(`/metrica/resetarMetrica/${idLinha}`,{
+    method: "PUT", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      minimoDisco: minimoDisco,
+      maximoDisco: maximoDisco,
+      minimoCpu: minimoCpu,
+      maximoCpu: maximoCpu,
+      minimoRam: minimoRam,
+      maximoRam: maximoRam,
+      qtdUsb: qtdUsb
+    })
+  }).then(function (resposta) {
+    if (resposta.ok) {
+        buscarInfoMetricas();   
+    } 
+    })
+
+}
 
 function salvarMetricas() {
   var minimoDisco = ipt_minDisco.value;
@@ -90,17 +119,6 @@ function salvarMetricas() {
 
   
   var idLinha = select_linha.value;
-
-
-
-  // TEMPERATURA
-
-  // var minimoProblema = ipt_minProblema.value;
-  // var minimoIdeal = ipt_minIdeal.value;
-  // var maximoCuidado = ipt_minCuidado2.value;
-  // var maximoProblema = ipt_minProblema2.value;
-
-
   
   if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)){
 
@@ -116,10 +134,6 @@ function salvarMetricas() {
         minimoRam: minimoRam,
         maximoRam: maximoRam,
         qtdUsb: qtdUsb
-        // minimoProblema: minimoProblema,
-        // minimoIdeal: minimoIdeal,
-        // maximoCuidado: maximoCuidado,
-        // maximoProblema: maximoProblema
     })
   }).then(function (resposta) {
       if (resposta.ok) {
@@ -160,7 +174,73 @@ function salvarMetricas() {
   }
 }
 
+function primeiraMetrica(){
+  var minimoDisco = ipt_minDisco.value;
+  var maximoDisco = ipt_minProblemaDisco.value;
+  
+  var minimoCpu = ipt_minCpu.value;
+  var maximoCpu = ipt_minProblemaCpu.value;
 
+  var minimoRam = ipt_minRam.value;
+  var maximoRam = ipt_minProblemaRam.value;
+  var qtdUsb = ipt_qtd_usb.value;
+
+  
+  var idLinha = select_linha.value;
+  
+  if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)){
+
+  if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
+  
+  fetch(`/metrica/primeiraMetrica/${idLinha}`,{
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        minimoDisco: minimoDisco,
+        maximoDisco: maximoDisco,
+        minimoCpu: minimoCpu,
+        maximoCpu: maximoCpu,
+        minimoRam: minimoRam,
+        maximoRam: maximoRam,
+        qtdUsb: qtdUsb
+    })
+  }).then(function (resposta) {
+      if (resposta.ok) {
+          buscarInfoMetricas();
+          const inputs = document.querySelectorAll('input');
+          const botaoAlterar = document.getElementById('botao_alterarMetrica');
+          const botaoSalvar = document.getElementById('botao_salvarMetrica');
+
+          inputs.forEach(input => {
+            // Verifica se o id do input NÃO contém a palavra "Problema"
+            if (!input.id.includes('Problema')) {
+              
+                // Se não contém, desabilita o input
+                input.toggleAttribute('disabled', true);
+      
+                botaoSalvar.style.display = 'none';
+                botaoAlterar.style.display = 'flex';
+                botaoAlterar.style.alignItems = 'center';
+                botaoAlterar.style.justifyContent = 'center';
+            } 
+        });
+        swal('Sucesso', "Suas alterações foram salvas! 😀", "success" );
+
+
+      } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+    } else{
+      swal('Eii', "Preencha todos os campos! 😠");
+
+    }
+  } else{
+      swal("Valores incorretos!", "Vwerftgtrewefgalor mínimo não pode ser maior ou igual ao valor máximo, ou negativo. 🥺", "error");
+    
+  }
+}
 
 
 

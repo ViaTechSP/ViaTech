@@ -162,6 +162,11 @@ body{
     margin-top: 0;
 }
 
+.mudar:hover{
+  cursor: pointer;
+  color: chartreuse;
+}
+
 .alert-settings {
     display: grid;
     grid-template-columns: 1fr 1fr;
