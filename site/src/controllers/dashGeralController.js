@@ -27,8 +27,26 @@ function filtrarPorAlerta(req, res){
     });
 }
 
+function atualizarQtdProblemas(req, res){
+    var idLinha = req.params.idLinha;
+
+    dashGeralModel.atualizarQtdProblemas(idLinha).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function atualizarEstacaoAlerta(req, res){
+    var idLinha = req.params.idLinha;
+
+    dashGeralModel.atualizarEstacaoAlerta(idLinha).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 module.exports = {
     buscarEstacoes,
     pesquisarEstacao,
-    filtrarPorAlerta
+    filtrarPorAlerta,
+    atualizarQtdProblemas,
+    atualizarEstacaoAlerta
 }
