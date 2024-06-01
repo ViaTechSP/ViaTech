@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViaTech | Funcionários</title>
-    <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
-    <link rel="stylesheet" href="../css/funcionario.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <title>Cadastrar Funcionário</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/funcionario2.css">
     <link rel="stylesheet" href="../css/menuLateral.css">
-    <script src="../js/funcionario.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+    <!-- JS -->
+    <script src="../js/funcionario.js" defer></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/menuLateral.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- IMPORTANDO -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<!-- <body onload="validarSessao()"> -->
-<body>
-        <!-- dashboard.css -->
+
+<body onload="validarSessao(); exibirFun(); exibirImagem()">
+
     <div class="menuHeader">
-        
         <!-- menuLateral.css -->
         <nav id="menuLateral">
             <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
@@ -31,172 +34,120 @@
                     <img id="imgViaTech" src="../assets/icon/icon.svg"> ViaTech
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
-                
+
                 <p>Olá, <span id="ola"></span></p>
-                
-            <div id="containerItens" class="container-itens">
-                <div class="item">
-                    <a href="perfil.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
+                <div id="containerItens" class="container-itens">
+                    <div class="item">
+                        <a href="perfil.html"><span class="material-symbols-outlined item-atual">account_circle</span> Perfil</a>
+                    </div>
+                    <div class="item">
+                        <a href="dashboardGeral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+                    </div>
+                    <div class="item">
+                        <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Métricas</a>
+                    </div>
+                    <div class="item">
+                        <a href="linha.html"> <span class="material-symbols-outlined">train</span>Linhas</a>
+                    </div>
+                    <div class="item">
+                        <a style="color: #e6e62c;" href="funcionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                    </div>
                 </div>
-                
-                <div class="item">
-                    <a href="dashboardGeral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
+                <div class="buttonSair">
+                    <a href="login.html"> <span class="material-symbols-outlined">logout</span>Sair</a>
                 </div>
-                
-                <div class="item">
-                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Metricas</a>
-                </div>
-                
-                
-                <div class="item">
-                    <a href="linha.html"> <span class="material-symbols-outlined">train</span>Linhas</a>
-                </div>
-                
-                
-                <div class="item">
-                    <a style="color: #e6e62c;"> <span class="material-symbols-outlined item-atual">groups</span> Funcionários</a>
-                </div>
-                
             </div>
-            
-            <div class="buttonSair">
-                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
-            </div>
-            
         </nav>
     </div>
-    
-    <!-- dashboard.css -->
-    <h2>Funcionário</h2>
-    <div id="formularioAdd">
-        <div class="coluna">
-            <p>Nome</p>
-            <input id="input_nome" type="text">
-            <p id="errado_nome" class="errado"></p>
-            
-            <p>CPF</p>
-            <input type="text" id="input_cpf">
-            <p id="errado_cpf" class="errado"></p>
-            
-            <p>Email</p>
-            <input type="text" id="input_email">
-            <p id="errado_email" class="errado"></p>
-        </div>
-        <div class="coluna">
-
-            <p>Cargo</p>
-            <input id="input_cargo" type="text">
-            <p id="errado_cargo" class="errado"></p>
-            
-            <p>Senha</p>
-            <input id="input_senha" type="password">
-            <p id="errado_senha" class="errado"></p>
-        </div>
-        <div class="botao">
-            <button onclick="cadastrarFun()" class="botaoCadastrar">Cadastrar</button>
-        </div>
+    <div class="header">
+        <h2>Funcionário</h2>
     </div>
+    <div class="temTudo">
 
-    <div id="formularioExibir" style="display: none;">
-        <div id="primeiraColuna" class="coluna1">
-            
-        </div>
-        <div id="segundaColuna" class="coluna1">
+        <!-- CADASTRO DO FUNCIONÁRIO -->
+        <div id="container-fun" class="container-fun" style="display: none;">
+            <div class="form">
+                <div class="left-side">
+                    <label for="profile-pic">Foto Perfil:</label>
+                    <img id="caminho" src="https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png" alt="Foto de Perfil" class="profile-pic">
+                    <input class="alter-image" id="input_imagem" placeholder="Insira a url da imagem">
+                </div>
+                <div class="right-side">
+                    <label for="input_nome">Nome:</label>
+                    <input type="text" id="input_nome">
+                    <p id="errado_nome" class="errado"></p>
 
+                    <label for="input_email">Email:</label>
+                    <input type="email" id="input_email">
+                    <p id="errado_email" class="errado"></p>
+
+                    <label for="input_cpf">CPF:</label>
+                    <input type="text" id="input_cpf">
+                    <p id="errado_cpf" class="errado"></p>
+
+                    <label for="input_cargo">Cargo:</label>
+                    <input type="text" id="input_cargo">
+                    <p id="errado_cargo" class="errado"></p>
+
+                    <label for="input_senha">Senha:</label>
+                    <input type="password" id="input_senha">
+                    <p id="errado_senha" class="errado"></p>
+
+                    <button onclick="cadastrarFun()" class="register-button">Cadastrar</button>
+                </div>
+            </div>
         </div>
 
-    </div> 
-   
-    <!-- <div id="formularioExcluir" style="display: none;"> -->
-        <!-- <div class="coluna">
-            <p>Nome</p>
-            <input id="input_nome" type="text">
-            <p id="errado_nome" class="errado"></p>
-            
-            <p>CPF</p>
-            <input type="text" id="input_cpf"  required>
-            <p id="errado_cpf" class="errado"></p>
-            
-            <p>Email</p>
-            <input type="text" id="input_email">
-            <p id="errado_email" class="errado"></p>
-        </div>
-        <div class="coluna">
-            <p>Telefone</p>
-            <input id="input_telefone" type="text" required>
-            <p id="errado_telefone" class="errado"></p>
-            
-            <p>Cargo</p>
-            <input id="input_cargo" type="text">
-            <p id="errado_cargo" class="errado"></p>
-            
-            <p>Senha</p>
-            <input id="input_senha" type="password">
-            <p id="errado_senha" class="errado"></p>
-        </div>
-        <div class="botao">
-            <button onclick="()" class="botaoCadastrar">Cadastrar</button>
+
+
+        <!-- LISTAR FUNCINIÁRIO -->
+        <div class="containerExibir" id="containerExibir">
+        
+            <!-- <div class="funcionario">
+                <div class="container-imagem">
+                    <img id="caminhoFun" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp5s3TCiBt__irdmEj6nJRp9UPw07CfS6I7g&s" alt="" class="profile-pic">
+                    <label><input type="text" class="ipt_fun_img" id="input_img" placeholder="Insira a url da imagem" disabled></label>
+
+                </div>
+
+                <div class="dados">
+                    <label>Nome: <input type="text" class="ipt_fun" id="input_nome" value="Samarah Costa" disabled></label>
+                    <label>CPF: <input type="text" class="ipt_fun" id="input_cpf" value="555.555.555-12" disabled></label>
+                    <label>E-mail: <input type="text" class="ipt_fun" id="input_nome" value="samarah@viatech.com" disabled></label>
+                    <label>Cargo: <input type="text" class="ipt_fun" id="input_nome" value="Analista" disabled></label>
+                </div>
+
+                <div class="opcoes">
+                    <span class="material-symbols-outlined selecionar" onclick="salvarLinha()" style="color: green; display: none;">check</span>
+                    <span class="material-symbols-outlined selecionar" onclick="editarFun()">edit</span>
+                    <span class="material-symbols-outlined selecionar" onclick="deletarFun()">delete</span>
+                    <span class="material-symbols-outlined selecionar" onclick="exibirFun()" id="cancelar" style="color: red; display: none;">cancel</span>
+                </div>
+            </div> -->
+
         </div> 
-    </div> -->
 
-    <!-- <div id="formularioEditar" style="display: none;"> -->
-        <!-- <div class="coluna">
-            <p>Nome</p>
-            <input id="input_nome" type="text">
-            <p id="errado_nome" class="errado"></p>
-            
-            <p>CPF</p>
-            <input type="text" id="input_cpf"  required>
-            <p id="errado_cpf" class="errado"></p>
-            
-            <p>Email</p>
-            <input type="text" id="input_email">
-            <p id="errado_email" class="errado"></p>
-        </div>
-        <div class="coluna">
-            <p>Telefone</p>
-            <input id="input_telefone" type="text" required>
-            <p id="errado_telefone" class="errado"></p>
-            
-            <p>Cargo</p>
-            <input id="input_cargo" type="text">
-            <p id="errado_cargo" class="errado"></p>
-            
-            <p>Senha</p>
-            <input id="input_senha" type="password">
-            <p id="errado_senha" class="errado"></p>
-        </div>
-        <div class="botao">
-            <button onclick="()" class="botaoCadastrar">Cadastrar</button>
-        </div> 
-    </div> -->
+
+    </div>
 
 
     <div class="menuDireita">
         <div id="containerItens" class="container-itens">
-            <div class="itemDireita">
-                <a href="#"><span id="ver" onclick="exibirFun()" class="iconDireita material-symbols-outlined">visibility</span></a>
+            <div class="item">
+                <a onclick="exibirFun()"><span id="ver"class="iconDireita selecionar material-symbols-outlined">visibility</span></a>
             </div>
             
             <div class="item">
-                <a href=""> <span class="iconDireita material-symbols-outlined">Edit</span></a>
-            </div>
-            
-            <div class="item">
-                <a href="#"> <span id="adicionarFuncionario" onclick="addFun()" class="iconDireita material-symbols-outlined">Person_Add</span></a>
-            </div>
-            
-            
-            <div class="item">
-                <a href=""> <span onclick="excluirFun()" class="iconDireita material-symbols-outlined">Person_Remove</span></a>
-            </div>
-            
+                <a onclick="exibirDivAddFun()"><span id="add" class="iconDireita selecionar material-symbols-outlined">add</span></a>
+            </div>            
         </div>
-
     </div>
 
-</div>
-
-    
 </body>
 </html>
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#input_cpf').mask('000.000.000-00', { reverse: false });
+    });
+</script> -->

@@ -16,7 +16,7 @@ CNPJ CHAR(14) NOT NULL UNIQUE
 
 CREATE TABLE funcionario(
 idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-urlFoto VARCHAR(300) NULL,
+urlFoto VARCHAR(800) NULL,
 nome VARCHAR(100) NOT NULL,
 cpf CHAR(11) NOT NULL UNIQUE,
 email VARCHAR(100) NOT NULL,
@@ -102,6 +102,7 @@ INSERT INTO empresa (razaoSocial, nomeFantasia, CNPJ) VALUES
 INSERT INTO Funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES
 ('Matheus Rabello', '62545164147', 'matheus@viatech.com', 'Senha!', 'Gerente', 1),
 ("Everton Fanado", "12345678901", "teste@teste.com", "123#Ee", "Gerente", 2);
+UPDATE funcionario SET urlFoto = 'https://static.vecteezy.com/ti/vetor-gratis/p3/14487724-ilustracao-em-gato-kawaii-fofo-de-gatinho-feliz-dos-desenhos-animados-vetor.jpg' WHERE email = 'matheus@viatech.com';
 
 INSERT INTO Linha (nome, numero, fkEmpresa) VALUES
 ('Amarela', 4, 1),

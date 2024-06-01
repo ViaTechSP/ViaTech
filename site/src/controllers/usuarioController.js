@@ -20,6 +20,8 @@ function autenticar(req, res) {
 }
 
 function cadastrarFun(req, res){
+    console.log('Estou por aqui controller')
+    var imagemVar = req.body.imagem;
     var nomeVar = req.body.nomeServer;
     var cpfVar = req.body.cpfServer;
     var emailVar = req.body.emailServer;
@@ -27,7 +29,9 @@ function cadastrarFun(req, res){
     var cargoVar = req.body.cargoServer;
     var fkEmpresaVar = req.body.fkEmpresaServer;
 
-    if (nomeVar == undefined) {
+    if(imagemVar == undefined){
+        res.status(400).send("Sua imagem está undefined!");
+    }else if (nomeVar == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cpfVar == undefined) {
         res.status(400).send("Seu cpf está undefined!");
@@ -38,7 +42,7 @@ function cadastrarFun(req, res){
     } else if(fkEmpresaVar == undefined){
         res.status(400).send("O id empresa está undefined!");
     } else {
-        usuarioModel.cadastrarFun(nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
+        usuarioModel.cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -89,7 +93,7 @@ function alterarSenha(req, res) {
         );
     }
     
-    function buscarInfo(req, res) {
+function buscarInfo(req, res) {
         var idFuncionario = req.params.idFuncionario;
         
         if (idFuncionario == undefined) {
@@ -103,10 +107,9 @@ function alterarSenha(req, res) {
               res.status(500).json({ mensagem: 'Erro ao buscar ID da empresa', erro });
             });
         }
-    }
-
+}
     
-    function alterarInfo(req, res) {
+function alterarInfo(req, res) {
         var idFuncionario = req.body.idFuncionario;
 
         var imagem = req.body.imagem ;
@@ -129,12 +132,61 @@ function alterarSenha(req, res) {
 }
 
 function exibirFun(req, res){
+    console.log('Estou no controleerrrrrrrrrrrrrrrrrr')
     var idEmpresa = req.params.idEmpresa;
     
     usuarioModel.exibirFun(idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
+
+function salvarFun(req, res){
+    console.log("tamo no controler")
+
+    var idFuncionario = req.params.idFuncionario;
+    var img = req.body.img;
+    var nome = req.body.nome;
+    var cpf = req.body.cpf;
+    var email = req.body.email;
+    var cargo = req.body.cargo;
+    
+    console.log('id =>', idFuncionario)
+    console.log('nome =>', nome)
+    console.log('email =>', email)
+    console.log('cargo =>', cargo)
+    console.log('cargo =>', img)
+    console.log('cargo =>', cpf)
+
+    usuarioModel.salvarFun(img, nome, cpf, email, cargo, idFuncionario)
+    .then(function (resultado) {
+            res.json(resultado);
+        })
+    .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function deletarFun(req, res) {
+    var idFuncionario = req.params.idFuncionario;
+
+    usuarioModel.deletarFun(idFuncionario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o funcionário: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 module.exports = {
     autenticar,
@@ -143,5 +195,7 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    exibirFun
+    exibirFun,
+    salvarFun,
+    deletarFun
 }
