@@ -49,7 +49,7 @@ function exibirLinha(idLinha){
      var auxiliar = 0;
 
      for (var i = 0; i < tamanhoLinha; i++) {
-       var id_linha = lista_linha[i].idLinha
+       var id_linha = lista_linha[i].idLinha;
        var nome_atual = lista_linha[i].nome;
        var numero_atual = lista_linha[i].numero;
       
@@ -112,7 +112,6 @@ function deletarLinha(idLinha) {
 }
 
 
-
 function exibirDivAddLinha(){
 
 
@@ -146,12 +145,75 @@ function cadastrarLinha(){
             }),
           }).then(function (resposta) {
                 swal('Eba!', 'Linha cadastrada!', 'success');
+                ultimaLinhaInserida();
             }
           )}
     else{
         swal('Ei!', 'Preencha todos os campos e não deixe o número negativo!', 'error');
     }
 
+}
+
+function ultimaLinhaInserida(){
+  var idEmpresa = sessionStorage.ID_EMPRESA;
+
+  fetch(`/linha/ultimaLinhaInserida/${idEmpresa}`, { 
+    method: "GET", 
+  }).then(function (resposta) {
+    if (!resposta.ok) { 
+      console.log('A resposta não está ok!');
+      throw new Error('Erro na requisição');
+    }
+    return resposta.json();
+  }).then((resposta) => { 
+    if (resposta.length > 0) {
+      var idLinha = resposta[0].idLinha;
+      primeiraMetrica(idLinha);
+    } else {
+      console.log('Nenhuma linha encontrada.');
+    }
+  }).catch(function (erro) {
+    console.error('Erro na requisição:', erro);
+  });
+}
+
+function primeiraMetrica(idLinha) {
+  var minimoDisco = 13;
+  var maximoDisco = 19;
+  
+  var minimoCpu = 75;
+  var maximoCpu = 85;
+
+  var minimoRam = 70;
+  var maximoRam = 90;
+
+  var qtdUsb = 3;
+   
+  if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
+    fetch(`/metrica/primeiraMetrica/${idLinha}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        minimoDisco: minimoDisco,
+        maximoDisco: maximoDisco,
+        minimoCpu: minimoCpu,
+        maximoCpu: maximoCpu,
+        minimoRam: minimoRam,
+        maximoRam: maximoRam,
+        qtdUsb: qtdUsb
+      })
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        console.log('A resposta está ok na primeiraMetrica()!');
+      } else {
+        console.error('Erro na resposta da primeiraMetrica:', resposta.statusText);
+      }
+    }).catch(function (erro) {
+      console.error('Erro ao chamar primeiraMetrica:', erro);
+    });
+  } else {
+    console.log('Há algum valor vazio nas métricas');
+  }
 }
 
 

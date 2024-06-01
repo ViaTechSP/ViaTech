@@ -19,4 +19,9 @@ router.get("/obterMetricasEstacao/:fkEstacao", function (req, res) {
     metricaController.obterMetricasEstacao(req, res);
 });
 
+router.post("/primeiraMetrica/:idLinha", function (req, res) {
+    metricaController.primeiraMetrica(req, res);
+})
+
+
 module.exports = router;

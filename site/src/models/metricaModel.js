@@ -50,7 +50,8 @@ function obterMetricasEstacao(fkEstacao) {
 }
 
 function primeiraMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb){
-    var instrucao = `INSERT INTO metrica (cuidadoDisco, problemaDisco, cuidadoCpu, problemaCpu, cuidadoRam, problemaRam, maxUsb, fkLinha) VALUES (${minimoDisco}, ${maximoDisco}, ${minimoCpu}, ${maximoCpu}, ${minimoRam}, ${maximoRam}, ${qtdUsb}) WHERE fkLinha = ${idLinha};`;
+    var instrucao = `INSERT INTO metrica (cuidadoDisco, problemaDisco, cuidadoCpu, problemaCpu, cuidadoRam, problemaRam, maxUsb, fkLinha) VALUES (${minimoDisco}, ${maximoDisco}, ${minimoCpu}, ${maximoCpu}, ${minimoRam}, ${maximoRam}, ${qtdUsb}, ${idLinha});
+    `;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -60,5 +61,6 @@ module.exports = {
     buscarInfoMetrica,
     alterarInfoMetrica,
     obterMetricasEstacao,
-    resetarMetrica
+    resetarMetrica,
+    primeiraMetrica
 };
