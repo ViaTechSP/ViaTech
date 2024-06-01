@@ -14,6 +14,15 @@ function cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargo, fkE
     return database.executar(instrucao);
 }
 
+function exibirFun(idEmpresa){
+    var query = `SELECT funcionario.* FROM funcionario WHERE fkEmpresa = ${idEmpresa} ORDER BY nome ;`;
+    
+    console.log('executando query: ', query)
+    return database.executar(query);
+}
+
+
+
 function autenticar(emailVar, senhaVar) {
     var instrucao = `SELECT * FROM Funcionario JOIN Empresa ON fkEmpresa = idEmpresa WHERE email = '${emailVar}' AND senha = '${senhaVar}';`;
 
@@ -57,11 +66,27 @@ function alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo) {
     return database.executar(instrucao);
 }
 
-function exibirFun(idEmpresa){
-    var query = `SELECT funcionario.* FROM funcionario JOIN empresa ON empresa.idEmpresa = fkEmpresa WHERE idEmpresa = ${idEmpresa};`;
+function salvarFun(img, nome, cpf, email, cargo, idFuncionario) {
+
+    var instrucao = 
+    `UPDATE funcionario SET 
+    urlFoto = '${img}',
+    nome = '${nome}',
+    cpf = '${cpf}',
+    email = '${email}',
+    cargo = '${cargo}'
+    WHERE idFuncionario = ${idFuncionario};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function deletarFun(idFuncionario) {
     
-    console.log('executando query: ', query)
-    return database.executar(query);
+    var instrucaoSql = `DELETE FROM funcionario WHERE idFuncionario = ${idFuncionario};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
@@ -71,5 +96,7 @@ module.exports = {
     alterarSenha,
     buscarInfo,
     alterarInfo,
-    exibirFun
+    exibirFun,
+    salvarFun,
+    deletarFun
 };

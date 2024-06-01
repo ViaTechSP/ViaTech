@@ -21,17 +21,20 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(); exibirFun(); exibirImagem()">
 
     <div class="menuHeader">
         <!-- menuLateral.css -->
         <nav id="menuLateral">
             <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+            
             <div class="container" id="containerMenuLateral">
+                
                 <p style="display: flex; align-items: center;">
                     <img id="imgViaTech" src="../assets/icon/icon.svg"> ViaTech
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
+
                 <p>Olá, <span id="ola"></span></p>
                 <div id="containerItens" class="container-itens">
                     <div class="item">
@@ -56,16 +59,17 @@
             </div>
         </nav>
     </div>
-
+    <div class="header">
+        <h2>Funcionário</h2>
+    </div>
     <div class="temTudo">
 
         <!-- CADASTRO DO FUNCIONÁRIO -->
-        <div class="container-fun" >
-            <h2>Cadastrar Funcionário</h2>
+        <div id="container-fun" class="container-fun" style="display: none;">
             <div class="form">
                 <div class="left-side">
                     <label for="profile-pic">Foto Perfil:</label>
-                    <img src="https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png" alt="Foto de Perfil" class="profile-pic">
+                    <img id="caminho" src="https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png" alt="Foto de Perfil" class="profile-pic">
                     <input class="alter-image" id="input_imagem" placeholder="Insira a url da imagem">
                 </div>
                 <div class="right-side">
@@ -97,13 +101,29 @@
 
 
         <!-- LISTAR FUNCINIÁRIO -->
-        <div class="containerExibir" style="display: none;" id="container-fun">
+        <div class="containerExibir" id="containerExibir">
         
-            <div class="funcionario">
+            <!-- <div class="funcionario">
                 <div class="container-imagem">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp5s3TCiBt__irdmEj6nJRp9UPw07CfS6I7g&s"alt="">
+                    <img id="caminhoFun" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp5s3TCiBt__irdmEj6nJRp9UPw07CfS6I7g&s" alt="" class="profile-pic">
+                    <label><input type="text" class="ipt_fun_img" id="input_img" placeholder="Insira a url da imagem" disabled></label>
+
                 </div>
-            </div>
+
+                <div class="dados">
+                    <label>Nome: <input type="text" class="ipt_fun" id="input_nome" value="Samarah Costa" disabled></label>
+                    <label>CPF: <input type="text" class="ipt_fun" id="input_cpf" value="555.555.555-12" disabled></label>
+                    <label>E-mail: <input type="text" class="ipt_fun" id="input_nome" value="samarah@viatech.com" disabled></label>
+                    <label>Cargo: <input type="text" class="ipt_fun" id="input_nome" value="Analista" disabled></label>
+                </div>
+
+                <div class="opcoes">
+                    <span class="material-symbols-outlined selecionar" onclick="salvarLinha()" style="color: green; display: none;">check</span>
+                    <span class="material-symbols-outlined selecionar" onclick="editarFun()">edit</span>
+                    <span class="material-symbols-outlined selecionar" onclick="deletarFun()">delete</span>
+                    <span class="material-symbols-outlined selecionar" onclick="exibirFun()" id="cancelar" style="color: red; display: none;">cancel</span>
+                </div>
+            </div> -->
 
         </div> 
 
@@ -114,11 +134,11 @@
     <div class="menuDireita">
         <div id="containerItens" class="container-itens">
             <div class="item">
-                <a onclick="exibirFun()"><span id="ver"class="iconDireita material-symbols-outlined">visibility</span></a>
+                <a onclick="exibirFun()"><span id="ver"class="iconDireita selecionar material-symbols-outlined">visibility</span></a>
             </div>
             
             <div class="item">
-                <a onclick="exibirDivAddFun()"><span id="add" class="iconDireita material-symbols-outlined">add</span></a>
+                <a onclick="exibirDivAddFun()"><span id="add" class="iconDireita selecionar material-symbols-outlined">add</span></a>
             </div>            
         </div>
     </div>

@@ -4,7 +4,7 @@ body {
     /* display: flex; */
     /* justify-content: center; */
     /* align-items: center; */
-    height: 100vh;
+    /* height: 50vh; */
     background-color: #f0f0f0;
 }
 
@@ -175,7 +175,18 @@ body{
 
 
 
-
+.header {
+  background-color: #efefef;
+  width: 92%;
+  /* height: 50px; */
+  padding-left: 4%;
+  margin-right: 80px;
+  text-align: left;
+  font-size: 20px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
 
 
 
@@ -208,10 +219,10 @@ body{
 }
 
 .temTudo{
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 10vh; */
 }
 
 
@@ -299,14 +310,92 @@ input {
   cursor: pointer;
 }
 
+.containerExibir{
+  /* margin-top: 10px; */
+  height: 600px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 2;
+  overflow-x: scroll;
+}
 
 .funcionario{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #f3f3f3;
   padding: 10px;
   margin-bottom: 30px;
   border-radius: 10px;
   border: 1px solid black;
-  width: 500px;
+  width: 600px;
+}
+
+.container-imagem{
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.dados{
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-items: flex-start;
+  /* background-color: #F27A5E; */
+  justify-content: center;
+}
+
+.ipt_fun{
+  width: 70%;
+  margin-bottom: 10px;    
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.ipt_fun_editar{
+  width: 70%;
+  margin-bottom: 10px;    
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.ipt_fun_img{
+  /* margin-right: 50px; */
+  width: 85%;
+  margin-bottom: 10px;    
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.opcoes{
+  
+  display: flex;
+  flex-direction: column;
+  height: 125px;
+  justify-content: space-around;
+}
+
+.selecionar{
+  cursor: pointer;
+}
+
+.selecionar:hover{
+  color: #F27A5E;
+  cursor: pointer;
+  transition: 2.0 ease;
+}
+
+.botao_salvar{
+  position: relative;
+  z-index: 2;
+  display: flex;
 }
