@@ -54,7 +54,7 @@ function filtrarEstacao() {
   if (pesquisarVar !== null && pesquisarVar !== '' && pesquisarVar !== undefined && pesquisarVar.length >= 3) {
     primeira_linha.innerHTML =  '';
     segunda_linha.innerHTML =  '';
-        fetch(`/dashboard/pesquisarEstacao/${pesquisarVar}`, { cache: 'no-store' })
+        fetch(`/dashGeral/pesquisarEstacao/${pesquisarVar}`, { cache: 'no-store' })
         .then(function (response) {
           if (response.ok) { response.json().then(function (resposta) {
             primeira_linha.innerHTML = `<div onclick="verDash(${resposta[0].idEstacao})" class="card-maquina">
@@ -71,7 +71,7 @@ function filtrarEstacao() {
 }
 
 function filtrarPorAlerta(alerta) {
-  fetch(`/dashboard/filtrarPorAlerta/${alerta}`, { cache: 'no-store' })
+  fetch(`/dashGeral/filtrarPorAlerta/${alerta}`, { cache: 'no-store' })
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
@@ -88,6 +88,49 @@ function filtrarPorAlerta(alerta) {
             segunda_linha.innerHTML += string(resposta);
           }
         });
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+function atualizarQtdProblemas() {
+  var idLinha = select_linha.value;
+
+  fetch(`/dashGeral/atualizarQtdProblemas/${idLinha}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        span_qtd_problemas.innerHTML = resposta[0].qtdProblemas
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+function atualizarEstacaoAlerta() {
+  var idLinha = select_linha.value;
+
+  fetch(`/dashGeral/atualizarEstacaoAlerta/${idLinha}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(resposta);
+        span_estacao_alerta.innerHTML = resposta[0].nome;
+        span_qtd_alertas.innerHTML = resposta[0].qtdAlertas;
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+function atualizarQtdAlertasGeral() {
+  var idLinha = select_linha.value;
+
+  fetch(`/dashGeral/atualizarEstacaoAlerta/${idLinha}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        console.log(resposta);
+        span_estacao_alerta.innerHTML = resposta[0].nome;
+        span_qtd_alertas.innerHTML = resposta[0].qtdAlertas;
       });
     } else console.error('Nenhum dado encontrado ou erro na API');
   })

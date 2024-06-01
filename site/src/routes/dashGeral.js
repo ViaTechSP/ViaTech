@@ -15,4 +15,12 @@ router.get("/filtrarPorAlerta/:alerta", function (req, res) {
     dashGeralController.filtrarPorAlerta(req, res);
 });
 
+router.get("/atualizarQtdProblemas/:idLinha", function (req, res) {
+    dashGeralController.atualizarQtdProblemas(req, res);
+});
+
+router.get("/atualizarEstacaoAlerta/:idLinha", function (req, res) {
+    dashGeralController.atualizarEstacaoAlerta(req, res);
+});
+
 module.exports = router;
