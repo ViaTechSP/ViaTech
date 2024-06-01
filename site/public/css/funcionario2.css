@@ -5,11 +5,11 @@ body {
     /* justify-content: center; */
     /* align-items: center; */
     /* height: 50vh; */
-    background-color: #f0f0f0;
+    /* background-color: white; */
 }
 
 
-body{
+/* body{
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -17,6 +17,8 @@ body{
   margin: 0px;
 
 }
+
+
 
 #imgViaTech{
     float: left; 
@@ -105,18 +107,11 @@ body{
 
 #menuLateral.escondido {
   width: 100px;
-}
+} */
 
 
 
 /* ==============================================================================> TELA DE FUNCIONÁRIO <========================================================================= */
-
-
-
-
-
-
-
 
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&display=swap'); */
 
@@ -177,9 +172,9 @@ body{
 
 .header {
   background-color: #efefef;
-  width: 92%;
-  /* height: 50px; */
-  padding-left: 4%;
+  width: 100%;
+  height: 50px;
+  padding-left: 5%;
   margin-right: 80px;
   text-align: left;
   font-size: 20px; 

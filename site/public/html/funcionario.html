@@ -19,44 +19,57 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body onload="validarSessao(); exibirFun(); exibirImagem()">
 
     <div class="menuHeader">
+        
         <!-- menuLateral.css -->
-        <nav id="menuLateral">
-            <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+        <nav id="menuLateral" style="width: 5%;">
+            <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
             
-            <div class="container" id="containerMenuLateral">
+            <div class="container" id="containerMenuLateral" style="display: none;">
                 
                 <p style="display: flex; align-items: center;">
-                    <img id="imgViaTech" src="../assets/icon/icon.svg"> ViaTech
+                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
-
-                <p>Olá, <span id="ola"></span></p>
-                <div id="containerItens" class="container-itens">
-                    <div class="item">
-                        <a href="perfil.html"><span class="material-symbols-outlined item-atual">account_circle</span> Perfil</a>
-                    </div>
-                    <div class="item">
-                        <a href="dashboardGeral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
-                    </div>
-                    <div class="item">
-                        <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Métricas</a>
-                    </div>
-                    <div class="item">
-                        <a href="linha.html"> <span class="material-symbols-outlined">train</span>Linhas</a>
-                    </div>
-                    <div class="item">
-                        <a style="color: #e6e62c;" href="funcionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
-                    </div>
+                
+                <p>Olá, <span id="ola">Undefined</span></p>
+                
+            <div id="containerItens" class="container-itens">
+                <div class="item">
+                    <a href="perfil.html"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
                 </div>
-                <div class="buttonSair">
-                    <a href="login.html"> <span class="material-symbols-outlined">logout</span>Sair</a>
+                
+                <div class="item">
+                    <a href="dashboardGeral.html"> <span class="material-symbols-outlined">monitoring</span> Dashboard</a>
                 </div>
+                
+                <div class="item">
+                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Metricas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="linha.html"> <span class="material-symbols-outlined">train</span>Linhas</a>
+                </div>
+                
+                
+                <div class="item esconder-item">
+                    <a href="funcionario.html"  style="color: #e6e62c;"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                </div>
+                
             </div>
+            
+            <div onclick="logout()" class="buttonSair">
+                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
+            </div>
+            
         </nav>
     </div>
     <div class="header">

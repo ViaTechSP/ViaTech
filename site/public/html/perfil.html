@@ -25,21 +25,21 @@
     <div class="menuHeader">
         
         <!-- menuLateral.css -->
-        <nav id="menuLateral">
-            <i style="display: none;" id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
+        <nav id="menuLateral" style="width: 5%;">
+            <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
             
-            <div class="container" id="containerMenuLateral">
+            <div class="container" id="containerMenuLateral" style="display: none;">
                 
                 <p style="display: flex; align-items: center;">
-                    <img id="imgViaTech" src="../assets/icon/icon.svg"> ViaTech
+                    <img id="imgViaTech" src="../assets/imgs/icon.svg"> ViaTech
                     <i class="material-icons" onclick="clicarMenu()">menu</i>
                 </p>
                 
-                <p>Olá, <span id="ola"></span></p>
+                <p>Olá, <span id="ola">Undefined</span></p>
                 
             <div id="containerItens" class="container-itens">
                 <div class="item">
-                    <a style="color: #e6e62c;" href="perfil.html"><span class="material-symbols-outlined item-atual">account_circle</span> Perfil</a>
+                    <a href="perfil.html"  style="color: #e6e62c;"><span class="material-symbols-outlined">account_circle</span> Perfil</a>
                 </div>
                 
                 <div class="item">
@@ -47,23 +47,23 @@
                 </div>
                 
                 <div class="item">
-                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Métricas</a>
+                    <a href="metricas.html"> <span class="material-symbols-outlined">notifications_active</span> Metricas</a>
                 </div>
                 
                 
-                <div class="item">
+                <div class="item esconder-item">
                     <a href="linha.html"> <span class="material-symbols-outlined">train</span>Linhas</a>
                 </div>
                 
                 
-                <div class="item">
-                    <a href="funcionario.html" > <span class="material-symbols-outlined">groups</span> Funcionários</a>
+                <div class="item esconder-item">
+                    <a href="funcionario.html"> <span class="material-symbols-outlined">groups</span> Funcionários</a>
                 </div>
                 
             </div>
             
-            <div class="buttonSair">
-                <a href="login.html"> <span class="material-symbols-outlined">logout</span>Sair</a>
+            <div onclick="logout()" class="buttonSair">
+                <a> <span class="material-symbols-outlined">logout</span>Sair</a>
             </div>
             
         </nav>
