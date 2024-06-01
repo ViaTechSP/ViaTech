@@ -65,6 +65,7 @@ function buscarIdEmpresa() {
 }
 
 function cadastrarFun(idEmpresa) {
+  console.log('entrou na função')
   var nome = input_nome.value;
   var cpf = input_cpf.value.replace(/[^\d]/g, '');
   var email = input_email.value;
@@ -77,7 +78,7 @@ function cadastrarFun(idEmpresa) {
 
   if (validacaoNulo && validacaoVazio) {
     if (validacaoSenha) {
-
+      console.log('antes do fetch');
       fetch("/usuarios/cadastrarFun", {
         method: "POST", 
         headers: {
@@ -92,20 +93,22 @@ function cadastrarFun(idEmpresa) {
         }),
       }).then(function (resposta) {
         if (resposta.ok) {
-        //   swal.fire({
-        //     title: 'Redirecionando para o login',
-        //     text: 'Aguarde...',
-        //     icon: 'info',
-        //     timer: 2500,
-        //     showConfirmButton: false,
-        // }).then(() => {
-            window.location = "login.html";
-        // });
-        } else {
-          resposta.text().then(function (texto) {
-          });
-        }
-      }).catch(function (error) {
+          //   swal.fire({
+            //     title: 'Redirecionando para o login',
+            //     text: 'Aguarde...',
+            //     icon: 'info',
+            //     timer: 2500,
+            //     showConfirmButton: false,
+            // }).then(() => {
+              window.location = "login.html";
+              // });
+            } else {
+              resposta.text().then(function (texto) {
+                console.log(texto);
+              });
+            }
+          }).catch(function (error) {
+        console.log('antes do fetch');
         console.error('Erro na requisição:', error);
         alert('Erro ao cadastrar: ' + error.message);
       });

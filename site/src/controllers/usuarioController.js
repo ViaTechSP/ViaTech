@@ -29,9 +29,7 @@ function cadastrarFun(req, res){
     var cargoVar = req.body.cargoServer;
     var fkEmpresaVar = req.body.fkEmpresaServer;
 
-    if(imagemVar == undefined){
-        res.status(400).send("Sua imagem está undefined!");
-    }else if (nomeVar == undefined) {
+    if (nomeVar == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (cpfVar == undefined) {
         res.status(400).send("Seu cpf está undefined!");
