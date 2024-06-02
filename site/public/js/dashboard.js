@@ -29,26 +29,26 @@ function obterHistoricoAlerta(fkEmpresa) {
 
             if (resposta.componente == 'USB') {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div>  - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } 
             } else if (resposta.componente == 'Disco'){
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } 
             } else {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } 
             }
@@ -112,11 +112,11 @@ function obterDadosGrafico(fkEstacao) {
       if (response.ok) {
           response.json().then(function (resposta) {
               graficos_primeira.innerHTML = 
-              `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu"></canvas>
+              `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu" style="width: 500px;"></canvas>
                <canvas id="ramChart${fkEstacao}" class="grafico-cpu"></canvas>`
 
               graficos_segunda.innerHTML = 
-              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>
+              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu" style="width: 500px;"></canvas>
               ` 
               // resposta.reverse();
               plotarGrafico(resposta, fkEstacao);
@@ -167,7 +167,7 @@ function plotarGrafico(resposta, fkEstacao) {
     usbs_conectados.innerHTML = registro.qtdDispositivosUsb;
   }
 
-  const createChart = (ctx, label, data, borderColor, backgroundColor) => {
+  const createChart = (ctx, label, data, borderColor, backgroundColor, height, width) => {
       return new Chart(ctx, {
           type: 'line',
           data: {
@@ -176,8 +176,8 @@ function plotarGrafico(resposta, fkEstacao) {
                   label: label,
                   data: data,
                   fill: true,
-                  borderColor: borderColor,
-                  backgroundColor: backgroundColor,
+                  borderColor: '#a15ff7',
+                  backgroundColor: '#c79cff',
                   tension: 0.4,
                   pointBackgroundColor: 'white',
                   pointBorderColor: borderColor,
@@ -213,14 +213,26 @@ function plotarGrafico(resposta, fkEstacao) {
                       radius: 5,
                       hoverRadius: 7
                   }
-              }
+              },
+              layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                },
+                responsive: false, // Impedindo o redimensionamento responsivo
+                maintainAspectRatio: false, // Desativando a manutenção da proporção
+                width: width,
+                height: height
+            }
           }
       });
   };
 
-  createChart(document.getElementById(`cpuChart${fkEstacao}`), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
-  createChart(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
-  createChart(document.getElementById(`ramChart${fkEstacao}`), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  createChart(document.getElementById(`cpuChart${fkEstacao}`), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 300, 250);
+  createChart(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 300, 250);
+  createChart(document.getElementById(`ramChart${fkEstacao}`), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 800, 250);
 }
 
 function formatDateTime(dtHora) {
