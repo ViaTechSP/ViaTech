@@ -7,6 +7,10 @@ router.get("/obterDadosGrafico/:fkEstacao", function (req, res) {
     dashboardController.obterDadosGrafico(req, res);
 })
 
+router.get("/obterDadosTempoReal/:fkEstacao", function (req, res) {
+    dashboardController.obterDadosTempoReal(req, res);
+})
+
 router.get("/obterHistoricoAlerta/:idEmpresa", function (req, res) {
     dashboardController.obterHistoricoAlerta(req, res);
 })

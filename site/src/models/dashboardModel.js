@@ -2,18 +2,35 @@ var database = require("../database/config")
 
 function obterDadosGrafico(fkEstacao) {
     var instrucao = `
-        SELECT r.dtHora, cpuUtilizada, discoDisponivel, 
+        SELECT DATE_FORMAT(r.dtHora,'%H:%i:%s') as dataHora, cpuUtilizada, discoDisponivel, 
         ramUtilizada, qtdDispositivosUsb 
         from Registro r JOIN especificacaoMaquina 
         ON fkespecificacaoMaquina = idespecificacaoMaquina 
         JOIN maquina
         ON fkMaquina = idMaquina 
         WHERE fkEstacao = ${fkEstacao}
-        ORDER BY dtHora;
+        ORDER BY idRegistro desc LIMIT 7;
     `;
 
     return database.executar(instrucao);
 }
+
+function obterDadosTempoReal(fkEstacao) {
+    var instrucao = `
+    SELECT DATE_FORMAT(r.dtHora,'%H:%i:%s') as dataHora, cpuUtilizada, discoDisponivel,
+    ramUtilizada, qtdDispositivosUsb
+    from Registro r JOIN especificacaoMaquina
+    ON fkespecificacaoMaquina = idespecificacaoMaquina 
+    JOIN maquina
+    ON fkMaquina = idMaquina
+    WHERE fkEstacao = ${fkEstacao}
+    ORDER BY idRegistro desc limit 1
+    `;
+
+    return database.executar(instrucao);
+}
+
+
 
 function buscarMaquinas(idEmpresa) {
     var instrucao = 
@@ -102,6 +119,7 @@ module.exports = {
     buscarMaquinas,
     obterInfoHeader,
     obterDadosGrafico,
+    obterDadosTempoReal,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
     obterHistoricoAlerta
