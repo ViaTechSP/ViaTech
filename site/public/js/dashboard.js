@@ -29,26 +29,26 @@ function obterHistoricoAlerta(fkEmpresa) {
 
             if (resposta.componente == 'USB') {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div>  - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } 
             } else if (resposta.componente == 'Disco'){
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } 
             } else {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} ❌</div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} ⚠</div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } 
             }
@@ -112,11 +112,11 @@ function obterDadosGrafico(fkEstacao) {
       if (response.ok) {
           response.json().then(function (resposta) {
               graficos_primeira.innerHTML = 
-              `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu" style="width: 500px;"></canvas>
+              `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu"></canvas>
                <canvas id="ramChart${fkEstacao}" class="grafico-cpu"></canvas>`
 
               graficos_segunda.innerHTML = 
-              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu" style="width: 500px;"></canvas>
+              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>
               ` 
               // resposta.reverse();
               plotarGrafico(resposta, fkEstacao);
@@ -147,20 +147,14 @@ function obterMetricasEstacao(fkEstacao) {
 }
 
 function plotarGrafico(resposta, fkEstacao) {
-  // var cpuChart = document.getElementById('cpuChart');
-
-  // if(cpuChart) document.getElementById('cpuChart').destroy();
-  
   let labels = [];
   let cpuData = [];
   let discoData = [];
   let ramData = [];
-  let usbData = [];
-  console.log('resposta length = ', resposta.length);
+
   for (let i = 0; i < resposta.length; i++) {
     var registro = resposta[i];
-    console.log('registro = >', registro, i);
-    labels.push(formatDateTime(registro.dtHora));
+    labels.push(registro.dataHora);
     cpuData.push(registro.cpuUtilizada);
     discoData.push(registro.discoDisponivel);
     ramData.push(registro.ramUtilizada);
@@ -230,27 +224,78 @@ function plotarGrafico(resposta, fkEstacao) {
       });
   };
 
-  createChart(document.getElementById(`cpuChart${fkEstacao}`), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 300, 250);
-  createChart(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 300, 250);
-  createChart(document.getElementById(`ramChart${fkEstacao}`), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)', 800, 250);
+  const cpuChart = createChart(document.getElementById(`cpuChart${fkEstacao}`), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  const discoChart = createChart(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  const ramChart = createChart(document.getElementById(`ramChart${fkEstacao}`), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+
+  atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart);
 }
 
-function formatDateTime(dtHora) {
-  const date = new Date(dtHora);
+function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
+  fetch(`/dashboard/obterDadosTempoReal/${fkEstacao}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (novoRegistro) {
+        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        
+        let novoHorario = novoRegistro[0].dataHora;
+        console.log('novo horario => ', novoHorario);
 
-  const formattedDate = date.toLocaleDateString('pt-BR', {
-      month: '2-digit',
-      day: '2-digit'
+        if (cpuChart.data.labels[cpuChart.data.labels.length - 1] === novoHorario) {
+          console.log("---------------------------------------------------------------");
+          console.log("Como não há dados novos para captura, os gráficos não atualizarão.");
+          console.log("Horário do novo dado capturado:");
+          console.log(novoHorario);
+          console.log("Horário do último dado capturado:");
+          console.log(cpuChart.data.labels[cpuChart.data.labels.length - 1]);
+          console.log("---------------------------------------------------------------");
+        } else {
+
+          const cpuLabels = [...cpuChart.data.labels];
+          cpuLabels.shift();
+          cpuLabels.push(novoHorario);
+          cpuChart.data.labels = cpuLabels;
+          const cpuData = [...cpuChart.data.datasets[0].data];
+          cpuData.shift();
+          cpuData.push(novoRegistro[0].cpuUtilizada);
+          cpuChart.data.datasets[0].data = cpuData;
+          cpuChart.update();
+          
+          const discoLabels = [...discoChart.data.labels];
+          discoLabels.shift();
+          discoLabels.push(novoHorario);
+          discoChart.data.labels = discoLabels;
+          const discoData = [...discoChart.data.datasets[0].data];
+          discoData.shift();
+          discoData.push(novoRegistro[0].discoDisponivel);
+          discoChart.data.datasets[0].data = discoData;
+          discoChart.update();
+          
+          const ramLabels = [...ramChart.data.labels];
+          ramLabels.shift();
+          ramLabels.push(novoHorario);
+          ramChart.data.labels = ramLabels;
+          const ramData = [...ramChart.data.datasets[0].data];
+          ramData.shift();
+          ramData.push(novoRegistro[0].ramUtilizada);
+          ramChart.data.datasets[0].data = ramData;
+          ramChart.update();
+          
+          usbs_conectados.innerHTML = novoRegistro[0].qtdDispositivosUsb;
+          console.log('qtdUsbs =>', novoRegistro[0].qtdDispositivosUsb);
+        }
+
+        setTimeout(() => atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart), 5000);
+      });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+      setTimeout(() => atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart), 5000);
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
   });
-
-  const formattedTime = date.toLocaleTimeString('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-  });
-
-  return `${formattedDate} ${formattedTime}`;
 }
+
 
 function onLoadFuncoes() {
   var idEmpresa = sessionStorage.ID_EMPRESA;
@@ -266,9 +311,28 @@ function onLoadFuncoes() {
 
 function onChangeSelect() {
   var fkEstacao = select_estacao.value;
-
+  
   obterDadosGrafico(fkEstacao);
   obterInfoHeader(fkEstacao);
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
 }
+
+
+
+// function formatDateTime(dtHora) {
+//   const date = new Date(dtHora);
+
+//   const formattedDate = date.toLocaleDateString('pt-BR', {
+//       month: '2-digit',
+//       day: '2-digit'
+//   });
+
+//   const formattedTime = date.toLocaleTimeString('pt-BR', {
+//       hour: '2-digit',
+//       minute: '2-digit',
+//       hour12: false
+//   });
+
+//   return `${formattedDate} ${formattedTime}`;
+// }
