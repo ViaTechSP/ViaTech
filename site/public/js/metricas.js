@@ -4,19 +4,20 @@ function buscarInfoMetricas() {
     // console.log('id =>', idFuncionario)
 
     var idLinha = select_linha.value;
+    // console.log('Tamahno da linhaaa', idLinha.length)
 
-    
+        
     fetch(`/metrica/buscarInfoMetrica/${idLinha}`, { cache: 'no-store' })
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
-
-          if (resposta.length > 0) {          
+           
+          if (resposta.length > 0) {
 
             document.getElementById('ipt_minDisco').value = resposta[0].cuidadoDisco;
             document.getElementById('ipt_minProblemaDisco').value = resposta[0].problemaDisco;
             document.getElementById('ipt_minCpu').value = resposta[0].cuidadoCpu;
-            document.getElementById('ipt_minProblemaCpu').value = resposta[0].cuidadoCpu;
+            document.getElementById('ipt_minProblemaCpu').value = resposta[0].problemaCpu;
             document.getElementById('ipt_minRam').value = resposta[0].cuidadoRam;
             document.getElementById('ipt_minProblemaRam').value = resposta[0].problemaRam;
             document.getElementById('ipt_qtd_usb').value = resposta[0].maxUsb;           
@@ -30,9 +31,7 @@ function buscarInfoMetricas() {
             document.getElementById('ipt_minProblemaRam').value = '';
             document.getElementById('ipt_qtd_usb').value = '';
 
-            console.error('Nenhuma informação encontrada');
-            primeiraMetrica();
-            
+            console.error('Nenhuma informação encontrada');   
           }
         });
       } else {
@@ -47,6 +46,7 @@ function buscarInfoMetricas() {
 }
 
 function alterarMetricas() {
+
   if(option.value !== 0){
   const inputs = document.querySelectorAll('input');
   const botaoAlterar = document.getElementById('botao_alterarMetrica');
@@ -73,8 +73,9 @@ function alterarMetricas() {
 }
 
 function resetarMetrica(){
-  var minimoDisco = 13;
-  var maximoDisco = 19;
+    
+  var minimoDisco = 128;
+  var maximoDisco = 50;
   
   var minimoCpu = 75;
   var maximoCpu = 85;
@@ -87,22 +88,45 @@ function resetarMetrica(){
   
   var idLinha = select_linha.value;
 
-  fetch(`/metrica/resetarMetrica/${idLinha}`,{
-    method: "PUT", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      minimoDisco: minimoDisco,
-      maximoDisco: maximoDisco,
-      minimoCpu: minimoCpu,
-      maximoCpu: maximoCpu,
-      minimoRam: minimoRam,
-      maximoRam: maximoRam,
-      qtdUsb: qtdUsb
-    })
-  }).then(function (resposta) {
-    if (resposta.ok) {
-        buscarInfoMetricas();   
-    } 
-    })
+  if(idLinha != 0){
+
+    if(idLinha > 0){
+      swal({
+        title: "Tem certeza?",
+        text: "Deseja mesmo resetar as metricas dessa linha?",
+        icon: "warning",
+        buttons: {
+            cancel: "Cancelar",
+            confirm: "SIM"
+        }
+    }).then((confirmacao) => {
+        if (confirmacao) {
+           
+          fetch(`/metrica/resetarMetrica/${idLinha}`,{
+            method: "PUT", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              minimoDisco: minimoDisco,
+              maximoDisco: maximoDisco,
+              minimoCpu: minimoCpu,
+              maximoCpu: maximoCpu,
+              minimoRam: minimoRam,
+              maximoRam: maximoRam,
+              qtdUsb: qtdUsb
+            })
+          }).then(function (resposta) {
+            if (resposta.ok) {
+              console.log('Update realizado!')
+                buscarInfoMetricas();   
+            } 
+            })
+        }
+    });
+
+    }
+  } else{
+    swal('Ei!', 'Selecione a linha que deseja resetar os dados!', 'warning')
+  }
+
 
 }
 
@@ -119,6 +143,7 @@ function salvarMetricas() {
 
   
   var idLinha = select_linha.value;
+
   
   if((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)){
 
@@ -159,7 +184,9 @@ function salvarMetricas() {
 
 
       } else {
+            // swal("Ops!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo. 🥺", "error");
             throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+
         }
       }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -169,9 +196,35 @@ function salvarMetricas() {
 
     }
   } else{
-      swal("Valores incorretos!", "Valor mínimo não pode ser maior ou igual ao valor máximo, ou negativo. 🥺", "error");
+      swal("Ops!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo. 🥺", "error");
     
   }
+
+   // ALGUNS LOGS
+ if (minimoDisco > maximoDisco) {
+  console.log('minimoDisco é maior que maximoDisco');
+} else {
+  console.log('minimoDisco NÃO é maior que maximoDisco');
+}
+
+if (minimoCpu < maximoCpu) {
+  console.log('minimoCpu é menor que maximoCpu');
+} else {
+  console.log('minimoCpu NÃO é menor que maximoCpu');
+}
+
+if (minimoRam < maximoRam) {
+  console.log('minimoRam é menor que maximoRam');
+} else {
+  console.log('minimoRam NÃO é menor que maximoRam');
+}
+
+if (qtdUsb >= 0) {
+  console.log('qtdUsb é maior ou igual a 0');
+} else {
+  console.log('qtdUsb NÃO é maior ou igual a 0');
+}
+
 }
 
 
