@@ -154,7 +154,6 @@ function plotarGrafico(resposta, fkEstacao) {
 
   for (let i = 0; i < resposta.length; i++) {
     var registro = resposta[i];
-    console.log('registro = >', registro, i);
     labels.push(registro.dataHora);
     cpuData.push(registro.cpuUtilizada);
     discoData.push(registro.discoDisponivel);
@@ -162,7 +161,7 @@ function plotarGrafico(resposta, fkEstacao) {
     usbs_conectados.innerHTML = registro.qtdDispositivosUsb;
   }
 
-  const createChart = (ctx, label, data, borderColor, backgroundColor) => {
+  const createChart = (ctx, label, data, borderColor, backgroundColor, height, width) => {
       return new Chart(ctx, {
           type: 'line',
           data: {
@@ -171,8 +170,8 @@ function plotarGrafico(resposta, fkEstacao) {
                   label: label,
                   data: data,
                   fill: true,
-                  borderColor: borderColor,
-                  backgroundColor: backgroundColor,
+                  borderColor: '#a15ff7',
+                  backgroundColor: '#c79cff',
                   tension: 0.4,
                   pointBackgroundColor: 'white',
                   pointBorderColor: borderColor,
@@ -208,7 +207,19 @@ function plotarGrafico(resposta, fkEstacao) {
                       radius: 5,
                       hoverRadius: 7
                   }
-              }
+              },
+              layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                },
+                responsive: false, // Impedindo o redimensionamento responsivo
+                maintainAspectRatio: false, // Desativando a manutenção da proporção
+                width: width,
+                height: height
+            }
           }
       });
   };
