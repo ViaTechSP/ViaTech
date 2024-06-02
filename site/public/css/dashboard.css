@@ -235,7 +235,7 @@ flex-direction: column;
 
 .bloco-de-comentario:hover{
   cursor: pointer;
-  background-image: url('../assets/imgs/bloco.png');
+  /* background-image: url('../assets/imgs/bloco.png'); */
   width: 90px;
   height: 70px;
   color: #5c4fa9;
