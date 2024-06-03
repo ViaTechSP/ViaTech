@@ -60,6 +60,11 @@ body{
     margin-top: 0;
 }
 
+.mudar:hover{
+  cursor: pointer;
+  color: chartreuse;
+}
+
 .alert-settings {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -157,4 +162,27 @@ body{
   cursor: pointer;
   width: 12vw;
   margin-top: 10px;
+}
+
+.botao-alterar:hover{
+  background-color: #201a42;
+  /* color: #000000; */
+  /* border: 1px solid #5c4fa9; */
+}
+
+.botao-resetar {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  /* width: 12vw; */
+  /* margin-top: 10px; */
+  margin-left: 50%;
+}
+
+.botao-resetar:hover{
+  background-color: rgb(54, 209, 54);
+  border: 1px solid green;
 }

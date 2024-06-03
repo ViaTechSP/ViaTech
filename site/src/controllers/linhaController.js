@@ -20,6 +20,14 @@ function exibirLinha(req, res){
     });
 }
 
+function ultimaLinhaInserida(req, res){
+    var idEmpresa = req.params.idEmpresa;
+    
+    linhaModel.ultimaLinhaInserida(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 function deletarLinha(req, res) {
     var idLinha = req.params.idLinha;
 
@@ -77,5 +85,6 @@ module.exports = {
     exibirLinha,
     deletarLinha,
     cadastrarLinha,
-    salvarLinha
+    salvarLinha,
+    ultimaLinhaInserida
 }
