@@ -28,8 +28,8 @@
     width: 75%;
     height: 20%;
     background-color: #efefef;
-    border-radius: 5px;
-    border: 1px solid #011640;
+    border-radius: 2px;
+    border: 1px solid #171796;
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -110,7 +110,10 @@
 
 .card-alerta {
     width: 250px;
-    background-color: #efefef;
+    background-color: #eeff5244;
+    border-radius: 2px;
+    padding: 12px;
+    border: 1px solid #171796;
     height: 100px;
     text-align: center;
     color: #171796;
@@ -127,7 +130,10 @@
 
 .card-problema {
     width: 300px;
-    background-color: #efefef;
+    background-color: #eeff5244;
+    border: 1px solid #171796;
+    border-radius: 2px;
+    padding: 10px;
     height: 110px;
     text-align: center;
     color: #171796;
@@ -185,6 +191,11 @@
     word-wrap: break-word;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.card-maquina:hover{
+    background-color: #17179634;
+    cursor: pointer;
 }
 
 #primeira_linha, #segunda_linha {

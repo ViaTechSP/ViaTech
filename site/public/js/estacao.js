@@ -1,5 +1,6 @@
 function exibirEstacao(idEstacao){
     document.getElementById('divAdd').style.display = 'none';
+    document.getElementById('frase').style.display = 'none';
     document.getElementById('ver').style.color = '#F27A5E';
     document.getElementById('add').style.color = 'black';
     document.getElementById('container-estacao').style.display = 'block';
@@ -139,6 +140,7 @@ function exibirDivAddEstacao(){
   document.getElementById('divAdd').style.display = 'block';
   document.getElementById('divAdd').style.display = 'flex';
   document.getElementById('container-estacao').style.display = 'none';
+  document.getElementById('frase').style.display = 'none';
   document.getElementById('ver').style.color = 'black';
   document.getElementById('add').style.color = '#F27A5E';
   

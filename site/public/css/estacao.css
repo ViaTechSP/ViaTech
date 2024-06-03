@@ -8,11 +8,14 @@ body {
 
 .header {
     background-color: #efefef;
-    width: 100%;
-    height: 50px;
+    /* width: 100%; */
+    /* height: 50px; */
     /* padding-left: 4%; */
-    margin-left: 5%;
-    text-align: left;
+    /* margin-left: 5%; */
+    position: relative;
+    /* z-index: -3; */
+    /* text-align: left; */
+    padding: 10px;
     font-size: 24px; 
     display: flex;
     align-items: center;
@@ -25,7 +28,7 @@ body {
 
 .combobox-style {
     /* background-color: #efefef; */
-    width: 100%;
+    /* width: 100%; */
     height: 50px;
     /* padding-left: 4%; */
     margin-left: 5%;
@@ -44,17 +47,32 @@ body {
     padding: 10px;
     margin-left: 5px;
     border: 1px solid #5c4fa9;
+    background-color: #5c4fa946;
     border-radius: 10px;
 }
 
 .container-estacao {
+    height: 76vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90%;   
     /* padding: 30px; */
-    /* overflow:hidden; */
+    /* overflow: hidden; */
+}
+
+
+.container-frase{
+    height: 76vh;
+    color: #00000052;
+    font-size: 20px;
+    margin-left: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 30px; */
+    /* overflow: hidden; */
 }
 
 .containerExibir {
@@ -69,7 +87,7 @@ body {
     /* position: relative; */
     height: 80%;
     z-index: 2;
-    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .quadrado-perfil {
