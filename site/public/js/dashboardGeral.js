@@ -1,5 +1,5 @@
+/* SELECT DE LINHAS */
 function listarLinhas(idEmpresa) {
-    var idEmpresa = sessionStorage.ID_EMPRESA;
     var select = document.getElementById("select_linha");
   
     fetch(`/linha/exibirLinha/${idEmpresa}`, { cache: 'no-store' })
@@ -19,19 +19,28 @@ function listarLinhas(idEmpresa) {
     })          
 }
 
-function exibirEstacoes() {
-  var idEmpresa = sessionStorage.ID_EMPRESA;
-  var idLinha = select_linha.value;
+function totalMaquinasEmpresa(idEmpresa) {
+  fetch(`/dashGeral/calcularTotalMaquinas/${idEmpresa}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        total_maquinas_empresa.innerHTML = resposta[0].total;
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })       
+}
 
+/* ESTAÇÕES SENDO EXIBIDAS DE ACORDO COM O SELECT */
+function exibirEstacoes(idEmpresa, idLinha) {
   fetch(`/dashGeral/exibirEstacoes/${idEmpresa}/${idLinha}`, { cache: 'no-store' })
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
         primeira_linha.innerHTML = "";  
         segunda_linha.innerHTML = "";  
+        total_maquinas_linha.innerHTML = resposta.length;
+        
         var auxiliar = 0;
-        total_maquinas.innerHTML = resposta.length;
-
         resposta.forEach(function (resposta) {
           auxiliar++ 
           console.log('nome estação =>', resposta.nome);
@@ -48,15 +57,72 @@ function exibirEstacoes() {
   })
 }
 
-function filtrarEstacao() {
+/* KPIS */
+function atualizarQtdProblemas(idLinha) {
+  fetch(`/dashGeral/atualizarQtdProblemas/${idLinha}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        span_qtd_problemas.innerHTML = resposta[0].qtdProblemas
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+function atualizarQtdAlertasAtual(idEmpresa, idLinha) {
+  var idLinha = select_linha.value;
+  var idEmpresa = sessionStorage.ID_EMPRESA;
+
+  console.log('id empresa', idEmpresa);
+
+  fetch(`/dashGeral/atualizarQtdAlertasAtual/${idLinha}/${idEmpresa}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+
+          if (resposta.length > 0) {
+          span_qtd_alerta_estacao.innerHTML = resposta[0].qtdEstacoesComAlertas;
+        } else {
+          span_qtd_alerta_estacao.innerHTML = "0";
+        }
+
+    });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+function atualizarEstacaoAlerta(idLinha) {
+  fetch(`/dashGeral/atualizarEstacaoAlerta/${idLinha}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+
+          if (resposta.length > 0) {
+          span_estacao_alerta.innerHTML = resposta[0].nome;
+          span_qtd_alertas.innerHTML = resposta[0].qtdAlertas;
+        } else {
+          span_estacao_alerta.innerHTML = 'Todas ok!';
+          span_qtd_alertas.innerHTML = "0";
+        }
+
+    });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })
+}
+
+/* FUNÇÕES DE FILTROS */
+function filtrarEstacaoPorNome() {
+  var idEmpresa = sessionStorage.ID_EMPRESA;
   var pesquisarVar = ipt_pesquisar.value;
   
   if (pesquisarVar !== null && pesquisarVar !== '' && pesquisarVar !== undefined && pesquisarVar.length >= 3) {
     primeira_linha.innerHTML =  '';
     segunda_linha.innerHTML =  '';
-        fetch(`/dashGeral/pesquisarEstacao/${pesquisarVar}`, { cache: 'no-store' })
+        fetch(`/dashGeral/pesquisarEstacao/${pesquisarVar}/${idEmpresa}`, { cache: 'no-store' })
         .then(function (response) {
           if (response.ok) { response.json().then(function (resposta) {
+            console.log('respposta =>>', resposta);
+            total_maquinas_linha.innerHTML = resposta.length;
             primeira_linha.innerHTML = `<div onclick="verDash(${resposta[0].idEstacao})" class="card-maquina">
             <img class="img-pc" src="../assets/imgs/computador.png">
               <div class="estacao-alerta">
@@ -71,14 +137,17 @@ function filtrarEstacao() {
 }
 
 function filtrarPorAlerta(alerta) {
-  fetch(`/dashGeral/filtrarPorAlerta/${alerta}`, { cache: 'no-store' })
+  var idLinha = select_linha.value;
+  var idEmpresa = sessionStorage.ID_EMPRESA;
+
+  fetch(`/dashGeral/filtrarPorAlerta/${alerta}/${idLinha}/${idEmpresa}`, { cache: 'no-store' })
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
         primeira_linha.innerHTML = "";  
         segunda_linha.innerHTML = "";  
         var auxiliar = 0;
-        total_maquinas.innerHTML = resposta.length;
+        total_maquinas_linha.innerHTML = resposta.length;
 
         resposta.forEach(function (resposta) {
           auxiliar++ 
@@ -88,49 +157,6 @@ function filtrarPorAlerta(alerta) {
             segunda_linha.innerHTML += string(resposta);
           }
         });
-      });
-    } else console.error('Nenhum dado encontrado ou erro na API');
-  })
-}
-
-function atualizarQtdProblemas() {
-  var idLinha = select_linha.value;
-
-  fetch(`/dashGeral/atualizarQtdProblemas/${idLinha}`, { cache: 'no-store' })
-  .then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        span_qtd_problemas.innerHTML = resposta[0].qtdProblemas
-      });
-    } else console.error('Nenhum dado encontrado ou erro na API');
-  })
-}
-
-function atualizarEstacaoAlerta() {
-  var idLinha = select_linha.value;
-
-  fetch(`/dashGeral/atualizarEstacaoAlerta/${idLinha}`, { cache: 'no-store' })
-  .then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        console.log(resposta);
-        span_estacao_alerta.innerHTML = resposta[0].nome;
-        span_qtd_alertas.innerHTML = resposta[0].qtdAlertas;
-      });
-    } else console.error('Nenhum dado encontrado ou erro na API');
-  })
-}
-
-function atualizarQtdAlertasGeral() {
-  var idLinha = select_linha.value;
-
-  fetch(`/dashGeral/atualizarEstacaoAlerta/${idLinha}`, { cache: 'no-store' })
-  .then(function (response) {
-    if (response.ok) {
-      response.json().then(function (resposta) {
-        console.log(resposta);
-        span_estacao_alerta.innerHTML = resposta[0].nome;
-        span_qtd_alertas.innerHTML = resposta[0].qtdAlertas;
       });
     } else console.error('Nenhum dado encontrado ou erro na API');
   })
@@ -160,7 +186,6 @@ function alternarSelecionadoProblema() {
   }
 }
 
-
 function verDash(idEstacao) {
   sessionStorage.setItem("estacaoId", idEstacao);
   window.location = '../html/dashboard.html';
@@ -176,4 +201,25 @@ function string(resposta) {
   </div>`;
 
   return textoEstacao;
+}
+
+function funcoesOnload() {
+  var idEmpresa = sessionStorage.ID_EMPRESA;
+  var idLinha = select_linha.value;
+
+  listarLinhas(idEmpresa);
+  totalMaquinasEmpresa(idEmpresa);
+  exibirEstacoes(idEmpresa, idLinha);
+  atualizarQtdProblemas(idLinha);
+  atualizarEstacaoAlerta(idLinha);
+  atualizarQtdAlertasAtual(idEmpresa, idLinha);
+}
+
+function funcoesOnchange() {
+  var idEmpresa = sessionStorage.ID_EMPRESA;
+  var idLinha = select_linha.value;
+
+  exibirEstacoes(idEmpresa, idLinha);
+  atualizarQtdProblemas(idLinha);
+  atualizarEstacaoAlerta(idLinha);
 }
