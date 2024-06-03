@@ -24,7 +24,7 @@
 </head>
 
 <!-- <body onload="validarSessao()"> -->
-<body onload="listarLinhas();">
+<body onload="funcoesOnload()">
         
 
     <nav id="menuLateral" style="width: 5%;">
@@ -81,8 +81,9 @@
                             <h3>Linha - </h3>
                         </div>
                         <div class="header-select">
-                            <select  onchange="atualizarEstacaoAlerta()" id="select_linha" class="select-linha">
-                                <option value="0" disabled selected>Selecione uma linha</option>
+                            <select  onchange="funcoesOnchange()" id="select_linha" class="select-linha">
+                                <option value="0" disabled>Selecione uma linha</option>
+                                <option value="todas" selected>Todas</option>
                             </select>
                         </div>
                     </div>
@@ -92,14 +93,13 @@
                             <h3>Máquinas da sua empresa</h3>
                         </div>
                         <!-- <input type="text" id="ipt_pesquisar" onkeyup="pesquisarEstacao()"> -->
-                            <sl-input id="ipt_pesquisar" onkeyup="filtrarEstacao()" class="ipt-pesquisar-estacao" placeholder="Buscar estação" size="large">
+                            <sl-input id="ipt_pesquisar" class="ipt-pesquisar-estacao" placeholder="Buscar estação" size="large">
                                 <sl-icon name="search" slot="prefix"></sl-icon>
                               </sl-input>
 
                         <div class="filtros-prontos">
-                                <sl-button size="medium" class="filtrar-botoes" pill>A-Z </sl-button>
 
-                                <sl-button size="medium" class="filtrar-botoes" id="botao_cuidado" onclick="alternarSelecionadoCuidado()" type="checkbox" pill>Cuidado
+                                <sl-button size="medium" class="filtrar-botoes" id="botao_cuidado" onclick="alternarSelecionadoCuidado()" pill>Cuidado
                                     <sl-icon name="exclamation-triangle" style="color: #fec23e;"></sl-icon>
                                 </sl-button>
 
@@ -107,7 +107,7 @@
                                     <sl-icon name="exclamation-circle" style="color: #f21d3c;"></sl-icon>
                                 </sl-button>
 
-                                <sl-button size="medium" onclick="clicarMenu()" class="filtrar-botoes" pill>Buscar</sl-button>
+                                <sl-button size="medium" onclick="filtrarEstacaoPorNome()" class="filtrar-botoes" pill>Buscar</sl-button>
 
                         </div>
                     </div>
@@ -117,11 +117,11 @@
 
                     <div class="kpis-alertas">
                             <div class="card-alerta">
-                                 Nº de máquinas da linha
-                                <span id="total_maquinas" class="span-numero">0</span>máquinas
+                                 Nº de máquinas <br>    
+                                <span id="total_maquinas_linha" class="span-numero">0</span>/<span id="total_maquinas_empresa">35</span> máquinas
                             </div>
                             <div class="card-alerta">
-                                <span id="span_qtd_alerta" class="span-numero">0</span>
+                                <span id="span_qtd_alerta_estacao" class="span-numero">0</span>
                                   <br>
                                 Das estações possuem alerta
                             </div>

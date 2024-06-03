@@ -1,10 +1,21 @@
 var dashboardModel = require("../models/dashboardModel");
 
-    // DASHBOARD MÁQUINA
 function obterDadosGrafico(req, res) {
     var fkEstacao = req.params.fkEstacao;
 
     dashboardModel.obterDadosGrafico(fkEstacao).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    })
+}
+
+function obterDadosTempoReal(req, res) {
+    var fkEstacao = req.params.fkEstacao;
+
+    dashboardModel.obterDadosTempoReal(fkEstacao).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -77,6 +88,7 @@ module.exports = {
     buscarMaquinas,
     obterInfoHeader,
     obterDadosGrafico,
+    obterDadosTempoReal,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
     obterHistoricoAlerta

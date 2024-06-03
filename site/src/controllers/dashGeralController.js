@@ -9,20 +9,31 @@ function buscarEstacoes(req, res){
     });
 }
 
+function calcularTotalMaquinas(req, res){
+    var idEmpresa = req.params.idEmpresa;
+
+    dashGeralModel.calcularTotalMaquinas(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 function pesquisarEstacao(req, res){
     var pesquisa = req.params.pesquisarVar;
+    var idEmpresa = req.params.idEmpresa;
 
     console.log('pesquisa: ', pesquisa)
 
-    dashGeralModel.pesquisarEstacao(pesquisa).then((resultado) => {
+    dashGeralModel.pesquisarEstacao(pesquisa, idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
 
 function filtrarPorAlerta(req, res){
     var alerta = req.params.alerta;
+    var idLinha = req.params.idLinha;
+    var idEmpresa = req.params.idEmpresa;
 
-    dashGeralModel.filtrarPorAlerta(alerta).then((resultado) => {
+    dashGeralModel.filtrarPorAlerta(alerta, idLinha, idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
@@ -43,10 +54,23 @@ function atualizarEstacaoAlerta(req, res){
     });
 }
 
+function atualizarQtdAlertasAtual(req, res){
+    var idLinha = req.params.idLinha;
+    var idEmpresa = req.params.idEmpresa;
+
+    console.log('idEmpresa =>', idEmpresa);
+
+    dashGeralModel.atualizarQtdAlertasAtual(idLinha, idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 module.exports = {
     buscarEstacoes,
+    calcularTotalMaquinas,
     pesquisarEstacao,
     filtrarPorAlerta,
     atualizarQtdProblemas,
-    atualizarEstacaoAlerta
+    atualizarEstacaoAlerta,
+    atualizarQtdAlertasAtual
 }
