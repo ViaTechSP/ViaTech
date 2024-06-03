@@ -1,6 +1,8 @@
 /* SELECT DE LINHAS */
 function listarLinhas(idEmpresa) {
     var select = document.getElementById("select_linha");
+
+    idEmpresa = sessionStorage.ID_EMPRESA;
   
     fetch(`/linha/exibirLinha/${idEmpresa}`, { cache: 'no-store' })
     .then(function (response) {

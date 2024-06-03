@@ -11,6 +11,7 @@ function buscarInfoMetricas() {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
+          console.log(response)
            
           if (resposta.length > 0) {
 

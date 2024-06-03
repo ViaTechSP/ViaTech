@@ -14,6 +14,7 @@ var linhaModel = require("../models/linhaModel");
 
 function exibirLinha(req, res){
     var idEmpresa = req.params.idEmpresa;
+    console.log('Controller exibirLinha ', idEmpresa )
     
     linhaModel.exibirLinha(idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
