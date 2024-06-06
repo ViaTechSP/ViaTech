@@ -66,6 +66,39 @@
             </div>
             
         </nav>
+
+        <div class="divComentario" id="divComentario" style="display: none;">
+
+            <div class="temTudoComentario">
+
+                <div class="headerComentario">
+                    <select id="select_catecoriga" class="select-categoria esconder-item">
+                        <option value="" >Selecione uma Estação</option>
+                        <option value="Manutenção" >Manutençaõ</option>
+                        <option value="Troca" >Troca de peças</option>
+                        <option value="Incidente" >Outros</option>
+                        <option value="..." >Anotações</option>
+                    </select>
+
+                    <div class="addComentario">
+                        <span class="material-symbols-outlined">add</span>
+                    </div>
+                </div>
+
+                <div class="caixaComentario">
+                    <div class="data">23/04/2004 - 12:30</div>
+                    <div class="email">funcionario@viatech.com</div>
+
+                    <div class="comentario">
+                        Esta máquina teve manutenção (hoje 05/06) as 13 horas!
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
         
         <!-- dashboard.css -->
         <div class="header-info">
@@ -170,12 +203,11 @@
                     </div>
 
                     <div class="comentarios">
-                        <img src="../assets/imgs/bloco.png" class="bloco-de-comentario" alt="">
+                        <img src="../assets/imgs/bloco.png" class="bloco-de-comentario" onclick="exibirPopUp()" alt="">
                     </div>
                 </div>
-                
-
             </div>
+
 
             <div class="coluna-3">
                 <div class="alertas-header"><strong>Alertas</strong></div>
@@ -192,6 +224,19 @@
             </div>
 
         </div>
+
+
 </body>
 </html>
+
+<script>
+    document.addEventListener('click', function(event) {
+  const popUp = document.getElementById('divComentario');
+  if (!popUp.contains(event.target)) {
+    popUp.style.display = 'none';
+  }
+});
+
+
+</script>
 

@@ -241,6 +241,98 @@ flex-direction: column;
   color: #5c4fa9;
 }
 
+
+.divComentario{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  z-index: 10;
+  background-color: #4644478e;
+}
+
+.temTudoComentario{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 55%;
+  height: 90vh;
+  background-color: #8993bf;
+  border: 2px solid #5c4fa9;
+  border-radius: 15px;
+
+}
+
+.headerComentario {
+  display: flex;
+  margin-top: 20px;
+  /* background-color: #5ea94f; */
+  width: 90%;
+  height: 10vh;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.select-categoria{
+  padding: 10px;
+  background-color: #e6e1ff;
+  color: black;
+  border-radius: 15px;
+  border: black solid 1px;
+  width: 45%;
+}
+
+.addComentario{
+  color: white;
+  background-color: #2f1c9c;
+  border-radius: 60px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addComentario:hover{
+  background-color: #8773fa;
+  cursor: pointer;
+  transition: 0.6s ease;
+}
+
+.caixaComentario{
+  display: flex;
+  margin-left: 15%;
+  padding: 10px;
+  flex-direction: column;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 5px;
+  /* width: 61%; */
+  border: #2f1c9c 1px solid;
+  /* height: 18vh; */
+}
+
+.data{
+  display: flex;
+  font-size: 12px;
+  color: #4b4953;
+}
+
+.email{
+  font-size: 12px;
+
+  /* padding-left: 5px; */
+}
+
+.comentario{
+  font-size: 16px;
+}
+
 .coluna-3 {
   display: flex;
   flex-direction: column;

@@ -319,6 +319,12 @@ function onChangeSelect() {
 }
 
 
+function exibirPopUp(){
+  document.getElementById("divComentario").style.display = 'block';
+  document.getElementById("divComentario").style.display = 'flex';
+}
+
+
 
 // function formatDateTime(dtHora) {
 //   const date = new Date(dtHora);
