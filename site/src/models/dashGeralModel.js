@@ -4,13 +4,14 @@ function buscarEstacoes(idEmpresa, idLinha) {
     var query;
 
     if (idLinha == 'todas') {
-        query = 
+        query =
         `SELECT idEstacao, estacao.nome FROM estacao
         JOIN linha
         ON fkLinha = idLinha
         JOIN empresa
         ON fkEmpresa = idEmpresa
-        where idEmpresa = ${idEmpresa} ORDER BY estacao.nome;
+        WHERE idEmpresa = ${idEmpresa}
+        ORDER BY estacao.nome;
         `
     } else {
         query =
@@ -19,20 +20,21 @@ function buscarEstacoes(idEmpresa, idLinha) {
         ON fkLinha = idLinha
         JOIN empresa
         ON fkEmpresa = idEmpresa
-        where idEmpresa = ${idEmpresa} AND idLinha = ${idLinha} ORDER BY estacao.nome DESC;
+        WHERE idEmpresa = ${idEmpresa} AND idLinha = ${idLinha}
+        ORDER BY estacao.nome DESC;
         `
     }
-    
+   
     return database.executar(query);
 }
 
 function calcularTotalMaquinas(idEmpresa) {
-    var query = 
-    `select count(idEstacao) as total from estacao 
-	join linha on fkLinha = idLinha
-    join empresa on fkEmpresa = idEmpresa
-    where idEmpresa = ${idEmpresa};`
-    
+    var query =
+    `SELECT COUNT(idEstacao) as total FROM estacao
+      JOIN linha ON fkLinha = idLinha
+    JOIN empresa ON fkEmpresa = idEmpresa
+    WHERE idEmpresa = ${idEmpresa};`
+   
     return database.executar(query);
 }
 
@@ -43,7 +45,7 @@ function pesquisarEstacao(pesquisa, idEmpresa) {
     ON fkLinha = idLinha
     JOIN empresa
     ON fkEmpresa = idEmpresa
-    where estacao.nome = '${pesquisa}' and idEmpresa = ${idEmpresa};
+    WHERE estacao.nome = '${pesquisa}' AND idEmpresa = ${idEmpresa};
     `
     return database.executar(query);
 }
@@ -53,36 +55,37 @@ function atualizarQtdProblemas(idLinha) {
 
     if (idLinha == 'todas') {
         query =
-        `SELECT count(idHistorico) qtdProblemas FROM historicoAlerta h
-	    JOIN Registro r ON fkRegistro = idRegistro
+        `SELECT COUNT(idHistorico) AS qtdProblemas FROM historicoAlerta h
+          JOIN Registro r ON fkRegistro = idRegistro
         JOIN especificacaoMaquina em ON fkEspecificacaoMaquina = idEspecificacaoMaquina
         JOIN maquina m ON fkMaquina = idMaquina
         JOIN estacao e ON fkEstacao = idEstacao
         WHERE h.tipo = 'Problema'
-        AND h.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();
+        AND h.dtHora BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE();
         `
     } else {
         query =
-        `SELECT count(idHistorico) qtdProblemas FROM historicoAlerta h
+        `SELECT COUNT(idHistorico) AS qtdProblemas FROM historicoAlerta h
         JOIN Registro r ON fkRegistro = idRegistro
         JOIN especificacaoMaquina em ON fkEspecificacaoMaquina = idEspecificacaoMaquina
         JOIN maquina m ON fkMaquina = idMaquina
         JOIN estacao e ON fkEstacao = idEstacao
         WHERE fkLinha = ${idLinha} AND h.tipo = 'Problema'
-        AND h.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW();
+        AND h.dtHora BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE();
         `
     }
-        
+       
     return database.executar(query);
 }
 
-function atualizarEstacaoAlerta(idLinha) {
+function atualizarEstacaoAlerta(idLinha, idEmpresa) { // Adicionei idEmpresa como parâmetro
     var query;
 
     if (idLinha == 'todas') {
         query =
-        `SELECT e.nome, count(r.idRegistro) as qtdAlertas FROM registro r
-        JOIN especificacaoMaquina em 
+        `SELECT TOP 1 e.nome, COUNT(r.idRegistro) AS qtdAlertas
+        FROM registro r
+        JOIN especificacaoMaquina em
             ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
         JOIN maquina mq
             ON em.fkMaquina = mq.idMaquina
@@ -101,14 +104,16 @@ function atualizarEstacaoAlerta(idLinha) {
             OR r.ramUtilizada > m.CuidadoRam
             OR r.ramUtilizada > m.ProblemaRam
             OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
-            AND idEmpresa = ${idEmpresa} 
-            GROUP BY e.nome TOP 1;
+            AND r.dtHora BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE()
+            AND idEmpresa = ${idEmpresa}
+        GROUP BY e.nome
+        ORDER BY qtdAlertas DESC;
         `
     } else {
         query =
-        `SELECT e.nome, count(r.idRegistro) as qtdAlertas FROM registro r
-        JOIN especificacaoMaquina em 
+        `SELECT TOP 1 e.nome, COUNT(r.idRegistro) AS qtdAlertas
+        FROM registro r
+        JOIN especificacaoMaquina em
             ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
         JOIN maquina mq
             ON em.fkMaquina = mq.idMaquina
@@ -120,31 +125,32 @@ function atualizarEstacaoAlerta(idLinha) {
             ON m.fkLinha = l.idLinha
         JOIN empresa
             ON fkEmpresa = idEmpresa
-        WHERE 
-              (r.discoDisponivel < m.CuidadoDisco
+        WHERE (r.discoDisponivel < m.CuidadoDisco
             OR r.discoDisponivel < m.ProblemaDisco
             OR r.cpuUtilizada > m.CuidadoCpu
             OR r.cpuUtilizada > m.ProblemaCpu
             OR r.ramUtilizada > m.CuidadoRam
             OR r.ramUtilizada > m.ProblemaRam
             OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
-            AND idLinha = ${idLinha} 
-            GROUP BY e.nome TOP 1;
+            AND r.dtHora BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE()
+            AND idLinha = ${idLinha}
+        GROUP BY e.nome
+        ORDER BY qtdAlertas DESC;
         `
     }
-    
+   
     return database.executar(query);
 }
+
 
 function atualizarQtdAlertasAtual(idLinha, idEmpresa) {
     var query;
 
     if (idLinha == 'todas') {
         query =
-        `SELECT COUNT(DISTINCT e.nome) as qtdEstacoesComAlertas
+        `SELECT COUNT(DISTINCT e.nome) AS qtdEstacoesComAlertas
         FROM registro r
-            JOIN especificacaoMaquina em 
+            JOIN especificacaoMaquina em
                 ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
             JOIN maquina mq
                 ON em.fkMaquina = mq.idMaquina
@@ -163,14 +169,14 @@ function atualizarQtdAlertasAtual(idLinha, idEmpresa) {
                 OR r.ramUtilizada > m.CuidadoRam
                 OR r.ramUtilizada > m.ProblemaRam
                 OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
             AND idEmpresa = ${idEmpresa};
         `
     } else {
         query =
-        `SELECT COUNT(DISTINCT e.nome) as qtdEstacoesComAlertas
+        `SELECT COUNT(DISTINCT e.nome) AS qtdEstacoesComAlertas
         FROM registro r
-            JOIN especificacaoMaquina em 
+            JOIN especificacaoMaquina em
                 ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
             JOIN maquina mq
                 ON em.fkMaquina = mq.idMaquina
@@ -189,28 +195,24 @@ function atualizarQtdAlertasAtual(idLinha, idEmpresa) {
                 OR r.ramUtilizada > m.CuidadoRam
                 OR r.ramUtilizada > m.ProblemaRam
                 OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
-            AND idLinha = ${fkLinha};
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
+            AND idLinha = ${idLinha};
         `
     }
-    
+   
     return database.executar(query);
 }
-
-
-
-
 
 function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
     var query;
 
     if (idLinha == 'todas') {
         if (alerta == "Cuidado") {  
-            query = 
-            `SELECT DISTINCT e.nome, 
-            'Cuidado' as tipoAlerta
+            query =
+            `SELECT DISTINCT e.nome,
+            'Cuidado' AS tipoAlerta
             FROM registro r
-            JOIN especificacaoMaquina em 
+            JOIN especificacaoMaquina em
                 ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
             JOIN maquina mq
                 ON em.fkMaquina = mq.idMaquina
@@ -222,18 +224,18 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
                 ON m.fkLinha = l.idLinha
             JOIN empresa
                 ON fkEmpresa = idEmpresa
-            WHERE ((r.discoDisponivel < m.cuidadoDisco AND r.discoDisponivel > m.problemaDisco)
-            OR (r.cpuUtilizada > m.cuidadoCpu AND r.cpuUtilizada < m.problemaCpu)
-            OR (r.ramUtilizada > m.cuidadoRam AND r.ramUtilizada < m.problemaRam))
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            WHERE ((r.discoDisponivel < m.CuidadoDisco AND r.discoDisponivel > m.ProblemaDisco)
+            OR (r.cpuUtilizada > m.CuidadoCpu AND r.cpuUtilizada < m.ProblemaCpu)
+            OR (r.ramUtilizada > m.CuidadoRam AND r.ramUtilizada < m.ProblemaRam))
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
             AND idEmpresa = ${idEmpresa};
             `
-        } else if (alerta == 'Problema') {
-            query = 
-            `SELECT DISTINCT e.nome, 
-            'Problema' as tipoAlerta
+        } else if (alerta == "Problema") {
+            query =
+            `SELECT DISTINCT e.nome,
+            'Problema' AS tipoAlerta
             FROM registro r
-            JOIN especificacaoMaquina em 
+            JOIN especificacaoMaquina em
                 ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
             JOIN maquina mq
                 ON em.fkMaquina = mq.idMaquina
@@ -245,70 +247,65 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
                 ON m.fkLinha = l.idLinha
             JOIN empresa
                 ON fkEmpresa = idEmpresa
-            WHERE (r.discoDisponivel < m.problemaDisco
-             OR r.cpuUtilizada > m.problemaCpu
-             OR r.ramUtilizada > m.problemaRam
-             OR r.qtdDispositivosUsb > m.maxUsb)
-             AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
-             AND idEmpresa = ${idEmpresa};
+            WHERE ((r.discoDisponivel < m.ProblemaDisco)
+            OR (r.cpuUtilizada > m.ProblemaCpu)
+            OR (r.ramUtilizada > m.ProblemaRam))
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
+            AND idEmpresa = ${idEmpresa};
             `
         }
-
     } else {
-    if (alerta == "Cuidado") {  
-        query = 
-        `SELECT DISTINCT e.nome, 
-        'Cuidado' as tipoAlerta
-        FROM registro r
-        JOIN especificacaoMaquina em 
-            ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
-        JOIN maquina mq
-            ON em.fkMaquina = mq.idMaquina
-        JOIN estacao e
-            ON mq.fkEstacao = e.idEstacao
-        JOIN linha l
-            ON e.fkLinha = l.idLinha
-        JOIN metrica m
-            ON m.fkLinha = l.idLinha
-        JOIN empresa
-            ON fkEmpresa = idEmpresa
-        WHERE ((r.discoDisponivel < m.cuidadoDisco AND r.discoDisponivel > m.problemaDisco)
-        OR (r.cpuUtilizada > m.cuidadoCpu AND r.cpuUtilizada < m.problemaCpu)
-        OR (r.ramUtilizada > m.cuidadoRam AND r.ramUtilizada < m.problemaRam))
-        AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
-        AND idLinha = ${idLinha};
-        `
-    } else if (alerta == 'Problema') {
-        query = 
-        `SELECT DISTINCT e.nome, 
-        'Problema' as tipoAlerta
-        FROM registro r
-        JOIN especificacaoMaquina em 
-            ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
-        JOIN maquina mq
-            ON em.fkMaquina = mq.idMaquina
-        JOIN estacao e
-            ON mq.fkEstacao = e.idEstacao
-        JOIN linha l
-            ON e.fkLinha = l.idLinha
-        JOIN metrica m
-            ON m.fkLinha = l.idLinha
-        JOIN empresa
-            ON fkEmpresa = idEmpresa
-        WHERE (r.discoDisponivel < m.problemaDisco
-         OR r.cpuUtilizada > m.problemaCpu
-         OR r.ramUtilizada > m.problemaRam
-         OR r.qtdDispositivosUsb > m.maxUsb)
-         AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
-         AND idLinha = ${idLinha};
-        `
+        if (alerta == "Cuidado") {  
+            query =
+            `SELECT DISTINCT e.nome,
+            'Cuidado' AS tipoAlerta
+            FROM registro r
+            JOIN especificacaoMaquina em
+                ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
+            JOIN maquina mq
+                ON em.fkMaquina = mq.idMaquina
+            JOIN estacao e
+                ON mq.fkEstacao = e.idEstacao
+            JOIN linha l
+                ON e.fkLinha = l.idLinha
+            JOIN metrica m
+                ON m.fkLinha = l.idLinha
+            JOIN empresa
+                ON fkEmpresa = idEmpresa
+            WHERE ((r.discoDisponivel < m.CuidadoDisco AND r.discoDisponivel > m.ProblemaDisco)
+            OR (r.cpuUtilizada > m.CuidadoCpu AND r.cpuUtilizada < m.ProblemaCpu)
+            OR (r.ramUtilizada > m.CuidadoRam AND r.ramUtilizada < m.ProblemaRam))
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
+            AND idLinha = ${idLinha};
+            `
+        } else if (alerta == "Problema") {
+            query =
+            `SELECT DISTINCT e.nome,
+            'Problema' AS tipoAlerta
+            FROM registro r
+            JOIN especificacaoMaquina em
+                ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
+            JOIN maquina mq
+                ON em.fkMaquina = mq.idMaquina
+            JOIN estacao e
+                ON mq.fkEstacao = e.idEstacao
+            JOIN linha l
+                ON e.fkLinha = l.idLinha
+            JOIN metrica m
+                ON m.fkLinha = l.idLinha
+            JOIN empresa
+                ON fkEmpresa = idEmpresa
+            WHERE ((r.discoDisponivel < m.ProblemaDisco)
+            OR (r.cpuUtilizada > m.ProblemaCpu)
+            OR (r.ramUtilizada > m.ProblemaRam))
+            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
+            AND idLinha = ${idLinha};
+            `
+        }
     }
-}
+   
     return database.executar(query);
 }
-
-
-
 
 module.exports = {
     buscarEstacoes,
