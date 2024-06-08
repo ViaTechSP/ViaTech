@@ -153,7 +153,7 @@ function salvarMetricas() {
 
   if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
   
-  fetch(`/metrica/alterarInfoMetrica/${idLinha}`,{
+  fetch(`/metrica/primeiraMetrica/${idLinha}`,{
       method: "PUT", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         minimoDisco: minimoDisco,
