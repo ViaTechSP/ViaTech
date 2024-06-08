@@ -62,6 +62,7 @@ function alterarMetricas() {
   const inputs = document.querySelectorAll('input');
   const botaoAlterar = document.getElementById('botao_alterarMetrica');
   const botaoSalvar = document.getElementById('botao_salvarMetrica');
+  const botaoAlterarInfoMetrica = document.getElementById('botao_alterarInfoMetrica')
 
   // Itera sobre cada input
   inputs.forEach(input => {
@@ -73,9 +74,9 @@ function alterarMetricas() {
           input.classList.remove('setting');
           input.classList.add('setting2');
           botaoAlterar.style.display = 'none';
-          botaoSalvar.style.display = 'flex';
-          botaoSalvar.style.alignItems = 'center';
-          botaoSalvar.style.justifyContent = 'center';
+          botaoAlterarInfoMetrica.style.display = 'flex';
+          botaoAlterarInfoMetrica.style.alignItems = 'center';
+          botaoAlterarInfoMetrica.style.justifyContent = 'center';
       
   });
   } else{
