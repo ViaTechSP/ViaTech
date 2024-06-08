@@ -14,6 +14,9 @@ function buscarInfoMetricas() {
           console.log(response)
            
           if (resposta.length > 0) {
+            document.getElementById('botao_alterarMetrica').style.display = 'block';
+            document.getElementById('botao_salvarMetrica').style.display = 'none';
+
 
             document.getElementById('ipt_minDisco').value = resposta[0].cuidadoDisco;
             document.getElementById('ipt_minProblemaDisco').value = resposta[0].problemaDisco;
