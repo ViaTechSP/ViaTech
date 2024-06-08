@@ -103,7 +103,7 @@ function atualizarEstacaoAlerta(idLinha) {
             OR r.qtdDispositivosUsb > m.maxUsb)
             AND r.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
             AND idEmpresa = ${idEmpresa} 
-            GROUP BY e.nome LIMIT 1;
+            GROUP BY e.nome TOP 1;
         `
     } else {
         query =
@@ -130,7 +130,7 @@ function atualizarEstacaoAlerta(idLinha) {
             OR r.qtdDispositivosUsb > m.maxUsb)
             AND r.dtHora BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()
             AND idLinha = ${idLinha} 
-            GROUP BY e.nome LIMIT 1;
+            GROUP BY e.nome TOP 1;
         `
     }
     

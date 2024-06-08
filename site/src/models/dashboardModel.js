@@ -9,7 +9,7 @@ function obterDadosGrafico(fkEstacao) {
         JOIN maquina
         ON fkMaquina = idMaquina 
         WHERE fkEstacao = ${fkEstacao}
-        ORDER BY idRegistro desc LIMIT 7;
+        ORDER BY idRegistro desc TOP 7;
     `;
 
     return database.executar(instrucao);
@@ -24,7 +24,7 @@ function obterDadosTempoReal(fkEstacao) {
     JOIN maquina
     ON fkMaquina = idMaquina
     WHERE fkEstacao = ${fkEstacao}
-    ORDER BY idRegistro desc limit 1
+    ORDER BY idRegistro desc TOP 1
     `;
 
     return database.executar(instrucao);
@@ -39,7 +39,7 @@ function buscarMaquinas(idEmpresa) {
     JOIN Linha ON fkLinha = idLinha
     JOIN Empresa on FkEmpresa = idEmpresa
     WHERE fkEmpresa = ${idEmpresa}
-    LIMIT 20;
+    TOP 20;
     `
     
     return database.executar(instrucao);
@@ -61,7 +61,7 @@ function obterHistoricoAlerta(idEmpresa) {
     ON fkLinha = idLinha
     WHERE fkEmpresa = ${idEmpresa}
     ORDER BY idHistorico DESC
-    LIMIT 8;
+    TOP 8;
     `
     
     return database.executar(instrucao);
@@ -110,7 +110,7 @@ function obterInfoKPIComponente(fkEstacao) {
 	AND h.dtHora <= NOW()
     GROUP BY componente
     ORDER BY total DESC
-    LIMIT 1;
+    TOP 1;
     `;
     return database.executar(instrucao);
 }
