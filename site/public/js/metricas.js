@@ -34,6 +34,8 @@ function buscarInfoMetricas() {
             document.getElementById('ipt_minProblemaCpu').value = '';
             document.getElementById('ipt_minProblemaRam').value = '';
             document.getElementById('ipt_qtd_usb').value = '';
+            
+            document.getElementById('ipt_minDisco').enabled;
 
             console.error('Nenhuma informação encontrada');   
           }
