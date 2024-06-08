@@ -27,6 +27,9 @@ function buscarInfoMetricas() {
             document.getElementById('ipt_qtd_usb').value = resposta[0].maxUsb;
 
           } else {
+            document.getElementById('botao_alterarMetrica').style.display = 'none';
+            document.getElementById('botao_salvarMetrica').style.display = 'block';
+
             document.getElementById('ipt_minDisco').value = '';
             document.getElementById('ipt_minCpu').value = '';
             document.getElementById('ipt_minRam').value = '';
@@ -43,6 +46,8 @@ function buscarInfoMetricas() {
             document.getElementById('ipt_minProblemaRam').disabled = false;
             document.getElementById('ipt_qtd_usb').disabled = false;
             console.error('Nenhuma informação encontrada');
+
+            
           }
         });
       } else {
