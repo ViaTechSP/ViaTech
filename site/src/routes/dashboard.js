@@ -35,4 +35,17 @@ router.get("/obterInfoHardware/:fkEstacao", function (req, res) {
     dashboardController.obterInfoHardware(req, res);
 })
 
+router.get("/listarCategoria", function (req, res) {
+    dashboardController.listarCategoria(req, res);
+});
+
+router.get("/exibirComentario/:idEstacao/:idCategoria", function (req, res) {
+    dashboardController.exibirComentario(req, res);
+});
+
+router.post("/addComentario", function (req, res) {
+    dashboardController.addComentario(req, res);
+});
+
+
 module.exports = router;

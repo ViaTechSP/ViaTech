@@ -18,7 +18,7 @@ function listarLinhas(idEmpresa) {
           });
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
-    })          
+    })      
 }
 
 function totalMaquinasEmpresa(idEmpresa) {

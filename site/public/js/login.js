@@ -8,7 +8,7 @@ function acessar() {
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (resposta) {
-              if (resposta.length > 0) {
+              if (resposta.length != 0) {
                 console.log('resposta ====>', resposta);
 
                 sessionStorage.ID_EMPRESA = resposta[0].fkEmpresa;
@@ -22,7 +22,7 @@ function acessar() {
 
                 window.location = "perfil.html"
               } else {
-                swal('Puts', 'nenhum usuário encontrado!', "error");
+                swal('Ei!', 'Senha ou email incorretos!', "error");
               }
             });
           } else {
@@ -33,7 +33,7 @@ function acessar() {
           console.error(`Erro na obtenção do usuário: ${error.message}`);
         });    
     } else {
-        swal('Eii', 'preencha todos os dados corretamente!');
+        swal('Ei!', 'preencha todos os dados corretamente!');
     }
 
 }
