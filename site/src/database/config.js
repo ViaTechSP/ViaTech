@@ -11,10 +11,10 @@ var mySqlConfig = {
 };
 
 var sqlServerConfig = {
-    server: "52.72.244.178",
+    server: "34.197.44.86",
     database: "viatech",
-    user: "eduardo",
-    password: "Urubu100",
+    user: "sa",
+    password: "urubu100",
     pool: {
         max: 10,
         min: 0,

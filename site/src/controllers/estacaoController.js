@@ -21,9 +21,9 @@ function exibirEstacao(req, res){
 }
 
 function deletarEstacao(req, res) {
-    var idEstacao = req.params.idEstacao;
+    var idLinha = req.params.idLinha;
 
-    estacaoModel.deletarEstacao(idEstacao)
+    linhaModel.deletarLinha(idLinha)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -51,13 +51,15 @@ function cadastrarEstacao(req, res){
 function salvarEstacao(req, res) {
     console.log("tamo no controler")
 
-    var idEstacao = req.params.idEstacao;
+    var idLinha = req.params.idEstacao;
     var nome = req.body.nome;
+    var numero = req.body.numero;
     
-    console.log('id =>', idEstacao)
+    console.log('id =>', idLinha)
     console.log('nome =>', nome)
+    console.log('numero =>', numero)
 
-    estacaoModel.salvarEstacao(nome, idEstacao)
+    linhaModel.salvarLinha(numero, nome, idLinha)
     .then(function (resultado) {
             res.json(resultado);
         })

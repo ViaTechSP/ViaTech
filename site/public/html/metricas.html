@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 </head>
-<body onload="validarSessao(); listarLinhas()">  
+<body onload="buscarInfoMetricas(); validarSessao(); listarLinhas()">  
         
         <nav id="menuLateral" style="width: 5%;">
             <i id="menuEscondido" class="material-icons" onclick="clicarMenu()">menu</i>
@@ -131,10 +131,8 @@
                     </div> -->
 
                 </div>
-                <button onclick="alterarMetricas()" id="botao_alterarMetrica" style="display: none;" class="botao-alterar">Alterar informações</button>
-                <button onclick="salvarMetricas()" id="botao_salvarMetrica" class="botao-alterar">Salvar informações</button>
-                <button onclick="alterarInfoMetrica()" id="botao_alterarInfoMetrica" style="display: none;" class="botao-alterar">Salvar novas informações</button>
-
+                <button onclick="alterarMetricas()" id="botao_alterarMetrica" class="botao-alterar">Alterar informações</button>
+                <button onclick="salvarMetricas()" id="botao_salvarMetrica" style="display: none;" class="botao-alterar">Salvar informações</button>
             </div> 
         </div>
 </body>

@@ -62,23 +62,10 @@ function exibirEstacao(idEstacao){
        <span class="material-symbols-outlined cancelar selecionar" onclick="exibirEstacao(${id_estacao})" id="cancelar_${id_estacao}" style="display: none;">cancel</span>
 
        <div class="nomeNumero">
-         <p> 
-            Nome: <input id="input_nome_${id_estacao}" type="text" disabled value="${nome_atual}" class="input-container">
-         </p> 
-          
-          <span class="material-symbols-outlined selecionar" onclick="deletarEstacao(${id_estacao})">delete</span>
-          
-          <button id="botao_salvar_${id_estacao}" onclick="salvarEstacao(${id_estacao})" class="botao-cadastrar" style="display: none;">SALVAR</button>
+         <p> Nome: <input id="input_nome_${id_estacao}" type="text" disabled value="${nome_atual}" class="input-container"></p> <span class="material-symbols-outlined selecionar" onclick="deletarEstacao(${id_estacao})">delete</span>
        </div>
       
-      <div class="nomeNumero">
-         <p> 
-         </p> 
-        <span onclick="editarEstacao(${id_estacao})" class="material-symbols-outlined selecionar">edit</span>
-         </div> 
-         <button id="botao_salvar_${id_estacao}" onclick="salvarEstacao(${id_estacao})" class="botao-cadastrar" style="display: none;">SALVAR</button>
-      `; 
-            
+        <button id="botao_salvar_${id_estacao}" onclick="salvarEstacao(${id_estacao})" class="botao-cadastrar" style="display: none;">SALVAR</button>`;       
 
      }
    });
