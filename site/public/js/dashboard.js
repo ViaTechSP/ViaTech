@@ -1,3 +1,5 @@
+// const e = require("cors");
+
 function listarMaquinas(idEmpresa) {
   var idEmpresa = sessionStorage.ID_EMPRESA;
   var select = document.getElementById("select_estacao");
@@ -6,15 +8,14 @@ function listarMaquinas(idEmpresa) {
     .then(resposta => {
       if (resposta.status == 200) {
         resposta.json().then(resposta => {
-          resposta.forEach(function (resposta) {
-            var option = document.createElement("option");
-            option.value = resposta.idEstacao;
-            option.text = resposta.nome;
-            select.appendChild(option);
-          });
+          resposta.map(item => {
+            console.log('item =>', item);
+            select.innerHTML += `<option value=${item.idEstacao}>${item.nome}</option>`
+          })
         });
       } else console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
     })
+    atualizarSelect();
 }
 
 function obterHistoricoAlerta(fkEmpresa) {
@@ -29,26 +30,26 @@ function obterHistoricoAlerta(fkEmpresa) {
 
             if (resposta.componente == 'USB') {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } 
             } else if (resposta.componente == 'Disco'){
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } 
             } else {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } 
             }
@@ -56,7 +57,7 @@ function obterHistoricoAlerta(fkEmpresa) {
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
-  }
+}
   
 function obterInfoHeader(fkEstacao) {
   fetch(`/dashboard/obterInfoHeader/${fkEstacao}`, { cache: 'no-store' })
@@ -66,8 +67,8 @@ function obterInfoHeader(fkEstacao) {
           resposta.reverse();
           span_so.innerHTML = resposta[0].sistemaOperacional
           span_cpu.innerHTML = resposta[0].nomeCpu
-          span_ram.innerHTML = resposta[0].ramTotal + ' GB'
-          span_disco.innerHTML = resposta[0].armazenamentoTotal + ' GB'
+          span_ram.innerHTML = (resposta[0].ramTotal).toFixed(2) + ' GB total'
+          span_disco.innerHTML = (resposta[0].armazenamentoTotal).toFixed(2) + ' GB total'
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
@@ -113,14 +114,12 @@ function obterDadosGrafico(fkEstacao) {
           response.json().then(function (resposta) {
               graficos_primeira.innerHTML = 
               `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu"></canvas>
-               <canvas id="ramChart${fkEstacao}" class="grafico-cpu"></canvas>`
+               <canvas id='ramChart${fkEstacao}' class="grafico-cpu"></canvas>`
 
               graficos_segunda.innerHTML = 
-              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>
-              ` 
-              // resposta.reverse();
-              plotarGrafico(resposta, fkEstacao);
+              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>` 
 
+              plotarGrafico(resposta, fkEstacao);
           });
       } else  console.error('Nenhum dado encontrado ou erro na API' + response);
   })
@@ -134,7 +133,7 @@ function obterMetricasEstacao(fkEstacao) {
           disco_ideal.innerHTML = resposta[0].cuidadoDisco
           disco_cuidado.innerHTML = resposta[0].cuidadoDisco
           disco_problema.innerHTML = resposta[0].problemaDisco
-          ram_ideal.innerHTML = (resposta[0].cuidadoRam)
+          ram_ideal.innerHTML = resposta[0].cuidadoRam
           ram_cuidado.innerHTML = resposta[0].cuidadoRam
           ram_problema.innerHTML = resposta[0].problemaRam
           cpu_ideal.innerHTML = resposta[0].cuidadoCpu
@@ -235,19 +234,19 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
   fetch(`/dashboard/obterDadosTempoReal/${fkEstacao}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        // console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
         
         let novoHorario = novoRegistro[0].dataHora;
         console.log('novo horario => ', novoHorario);
 
         if (cpuChart.data.labels[cpuChart.data.labels.length - 1] === novoHorario) {
-          console.log("---------------------------------------------------------------");
-          console.log("Como não há dados novos para captura, os gráficos não atualizarão.");
-          console.log("Horário do novo dado capturado:");
-          console.log(novoHorario);
-          console.log("Horário do último dado capturado:");
-          console.log(cpuChart.data.labels[cpuChart.data.labels.length - 1]);
-          console.log("---------------------------------------------------------------");
+          // console.log("---------------------------------------------------------------");
+          // console.log("Como não há dados novos para captura, os gráficos não atualizarão.");
+          // console.log("Horário do novo dado capturado:");
+          // console.log(novoHorario);
+          // console.log("Horário do último dado capturado:");
+          // console.log(cpuChart.data.labels[cpuChart.data.labels.length - 1]);
+          // console.log("---------------------------------------------------------------");
         } else {
 
           const cpuLabels = [...cpuChart.data.labels];
@@ -296,10 +295,11 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
   });
 }
 
-
 function onLoadFuncoes() {
   var idEmpresa = sessionStorage.ID_EMPRESA;
-  var fkEstacao = sessionStorage.getItem("estacaoId");
+  
+  var fkEstacao = localStorage.getItem("estacaoId");
+  
   
   listarMaquinas(idEmpresa);
   obterHistoricoAlerta(idEmpresa);
@@ -309,30 +309,201 @@ function onLoadFuncoes() {
   obterMetricasEstacao(fkEstacao);
 }
 
-function onChangeSelect() {
+function onChangeSelect(){
   var fkEstacao = select_estacao.value;
   
   obterDadosGrafico(fkEstacao);
   obterInfoHeader(fkEstacao);
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
+  exibirComentario();
+}
+
+function exibirPopUp(){
+  document.getElementById("caixaComentar").style.display = 'none';
+
+  document.getElementById("divComentario").style.display = 'block';
+  document.getElementById("divComentario").style.display = 'flex';
+
+  exibirComentario();
+}
+
+function esconderPopUp(){
+  document.getElementById("divComentario").style.display = 'none';
+ 
+}
+
+function listarCategoria() {
+  var select = document.getElementById("select_categoria");
+
+
+  fetch(`/dashboard/listarCategoria/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        resposta.forEach(function (resposta) {
+
+
+          console.log('id',resposta.idCategoria)
+          console.log('nome',resposta.nome)
+
+          var option = document.createElement("option");
+          option.value = resposta.idCategoria;
+          option.text = resposta.nome;
+          select.appendChild(option);
+        
+        });
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  });
+}
+
+function exibirAdd(){
+  document.getElementById("caixaExibir").style.display = 'none';
+  document.getElementById("caixaComentar").style.display = 'block';
+  document.getElementById("caixaComentar").style.display = 'flex';
+
+  var email = document.getElementById("ipt_funcionario");
+
+  if (sessionStorage.EMAIL_USUARIO) {
+    email.value = sessionStorage.EMAIL_USUARIO;
+  }
+}
+
+function addComentario(){
+  var idFun = sessionStorage.ID_FUNCIONARIO;
+  var comentario = ipt_descricao.value;
+  var idCategoria = select_categoria.value;
+  var idEstacao = select_estacao.value;
+
+
+  console.log(idFun)
+  console.log(comentario)
+  console.log(idEstacao)
+  // console.log(idCategoria)
+
+  
+  if(idCategoria != 0 && idEstacao != 0){
+
+    if(comentario !== '' ){
+     fetch("/dashboard/addComentario", {
+       method: "POST", 
+         headers: {
+         "Content-Type": "application/json",
+        },
+         body: JSON.stringify({
+         idFun: idFun,
+         comentario: comentario,
+         idCategoria: select_categoria.value,
+         idEstacao: select_estacao.value
+        }),
+        }).then(function (resposta) {
+         swal('Eba!', 'Comentário postado!', 'success');
+        }
+        )}else{
+        swal('Ei!', 'Preencha o campo!', 'error');
+    }
+  } else{
+    swal('Ei!', 'Selecione uma categoria e uma estaçao!', 'error');
+
+  }
+
+    exibirComentario();
+  
+}
+
+function exibirComentario(){
+
+  var container = document.getElementById('caixaExibir');  
+  document.getElementById("caixaComentar").style.display = 'none';
+  container.style.display = 'block';
+  container.style.display = 'flex';
+
+  var idEstacao = select_estacao.value;
+  var idCategoria = select_categoria.value;
+
+  if(idEstacao == 0){
+    swal('Ei!', 'Selecione uma estação primeiro!', 'error')
+    document.getElementById("divComentario").style.display = 'none';
+
+
+  }
+  var lista_comentario = [];
+
+  container.innerHTML ="";
+
+  
+
+   fetch(`/dashboard/exibirComentario/${idEstacao}/${idCategoria}`
+   ).then(function (resposta) {
+      console.log(resposta)
+
+      return resposta.json();
+     })
+     
+     .then((resposta) => { 
+     lista_comentario = resposta;
+     console.log('ee', resposta)
+
+     if (lista_comentario.length === 0) {
+      swal({
+          title: "Ops",
+          text: "Não existem comentarios nessa categoria ainda, seja o primeiro!",
+          icon: "warning",
+      }).then((confirmacao) => {
+          if (confirmacao) {
+              exibirAdd();
+          }
+      });
+  }
+        
+   var tamanhoComentario = lista_comentario.length;
+   var auxiliar = 0;
+
+   for (var i = 0; i < tamanhoComentario; i++) {
+     var id_comentario = lista_comentario[i].id_comentario;
+     var descricao_atual = lista_comentario[i].descricao;
+     var dtHora_atual = formatDateTime(lista_comentario[i].dtHora);
+     var email_atual = lista_comentario[i].email
+     var categoria_atual = lista_comentario[i].categoria
+    //  formatDateTime(dtHora_atual);
+    
+     auxiliar++;
+
+     container.innerHTML += `
+     <div class="caixaComentario">
+     
+     
+     <div class="data">${dtHora_atual}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ#${categoria_atual}</div>
+     <div class="email">${email_atual}</div>
+     
+     <div class="comentario">
+     ${descricao_atual}
+     </div>
+     </div>
+     `;
+     
+     console.log(container)
+   }
+ });
+
 }
 
 
+function formatDateTime(dtHora) {
+  const date = new Date(dtHora);
 
-// function formatDateTime(dtHora) {
-//   const date = new Date(dtHora);
+  const formattedDate = date.toLocaleDateString('pt-BR', {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit'
+  });
 
-//   const formattedDate = date.toLocaleDateString('pt-BR', {
-//       month: '2-digit',
-//       day: '2-digit'
-//   });
+  const formattedTime = date.toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+  });
 
-//   const formattedTime = date.toLocaleTimeString('pt-BR', {
-//       hour: '2-digit',
-//       minute: '2-digit',
-//       hour12: false
-//   });
-
-//   return `${formattedDate} ${formattedTime}`;
-// }
+  return `${formattedDate} - ${formattedTime}`;
+}

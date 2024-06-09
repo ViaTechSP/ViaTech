@@ -78,7 +78,9 @@ function atualizarQtdProblemas(idLinha) {
     return database.executar(query);
 }
 
-function atualizarEstacaoAlerta(idLinha, idEmpresa) { // Adicionei idEmpresa como parâmetro
+
+function atualizarEstacaoAlerta(idLinha, idEmpresa) {
+
     var query;
 
     if (idLinha == 'todas') {
@@ -224,10 +226,12 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
                 ON m.fkLinha = l.idLinha
             JOIN empresa
                 ON fkEmpresa = idEmpresa
-            WHERE ((r.discoDisponivel < m.CuidadoDisco AND r.discoDisponivel > m.ProblemaDisco)
-            OR (r.cpuUtilizada > m.CuidadoCpu AND r.cpuUtilizada < m.ProblemaCpu)
-            OR (r.ramUtilizada > m.CuidadoRam AND r.ramUtilizada < m.ProblemaRam))
-            AND r.dtHora >= DATEADD(SECOND, -100000, GETDATE())
+
+            WHERE ((r.discoDisponivel < m.cuidadoDisco AND r.discoDisponivel > m.problemaDisco)
+            OR (r.cpuUtilizada > m.cuidadoCpu AND r.cpuUtilizada < m.problemaCpu)
+            OR (r.ramUtilizada > m.cuidadoRam AND r.ramUtilizada < m.problemaRam))
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
+
             AND idEmpresa = ${idEmpresa};
             `
         } else if (alerta == "Problema") {

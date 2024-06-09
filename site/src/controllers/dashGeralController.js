@@ -46,10 +46,13 @@ function atualizarQtdProblemas(req, res){
     });
 }
 
-function atualizarEstacaoAlerta(req, res) {
-    var idEmpresa = req.body.idEmpresa;  // ou req.params.idEmpresa, dependendo de como está sendo enviado
 
-    dashGeralModel.atualizarEstacaoAlerta(idEmpresa).then((resultado) => {
+function atualizarEstacaoAlerta(req, res){
+    var idLinha = req.params.idLinha;
+    var idEmpresa = req.params.idEmpresa;
+
+    dashGeralModel.atualizarEstacaoAlerta(idLinha, idEmpresa).then((resultado) => {
+
         res.status(200).json(resultado);
     }).catch((erro) => {
         console.log("Houve um erro ao atualizar o alerta da estação: ", erro.sqlMessage);

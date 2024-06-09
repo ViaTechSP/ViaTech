@@ -101,6 +101,31 @@ function obterInfoKPIComponente(fkEstacao) {
     return database.executar(instrucao);
 }
 
+function listarCategoria(){
+    var instrucao = `SELECT * FROM categoria;`;
+
+    return database.executar(instrucao);
+
+}
+
+function addComentario(idFun, comentario, idCategoria, idEstacao){
+    var instrucao = `INSERT INTO comentario (fkFuncionario, descricao, fkCategoria, fkMaquina) VALUES (${idFun}, '${comentario}', ${idCategoria}, ${idEstacao});`;
+    return database.executar(instrucao);
+}
+
+function exibirComentario(idEstacao, idCategoria){
+    if(idCategoria == 0){
+
+     var instrucao = `SELECT idComentario, fkMaquina, dtHora, descricao, email, categoria.nome AS categoria FROM comentario JOIN funcionario ON fkFuncionario = idFuncionario JOIN categoria ON fkCategoria = idCategoria WHERE fkMaquina = ${idEstacao} ORDER BY dtHora;
+     `;
+    } else{
+     var instrucao = `SELECT idComentario, fkMaquina, dtHora, descricao, email, categoria.nome AS categoria FROM comentario JOIN funcionario ON fkFuncionario = idFuncionario JOIN categoria ON fkCategoria = idCategoria WHERE fkMaquina = ${idEstacao} AND fkCategoria = ${idCategoria} ORDER BY dtHora;
+     `;
+    }
+
+    return database.executar(instrucao);
+}
+
 module.exports = {
     buscarMaquinas,
     obterInfoHeader,
@@ -108,5 +133,8 @@ module.exports = {
     obterDadosTempoReal,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
-    obterHistoricoAlerta
+    obterHistoricoAlerta,
+    listarCategoria,
+    addComentario,
+    exibirComentario
 };
