@@ -7,9 +7,9 @@ function exibirEstacao(idLinha){
     return database.executar(query);
 }
 
-function deletarLinha(idLinha) {
+function deletarEstacao(idEstacao) {
     
-    var instrucaoSql = `DELETE FROM linha WHERE idLinha = ${idLinha};`;
+    var instrucaoSql = `DELETE FROM estacao WHERE idEstacao = ${idEstacao};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -24,13 +24,12 @@ function cadastrarEstacao(nome, idLinha) {
     return database.executar(instrucao);
 }
 
-function salvarLinha(numero, nome, idLinha) {
+function salvarEstacao(nome, idEstacao) {
 
     var instrucao = 
-    `UPDATE linha SET 
-    numero = ${numero},
+    `UPDATE estacao SET 
     nome = '${nome}'
-    WHERE idLinha = ${idLinha};`;
+    WHERE idEstacao = ${idEstacao};`;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -50,8 +49,8 @@ function salvarLinha(numero, nome, idLinha) {
 
 module.exports = {
     exibirEstacao,
-    deletarLinha,
+    deletarEstacao,
     cadastrarEstacao,
-    salvarLinha,
+    salvarEstacao,
     // buscarLinhas
 };
