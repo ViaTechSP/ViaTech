@@ -84,6 +84,37 @@ function obterHistoricoAlerta(req, res) {
     })
 }
 
+function listarCategoria(req, res){
+    
+    dashboardModel.listarCategoria().then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function addComentario(req, res){
+        var comentario = req.body.comentario;
+        var idCategoria = req.body.idCategoria;
+        var idEstacao = req.body.idEstacao;
+        var idFun = req.body.idFun;
+
+        console.log('idcategoria =>>>>>>>>>>>>>>>>>>>.', idCategoria)
+        
+        
+        dashboardModel.addComentario(idFun, comentario, idCategoria, idEstacao).then((resultado) => {
+            res.status(200).json(resultado);
+        });
+    
+}
+
+function exibirComentario(req, res){
+
+    var idEstacao = req.params.idEstacao;    
+    var idCategoria = req.params.idCategoria;    
+    dashboardModel.exibirComentario(idEstacao, idCategoria).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
 module.exports = {
     buscarMaquinas,
     obterInfoHeader,
@@ -91,5 +122,8 @@ module.exports = {
     obterDadosTempoReal,
     obterInfoKPIAlertas,
     obterInfoKPIComponente,
-    obterHistoricoAlerta
+    obterHistoricoAlerta,
+    listarCategoria,
+    addComentario,
+    exibirComentario
 }

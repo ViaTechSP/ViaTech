@@ -93,7 +93,31 @@ fkLinha INT,
 FOREIGN KEY (fkLinha) REFERENCES linha (idLinha) ON DELETE CASCADE
 );
 
+
+CREATE TABLE categoria(
+idCategoria INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100)
+);
+
+CREATE TABLE comentario(
+idComentario INT PRIMARY KEY AUTO_INCREMENT,
+dtHora DATETIME DEFAULT CURRENT_TIMESTAMP,
+descricao VARCHAR(450),
+fkFuncionario INT,
+fkCategoria INT,
+fkMaquina INT,
+FOREIGN KEY (fkMaquina) REFERENCES maquina (idMaquina) ON DELETE CASCADE,
+FOREIGN KEY (fkFuncionario) REFERENCES funcionario (idFuncionario)  ON DELETE CASCADE,
+FOREIGN KEY (fkCategoria) REFERENCES categoria (idCategoria) ON DELETE CASCADE
+);
+
 -------------------------------------------------------------------- INSERTS --------------------------------------------------------------
+INSERT INTO categoria (nome) VALUES
+('Manutenção'),
+('Troca de peças'),
+('Observações'),
+('Incidentes externo'),
+('Outro');
 
 INSERT INTO empresa (razaoSocial, nomeFantasia, CNPJ) VALUES
 ('Via Tecnológica de São Paulo', 'ViaTechSP', '45904145652564'),
@@ -102,7 +126,6 @@ INSERT INTO empresa (razaoSocial, nomeFantasia, CNPJ) VALUES
 INSERT INTO Funcionario (nome, cpf, email, senha, cargo, fkEmpresa) VALUES
 ('Matheus Rabello', '62545164147', 'matheus@viatech.com', 'Senha!', 'Gerente', 1),
 ("Everton Fanado", "12345678901", "teste@teste.com", "123#Ee", "Gerente", 2);
-UPDATE funcionario SET urlFoto = 'https://static.vecteezy.com/ti/vetor-gratis/p3/14487724-ilustracao-em-gato-kawaii-fofo-de-gatinho-feliz-dos-desenhos-animados-vetor.jpg' WHERE email = 'matheus@viatech.com';
 
 INSERT INTO Linha (nome, numero, fkEmpresa) VALUES
 ('Amarela', 4, 1),

@@ -258,19 +258,22 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
   width: 55%;
   height: 90vh;
   background-color: #8993bf;
   border: 2px solid #5c4fa9;
+  transition: opacity 10s ease;
   border-radius: 15px;
-
+  /* z-index: 11; */
 }
 
+
 .headerComentario {
+  z-index: 11;
   display: flex;
   margin-top: 20px;
-  /* background-color: #5ea94f; */
-  width: 90%;
+  width: 95%;
   height: 10vh;
   align-items: center;
   justify-content: space-evenly;
@@ -296,6 +299,32 @@ flex-direction: column;
   justify-content: center;
 }
 
+.fecharComentario{
+  color: white;
+  background-color: #b93636;
+  border-radius: 60px;
+  width: 50px;
+  position: absolute;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.fecharComentario:hover{
+  background-color: #ff6767;
+  cursor: pointer;
+  /* transition: 2s ease; */
+
+}
+
+
+
+
+
 .addComentario:hover{
   background-color: #8773fa;
   cursor: pointer;
@@ -315,6 +344,99 @@ flex-direction: column;
   /* width: 61%; */
   border: #2f1c9c 1px solid;
   /* height: 18vh; */
+}
+
+.caixaComentar{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-evenly;
+  border: #2f1c9c 1px solid;
+  border-radius: 5px;
+  width: 65%;
+  height: 60vh;
+  margin-left: 15%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.todosComentarios {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width: 75%;
+  height: 70vh;
+  margin-left: 4%;
+}
+
+.comentar{
+  background-color: #954bc0;
+  padding: 20px;
+  border-radius: 30px;
+  color: wheat;
+  cursor: pointer;
+  border: solid 1px black;
+}
+
+.comentar:hover{
+  background-color: rgb(226, 179, 245);
+  color: #954bc0;
+  border: 1px solid black;
+}
+
+.funcionario{
+  height: 3vh;
+  width: 60%;
+  border-radius: 5px;
+  border: #2f1c9c solid 1px;
+  font-size: 14px;
+  margin-left: 5px;
+  padding: 8px;
+}
+
+.descricao{
+  height: 30vh;
+  width: 98%;
+  border-radius: 5px;
+  border: #2f1c9c solid 1px;
+  font-size: 20px;
+  padding: 6px;
+  display: flex;
+  overflow: hidden;
+}
+
+.comente{
+  color: #2f1c9c;
+}
+
+.tem-botao{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.botao-comentar{
+  background-color: #8ad459;
+  width: 40%;
+  height: 5vh;
+}
+
+.botao-comentar:hover{
+  background-color: #46a009;
+  cursor: pointer;
+  color: white;
+}
+
+.botao-cancelar{
+  background-color: #d46759;
+  width: 40%;
+  height: 5vh;
+}
+
+.botao-cancelar:hover{
+  background-color: #db1717;
+  color: white;
+  cursor: pointer;
 }
 
 .data{
