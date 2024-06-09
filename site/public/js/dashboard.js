@@ -31,26 +31,26 @@ function obterHistoricoAlerta(fkEmpresa) {
 
             if (resposta.componente == 'USB') {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
               } 
             } else if (resposta.componente == 'Disco'){
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } 
             } else {
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} </div> - Estação ${resposta.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } 
             }

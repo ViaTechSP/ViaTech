@@ -495,6 +495,16 @@ flex-direction: column;
 
 .amarelo {
   margin: 0 5px 0 5px;
-  color: #ff914d;
+  color: #e9cf0a;
   font-weight: bold;
+}
+
+.icone-perigo {
+  color: #f21d3c;
+  margin: 5px 5px 0px 0px;
+}
+
+.icone-cuidado {
+  color: #fec23e;
+  margin: 5px 5px 0px 0px;
 }

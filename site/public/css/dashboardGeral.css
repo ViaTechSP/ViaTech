@@ -188,8 +188,9 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
+    border: 1px solid #171796;
+    box-shadow: -6px 7px 10px -3px rgba(17, 17, 88, 0.452);
 }
-
 .card-maquina:hover{
     background-color: #17179634;
     cursor: pointer;
@@ -224,5 +225,7 @@
 }
 
 .selecionado {
-    background-color: #f21d3c;
+    height: 6vh;
+    border-radius: 20px;
+    background-color: rgba(64, 13, 105, 0.451);
 }
