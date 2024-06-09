@@ -23,7 +23,7 @@ router.get("/calcularTotalMaquinas/:idEmpresa", function (req, res) {
     dashGeralController.calcularTotalMaquinas(req, res);
 });
 
-router.get("/atualizarEstacaoAlerta/:idLinha", function (req, res) {
+router.get("/atualizarEstacaoAlerta/:idLinha/:idEmpresa", function (req, res) {
     dashGeralController.atualizarEstacaoAlerta(req, res);
 });
 
