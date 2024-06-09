@@ -76,7 +76,7 @@ function atualizarQtdProblemas(idLinha) {
     return database.executar(query);
 }
 
-function atualizarEstacaoAlerta(idLinha) {
+function atualizarEstacaoAlerta(idLinha, idEmpresa) {
     var query;
 
     if (idLinha == 'todas') {
@@ -225,7 +225,7 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
             WHERE ((r.discoDisponivel < m.cuidadoDisco AND r.discoDisponivel > m.problemaDisco)
             OR (r.cpuUtilizada > m.cuidadoCpu AND r.cpuUtilizada < m.problemaCpu)
             OR (r.ramUtilizada > m.cuidadoRam AND r.ramUtilizada < m.problemaRam))
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
             AND idEmpresa = ${idEmpresa};
             `
         } else if (alerta == 'Problema') {

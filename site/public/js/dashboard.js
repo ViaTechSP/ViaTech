@@ -8,15 +8,14 @@ function listarMaquinas(idEmpresa) {
     .then(resposta => {
       if (resposta.status == 200) {
         resposta.json().then(resposta => {
-          resposta.forEach(function (resposta) {
-            var option = document.createElement("option");
-            option.value = resposta.idEstacao;
-            option.text = resposta.nome;
-            select.appendChild(option);
-          });
+          resposta.map(item => {
+            console.log('item =>', item);
+            select.innerHTML += `<option value=${item.idEstacao}>${item.nome}</option>`
+          })
         });
       } else console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
     })
+    atualizarSelect();
 }
 
 function obterHistoricoAlerta(fkEmpresa) {
@@ -58,7 +57,7 @@ function obterHistoricoAlerta(fkEmpresa) {
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
-  }
+}
   
 function obterInfoHeader(fkEstacao) {
   fetch(`/dashboard/obterInfoHeader/${fkEstacao}`, { cache: 'no-store' })
@@ -68,8 +67,8 @@ function obterInfoHeader(fkEstacao) {
           resposta.reverse();
           span_so.innerHTML = resposta[0].sistemaOperacional
           span_cpu.innerHTML = resposta[0].nomeCpu
-          span_ram.innerHTML = resposta[0].ramTotal + ' GB'
-          span_disco.innerHTML = resposta[0].armazenamentoTotal + ' GB'
+          span_ram.innerHTML = (resposta[0].ramTotal).toFixed(2) + ' GB total'
+          span_disco.innerHTML = (resposta[0].armazenamentoTotal).toFixed(2) + ' GB total'
         });
       } else console.error('Nenhum dado encontrado ou erro na API');
     })
@@ -115,14 +114,12 @@ function obterDadosGrafico(fkEstacao) {
           response.json().then(function (resposta) {
               graficos_primeira.innerHTML = 
               `<canvas id='cpuChart${fkEstacao}' class="grafico-cpu"></canvas>
-               <canvas id="ramChart${fkEstacao}" class="grafico-cpu"></canvas>`
+               <canvas id='ramChart${fkEstacao}' class="grafico-cpu"></canvas>`
 
               graficos_segunda.innerHTML = 
-              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>
-              ` 
-              // resposta.reverse();
-              plotarGrafico(resposta, fkEstacao);
+              `<canvas id="discoChart${fkEstacao}" class="grafico-cpu"></canvas>` 
 
+              plotarGrafico(resposta, fkEstacao);
           });
       } else  console.error('Nenhum dado encontrado ou erro na API' + response);
   })
@@ -136,7 +133,7 @@ function obterMetricasEstacao(fkEstacao) {
           disco_ideal.innerHTML = resposta[0].cuidadoDisco
           disco_cuidado.innerHTML = resposta[0].cuidadoDisco
           disco_problema.innerHTML = resposta[0].problemaDisco
-          ram_ideal.innerHTML = (resposta[0].cuidadoRam)
+          ram_ideal.innerHTML = resposta[0].cuidadoRam
           ram_cuidado.innerHTML = resposta[0].cuidadoRam
           ram_problema.innerHTML = resposta[0].problemaRam
           cpu_ideal.innerHTML = resposta[0].cuidadoCpu
@@ -237,19 +234,19 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
   fetch(`/dashboard/obterDadosTempoReal/${fkEstacao}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
       response.json().then(function (novoRegistro) {
-        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+        // console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
         
         let novoHorario = novoRegistro[0].dataHora;
         console.log('novo horario => ', novoHorario);
 
         if (cpuChart.data.labels[cpuChart.data.labels.length - 1] === novoHorario) {
-          console.log("---------------------------------------------------------------");
-          console.log("Como não há dados novos para captura, os gráficos não atualizarão.");
-          console.log("Horário do novo dado capturado:");
-          console.log(novoHorario);
-          console.log("Horário do último dado capturado:");
-          console.log(cpuChart.data.labels[cpuChart.data.labels.length - 1]);
-          console.log("---------------------------------------------------------------");
+          // console.log("---------------------------------------------------------------");
+          // console.log("Como não há dados novos para captura, os gráficos não atualizarão.");
+          // console.log("Horário do novo dado capturado:");
+          // console.log(novoHorario);
+          // console.log("Horário do último dado capturado:");
+          // console.log(cpuChart.data.labels[cpuChart.data.labels.length - 1]);
+          // console.log("---------------------------------------------------------------");
         } else {
 
           const cpuLabels = [...cpuChart.data.labels];
@@ -300,7 +297,9 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
 
 function onLoadFuncoes() {
   var idEmpresa = sessionStorage.ID_EMPRESA;
-  var fkEstacao = sessionStorage.getItem("estacaoId");
+  
+  var fkEstacao = localStorage.getItem("estacaoId");
+  
   
   listarMaquinas(idEmpresa);
   obterHistoricoAlerta(idEmpresa);

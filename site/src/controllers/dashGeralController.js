@@ -48,8 +48,9 @@ function atualizarQtdProblemas(req, res){
 
 function atualizarEstacaoAlerta(req, res){
     var idLinha = req.params.idLinha;
+    var idEmpresa = req.params.idEmpresa;
 
-    dashGeralModel.atualizarEstacaoAlerta(idLinha).then((resultado) => {
+    dashGeralModel.atualizarEstacaoAlerta(idLinha, idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
