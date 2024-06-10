@@ -8,7 +8,7 @@ function exibirLinha(idEmpresa){
 }
 
 function ultimaLinhaInserida(idEmpresa){
-    var query = `SELECT idLinha FROM linha WHERE fkEmpresa = ${idEmpresa} ORDER BY idLinha DESC LIMIT 1;`;
+    var query = `SELECT TOP(1) idLinha FROM linha WHERE fkEmpresa = ${idEmpresa} ORDER BY idLinha DESC;`;
     
     console.log('executando query: ', query)
     return database.executar(query);
