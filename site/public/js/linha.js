@@ -178,8 +178,8 @@ function ultimaLinhaInserida(){
 }
 
 function primeiraMetrica(idLinha) {
-  var minimoDisco = 13;
-  var maximoDisco = 19;
+  var minimoDisco = 128;
+  var maximoDisco = 50;
   
   var minimoCpu = 75;
   var maximoCpu = 85;
@@ -187,7 +187,7 @@ function primeiraMetrica(idLinha) {
   var minimoRam = 70;
   var maximoRam = 90;
 
-  var qtdUsb = 3;
+  var qtdUsb = 2;
    
   if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
     fetch(`/metrica/primeiraMetrica/${idLinha}`, {

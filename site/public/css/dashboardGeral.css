@@ -224,6 +224,11 @@
     margin: 5px 5px 0px 0px;
 }
 
+.icone-ideal {
+    color: green;
+    margin: 5px 5px 0px 0px;
+}
+
 .selecionado {
     height: 6vh;
     border-radius: 20px;

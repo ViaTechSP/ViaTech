@@ -45,16 +45,16 @@ function exibirEstacoes(idEmpresa, idLinha) {
         var auxiliar = 0;
         resposta.forEach(function (resposta) {
           auxiliar++ 
-          console.log('nome estação =>', resposta.nome);
-          console.log('id estação =>', resposta.idEstacao);
 
           if (auxiliar % 2 == 0) {
             primeira_linha.innerHTML += string(resposta);
           } else {
             segunda_linha.innerHTML += string(resposta);
           }
+        verificarAlerta(resposta.idEstacao);
         });
       });
+
     } else console.error('Nenhum dado encontrado ou erro na API');
   })
 }
@@ -62,8 +62,8 @@ function exibirEstacoes(idEmpresa, idLinha) {
 // function 
 
 /* KPIS */
-function atualizarQtdProblemas(idLinha) {
-  fetch(`/dashGeral/atualizarQtdProblemas/${idLinha}`, { cache: 'no-store' })
+function atualizarQtdProblemas(idLinha, idEmpresa) {
+  fetch(`/dashGeral/atualizarQtdProblemas/${idLinha}/${idEmpresa}`, { cache: 'no-store' })
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
@@ -125,7 +125,7 @@ function filtrarEstacaoPorNome() {
         fetch(`/dashGeral/pesquisarEstacao/${pesquisarVar}/${idEmpresa}`, { cache: 'no-store' })
         .then(function (response) {
           if (response.ok) { response.json().then(function (resposta) {
-            console.log('respposta =>>', resposta);
+              console.log('respposta =>>', resposta);
             total_maquinas_linha.innerHTML = resposta.length;
             primeira_linha.innerHTML = `<div onclick="verDash(${resposta[0].idEstacao})" class="card-maquina">
             <img class="img-pc" src="../assets/imgs/computador.png">
@@ -166,6 +166,30 @@ function filtrarPorAlerta(alerta) {
   })
 }
 
+function verificarAlerta(idMaquina) {
+  var icon = document.getElementById(`icon${idMaquina}`);
+
+  fetch(`/dashGeral/verificarAlerta/${idMaquina}`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        if (resposta[0].tipo == 'cuidado') {
+          icon.setAttribute('name', 'exclamation-triangle');
+          icon.setAttribute('class', 'icone-cuidado');
+        } else if (resposta[0].tipo == 'problema') {
+          icon.setAttribute('name', 'exclamation-circle');
+          icon.setAttribute('class', 'icone-perigo');
+        } else if (resposta[0].tipo == 'ideal') {
+          icon.setAttribute('name', 'check-circle');
+          icon.setAttribute('class', 'icone-ideal');
+        }
+      });
+    } else console.error('Nenhum dado encontrado ou erro na API');
+  })       
+}
+
+
+
 function alternarSelecionadoCuidado() {
   const botao_cuidado = document.getElementById('botao_cuidado');
   botao_cuidado.classList.toggle('selecionado');
@@ -190,9 +214,8 @@ function alternarSelecionadoProblema() {
   }
 }
 
-function verDash(idEstacao, nome) {
+function verDash(idEstacao) {
   localStorage.setItem("estacaoId", idEstacao);
-  console.log('LOCAL STORAGE => ', localStorage.getItem("estacaoId"));
   window.location = '../html/dashboard.html';
 }
 
@@ -200,10 +223,12 @@ function string(resposta) {
   var textoEstacao = `<div onclick="verDash(${resposta.idEstacao})" class="card-maquina">
   <img class="img-pc" src="../assets/imgs/computador.png">
     <div class="estacao-alerta">
-      <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+      <sl-icon class="icone-perigo" id="icon${resposta.idEstacao}" name="exclamation-circle"></sl-icon>
       <span id="nome_estacao">${resposta.nome}</span>
     </div>
   </div>`;
+
+
 
   return textoEstacao;
 }
@@ -215,9 +240,11 @@ function funcoesOnload() {
   listarLinhas(idEmpresa);
   totalMaquinasEmpresa(idEmpresa);
   exibirEstacoes(idEmpresa, idLinha);
-  atualizarQtdProblemas(idLinha);
+  atualizarQtdProblemas(idLinha, idEmpresa);
   atualizarEstacaoAlerta(idLinha, idEmpresa);
   atualizarQtdAlertasAtual(idEmpresa, idLinha);
+
+  setTimeout(funcoesOnchange, 5000);
 }
 
 function funcoesOnchange() {
@@ -225,6 +252,9 @@ function funcoesOnchange() {
   var idLinha = select_linha.value;
 
   exibirEstacoes(idEmpresa, idLinha);
-  atualizarQtdProblemas(idLinha);
+  atualizarQtdProblemas(idLinha, idEmpresa);
   atualizarEstacaoAlerta(idLinha, idEmpresa);
+  atualizarQtdAlertasAtual(idEmpresa, idLinha);
+
+  setTimeout(funcoesOnchange, 5000);
 }

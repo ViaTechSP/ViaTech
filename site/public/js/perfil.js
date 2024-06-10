@@ -26,7 +26,7 @@ function atualizarInfo() {
             document.getElementById('ipt_cargo').value = resposta[0].cargo;
             document.getElementById('ipt_email').value = resposta[0].email;
             document.getElementById('ipt_senha').value = resposta[0].senha;
-            ola.innerHTML = resposta[0].nome;
+            sessionStorage.NOME_USUARIO = resposta[0].nome;
 
             if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
             exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";

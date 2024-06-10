@@ -15,7 +15,7 @@ router.get("/filtrarPorAlerta/:alerta/:idLinha/:idEmpresa", function (req, res) 
     dashGeralController.filtrarPorAlerta(req, res);
 });
 
-router.get("/atualizarQtdProblemas/:idLinha", function (req, res) {
+router.get("/atualizarQtdProblemas/:idLinha/:idEmpresa", function (req, res) {
     dashGeralController.atualizarQtdProblemas(req, res);
 });
 
@@ -29,6 +29,10 @@ router.get("/atualizarEstacaoAlerta/:idLinha/:idEmpresa", function (req, res) {
 
 router.get("/atualizarQtdAlertasAtual/:idLinha/:idEmpresa", function (req, res) {
     dashGeralController.atualizarQtdAlertasAtual(req, res);
+});
+
+router.get("/verificarAlerta/:idMaquina", function (req, res) {
+    dashGeralController.verificarAlerta(req, res);
 });
 
 module.exports = router;

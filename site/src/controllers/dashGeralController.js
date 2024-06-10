@@ -21,8 +21,6 @@ function pesquisarEstacao(req, res){
     var pesquisa = req.params.pesquisarVar;
     var idEmpresa = req.params.idEmpresa;
 
-    console.log('pesquisa: ', pesquisa)
-
     dashGeralModel.pesquisarEstacao(pesquisa, idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
@@ -40,8 +38,9 @@ function filtrarPorAlerta(req, res){
 
 function atualizarQtdProblemas(req, res){
     var idLinha = req.params.idLinha;
+    var idEmpresa = req.params.idEmpresa;
 
-    dashGeralModel.atualizarQtdProblemas(idLinha).then((resultado) => {
+    dashGeralModel.atualizarQtdProblemas(idLinha, idEmpresa).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
@@ -64,9 +63,15 @@ function atualizarQtdAlertasAtual(req, res){
     var idLinha = req.params.idLinha;
     var idEmpresa = req.params.idEmpresa;
 
-    console.log('idEmpresa =>', idEmpresa);
-
     dashGeralModel.atualizarQtdAlertasAtual(idLinha, idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    });
+}
+
+function verificarAlerta(req, res){
+    var idMaquina = req.params.idMaquina;
+
+    dashGeralModel.verificarAlerta(idMaquina).then((resultado) => {
         res.status(200).json(resultado);
     });
 }
@@ -78,5 +83,6 @@ module.exports = {
     filtrarPorAlerta,
     atualizarQtdProblemas,
     atualizarEstacaoAlerta,
-    atualizarQtdAlertasAtual
+    atualizarQtdAlertasAtual,
+    verificarAlerta
 }

@@ -307,6 +307,8 @@ function onLoadFuncoes() {
   obterInfoHeader(fkEstacao);
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
+
+  setTimeout(onChangeSelect, 5000);
 }
 
 function onChangeSelect(){
@@ -317,6 +319,8 @@ function onChangeSelect(){
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
   exibirComentario();
+
+  setTimeout(onChangeSelect, 5000);
 }
 
 function exibirPopUp(){
