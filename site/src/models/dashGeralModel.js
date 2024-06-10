@@ -278,6 +278,7 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
 
     return database.executar(query);
 }
+
 module.exports = {
     buscarEstacoes,
     calcularTotalMaquinas,
@@ -286,4 +287,5 @@ module.exports = {
     atualizarEstacaoAlerta,
     atualizarQtdAlertasAtual,
     filtrarPorAlerta,
+    verificarAlerta
 }
