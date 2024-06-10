@@ -130,10 +130,12 @@ function filtrarEstacaoPorNome() {
             primeira_linha.innerHTML = `<div onclick="verDash(${resposta[0].idEstacao})" class="card-maquina">
             <img class="img-pc" src="../assets/imgs/computador.png">
               <div class="estacao-alerta">
-                <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon>
+                <sl-icon id="icon${resposta[0].idEstacao}"></sl-icon>
                 <span id="nome_estacao">${resposta[0].nome}</span>
               </div>
             </div>`
+
+            verificarAlerta(resposta[0].idEstacao);
           });
         } else console.error('Nenhum dado encontrado ou erro na API');
       })  
@@ -160,6 +162,8 @@ function filtrarPorAlerta(alerta) {
           } else {
             segunda_linha.innerHTML += string(resposta);
           }
+          console.log('resposta =>', idEstacao)
+          verificarAlerta(resposta.idEstacao);
         });
       });
     } else console.error('Nenhum dado encontrado ou erro na API');
@@ -223,12 +227,10 @@ function string(resposta) {
   var textoEstacao = `<div onclick="verDash(${resposta.idEstacao})" class="card-maquina">
   <img class="img-pc" src="../assets/imgs/computador.png">
     <div class="estacao-alerta">
-      <sl-icon class="icone-perigo" id="icon${resposta.idEstacao}" name="exclamation-circle"></sl-icon>
+      <sl-icon id="icon${resposta.idEstacao}"></sl-icon>
       <span id="nome_estacao">${resposta.nome}</span>
     </div>
   </div>`;
-
-
 
   return textoEstacao;
 }
@@ -255,6 +257,12 @@ function funcoesOnchange() {
   atualizarQtdProblemas(idLinha, idEmpresa);
   atualizarEstacaoAlerta(idLinha, idEmpresa);
   atualizarQtdAlertasAtual(idEmpresa, idLinha);
-
+  
   setTimeout(funcoesOnchange, 5000);
+  }
+  
+  function atualizarFuncoes() {
+  atualizarQtdProblemas(idLinha, idEmpresa);
+  atualizarEstacaoAlerta(idLinha, idEmpresa);
+  atualizarQtdAlertasAtual(idEmpresa, idLinha);
 }

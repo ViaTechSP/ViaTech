@@ -140,7 +140,7 @@ function atualizarQtdAlertasAtual(idLinha, idEmpresa) {
                 OR r.ramUtilizada > m.CuidadoRam
                 OR r.ramUtilizada > m.ProblemaRam
                 OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
             AND idEmpresa = ${idEmpresa};
         `
     } else {
@@ -166,7 +166,7 @@ function atualizarQtdAlertasAtual(idLinha, idEmpresa) {
                 OR r.ramUtilizada > m.CuidadoRam
                 OR r.ramUtilizada > m.ProblemaRam
                 OR r.qtdDispositivosUsb > m.maxUsb)
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
             AND idLinha = ${idLinha};
         `
     }
@@ -222,7 +222,7 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
             WHERE ((r.discoDisponivel < m.ProblemaDisco)
             OR (r.cpuUtilizada > m.ProblemaCpu)
             OR (r.ramUtilizada > m.ProblemaRam))
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
             AND idEmpresa = ${idEmpresa};
             `
         }
@@ -271,7 +271,7 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
             WHERE ((r.discoDisponivel < m.ProblemaDisco)
             OR (r.cpuUtilizada > m.ProblemaCpu)
             OR (r.ramUtilizada > m.ProblemaRam))
-            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 100000 SECOND)
+            AND r.dtHora >= DATE_SUB(NOW(), INTERVAL 5 SECOND)
             AND idLinha = ${idLinha}
             AND idEmpresa = ${idEmpresa};
             `
