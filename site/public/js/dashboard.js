@@ -308,7 +308,7 @@ function onLoadFuncoes() {
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
 
-  setTimeout(onChangeSelect, 5000);
+  setTimeout(recarregar, 5000);
 }
 
 function onChangeSelect(){
@@ -320,7 +320,18 @@ function onChangeSelect(){
   obterMetricasEstacao(fkEstacao);
   exibirComentario();
 
-  setTimeout(onChangeSelect, 5000);
+  setTimeout(recarregar, 5000);
+}
+
+function recarregar() {
+  var fkEstacao = select_estacao.value;
+
+  obterDadosGrafico(fkEstacao);
+  obterInfoHeader(fkEstacao);
+  atualizarKPIs(fkEstacao);
+  obterMetricasEstacao(fkEstacao);
+
+  setTimeout(recarregar, 5000);
 }
 
 function exibirPopUp(){

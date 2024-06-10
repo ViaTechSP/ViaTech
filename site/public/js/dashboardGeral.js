@@ -252,7 +252,7 @@ function funcoesOnload() {
 function funcoesOnchange() {
   var idEmpresa = sessionStorage.ID_EMPRESA;
   var idLinha = select_linha.value;
-
+  
   exibirEstacoes(idEmpresa, idLinha);
   atualizarQtdProblemas(idLinha, idEmpresa);
   atualizarEstacaoAlerta(idLinha, idEmpresa);
