@@ -3,7 +3,7 @@ var database = require("../database/config");
 function exibirLinha(idEmpresa){
     var query = `SELECT linha.* FROM linha WHERE fkEmpresa = ${idEmpresa};`;
     
-    console.log('executando query: ', query)
+    console.log('executando query exibirLinha(): ', query)
     return database.executar(query);
 }
 
