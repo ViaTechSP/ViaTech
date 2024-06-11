@@ -88,7 +88,8 @@ function atualizarKPIs(fkEstacao) {
         response.json().then(function (resposta) {
           resposta.forEach(function (item) {
             
-        console.log('Console log do rabello ' + item)
+        console.log('Console log do rabello ');
+        console.log(item);
             
             if (item.tipo == 'Cuidado') {
               span_kpi_cuidado.innerHTML = item.total;
