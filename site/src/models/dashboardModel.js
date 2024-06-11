@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function obterDadosGrafico(fkEstacao) {
     var instrucao = `
-        SELECT DATE_FORMAT(r.dtHora, '%H:%i:%s') as dataHora,
+        SELECT FORMAT(r.dtHora, 'HH:mm:ss') as dataHora,
                r.cpuUtilizada, r.discoDisponivel,
                r.ramUtilizada, r.qtdDispositivosUsb
         FROM Registro r
@@ -10,7 +10,7 @@ function obterDadosGrafico(fkEstacao) {
         JOIN maquina m ON em.fkMaquina = m.idMaquina
         WHERE m.fkEstacao = ${fkEstacao}
         ORDER BY r.idRegistro DESC
-        LIMIT 7;
+        OFFSET 0 ROWS FETCH NEXT 7 ROWS ONLY;
     `;
 
     return database.executar(instrucao);
@@ -18,7 +18,7 @@ function obterDadosGrafico(fkEstacao) {
 
 function obterDadosTempoReal(fkEstacao) {
     var instrucao = `
-        SELECT DATE_FORMAT(r.dtHora, '%H:%i:%s') as dataHora,
+        SELECT FORMAT(r.dtHora, 'HH:mm:ss') as dataHora,
                r.cpuUtilizada, r.discoDisponivel,
                r.ramUtilizada, r.qtdDispositivosUsb
         FROM Registro r
@@ -26,7 +26,7 @@ function obterDadosTempoReal(fkEstacao) {
         JOIN maquina m ON em.fkMaquina = m.idMaquina
         WHERE m.fkEstacao = ${fkEstacao}
         ORDER BY r.idRegistro DESC
-        LIMIT 1;
+        OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;
     `;
 
     return database.executar(instrucao);
@@ -39,7 +39,7 @@ function buscarMaquinas(idEmpresa) {
         JOIN Linha l ON e.fkLinha = l.idLinha
         JOIN Empresa emp ON l.fkEmpresa = emp.idEmpresa
         WHERE emp.idEmpresa = ${idEmpresa}
-        LIMIT 20;
+        OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY;
     `;
    
     return database.executar(instrucao);
@@ -56,7 +56,7 @@ function obterHistoricoAlerta(idEmpresa) {
         JOIN Linha l ON e.fkLinha = l.idLinha
         WHERE l.fkEmpresa = ${idEmpresa}
         ORDER BY h.idHistorico DESC
-        LIMIT 8;
+        OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY;
     `;
    
     return database.executar(instrucao);
@@ -96,11 +96,11 @@ function obterInfoKPIComponente(fkEstacao) {
         JOIN maquina m ON em.fkMaquina = m.idMaquina
         JOIN estacao e ON m.fkEstacao = e.idEstacao
         WHERE e.idEstacao = ${fkEstacao}
-          AND h.dtHora >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
-          AND h.dtHora <= NOW()
+          AND h.dtHora >= DATEADD(WEEK, -1, GETDATE())
+          AND h.dtHora <= GETDATE()
         GROUP BY h.componente
         ORDER BY total DESC
-        LIMIT 1;
+        OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;
     `;
     return database.executar(instrucao);
 }
@@ -118,7 +118,13 @@ function addComentario(idFun, comentario, idCategoria, idEstacao){
 }
 
 function exibirComentario(idEstacao, idCategoria){
-    var instrucao = `SELECT idComentario, fkMaquina, dtHora, descricao, email, categoria.nome AS categoria FROM comentario JOIN funcionario ON fkFuncionario = idFuncionario JOIN categoria ON fkCategoria = idCategoria WHERE fkMaquina = ${idEstacao} ${idCategoria != 0 ? 'AND fkCategoria = ' + idCategoria : ''} ORDER BY dtHora;
+    var instrucao = `
+        SELECT idComentario, fkMaquina, dtHora, descricao, email, categoria.nome AS categoria
+        FROM comentario
+        JOIN funcionario ON fkFuncionario = idFuncionario
+        JOIN categoria ON fkCategoria = idCategoria
+        WHERE fkMaquina = ${idEstacao} ${idCategoria != 0 ? 'AND fkCategoria = ' + idCategoria : ''}
+        ORDER BY dtHora;
     `;
 
     return database.executar(instrucao);
