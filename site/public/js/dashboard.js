@@ -20,34 +20,45 @@ function listarMaquinas(idEmpresa) {
 function obterHistoricoAlerta(fkEmpresa) {
   var fkEmpresa = sessionStorage.ID_EMPRESA;
 
+  console.log('ENTROU NA FUNÇÃO HISTÓRICO ALERTA');
+  
   fetch(`/dashboard/obterHistoricoAlerta/${fkEmpresa}`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          container_alertas.innerHTML = ''
-          resposta.forEach(function (resposta) {
-
-            if (resposta.componente == 'USB') {
+  .then(function (response) {
+    if (response.ok) {
+      response.json().then(function (resposta) {
+        container_alertas.innerHTML = ''
+        resposta.forEach(function (resposta) {
+          
+          console.log('ENTROU NO FOR EACH DO HISTÓRICO ALERTA');
+          if (resposta.componente == 'USB') {
+            if (resposta.tipo == 'Problema') {
+              console.log('1');
+              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${resposta.nome} <br>
+              ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
+            } else if (resposta.tipo == 'Cuidado') {
+              console.log('2');
+              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
+              ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
+            } 
+          } else if (resposta.componente == 'Disco'){
+              console.log('3');
               if (resposta.tipo == 'Problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
-              } else if (resposta.tipo == 'Cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
-              } 
-            } else if (resposta.componente == 'Disco'){
-              if (resposta.tipo == 'Problema') {
+                console.log('4');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } else if (resposta.tipo == 'Cuidado') {
+                console.log('5');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
               } 
             } else {
+              console.log('6');
               if (resposta.tipo == 'Problema') {
+                console.log('7');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } else if (resposta.tipo == 'Cuidado') {
+                console.log('8');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
                 ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
               } 
