@@ -30,35 +30,30 @@ function obterHistoricoAlerta(fkEmpresa) {
         resposta.forEach(function (item) {
           if (item.componente == 'usb') {
             if (item.tipo == 'problema') {
-              console.log('1');
               container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${item.nome} <br>
               ${item.componente}s: ${(item.valorRegistrado).toFixed(2)}</div>`
             } else if (item.tipo == 'cuidado') {
-              console.log('2');
               container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
               ${item.componente}s: ${(item.valorRegistrado).toFixed(2)}</div>`
             } 
           } else if (item.componente == 'disco'){
               console.log('3');
               if (item.tipo == 'problema') {
-                console.log('4');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
                 ${item.componente}: ${(item.valorRegistrado).toFixed(2)} GB</div>`
               } else if (item.tipo == 'cuidado') {
-                console.log('5');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
                 ${item.componente}: ${(item.valorRegistrado).toFixed(2)} GB</div>`
               } 
             } else {
-              console.log('6');
               if (item.tipo == 'problema') {
-                console.log('7');
+                console.log('VALOR REGISTRADO => ' + item.valorRegistrado);
+
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
-                ${item.componente}: ${Math.round(item.valorRegistrado).toFixed(2)}%</div>`
+                ${item.componente}: ${Math.round(item.valorRegistrado)}%</div>`
               } else if (item.tipo == 'cuidado') {
-                console.log('8');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
-                ${item.componente}: ${Math.round(item.valorRegistrado).toFixed(2)}%</div>`
+                ${item.componente}: ${Math.round(item.valorRegistrado)}%</div>`
               } 
             }
           });
