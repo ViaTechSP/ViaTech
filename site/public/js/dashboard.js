@@ -54,11 +54,11 @@ function obterHistoricoAlerta(fkEmpresa) {
               if (item.tipo == 'problema') {
                 console.log('7');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
-                ${item.componente}: ${item.valorRegistrado}%</div>`
+                ${item.componente}: ${(item.valorRegistrado).toFixed(1)}%</div>`
               } else if (item.tipo == 'cuidado') {
                 console.log('8');
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
-                ${item.componente}: ${item.valorRegistrado}%</div>`
+                ${item.componente}: ${(item.valorRegistrado).toFixed(1)}%</div>`
               } 
             }
           });
