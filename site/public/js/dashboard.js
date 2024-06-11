@@ -27,42 +27,41 @@ function obterHistoricoAlerta(fkEmpresa) {
     if (response.ok) {
       response.json().then(function (resposta) {
         container_alertas.innerHTML = ''
-        resposta.forEach(function (resposta) {
-
-          console.log('historicoAlerta => ' + JSON.stringify(resposta));
+        resposta.forEach(function (item) {
+          let jsonString = JSON.stringify(item);
           
-          console.log('ENTROU NO FOR EACH DO HISTÓRICO ALERTA');
-          if (resposta.componente == 'USB') {
-            if (resposta.tipo == 'Problema') {
+
+          if (jsonString.componente == 'USB') {
+            if (jsonString.tipo == 'Problema') {
               console.log('1');
-              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-              ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
-            } else if (resposta.tipo == 'Cuidado') {
+              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
+              ${jsonString.componente}s: ${jsonString.valorRegistrado}</div>`
+            } else if (jsonString.tipo == 'Cuidado') {
               console.log('2');
-              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-              ${resposta.componente}s: ${resposta.valorRegistrado}</div>`
+              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
+              ${jsonString.componente}s: ${jsonString.valorRegistrado}</div>`
             } 
-          } else if (resposta.componente == 'Disco'){
+          } else if (jsonString.componente == 'Disco'){
               console.log('3');
-              if (resposta.tipo == 'Problema') {
+              if (jsonString.tipo == 'Problema') {
                 console.log('4');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
-              } else if (resposta.tipo == 'Cuidado') {
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${jsonString.nome} <br>
+                ${jsonString.componente}: ${jsonString.valorRegistrado} GB</div>`
+              } else if (jsonString.tipo == 'Cuidado') {
                 console.log('5');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}: ${resposta.valorRegistrado} GB</div>`
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
+                ${jsonString.componente}: ${jsonString.valorRegistrado} GB</div>`
               } 
             } else {
               console.log('6');
-              if (resposta.tipo == 'Problema') {
+              if (jsonString.tipo == 'Problema') {
                 console.log('7');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${resposta.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
-              } else if (resposta.tipo == 'Cuidado') {
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${jsonString.nome} <br>
+                ${jsonString.componente}: ${jsonString.valorRegistrado}%</div>`
+              } else if (jsonString.tipo == 'Cuidado') {
                 console.log('8');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${resposta.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${resposta.nome} <br>
-                ${resposta.componente}: ${resposta.valorRegistrado}%</div>`
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
+                ${jsonString.componente}: ${jsonString.valorRegistrado}%</div>`
               } 
             }
           });
