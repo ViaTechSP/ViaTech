@@ -29,7 +29,7 @@ function obterHistoricoAlerta(fkEmpresa) {
         container_alertas.innerHTML = ''
         resposta.forEach(function (resposta) {
 
-          console.log('historicoAlerta => ' + json.stringify(resposta));
+          console.log('historicoAlerta => ' + JSON.stringify(resposta));
           
           console.log('ENTROU NO FOR EACH DO HISTÓRICO ALERTA');
           if (resposta.componente == 'USB') {
