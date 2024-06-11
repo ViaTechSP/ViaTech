@@ -248,7 +248,10 @@ function funcoesOnload() {
   atualizarEstacaoAlerta(idLinha, idEmpresa);
   atualizarQtdAlertasAtual(idEmpresa, idLinha);
 
-  setTimeout(funcoesOnload, 5000);
+  setTimeout(exibirEstacoes, 5000);
+  setTimeout(atualizarQtdProblemas, 5000);
+  setTimeout(atualizarEstacaoAlerta, 5000);
+  setTimeout(atualizarQtdAlertasAtual, 5000);
 }
 
 function funcoesOnchange() {
