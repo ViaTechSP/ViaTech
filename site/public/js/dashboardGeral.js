@@ -177,6 +177,8 @@ function verificarAlerta(idMaquina) {
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
+        console.log('RESPOSTA verificar => ' + resposta);
+
         if (resposta[0].tipo == 'cuidado') {
           icon.setAttribute('name', 'exclamation-triangle');
           icon.setAttribute('class', 'icone-cuidado');
