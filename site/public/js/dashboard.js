@@ -29,39 +29,39 @@ function obterHistoricoAlerta(fkEmpresa) {
         container_alertas.innerHTML = ''
         resposta.forEach(function (item) {
           let jsonString = JSON.stringify(item);
-          
-
-          if (jsonString.componente == 'USB') {
-            if (jsonString.tipo == 'Problema') {
+          console.log('ITEM =>');
+          console.log(item);
+          if (item.componente == 'USB') {
+            if (item.tipo == 'Problema') {
               console.log('1');
-              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
-              ${jsonString.componente}s: ${jsonString.valorRegistrado}</div>`
-            } else if (jsonString.tipo == 'Cuidado') {
+              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${item.nome} <br>
+              ${item.componente}s: ${item.valorRegistrado}</div>`
+            } else if (item.tipo == 'Cuidado') {
               console.log('2');
-              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
-              ${jsonString.componente}s: ${jsonString.valorRegistrado}</div>`
+              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+              ${item.componente}s: ${item.valorRegistrado}</div>`
             } 
-          } else if (jsonString.componente == 'Disco'){
+          } else if (item.componente == 'Disco'){
               console.log('3');
-              if (jsonString.tipo == 'Problema') {
+              if (item.tipo == 'Problema') {
                 console.log('4');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${jsonString.nome} <br>
-                ${jsonString.componente}: ${jsonString.valorRegistrado} GB</div>`
-              } else if (jsonString.tipo == 'Cuidado') {
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
+                ${item.componente}: ${item.valorRegistrado} GB</div>`
+              } else if (item.tipo == 'Cuidado') {
                 console.log('5');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
-                ${jsonString.componente}: ${jsonString.valorRegistrado} GB</div>`
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+                ${item.componente}: ${item.valorRegistrado} GB</div>`
               } 
             } else {
               console.log('6');
-              if (jsonString.tipo == 'Problema') {
+              if (item.tipo == 'Problema') {
                 console.log('7');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${jsonString.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${jsonString.nome} <br>
-                ${jsonString.componente}: ${jsonString.valorRegistrado}%</div>`
-              } else if (jsonString.tipo == 'Cuidado') {
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
+                ${item.componente}: ${item.valorRegistrado}%</div>`
+              } else if (item.tipo == 'Cuidado') {
                 console.log('8');
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${jsonString.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${jsonString.nome} <br>
-                ${jsonString.componente}: ${jsonString.valorRegistrado}%</div>`
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+                ${item.componente}: ${item.valorRegistrado}%</div>`
               } 
             }
           });
