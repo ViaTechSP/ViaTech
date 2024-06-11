@@ -204,7 +204,7 @@ function alternarSelecionadoCuidado() {
     const botao_problema = document.getElementById('botao_problema');
     botao_problema.classList.remove('selecionado');
 
-    filtrarPorAlerta('Cuidado');
+    filtrarPorAlerta('cuidado');
   }
 }
 
@@ -216,7 +216,7 @@ function alternarSelecionadoProblema() {
     const botao_cuidado = document.getElementById('botao_cuidado');
     botao_cuidado.classList.remove('selecionado');
 
-    filtrarPorAlerta('Problema');
+    filtrarPorAlerta('problema');
   }
 }
 
@@ -248,7 +248,7 @@ function funcoesOnload() {
   atualizarEstacaoAlerta(idLinha, idEmpresa);
   atualizarQtdAlertasAtual(idEmpresa, idLinha);
 
-  setTimeout(funcoesOnchange, 5000);
+  setTimeout(funcoesOnload, 5000);
 }
 
 function funcoesOnchange() {
