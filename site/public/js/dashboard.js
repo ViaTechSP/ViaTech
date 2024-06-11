@@ -91,10 +91,10 @@ function atualizarKPIs(fkEstacao) {
         console.log('Console log do rabello ');
         console.log(item);
             
-            if (item.tipo == 'Cuidado') {
+            if (item.tipo == 'cuidado') {
               span_kpi_cuidado.innerHTML = item.total;
             }
-            else if (item.tipo == 'Problema') {
+            else if (item.tipo == 'problema') {
               span_kpi_problema.innerHTML = item.total;
             }
 
