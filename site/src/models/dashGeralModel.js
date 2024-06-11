@@ -279,6 +279,30 @@ function filtrarPorAlerta(alerta, idLinha, idEmpresa) {
     return database.executar(query);
 }
 
+function verificarAlerta(idMaquina) {
+    var query = 
+    `SELECT 
+    CASE 
+        WHEN ultimo_registro.dtHora >= DATEADD(SECOND, -5, GETDATE()) THEN h.tipo
+        ELSE 'ideal'
+    END AS tipo 
+FROM historicoAlerta h
+JOIN (
+    SELECT MAX(dtHora) AS dtHora
+    FROM historicoAlerta
+    WHERE fkRegistro IN (
+        SELECT idRegistro
+        FROM registro
+        JOIN especificacaoMaquina ON fkEspecificacaoMaquina = idEspecificacaoMaquina
+        JOIN maquina ON fkMaquina = idMaquina
+        WHERE fkEstacao = ${idMaquina}
+    )
+) AS ultimo_registro ON h.dtHora = ultimo_registro.dtHora;
+`
+
+    return database.executar(query);
+}
+
 module.exports = {
     buscarEstacoes,
     calcularTotalMaquinas,
