@@ -336,10 +336,7 @@ function onChangeSelect(){
 function recarregar() {
   var fkEstacao = select_estacao.value;
 
-  obterDadosGrafico(fkEstacao);
-  obterInfoHeader(fkEstacao);
   atualizarKPIs(fkEstacao);
-  obterMetricasEstacao(fkEstacao);
 
   setTimeout(recarregar, 5000);
 }

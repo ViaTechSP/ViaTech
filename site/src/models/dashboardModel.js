@@ -52,7 +52,7 @@ function buscarMaquinas(idEmpresa) {
 
 function obterHistoricoAlerta(idEmpresa) {
     var instrucao = `
-    SELECT e.nome, h.*
+    SELECT TOP(8) e.nome, h.*
     FROM historicoAlerta h
     JOIN registro r ON h.fkRegistro = r.idRegistro
     JOIN especificacaoMaquina em ON r.fkEspecificacaoMaquina = em.idEspecificacaoMaquina
@@ -60,8 +60,7 @@ function obterHistoricoAlerta(idEmpresa) {
     JOIN estacao e ON m.fkEstacao = e.idEstacao
     JOIN Linha l ON e.fkLinha = l.idLinha
     WHERE l.fkEmpresa = ${idEmpresa}
-    ORDER BY h.idHistorico DESC
-    OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY;
+    ORDER BY h.idHistorico DESC;
     
     `;
    
