@@ -177,18 +177,18 @@ function verificarAlerta(idMaquina) {
   .then(function (response) {
     if (response.ok) {
       response.json().then(function (resposta) {
-        console.log('RESPOSTA verificar => ' + resposta[0]);
-
-        if (resposta[0].tipo == 'cuidado') {
+        resposta.forEach(function (item) {
+        if (item.tipo == 'cuidado') {
           icon.setAttribute('name', 'exclamation-triangle');
           icon.setAttribute('class', 'icone-cuidado');
-        } else if (resposta[0].tipo == 'problema') {
+        } else if (item.tipo == 'problema') {
           icon.setAttribute('name', 'exclamation-circle');
           icon.setAttribute('class', 'icone-perigo');
-        } else if (resposta[0].tipo == 'ideal') {
+        } else if (item.tipo == 'ideal') {
           icon.setAttribute('name', 'check-circle');
           icon.setAttribute('class', 'icone-ideal');
         }
+      });
       });
     } else console.error('Nenhum dado encontrado ou erro na API');
   })       
