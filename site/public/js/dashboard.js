@@ -86,13 +86,13 @@ function atualizarKPIs(fkEstacao) {
         span_kpi_problema.innerHTML = 0;
 
         response.json().then(function (resposta) {
-          resposta.forEach(function (resposta) {
+          resposta.forEach(function (item) {
             
-            if (resposta.tipo == 'Cuidado') {
-              span_kpi_cuidado.innerHTML = resposta.total;
+            if (item.tipo == 'Cuidado') {
+              span_kpi_cuidado.innerHTML = item.total;
             }
-            else if (resposta.tipo == 'Problema') {
-              span_kpi_problema.innerHTML = resposta.total;
+            else if (item.tipo == 'Problema') {
+              span_kpi_problema.innerHTML = item.total;
             }
 
           });
