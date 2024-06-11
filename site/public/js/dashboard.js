@@ -50,10 +50,10 @@ function obterHistoricoAlerta(fkEmpresa) {
                 console.log('VALOR REGISTRADO => ' + item.valorRegistrado);
 
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
-                ${item.componente}: ${Math.round(item.valorRegistrado)}%</div>`
+                ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
               } else if (item.tipo == 'cuidado') {
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
-                ${item.componente}: ${Math.round(item.valorRegistrado)}%</div>`
+                ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
               } 
             }
           });
