@@ -15,7 +15,6 @@ function listarMaquinas(idEmpresa) {
         });
       } else console.error(`Nenhum dado encontrado para o id ${idEmpresa} ou erro na API`);
     })
-    atualizarSelect();
 }
 
 function obterHistoricoAlerta(fkEmpresa) {
