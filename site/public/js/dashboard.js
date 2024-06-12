@@ -354,7 +354,7 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
 
         setTimeout(() => atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart), 5000);
         setTimeout(() => obterHistoricoAlerta(), 5000);
-        setTimeout(() => atualizarKPIs(), 5000);
+        setTimeout(() => atualizarKPIs(fkEstacao), 5000);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
