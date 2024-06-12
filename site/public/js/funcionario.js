@@ -176,7 +176,7 @@ function exibirFun(){
         <div class="funcionario">
              <div class="container-imagem">
               <img id="caminhoFun${id_fun}" src="${foto_atual}" class="profile-pic">
-              <label><input type="text" placeholder="Insira a url da imagem" style="display: none;" class="ipt_fun_img" id="input_img_${id_fun}" disabled></label>
+              <label><input type="text" placeholder="Insira a url da imagem" style="display: none;" class="ipt_fun_img" id="input_img_${id_fun}" value="${foto_atual}" disabled></label>
              </div>
 
             <div class="dados">
