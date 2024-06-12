@@ -12,73 +12,117 @@ var linhaModel = require("../models/linhaModel");
 //     })
 // }
 
-function exibirLinha(req, res){
+function exibirLinha(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    console.log('Controller exibirLinha ', idEmpresa )
-    
-    linhaModel.exibirLinha(idEmpresa).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+    console.log('Controller exibirLinha ', idEmpresa);
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("idEmpresa está undefined!");
+    } else {
+        linhaModel.exibirLinha(idEmpresa).then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma linha encontrada!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao exibir linha:', erro);
+            console.error('Mensagem de erro:', erro.message);
+            res.status(500).json({ mensagem: 'Erro ao exibir linha', erro: erro.message });
+        });
+    }
 }
 
-function ultimaLinhaInserida(req, res){
+function ultimaLinhaInserida(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    
-    linhaModel.ultimaLinhaInserida(idEmpresa).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+
+    if (idEmpresa == undefined) {
+        res.status(400).send("idEmpresa está undefined!");
+    } else {
+        linhaModel.ultimaLinhaInserida(idEmpresa).then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma linha encontrada!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao buscar a última linha inserida:', erro);
+            console.error('Mensagem de erro:', erro.message);
+            res.status(500).json({ mensagem: 'Erro ao buscar a última linha inserida', erro: erro.message });
+        });
+    }
 }
 
 function deletarLinha(req, res) {
     var idLinha = req.params.idLinha;
 
-    linhaModel.deletarLinha(idLinha)
-        .then(
-            function (resultado) {
-                res.json(resultado);
+    if (idLinha == undefined) {
+        res.status(400).send("idLinha está undefined!");
+    } else {
+        linhaModel.deletarLinha(idLinha).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma linha deletada!");
             }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar a linha: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        }).catch((erro) => {
+            console.error('Erro ao deletar a linha:', erro);
+            console.error('Mensagem de erro:', erro.message);
+            res.status(500).json({ mensagem: 'Erro ao deletar a linha', erro: erro.message });
+        });
+    }
 }
 
-function cadastrarLinha(req, res){
+function cadastrarLinha(req, res) {
     var nome = req.body.nome;
     var numero = req.body.numero;
     var idEmpresa = req.body.idEmpresa;
-    
-    
-    linhaModel.cadastrarLinha(nome, numero, idEmpresa).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+
+    if (nome == undefined) {
+        res.status(400).send("nome está undefined!");
+    } else if (numero == undefined) {
+        res.status(400).send("numero está undefined!");
+    } else if (idEmpresa == undefined) {
+        res.status(400).send("idEmpresa está undefined!");
+    } else {
+        linhaModel.cadastrarLinha(nome, numero, idEmpresa).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma linha cadastrada!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao cadastrar linha:', erro);
+            console.error('Mensagem de erro:', erro.message);
+            res.status(500).json({ mensagem: 'Erro ao cadastrar linha', erro: erro.message });
+        });
+    }
 }
 
 function salvarLinha(req, res) {
-    console.log("tamo no controler")
-
     var idLinha = req.params.idLinha;
     var nome = req.body.nome;
     var numero = req.body.numero;
-    
-    console.log('id =>', idLinha)
-    console.log('nome =>', nome)
-    console.log('numero =>', numero)
 
-    linhaModel.salvarLinha(numero, nome, idLinha)
-    .then(function (resultado) {
-            res.json(resultado);
-        })
-    .catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
+    if (idLinha == undefined) {
+        res.status(400).send("idLinha está undefined!");
+    } else if (nome == undefined) {
+        res.status(400).send("nome está undefined!");
+    } else if (numero == undefined) {
+        res.status(400).send("numero está undefined!");
+    } else {
+        linhaModel.salvarLinha(numero, nome, idLinha).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma linha salva!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao salvar linha:', erro);
+            console.error('Mensagem de erro:', erro.message);
+            res.status(500).json({ mensagem: 'Erro ao salvar linha', erro: erro.message });
+        });
+    }
 }
 
 module.exports = {

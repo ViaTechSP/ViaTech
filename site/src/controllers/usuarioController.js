@@ -10,17 +10,27 @@ function autenticar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
         usuarioModel.autenticar(email, senha)
-        .then((resultado) => {
-          res.status(200).json(resultado);
-        })
-        .catch((erro) => {
-          res.status(500).json({ mensagem: 'Erro ao buscar ID da empresa', erro });
-        });
+            .then(
+                function (resultadoAutenticar) {
+                    if (resultadoAutenticar.length == 1) {
+                        res.status(200).json(resultado);
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.message);
+                    res.status(500).json(erro.message);
+                }
+            );
     }
 }
 
 function cadastrarFun(req, res){
-    console.log('Estou por aqui controller')
     var imagemVar = req.body.imagem;
     var nomeVar = req.body.nomeServer;
     var cpfVar = req.body.cpfServer;
@@ -43,17 +53,21 @@ function cadastrarFun(req, res){
         usuarioModel.cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
             .then(
                 function (resultado) {
+                if (resultado.affectedRows > 0) {
                     res.json(resultado);
                     console.log("enviou p model")
+                } else {
+                    res.status(204).send("Nenhuma alteração realizada!");
                 }
+            }
             ).catch(
                 function (erro) {
                     console.log(erro);
                     console.log(
                         "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
+                        erro.message
                     );
-                    res.status(500).json(erro.sqlMessage);
+                    res.status(500).json(erro.message);
                 }
             );
     }
@@ -67,10 +81,15 @@ function buscarId(req, res) {
     } else {
         usuarioModel.buscarId(email)
         .then((resultado) => {
-          res.status(200).json(resultado);
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
         })
         .catch((erro) => {
-          res.status(500).json({ mensagem: 'Erro ao buscar ID da empresa', erro });
+            console.error('Erro ao buscar ID do funcionário:', erro);
+            res.status(500).json({ mensagem: 'Erro ao buscar ID do funcionário', erro: erro.message });
         });
     }
 }
@@ -79,68 +98,95 @@ function alterarSenha(req, res) {
     var novaSenha = req.body.novaSenha;
     var idFuncionario = req.body.idFuncionario;
     
-    usuarioModel.alterarSenha(novaSenha, idFuncionario)
-    .then(function (resultado) {
+    if (!novaSenha || !idFuncionario) {
+        res.status(400).send("Alguma(s) variável(is) está(ão) undefined!");
+    } else {
+        usuarioModel.alterarSenha(novaSenha, idFuncionario)
+        .then(function (resultado) {
+            if (resultado.affectedRows > 0) {
                 res.json(resultado);
-            })
+            } else {
+                res.status(204).send("Nenhuma alteração realizada!");
+            }
+        })
         .catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        }
-        );
+            console.error('Erro ao alterar senha do funcionário:', erro);
+            res.status(500).json({ mensagem: 'Erro ao alterar senha do funcionário', erro: erro.message });
+        });
     }
-    
-function buscarInfo(req, res) {
-        var idFuncionario = req.params.idFuncionario;
-        
-        if (idFuncionario == undefined) {
-            res.status(400).send("Seu id está undefined!");
-        } else {
-            usuarioModel.buscarInfo(idFuncionario)
-            .then((resultado) => {
-              res.status(200).json(resultado);
-            })
-            .catch((erro) => {
-              res.status(500).json({ mensagem: 'Erro ao buscar ID da empresa', erro });
-            });
-        }
 }
-    
-function alterarInfo(req, res) {
-        var idFuncionario = req.body.idFuncionario;
 
-        var imagem = req.body.imagem ;
-        var nome = req.body.nome ;
-        var cpf = req.body.cpf;
-        var email = req.body.email;
-        var senha = req.body.senha;
-        var cargo = req.body.cargo;
+function buscarInfo(req, res) {
+    var idFuncionario = req.params.idFuncionario;
         
+    if (idFuncionario == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+        usuarioModel.buscarInfo(idFuncionario)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        })
+        .catch((erro) => {
+            console.error('Erro ao buscar informações do funcionário:', erro);
+            res.status(500).json({ mensagem: 'Erro ao buscar informações do funcionário', erro: erro.message });
+        });
+    }
+}
+
+function alterarInfo(req, res) {
+    var idFuncionario = req.body.idFuncionario;
+
+    var imagem = req.body.imagem ;
+    var nome = req.body.nome ;
+    var cpf = req.body.cpf;
+    var email = req.body.email;
+    var senha = req.body.senha;
+    var cargo = req.body.cargo;
+        
+    if (!idFuncionario || !imagem || !nome || !cpf || !email || !senha || !cargo) {
+        res.status(400).send("Alguma(s) variável(is) está(ão) undefined!");
+    } else {
         usuarioModel.alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo)
         .then(function (resultado) {
+            if (resultado.affectedRows > 0) {
                 res.json(resultado);
-            })
-        .catch(function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
+            } else {
+                res.status(204).send("Nenhuma alteração realizada!");
             }
-        );
+        })
+        .catch(function (erro) {
+            console.error('Erro ao alterar informações do funcionário:', erro);
+            res.status(500).json({ mensagem: 'Erro ao alterar informações do funcionário', erro: erro.message });
+        });
+    }
 }
 
 function exibirFun(req, res){
-    console.log('Estou no controleerrrrrrrrrrrrrrrrrr')
     var idEmpresa = req.params.idEmpresa;
     
-    usuarioModel.exibirFun(idEmpresa).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+    if (!idEmpresa) {
+        res.status(400).send("O id da empresa está undefined!");
+    } else {
+        usuarioModel.exibirFun(idEmpresa)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!");
+            }
+        })
+        .catch((erro) => {
+            console.error('Erro ao exibir funcionários da empresa:', erro);
+            res.status(500).json({ mensagem: 'Erro ao exibir funcionários da empresa', erro: erro.message });
+        });
+    }
 }
 
 function salvarFun(req, res){
-    console.log("tamo no controler")
-
     var idFuncionario = req.params.idFuncionario;
     var img = req.body.img;
     var nome = req.body.nome;
@@ -148,43 +194,48 @@ function salvarFun(req, res){
     var email = req.body.email;
     var cargo = req.body.cargo;
     
-    console.log('id =>', idFuncionario)
-    console.log('nome =>', nome)
-    console.log('email =>', email)
-    console.log('cargo =>', cargo)
-    console.log('cargo =>', img)
-    console.log('cargo =>', cpf)
-
-    usuarioModel.salvarFun(img, nome, cpf, email, cargo, idFuncionario)
-    .then(function (resultado) {
-            res.json(resultado);
+    if (!idFuncionario || !img || !nome || !cpf || !email || !cargo) {
+        res.status(400).send("Alguma(s) variável(is) está(ão) undefined!");
+    } else {
+        usuarioModel.salvarFun(img, nome, cpf, email, cargo, idFuncionario)
+        .then(function (resultado) {
+            if (resultado.affectedRows > 0) {
+                res.json(resultado);
+            } else {
+                res.status(204).send("Nenhuma alteração realizada!");
+            }
         })
-    .catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
+        .catch(function (erro) {
+            console.error('Erro ao salvar funcionário:', erro);
+            res.status(500).json({ mensagem: 'Erro ao salvar funcionário', erro: erro.message });
+        });
+    }
 }
 
 function deletarFun(req, res) {
     var idFuncionario = req.params.idFuncionario;
 
-    usuarioModel.deletarFun(idFuncionario)
+    if (!idFuncionario) {
+        res.status(400).send("O id do funcionário está undefined!");
+    } else {
+        usuarioModel.deletarFun(idFuncionario)
         .then(
             function (resultado) {
-                res.json(resultado);
+                if (resultado.affectedRows > 0) {
+                    res.json(resultado);
+                } else {
+                    res.status(204).send("Nenhuma alteração realizada!");
+                }
             }
         )
         .catch(
             function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar o funcionário: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
+                console.error('Erro ao deletar o funcionário:', erro);
+                res.status(500).json({ mensagem: 'Erro ao deletar o funcionário', erro: erro.message });
             }
         );
+    }
 }
-
 
 module.exports = {
     autenticar,

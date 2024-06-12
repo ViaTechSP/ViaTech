@@ -1,76 +1,89 @@
 var estacaoModel = require("../models/estacaoModel");
 
-// function buscarLinhas(req, res) {
-//     var idEmpresa = req.params.idEmpresa;
-
-//     linhaModel.buscarLinhas(idEmpresa).then(function (resultado) {
-//         if (resultado.length > 0) {
-//             res.status(200).json(resultado);
-//         } else {
-//             res.status(204).send("Nenhum resultado encontrado!")
-//         }
-//     })
-// }
-
-function exibirEstacao(req, res){
+function exibirEstacao(req, res) {
     var idLinha = req.params.idLinha;
-    
-    estacaoModel.exibirEstacao(idLinha).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+
+    if (idLinha == undefined) {
+        res.status(400).send("idLinha está undefined!");
+    } else {
+        estacaoModel.exibirEstacao(idLinha).then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma estação encontrada!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao exibir estação:', erro);
+            res.status(500).json({ mensagem: 'Erro ao exibir estação' });
+        });
+    }
 }
 
 function deletarEstacao(req, res) {
     var idEstacao = req.params.idEstacao;
 
-    estacaoModel.deletarEstacao(idEstacao)
-        .then(
-            function (resultado) {
-                res.json(resultado);
+    if (idEstacao == undefined) {
+        res.status(400).send("idEstacao está undefined!");
+    } else {
+        estacaoModel.deletarEstacao(idEstacao).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma estação deletada!");
             }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar a linha: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+        }).catch((erro) => {
+            console.error('Erro ao deletar estação:', erro);
+            res.status(500).json({ mensagem: 'Erro ao deletar estação' });
+        });
+    }
 }
 
-function cadastrarEstacao(req, res){
+function cadastrarEstacao(req, res) {
     var nome = req.body.nome;
     var idLinha = req.body.idLinha;
-    
-    
-    estacaoModel.cadastrarEstacao(nome, idLinha).then((resultado) => {
-        res.status(200).json(resultado);
-    });
+
+    if (nome == undefined) {
+        res.status(400).send("nome está undefined!");
+    } else if (idLinha == undefined) {
+        res.status(400).send("idLinha está undefined!");
+    } else {
+        estacaoModel.cadastrarEstacao(nome, idLinha).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma estação cadastrada!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao cadastrar estação:', erro);
+            res.status(500).json({ mensagem: 'Erro ao cadastrar estação' });
+        });
+    }
 }
 
 function salvarEstacao(req, res) {
-    console.log("tamo no controler")
-
     var idEstacao = req.params.idEstacao;
     var nome = req.body.nome;
-    
-    console.log('id =>', idEstacao)
-    console.log('nome =>', nome)
 
-    estacaoModel.salvarEstacao(nome, idEstacao)
-    .then(function (resultado) {
-            res.json(resultado);
-        })
-    .catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        }
-    );
+    if (idEstacao == undefined) {
+        res.status(400).send("idEstacao está undefined!");
+    } else if (nome == undefined) {
+        res.status(400).send("nome está undefined!");
+    } else {
+        estacaoModel.salvarEstacao(nome, idEstacao).then((resultado) => {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhuma estação salva!");
+            }
+        }).catch((erro) => {
+            console.error('Erro ao salvar estação:', erro);
+            res.status(500).json({ mensagem: 'Erro ao salvar estação' });
+        });
+    }
 }
 
+
 module.exports = {
-    // buscarLinhas,
     deletarEstacao,
     cadastrarEstacao,
     salvarEstacao,

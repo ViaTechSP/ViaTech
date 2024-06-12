@@ -1,4 +1,3 @@
-// const { columns } = require("mssql");
 $(document).ready(function(){
   $('#ipt_cpf').mask('000.000.000-00');
 });
