@@ -165,6 +165,10 @@ function exibirFun(){
        var cpf_atual = lista_funcionario[i].cpf;
        var email_atual = lista_funcionario[i].email;
        var cargo_atual = lista_funcionario[i].cargo;
+
+       if(foto_atual == null || foto_atual === ''){
+        foto_atual = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+       }
       
        auxiliar++;
 
@@ -234,7 +238,10 @@ function salvarFun(idFuncionario){
   var email = document.getElementById(`input_email_${idFuncionario}`).value;
   var cargo = document.getElementById(`input_cargo_${idFuncionario}`).value;
   console.log('id do funcionário ==>', idFuncionario);
-
+  
+  if(img == '' || img == null){
+    img = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+  }
   // alert(idFuncionario, nome)
 
 

@@ -162,7 +162,7 @@ function salvarMetricas() {
   var idLinha = select_linha.value;
 
 
-  if ((minimoDisco < maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)) {
+  if ((minimoDisco > maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)) {
 
     if (minimoDisco !== '' && maximoDisco !== '' && minimoCpu !== '' && maximoCpu !== '' && minimoRam !== '' && maximoRam !== '' && qtdUsb !== '') {
 

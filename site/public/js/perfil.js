@@ -21,6 +21,7 @@ function atualizarInfo() {
         response.json().then(function (resposta) {
           if (resposta.length > 0) {
             document.getElementById('profileImage').src = resposta[0].urlFoto;
+            document.getElementById('ipt_alterImage').value = resposta[0].urlFoto;
             document.getElementById('ipt_nome').value = resposta[0].nome;
             document.getElementById('ipt_cpf').value = resposta[0].cpf;
             document.getElementById('ipt_cargo').value = resposta[0].cargo;
@@ -41,7 +42,7 @@ function atualizarInfo() {
 }
 
 function salvar() {
-    var imagem = ipt_alterImage.value; //é uma input com nome de botão
+    var imagem = ipt_alterImage.value; 
     var nome = ipt_nome.value;
     var cpf = ipt_cpf.value;
     var cargo = ipt_cargo.value;
@@ -51,7 +52,7 @@ function salvar() {
 
 
 
-    if(nome !== '' && cpf !== '' && cargo !== '' && email !== '' && senha !== ''){
+    if(nome !== '' && cpf !== '' && cargo !== '' && email !== '' && senha !== '' && imagem !== ''){
 
     fetch(`/usuarios/alterarInfo/`,{
         method: "PUT", headers: { "Content-Type": "application/json" },
