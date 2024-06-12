@@ -258,9 +258,8 @@ function alterarInfoMetrica() {
 
   var idLinha = select_linha.value;
 
-  var botaoAlterarInfoMetrica = document.getElementById('botao_alterarInfoMetrica')
-  botaoAlterarInfoMetrica.style.display='none'
-
+  var botaoAlterarInfoMetrica = document.getElementById('botao_alterarInfoMetrica');
+  const botaoAlterar = document.getElementById('botao_alterarMetrica');
 
 
   if ((minimoDisco > maximoDisco) && (minimoCpu < maximoCpu) && (minimoRam < maximoRam) && (qtdUsb >= 0)) {
@@ -309,6 +308,12 @@ function alterarInfoMetrica() {
       }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
+        botaoAlterarInfoMetrica.style.display='none'
+        botaoAlterar.style.display='block'
+        botaoAlterar.style.display = 'flex';
+        botaoAlterar.style.alignItems = 'center';
+        botaoAlterar.style.justifyContent = 'center';
+
     } else {
       swal('Eii', "Preencha todos os campos! 😠");
 
