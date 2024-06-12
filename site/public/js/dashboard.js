@@ -229,8 +229,71 @@ function plotarGrafico(resposta, fkEstacao) {
       });
   };
 
+  const createChartDisco = (ctx, label, data, borderColor, backgroundColor, height, width) => {
+      return new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: label,
+                  data: data,
+                  fill: true,
+                  borderColor: '#a15ff7',
+                  backgroundColor: '#c79cff',
+                  tension: 0.4,
+                  pointBackgroundColor: 'white',
+                  pointBorderColor: borderColor,
+                  pointHoverBackgroundColor: borderColor,
+                  pointHoverBorderColor: 'white'
+              }]
+          },
+          options: {
+              plugins: {
+                  title: {
+                      display: true,
+                      text: label,
+                      font: {
+                          size: 20
+                      }
+                  }
+              },
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      ticks: {
+                          callback: function(value) {
+                              return value;
+                          }
+                      }
+                  }
+              },
+              elements: {
+                  line: {
+                      borderWidth: 2
+                  },
+                  point: {
+                      radius: 5,
+                      hoverRadius: 7
+                  }
+              },
+              layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                },
+                responsive: false, // Impedindo o redimensionamento responsivo
+                maintainAspectRatio: false, // Desativando a manutenção da proporção
+                width: width,
+                height: height
+            }
+          }
+      });
+  };
+
   const cpuChart = createChart(document.getElementById(`cpuChart${fkEstacao}`), 'CPU %', cpuData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
-  const discoChart = createChart(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
+  const discoChart = createChartDisco(document.getElementById(`discoChart${fkEstacao}`), 'Disco GB', discoData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
   const ramChart = createChart(document.getElementById(`ramChart${fkEstacao}`), 'RAM %', ramData, 'rgb(75, 192, 192)', 'rgba(75, 192, 192, 0.2)');
 
   atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart);
