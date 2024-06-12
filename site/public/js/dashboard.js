@@ -526,46 +526,52 @@ function exibirComentario(){
      lista_comentario = resposta;
      console.log('ee', resposta)
 
-     if (lista_comentario.length === 0) {
-      swal({
-          title: "Ops",
-          text: "Não existem comentarios nessa categoria ainda, seja o primeiro!",
-          icon: "warning",
-      }).then((confirmacao) => {
-          if (confirmacao) {
-              exibirAdd();
-          }
-      });
-  }
+     
         
    var tamanhoComentario = lista_comentario.length;
    var auxiliar = 0;
 
-   for (var i = 0; i < tamanhoComentario; i++) {
-     var id_comentario = lista_comentario[i].id_comentario;
-     var descricao_atual = lista_comentario[i].descricao;
-     var dtHora_atual = formatDateTime(lista_comentario[i].dtHora);
-     var email_atual = lista_comentario[i].email
-     var categoria_atual = lista_comentario[i].categoria
-    //  formatDateTime(dtHora_atual);
-    
-     auxiliar++;
 
-     container.innerHTML += `
-     <div class="caixaComentario">
-     
-     
-     <div class="data">${dtHora_atual}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ#${categoria_atual}</div>
-     <div class="email">${email_atual}</div>
-     
-     <div class="comentario">
-     ${descricao_atual}
-     </div>
-     </div>
-     `;
-     
-     console.log(container)
-   }
+   if (tamanhoComentario == 0) {
+    swal({
+        title: "Ops",
+        text: "Não existem comentarios nessa categoria ainda, seja o primeiro!",
+        icon: "warning",
+    }).then((confirmacao) => {
+        if (confirmacao) {
+            exibirAdd();
+        }
+    });
+    } else{
+
+      for (var i = 0; i < tamanhoComentario; i++) {
+        var id_comentario = lista_comentario[i].id_comentario;
+        var descricao_atual = lista_comentario[i].descricao;
+        var dtHora_atual = formatDateTime(lista_comentario[i].dtHora);
+        var email_atual = lista_comentario[i].email
+        var categoria_atual = lista_comentario[i].categoria
+       //  formatDateTime(dtHora_atual);
+       
+        auxiliar++;
+   
+        container.innerHTML += `
+        <div class="caixaComentario">
+        
+        
+        <div class="data">${dtHora_atual}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ#${categoria_atual}</div>
+        <div class="email">${email_atual}</div>
+        
+        <div class="comentario">
+        ${descricao_atual}
+        </div>
+        </div>
+        `;
+        
+        console.log(container)
+      }
+
+    }
+
  });
 
 }
