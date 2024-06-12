@@ -1,6 +1,4 @@
-$(document).ready(function(){
-  $('#ipt_cpf').mask('000.000.000-00');
-});
+
 
 function atualizarInfo() {
     document.getElementById('ipt_empresa').value = sessionStorage.NOME_EMPRESA;
@@ -34,6 +32,10 @@ function atualizarInfo() {
             document.getElementById('ipt_email').value = resposta[0].email;
             document.getElementById('ipt_senha').value = resposta[0].senha;
             sessionStorage.NOME_USUARIO = resposta[0].nome;
+
+            $(document).ready(function(){
+              $('#ipt_cpf').mask('000.000.000-00');
+            });
 
             if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
               exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
