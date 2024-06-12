@@ -19,7 +19,7 @@ function exibirLinha(idLinha){
         // console.log(teste)
      
         if (!resposta.ok) { 
-          swal("Ops", 'Parce que você ainda não possuí linhas cadastradas!');
+          swal("Erro!", 'Parce que você ainda não possuí linhas cadastradas!');
           throw new Error('Erro na requisição');
          }
         return resposta.json();
@@ -30,7 +30,7 @@ function exibirLinha(idLinha){
 
        if (lista_linha.length === 0) {
         swal({
-            title: "Ops",
+            title: "Erro",
             text: "Parece que você ainda não possui linhas cadastradas!",
             icon: "warning",
             // buttons: {
@@ -144,12 +144,12 @@ function cadastrarLinha(){
               idEmpresa: idEmpresa
             }),
           }).then(function (resposta) {
-                swal('Eba!', 'Linha cadastrada!', 'success');
+                swal('Sucesso!', 'Linha cadastrada!', 'success');
                 ultimaLinhaInserida();
             }
           )}
     else{
-        swal('Ei!', 'Preencha todos os campos e não deixe o número negativo!', 'error');
+        swal('Erro!', 'Preencha todos os campos e não deixe o número negativo!', 'error');
     }
 
 }
@@ -291,7 +291,7 @@ function salvarLinha(idLinha){
        console.log(`#ERRO: ${resposta}`);
       });
   } else{
-   swal("Ei!", "Preencha todos os campos!");
+   swal("Cuidado!", "Preencha todos os campos!");
   }
 }
 

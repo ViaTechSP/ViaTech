@@ -22,7 +22,7 @@ function acessar() {
 
                 window.location = "perfil.html"
               } else {
-                swal('Ei!', 'Senha ou email incorretos!', "error");
+                swal('Erro!', 'Senha ou email incorretos!', "error");
               }
             });
           } else {
@@ -33,7 +33,7 @@ function acessar() {
           console.error(`Erro na obtenção do usuário: ${error.message}`);
         });    
     } else {
-        swal('Ei!', 'preencha todos os dados corretamente!');
+        swal('Cuidado!', 'preencha todos os dados corretamente!');
     }
 
 }

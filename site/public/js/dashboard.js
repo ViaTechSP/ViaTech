@@ -479,13 +479,13 @@ function addComentario(){
          idEstacao: select_estacao.value
         }),
         }).then(function (resposta) {
-         swal('Eba!', 'Comentário postado!', 'success');
+         swal('Sucesso!', 'Comentário postado!', 'success');
         }
         )}else{
-        swal('Ei!', 'Preencha o campo!', 'error');
+        swal('Erro!', 'Preencha o campo!', 'error');
     }
   } else{
-    swal('Ei!', 'Selecione uma categoria e uma estaçao!', 'error');
+    swal('Erro!', 'Selecione uma categoria e uma estaçao!', 'error');
 
   }
 
@@ -504,7 +504,7 @@ function exibirComentario(){
   var idCategoria = select_categoria.value;
 
   if(idEstacao == 0){
-    swal('Ei!', 'Selecione uma estação primeiro!', 'error')
+    swal('Erro!', 'Selecione uma estação primeiro!', 'error')
     document.getElementById("divComentario").style.display = 'none';
 
 
@@ -537,7 +537,7 @@ function exibirComentario(){
 
    if (tamanhoComentario == 0) {
     swal({
-        title: "Ops",
+        title: "Cuidado",
         text: "Não existem comentarios nessa categoria ainda, seja o primeiro!",
         icon: "warning",
     }).then((confirmacao) => {

@@ -20,7 +20,7 @@ function exibirEstacao(idEstacao){
         // console.log(teste)
      
         if (!resposta.ok) { 
-          swal("Ops", 'Parce que você ainda não possuí estações cadastradas!');
+          swal("Erro", 'Parce que você ainda não possuí estações cadastradas!');
           throw new Error('Erro na requisição');
          }
         return resposta.json();
@@ -31,7 +31,7 @@ function exibirEstacao(idEstacao){
 
        if (lista_estacao.length === 0) {
         swal({
-            title: "Ops",
+            title: "Cuidado!",
             text: "Parece que você ainda não possui estações cadastradas!",
             icon: "warning",
             // buttons: {
@@ -178,11 +178,11 @@ function cadastrarEstacao(){
               idLinha: select_linha.value
             }),
           }).then(function (resposta) {
-                swal('Eba!', 'Estacao cadastrada!', 'success');
+                swal('Sucesso!', 'Estacao cadastrada!', 'success');
             }
           )}
     else{
-        swal('Ei!', 'Preencha o campo!', 'error');
+        swal('Erro!', 'Preencha o campo!', 'error');
     }
 
 }
@@ -252,7 +252,7 @@ function salvarEstacao(idEstacao){
        console.log(`#ERRO: ${resposta}`);
       });
   } else{
-   swal("Ei!", "Preencha todos os campos!");
+   swal("Erro!", "Preencha todos os campos!");
   }
 }
 

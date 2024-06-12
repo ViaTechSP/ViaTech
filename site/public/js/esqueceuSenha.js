@@ -49,7 +49,7 @@ function confirmar(){
         if (resposta.ok) {
             window.location = 'login.html';
         } else {
-            swal('error', "Não foi possível trocar a senha!");
+            swal('Erro!', "Não foi possível trocar a senha!");
             throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
         }
     }).catch(function (resposta) {

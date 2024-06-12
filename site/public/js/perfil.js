@@ -87,7 +87,7 @@ function salvar() {
             swal('Sucesso!', "Informações alteradas!");
 
         } else if(imagem.length > 800){
-          swal('Não deu!', "O link da imagem é muito grande!", "error");
+          swal('Erro!', "O link da imagem é muito grande!", "error");
         }
           else {
             swal('Erro', "Não foi possível trocar a senha!");

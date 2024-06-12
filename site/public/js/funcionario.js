@@ -88,7 +88,7 @@ function cadastrarFun() {
               alert('Erro ao cadastrar: ' + error.message);
             })
           } else{
-            swal('Puts!', 'A url da imagem é grande demais.')
+            swal('Erro!', 'A url da imagem é grande demais.')
           }
           } else {
             swal('Erro', "Senha inválida!", 'error');
@@ -126,7 +126,7 @@ function exibirFun(){
 
         if (!resposta.ok) { 
           swal({
-            title: "Ops",
+            title: "Cuidado!",
             text: "Parece que você ainda não possui funcionários cadastrados!",
             icon: "warning",
         }).then((confirmacao) => {
@@ -145,7 +145,7 @@ function exibirFun(){
 
        if (lista_funcionario.length === 0) {
         swal({
-            title: "Ops",
+            title: "Cuidado!",
             text: "Parece que você ainda não possui funcionários cadastrados!",
             icon: "warning",
         }).then((confirmacao) => {
@@ -300,7 +300,7 @@ function salvarFun(idFuncionario){
        console.log(`#ERRO: ${resposta}`);
       });
   } else{
-   swal("Ei!", "Preencha todos os campos!");
+   swal("Cuidado!", "Preencha todos os campos!");
   }
 }
 

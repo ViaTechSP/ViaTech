@@ -85,7 +85,7 @@ function alterarMetricas() {
 
     });
   } else {
-    swal('Ei!', 'Selecione uma linha primeiro!', 'warning')
+    swal('Cuidado!', 'Selecione uma linha primeiro!', 'warning')
   }
 }
 
@@ -141,7 +141,7 @@ function resetarMetrica() {
 
     }
   } else {
-    swal('Ei!', 'Selecione a linha que deseja resetar os dados!', 'warning')
+    swal('Cuidado!', 'Selecione a linha que deseja resetar os dados!', 'warning')
   }
 
 
@@ -197,7 +197,7 @@ function salvarMetricas() {
               botaoAlterar.style.justifyContent = 'center';
             }
           });
-          swal('Sucesso', "Suas alterações foram salvas! 😀", "success");
+          swal('Sucesso', "Suas alterações foram salvas!", "success");
 
 
         } else {
@@ -209,11 +209,11 @@ function salvarMetricas() {
         console.log(`#ERRO: ${resposta}`);
       });
     } else {
-      swal('Eii', "Preencha todos os campos! 😠");
+      swal('Erro!', "Preencha todos os campos! 😠");
 
     }
   } else {
-    swal("Ops!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo. 🥺", "error");
+    swal("Erro!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo.", "error");
 
   }
 
@@ -315,11 +315,11 @@ function alterarInfoMetrica() {
         botaoAlterar.style.justifyContent = 'center';
 
     } else {
-      swal('Eii', "Preencha todos os campos! 😠");
+      swal('Erro', "Preencha todos os campos!");
 
     }
   } else {
-    swal("Ops!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo. 🥺", "error");
+    swal("Erro!", "Valores incorretos, cuidado não pode ser maior ou igual ao problema, ou negativo.", "error");
 
   }
 
