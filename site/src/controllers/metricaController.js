@@ -33,7 +33,7 @@ function alterarInfoMetrica(req, res) {
     
     metricaModel.alterarInfoMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb)
     .then(function (resultado) {
-        if (resultado.affectedRows > 0) {
+        if (resultado > 0) {
             res.json(resultado);
         } else {
             res.status(204).send("Nenhuma alteração realizada!");
@@ -60,7 +60,7 @@ function resetarMetrica(req, res) {
     
     metricaModel.resetarMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb)
     .then(function (resultado) {
-        if (resultado.affectedRows > 0) {
+        if (resultado > 0) {
             res.json(resultado);
         } else {
             res.status(204).send("Nenhuma alteração realizada!");
@@ -120,7 +120,7 @@ function primeiraMetrica(req, res) {
     } else {
         metricaModel.primeiraMetrica(idLinha, minimoDisco, maximoDisco, minimoCpu, maximoCpu, minimoRam, maximoRam, qtdUsb)
             .then(function (resultado) {
-                if (resultado.affectedRows > 0) {
+                if (resultado > 0) {
                     res.json(resultado);
                 } else {
                     res.status(204).send("Nenhuma alteração realizada!");

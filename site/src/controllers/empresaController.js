@@ -13,7 +13,7 @@ function cadastrarEmpresa(req, res) {
       res.status(400).send("cnpj está undefined!");
   } else {
       empresaModel.cadastrarEmpresa(razaoSocial, nomeFantasia, cnpj).then((resultado) => {
-          if (resultado.affectedRows > 0) {
+          if (resultado > 0) {
               res.status(200).json(resultado);
           } else {
               res.status(204).send("Nenhuma empresa cadastrada!");

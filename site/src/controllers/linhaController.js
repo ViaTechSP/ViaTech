@@ -60,7 +60,7 @@ function deletarLinha(req, res) {
         res.status(400).send("idLinha está undefined!");
     } else {
         linhaModel.deletarLinha(idLinha).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma linha deletada!");
@@ -86,7 +86,7 @@ function cadastrarLinha(req, res) {
         res.status(400).send("idEmpresa está undefined!");
     } else {
         linhaModel.cadastrarLinha(nome, numero, idEmpresa).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma linha cadastrada!");
@@ -112,7 +112,7 @@ function salvarLinha(req, res) {
         res.status(400).send("numero está undefined!");
     } else {
         linhaModel.salvarLinha(numero, nome, idLinha).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma linha salva!");

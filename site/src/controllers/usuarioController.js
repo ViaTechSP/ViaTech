@@ -53,7 +53,7 @@ function cadastrarFun(req, res){
         usuarioModel.cadastrarFun(imagemVar, nomeVar, cpfVar, emailVar, senhaVar, cargoVar, fkEmpresaVar)
             .then(
                 function (resultado) {
-                if (resultado.affectedRows > 0) {
+                if (resultado > 0) {
                     res.json(resultado);
                     console.log("enviou p model")
                 } else {
@@ -103,7 +103,7 @@ function alterarSenha(req, res) {
     } else {
         usuarioModel.alterarSenha(novaSenha, idFuncionario)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.json(resultado);
             } else {
                 res.status(204).send("Nenhuma alteração realizada!");
@@ -152,7 +152,7 @@ function alterarInfo(req, res) {
     } else {
         usuarioModel.alterarInfo(idFuncionario, imagem, nome, cpf, email, senha, cargo)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.json(resultado);
             } else {
                 res.status(204).send("Nenhuma alteração realizada!");
@@ -199,7 +199,7 @@ function salvarFun(req, res){
     } else {
         usuarioModel.salvarFun(img, nome, cpf, email, cargo, idFuncionario)
         .then(function (resultado) {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.json(resultado);
             } else {
                 res.status(204).send("Nenhuma alteração realizada!");
@@ -221,7 +221,7 @@ function deletarFun(req, res) {
         usuarioModel.deletarFun(idFuncionario)
         .then(
             function (resultado) {
-                if (resultado.affectedRows > 0) {
+                if (resultado > 0) {
                     res.json(resultado);
                 } else {
                     res.status(204).send("Nenhuma alteração realizada!");

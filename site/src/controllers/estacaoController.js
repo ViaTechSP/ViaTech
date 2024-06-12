@@ -26,7 +26,7 @@ function deletarEstacao(req, res) {
         res.status(400).send("idEstacao está undefined!");
     } else {
         estacaoModel.deletarEstacao(idEstacao).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma estação deletada!");
@@ -48,7 +48,7 @@ function cadastrarEstacao(req, res) {
         res.status(400).send("idLinha está undefined!");
     } else {
         estacaoModel.cadastrarEstacao(nome, idLinha).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma estação cadastrada!");
@@ -70,7 +70,7 @@ function salvarEstacao(req, res) {
         res.status(400).send("nome está undefined!");
     } else {
         estacaoModel.salvarEstacao(nome, idEstacao).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhuma estação salva!");

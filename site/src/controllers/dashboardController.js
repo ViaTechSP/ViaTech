@@ -170,7 +170,7 @@ function addComentario(req, res) {
         res.status(400).send("idFun está undefined!");
     } else {
         dashboardModel.addComentario(idFun, comentario, idCategoria, idEstacao).then((resultado) => {
-            if (resultado.affectedRows > 0) {
+            if (resultado > 0) {
                 res.status(200).json(resultado);
             } else {
                 res.status(204).send("Nenhum comentário adicionado!");
