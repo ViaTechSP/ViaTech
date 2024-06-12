@@ -50,10 +50,10 @@ function obterHistoricoAlerta(fkEmpresa) {
                 console.log('VALOR REGISTRADO => ' + item.valorRegistrado);
 
                 container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> -${item.nome} <br>
-                ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
+                ${item.componente}: ${(item.valorRegistrado).toFixed(2)}%</div>`
               } else if (item.tipo == 'cuidado') {
                 container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> -${item.nome} <br>
-                ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
+                ${item.componente}: ${(item.valorRegistrado).toFixed(2)}%</div>`
               } 
             }
           });
@@ -353,6 +353,8 @@ function atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart) {
         }
 
         setTimeout(() => atualizarGrafico(fkEstacao, cpuChart, discoChart, ramChart), 5000);
+        setTimeout(() => obterHistoricoAlerta(), 5000);
+        setTimeout(() => atualizarKPIs(), 5000);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
@@ -376,8 +378,6 @@ function onLoadFuncoes() {
   obterInfoHeader(fkEstacao);
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
-
-  setTimeout(recarregar, 5000);
 }
 
 function onChangeSelect(){
@@ -388,17 +388,8 @@ function onChangeSelect(){
   atualizarKPIs(fkEstacao);
   obterMetricasEstacao(fkEstacao);
   exibirComentario();
-
-  setTimeout(recarregar, 5000);
 }
 
-function recarregar() {
-  var fkEstacao = select_estacao.value;
-
-  atualizarKPIs(fkEstacao);
-
-  setTimeout(recarregar, 5000);
-}
 
 function exibirPopUp(){
   document.getElementById("caixaComentar").style.display = 'none';
