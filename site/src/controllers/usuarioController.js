@@ -13,7 +13,7 @@ function autenticar(req, res) {
             .then(
                 function (resultadoAutenticar) {
                     if (resultadoAutenticar.length == 1) {
-                        res.status(200).json(resultado);
+                        res.status(200).json(resultadoAutenticar);
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
