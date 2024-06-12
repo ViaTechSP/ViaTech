@@ -19,8 +19,15 @@ function atualizarInfo() {
       if (response.ok) {
         response.json().then(function (resposta) {
           if (resposta.length > 0) {
+            var foto = resposta[0].urlFoto;
+           
+            if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
+              exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
+              foto = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
+              }
+
             document.getElementById('profileImage').src = resposta[0].urlFoto;
-            document.getElementById('ipt_alterImage').value = resposta[0].urlFoto;
+            document.getElementById('ipt_alterImage').value = foto;
             document.getElementById('ipt_nome').value = resposta[0].nome;
             document.getElementById('ipt_cpf').value = resposta[0].cpf;
             document.getElementById('ipt_cargo').value = resposta[0].cargo;
@@ -28,9 +35,7 @@ function atualizarInfo() {
             document.getElementById('ipt_senha').value = resposta[0].senha;
             sessionStorage.NOME_USUARIO = resposta[0].nome;
 
-            if(resposta[0].urlFoto == null || resposta[0].urlFoto == ''){
-            exibirPerfil.src = "https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png";
-            }
+            
 
           } else console.error('Nenhuma informação encontrada');
         });
