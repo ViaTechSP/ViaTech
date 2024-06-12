@@ -531,6 +531,9 @@ function exibirComentario(){
    var tamanhoComentario = lista_comentario.length;
    var auxiliar = 0;
 
+   console.log('TAMANHO DO TAMANHOCOMENTARIO' + tamanhoComentario);
+   console.log('TAMANHO DA LSITA ' + lista_comentario.length);
+
 
    if (tamanhoComentario == 0) {
     swal({
