@@ -30,29 +30,29 @@ function obterHistoricoAlerta(fkEmpresa) {
         resposta.forEach(function (item) {
           if (item.componente == 'usb') {
             if (item.tipo == 'problema') {
-              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> - Estação ${item.nome} <br>
+              container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon> </div> -${item.nome} <br>
               ${item.componente}s: ${(item.valorRegistrado).toFixed(2)}</div>`
             } else if (item.tipo == 'cuidado') {
-              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+              container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> -${item.nome} <br>
               ${item.componente}s: ${(item.valorRegistrado).toFixed(2)}</div>`
             } 
           } else if (item.componente == 'disco'){
               console.log('3');
               if (item.tipo == 'problema') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> -${item.nome} <br>
                 ${item.componente}: ${(item.valorRegistrado).toFixed(2)} GB</div>`
               } else if (item.tipo == 'cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> -${item.nome} <br>
                 ${item.componente}: ${(item.valorRegistrado).toFixed(2)} GB</div>`
               } 
             } else {
               if (item.tipo == 'problema') {
                 console.log('VALOR REGISTRADO => ' + item.valorRegistrado);
 
-                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> - Estação ${item.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado"> <div class="vermelho">${item.tipo} <sl-icon class="icone-perigo" name="exclamation-circle"></sl-icon></div> -${item.nome} <br>
                 ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
               } else if (item.tipo == 'cuidado') {
-                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> - Estação ${item.nome} <br>
+                container_alertas.innerHTML += ` <div class="alertas-quadrado">  <div class="amarelo">${item.tipo} <sl-icon class="icone-cuidado" name="exclamation-triangle"></sl-icon> </div> -${item.nome} <br>
                 ${item.componente}: ${parseInt(item.valorRegistrado).toString().slice(0, 2)}%</div>`
               } 
             }
@@ -88,12 +88,13 @@ function atualizarKPIs(fkEstacao) {
         response.json().then(function (resposta) {
           resposta.forEach(function (item) {
             
-        console.log('Console log do rabello ' + item)
+        console.log('Console log do rabello ');
+        console.log(item);
             
-            if (item.tipo == 'Cuidado') {
+            if (item.tipo == 'cuidado') {
               span_kpi_cuidado.innerHTML = item.total;
             }
-            else if (item.tipo == 'Problema') {
+            else if (item.tipo == 'problema') {
               span_kpi_problema.innerHTML = item.total;
             }
 
