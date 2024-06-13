@@ -14,7 +14,7 @@ var sqlServerConfig = {
     server: "34.197.44.86",
     database: "viatech",
     user: "sa",
-    password: "Urubu100",
+    password: "urubu100",
     pool: {
         max: 10,
         min: 0,
