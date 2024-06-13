@@ -11,9 +11,9 @@ var mySqlConfig = {
 };
 
 var sqlServerConfig = {
-    server: "52.72.244.178",
+    server: "34.197.44.86",
     database: "viatech",
-    user: "eduardo",
+    user: "sa",
     password: "Urubu100",
     pool: {
         max: 10,
